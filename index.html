@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yonah Friedman — Director of Marketing</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text-primary:   #09090f;
+      --text-secondary: #4c4c5e;
+      --text-muted:     #8888a0;
+      --bg-white:       #ffffff;
+      --bg-gray:        #f4f4f7;
+      --accent:         #3462e3;
+      --accent-hover:   #2650c8;
+      --accent-light:   #eaeffd;
+      --border:         #e2e2ea;
+      --shadow-card:    0 1px 3px rgba(10,10,30,.05), 0 8px 28px rgba(10,10,30,.07);
+      --container:      1220px;
+      --pad:            48px;
+      --section-v:      120px;
+      --nav-h:          72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      background: var(--bg-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.022em;
+      line-height: 1.12;
+    }
+
+    h1 { font-size: clamp(40px, 5.5vw, 70px); }
+    h2 { font-size: clamp(30px, 4vw, 50px); }
+    h3 { font-size: clamp(18px, 2.2vw, 24px); }
+
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       LAYOUT HELPERS
+    ============================================================ */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    .section { padding: var(--section-v) 0; }
+    .section--gray { background: var(--bg-gray); }
+
+    .section-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .rule {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 22px 0 30px;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+
+    .nav.scrolled {
+      border-color: var(--border);
+      box-shadow: 0 1px 18px rgba(10,10,30,.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--nav-h);
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: var(--bg-gray);
+    }
+
+    .nav-links .nav-contact {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .nav-links .nav-contact:hover {
+      background: var(--accent-hover);
+      color: #fff;
+    }
+
+    .nav-burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--text-primary);
+    }
+
+    .nav-burger svg { display: block; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      padding-top: calc(var(--nav-h) + 96px);
+      padding-bottom: 128px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle background geometry */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,58,95,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-content { max-width: 100%; }
+
+    .hero-headline {
+      margin-bottom: 28px;
+      letter-spacing: -0.028em;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin-bottom: 52px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Profile photo */
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-gray);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Placeholder state — shown when no real photo is set */
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-photo-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: .35;
+    }
+
+    .hero-photo img.loaded + .hero-photo-placeholder { display: none; }
+
+    /* Accent decoration behind photo */
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 14px -14px -14px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      z-index: -1;
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 15px 30px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all .22s ease;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 14px rgba(30,58,95,.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(30,58,95,.28);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text-primary);
+      background: var(--bg-gray);
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .btn-white:hover {
+      background: #f0f4f9;
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       EXPERTISE — CAROUSEL
+    ============================================================ */
+    .expertise-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 52px;
+      gap: 40px;
+    }
+
+    .expertise-intro { max-width: 560px; }
+    .expertise-intro h2 { margin-bottom: 16px; }
+    .expertise-intro p { font-size: 17px; line-height: 1.75; }
+
+    /* Arrow buttons */
+    .carousel-arrows {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      padding-top: 10px;
+    }
+
+    .carousel-arrow {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--bg-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: background .2s, border-color .2s, color .2s, opacity .2s;
+    }
+
+    .carousel-arrow svg { width: 18px; height: 18px; }
+
+    .carousel-arrow:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .carousel-arrow:disabled {
+      opacity: .3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* Viewport + track */
+    .carousel-viewport { overflow: hidden; cursor: grab; }
+    .carousel-viewport:active { cursor: grabbing; }
+
+    .carousel-track {
+      display: flex;
+      gap: 22px;
+      transition: transform .42s cubic-bezier(.25,.46,.45,.94);
+      will-change: transform;
+    }
+
+    /* Cards */
+    .expertise-card {
+      flex: 0 0 320px;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 44px 36px 40px;
+      text-align: center;
+      transition: box-shadow .22s, transform .22s;
+    }
+
+    .expertise-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-3px);
+    }
+
+    /* Icon bubble */
+    .card-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .card-icon svg {
+      width: 46px;
+      height: 46px;
+      color: var(--accent);
+    }
+
+    .expertise-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .expertise-card p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    /* Dots */
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* ============================================================
+       EXPERIENCE
+    ============================================================ */
+    .experience-header {
+      max-width: 520px;
+      margin-bottom: 64px;
+    }
+
+    .experience-list { display: flex; flex-direction: column; }
+
+    .experience-item {
+      padding: 44px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .experience-item:last-child { border-bottom: 1px solid var(--border); }
+
+    /* Date ———— Company row */
+    .exp-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Logo placeholder */
+    .exp-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--bg-gray);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .exp-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
+    }
+
+    .exp-logo-init {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: -0.02em;
+    }
+
+    .exp-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .exp-date {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .exp-rule {
+      width: 32px;
+      height: 1.5px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .exp-company {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      white-space: nowrap;
+    }
+
+    /* Title + blurb */
+    .exp-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+
+    .exp-blurb {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    /* Toggle button */
+    .exp-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: none;
+      border: 1.5px solid var(--accent-light);
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      letter-spacing: 0.01em;
+    }
+
+    .exp-toggle:hover {
+      background: var(--accent-light);
+      border-color: #c5d8ec;
+    }
+
+    .exp-toggle svg {
+      width: 13px;
+      height: 13px;
+      transition: transform .25s ease;
+      flex-shrink: 0;
+    }
+
+    .exp-toggle.open svg { transform: rotate(180deg); }
+
+    /* Expanded details panel */
+    .exp-details {
+      margin-top: 22px;
+      padding: 28px 32px;
+      background: var(--bg-gray);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .exp-details.open { display: block; }
+
+    .exp-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .exp-details li {
+      font-size: 15px;
+      line-height: 1.62;
+      color: var(--text-secondary);
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .exp-details li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 11px;
+      top: 3px;
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text h2 { margin-bottom: 22px; }
+
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-top: 8px;
+    }
+
+    .stat {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 26px;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       INSIGHTS
+    ============================================================ */
+    .insights-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 52px;
+      gap: 40px;
+    }
+
+    .insights-top-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 340px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .insight-card {
+      background: var(--bg-gray);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 38px 34px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s, box-shadow .22s;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .insight-tag {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .insight-card h3 {
+      font-size: 19px;
+      line-height: 1.35;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+    }
+
+    .insight-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .insight-footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       CTA
+    ============================================================ */
+    #contact {
+      background: var(--accent);
+      padding: var(--section-v) 0;
+    }
+
+    .cta-inner { max-width: 620px; }
+
+    .cta-inner h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      letter-spacing: -0.022em;
+    }
+
+    .cta-inner p {
+      color: rgba(255,255,255,.72);
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    .cta-contact-options {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .18s, transform .18s;
+    }
+
+    .cta-contact-btn:hover { opacity: .88; transform: translateY(-2px); }
+
+    .cta-contact-btn.whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .cta-contact-btn.email {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.28);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--text-primary);
+      padding: 44px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,.88);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,.38);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,.48);
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,.82); }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      :root { --pad: 36px; --section-v: 96px; }
+
+      .hero-layout       { grid-template-columns: 1fr 340px; gap: 56px; }
+      .expertise-layout  { grid-template-columns: 1fr; gap: 52px; }
+      .about-layout      { grid-template-columns: 1fr; gap: 52px; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad: 24px; --section-v: 72px; }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-photo-wrap {
+        max-width: 320px;
+        margin: 0 auto;
+        order: -1;
+      }
+
+      .hero-photo-wrap::before { display: none; }
+
+      .nav-links { display: none; flex-direction: column; gap: 4px; }
+
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: #fff;
+        padding: 20px 24px 28px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 12px 36px rgba(10,10,30,.08);
+      }
+
+      .nav-links.open a { padding: 13px 16px; font-size: 16px; }
+
+      .nav-burger { display: block; }
+
+      #hero { padding-top: calc(var(--nav-h) + 64px); padding-bottom: 80px; }
+
+      .expertise-grid { grid-template-columns: 1fr; }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 40px 0;
+      }
+
+      .experience-meta {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .insights-grid { grid-template-columns: 1fr; }
+      .insights-top  { flex-direction: column; align-items: flex-start; }
+      .insights-top-sub { text-align: left; }
+
+      .about-stats { grid-template-columns: 1fr 1fr; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; justify-content: center; }
+      .about-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Yonah <em>Friedman</em></a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="nav-contact">Contact Me</a></li>
+        </ul>
+
+        <button class="nav-burger" id="navBurger" aria-label="Toggle navigation">
+          <svg id="burgerIcon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="2" y1="5"  x2="20" y2="5"/>
+            <line x1="2" y1="11" x2="20" y2="11"/>
+            <line x1="2" y1="17" x2="20" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-layout">
+
+        <!-- Left: copy -->
+        <div>
+          <div class="hero-eyebrow">Director of Marketing</div>
+          <div class="hero-content">
+            <h1 class="hero-headline fade-up">
+              I Build Marketing Systems That Help Organizations Grow
+            </h1>
+            <p class="hero-sub fade-up delay-1">
+              Brand strategist and growth operator with experience across healthcare, nonprofit, and mission-driven organizations. I help turn big ideas into clear strategy, strong creative, and scalable execution.
+            </p>
+            <div class="hero-actions fade-up delay-2">
+              <a href="#contact" class="btn btn-primary">Contact Me</a>
+              <a href="#experience" class="btn btn-ghost">View Experience</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: profile photo -->
+        <div class="hero-photo-wrap fade-up delay-2">
+          <div class="hero-photo">
+            <!--
+              PHOTO INSTRUCTIONS:
+              Replace the src below with your photo path, e.g. src="photo.jpg"
+              The image will fill and crop to the frame automatically.
+            -->
+            <img src="Images/headshot.png" alt="Yonah Friedman" id="heroPhoto" />
+            <div class="hero-photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
+              Add your photo
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERTISE — CAROUSEL
+  ============================================================ -->
+  <section id="expertise" class="section section--gray">
+    <div class="container">
+
+      <!-- Top: intro + arrows -->
+      <div class="expertise-top fade-up">
+        <div class="expertise-intro">
+          <span class="section-label">What I Do</span>
+          <h2>Marketing built for clarity and scale</h2>
+          <div class="rule"></div>
+          <p>I lead marketing across strategy, brand, content, and digital growth — helping organizations build systems that are both creative and operationally strong.</p>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" id="expertisePrev" aria-label="Previous" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" id="expertiseNext" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="carousel-viewport fade-up delay-1">
+        <div class="carousel-track" id="expertiseTrack">
+
+          <!-- Card 1: Marketing Strategy -->
+          <div class="expertise-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </div>
+            <h3>Marketing Strategy</h3>
+            <p>High-level direction aligned with business goals, growth priorities, and audience needs.</p>
+          </div>
+
+          <!-- Card 2: Brand Development -->
+          <div class="expertise-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3>Brand Development</h3>
+            <p>Positioning, messaging, and creative direction that build clarity and consistency.</p>
+          </div>
+
+          <!-- Card 3: Content & Campaigns -->
+          <div class="expertise-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2L11 13"/>
+                <path d="M22 2L15 22 11 13 2 9l20-7z"/>
+              </svg>
+            </div>
+            <h3>Content &amp; Campaigns</h3>
+            <p>Campaign development across web, email, social, print, and advertising channels.</p>
+          </div>
+
+          <!-- Card 4: Digital Growth Operations -->
+          <div class="expertise-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+            <h3>Digital Growth Operations</h3>
+            <p>Websites, lead generation, reporting, workflow design, and performance optimization.</p>
+          </div>
+
+          <!-- Card 5: Design & Creative -->
+          <div class="expertise-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                <path d="M2 2l7.586 7.586"/>
+                <circle cx="11" cy="11" r="2"/>
+              </svg>
+            </div>
+            <h3>Design &amp; Creative</h3>
+            <p>Visual identity, creative direction, and design systems that make brands look as strong as they are.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="carousel-dots" id="expertiseDots">
+        <button class="carousel-dot active" data-index="0" aria-label="Slide 1"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Slide 2"></button>
+        <button class="carousel-dot" data-index="2" aria-label="Slide 3"></button>
+        <button class="carousel-dot" data-index="3" aria-label="Slide 4"></button>
+        <button class="carousel-dot" data-index="4" aria-label="Slide 5"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE
+  ============================================================ -->
+  <section id="experience" class="section">
+    <div class="container">
+
+      <div class="experience-header fade-up">
+        <span class="section-label">Work History</span>
+        <h2>Selected Experience</h2>
+      </div>
+
+      <div class="experience-list">
+
+        <!-- 1. Premier Health Alliance -->
+        <div class="experience-item fade-up">
+          <div class="exp-top">
+            <div class="exp-logo">
+              <img src="Images/Logos/premier health.png" alt="Premier Health Alliance" />
+            </div>
+            <div class="exp-meta">
+              <span class="exp-date">2024 — Present</span>
+              <div class="exp-rule"></div>
+              <span class="exp-company">Premier Health Alliance</span>
+            </div>
+          </div>
+          <div class="exp-title">Director of Marketing</div>
+          <p class="exp-blurb">Managing full marketing operations for a healthcare ownership group encompassing multiple specialty practices — covering brand strategy, patient acquisition, digital growth, and executive-level collaboration.</p>
+          <button class="exp-toggle">
+            View Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="exp-details">
+            <ul>
+              <li>Lead and manage full-scale marketing operations for a healthcare ownership group encompassing multiple specialty practices and service lines</li>
+              <li>Develop and execute overarching marketing strategy across brands, aligning with organizational growth objectives</li>
+              <li>Oversee multidisciplinary teams across design, content, digital marketing, and external partners</li>
+              <li>Build and maintain brand architecture across multiple companies, ensuring consistency while tailoring messaging to distinct audiences</li>
+              <li>Direct patient acquisition strategies, including digital advertising, SEO, and referral-driven initiatives</li>
+              <li>Collaborate with executive leadership to identify growth opportunities and translate them into scalable initiatives</li>
+              <li>Implement data-driven systems to track performance, optimize campaigns, and improve ROI</li>
+              <li>Support new practice launches, service expansions, and geographic growth through targeted go-to-market strategies</li>
+              <li>Oversee development and optimization of websites, landing pages, and digital funnels</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Aish Global -->
+        <div class="experience-item fade-up">
+          <div class="exp-top">
+            <div class="exp-logo">
+              <img src="Images/Logos/Aish_logo.png" alt="Aish Global" />
+            </div>
+            <div class="exp-meta">
+              <span class="exp-date">2022 — 2024</span>
+              <div class="exp-rule"></div>
+              <span class="exp-company">Aish Global</span>
+            </div>
+          </div>
+          <div class="exp-title">Director of Marketing</div>
+          <p class="exp-blurb">Built and scaled a full in-house marketing operation from the ground up — including design, content, and digital teams — while leading global campaigns and establishing the systems to sustain them.</p>
+          <button class="exp-toggle">
+            View Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="exp-details">
+            <ul>
+              <li>Built and scaled a full in-house marketing operation, including design, content, and digital marketing teams</li>
+              <li>Led end-to-end marketing strategy across global campaigns, aligning messaging with organizational vision</li>
+              <li>Managed and mentored a multidisciplinary team, establishing workflows, KPIs, and performance standards</li>
+              <li>Oversaw brand development and consistency across digital platforms, print materials, and international initiatives</li>
+              <li>Directed content strategy and production across social media, web, email, and campaigns</li>
+              <li>Implemented data-driven digital marketing initiatives to improve reach, engagement, and conversion</li>
+              <li>Collaborated with senior leadership to translate strategic priorities into actionable campaigns</li>
+              <li>Built scalable systems for campaign execution, reporting, and cross-team coordination</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Nefesh B'Nefesh -->
+        <div class="experience-item fade-up">
+          <div class="exp-top">
+            <div class="exp-logo">
+              <img src="Images/Logos/nefesh b'nefesh.png" alt="Nefesh B'Nefesh" />
+            </div>
+            <div class="exp-meta">
+              <span class="exp-date">2018 — 2023</span>
+              <div class="exp-rule"></div>
+              <span class="exp-company">Nefesh B'Nefesh</span>
+            </div>
+          </div>
+          <div class="exp-title">Project Manager – Creative Marketing</div>
+          <p class="exp-blurb">Led creative marketing across campaigns, events, and digital initiatives for a major international organization — managing brand, content, digital presence, and cross-functional teams end to end.</p>
+          <button class="exp-toggle">
+            View Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="exp-details">
+            <ul>
+              <li>Directed all creative marketing efforts in alignment with organizational goals</li>
+              <li>Partnered with internal and external stakeholders to develop and execute strategic campaigns</li>
+              <li>Led design, content, and campaign production for local and international initiatives</li>
+              <li>Defined KPIs and delivered performance reporting on campaigns and milestones</li>
+              <li>Managed brand consistency across all channels and touchpoints</li>
+              <li>Oversaw website expansion and digital presence, ensuring quality and alignment</li>
+              <li>Implemented data collection systems across web and social platforms</li>
+              <li>Developed targeted lead generation funnels for diverse audiences</li>
+              <li>Managed multidisciplinary teams and coordinated third-party vendors within budget</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Freelance -->
+        <div class="experience-item fade-up">
+          <div class="exp-top">
+            <div class="exp-logo">
+              <img src="Images/Logos/yonah agency.png" alt="Yonah Friedman Freelance" />
+            </div>
+            <div class="exp-meta">
+              <span class="exp-date">2015 — Present</span>
+              <div class="exp-rule"></div>
+              <span class="exp-company">yonah.xyz</span>
+            </div>
+          </div>
+          <div class="exp-title">End-to-End Brand Strategist</div>
+          <p class="exp-blurb">Independent consultancy serving clients across the U.S. and Israel — delivering full-cycle brand strategy, identity, and marketing execution with a track record of high-quality outputs and long-term client relationships.</p>
+          <button class="exp-toggle">
+            View Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="exp-details">
+            <ul>
+              <li>Built and managed a successful consultancy serving clients across the U.S. and Israel</li>
+              <li>Conduct market research to develop brand positioning, voice, and visual identity</li>
+              <li>Lead full-cycle branding and marketing projects from strategy through execution</li>
+              <li>Manage client relationships, project timelines, and financial operations</li>
+              <li>Develop and implement marketing strategies tailored to diverse industries</li>
+              <li>Deliver high-quality creative and strategic outputs with minimal revision cycles</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Yeshivat Lev HaTorah -->
+        <div class="experience-item fade-up">
+          <div class="exp-top">
+            <div class="exp-logo">
+              <img src="Images/Logos/lev hatorah.jpg" alt="Yeshivat Lev HaTorah" />
+            </div>
+            <div class="exp-meta">
+              <span class="exp-date">2015 — 2018</span>
+              <div class="exp-rule"></div>
+              <span class="exp-company">Yeshivat Lev HaTorah</span>
+            </div>
+          </div>
+          <div class="exp-title">Head of Marketing &amp; PR</div>
+          <p class="exp-blurb">Developed brand identity, managed communications across multiple audiences, led PR initiatives, and directed fundraising campaigns that generated over $2M in donations.</p>
+          <button class="exp-toggle">
+            View Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="exp-details">
+            <ul>
+              <li>Developed and implemented a cohesive brand identity and voice</li>
+              <li>Launched and managed social media platforms for multiple audiences</li>
+              <li>Directed PR efforts across concurrent organizational initiatives</li>
+              <li>Created and managed weekly content and email communications</li>
+              <li>Led fundraising campaigns generating over $2M in donations</li>
+              <li>Managed internal teams and coordinated a network of volunteers</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about" class="section section--gray">
+    <div class="container">
+      <div class="about-layout">
+
+        <div class="about-text fade-up">
+          <span class="section-label">About Me</span>
+          <h2>Creative problem solving where marketing serves the end result.</h2>
+          <div class="rule"></div>
+          <p>
+            I'm a marketing leader who cares just as much about how things get done as the results themselves.
+          </p>
+          <p>
+            Yes, I build strategy. Yes, I execute. But the work only matters if it actually moves something forward.
+          </p>
+          <p>
+            The best outcomes come from clear thinking, strong collaboration, and an environment where people enjoy what they're building together. That's the balance I try to bring into every project.
+          </p>
+        </div>
+
+        <div class="about-stats fade-up delay-1">
+          <div class="stat">
+            <span class="stat-num">Problem Solver</span>
+            <span class="stat-label">I like getting into complex situations, cutting through noise, and finding the problem that actually matters.</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">People Person</span>
+            <span class="stat-label">Strong work comes from strong relationships. I value clear communication, trust, and collaboration.</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">Let's Have a Good Time</span>
+            <span class="stat-label">The best teams do their best work when the process is enjoyable. I bring that energy into everything I do.</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">Goal Oriented</span>
+            <span class="stat-label">I stay focused on outcomes. Clear direction, steady execution, and real results.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA / CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <div class="cta-inner fade-up">
+        <h2>Let's Build Something Stronger</h2>
+        <p>
+          Whether you need strategic marketing leadership, brand clarity, or support building a stronger growth engine, I'd be glad to connect.
+        </p>
+        <div class="cta-contact-options">
+          <a href="https://wa.me/972543518212" target="_blank" rel="noopener" class="cta-contact-btn whatsapp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="mailto:yonah@yonah.agency" class="cta-contact-btn email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            yonah@yonah.agency
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">Yonah Friedman</div>
+        <div class="footer-copy">© 2026 · Director of Marketing</div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yonah-friedman/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:yonah@yonah.agency">Email</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // Hide photo placeholder when a real src is present
+    const heroPhoto = document.getElementById('heroPhoto');
+    if (heroPhoto && heroPhoto.src && !heroPhoto.src.endsWith('/')) {
+      heroPhoto.addEventListener('load', () => heroPhoto.classList.add('loaded'));
+      if (heroPhoto.complete) heroPhoto.classList.add('loaded');
+    }
+
+    // ── Expertise Carousel ──────────────────────────────────────
+    (function () {
+      const track    = document.getElementById('expertiseTrack');
+      const prevBtn  = document.getElementById('expertisePrev');
+      const nextBtn  = document.getElementById('expertiseNext');
+      const dots     = document.querySelectorAll('#expertiseDots .carousel-dot');
+      const cards    = track.querySelectorAll('.expertise-card');
+      const total    = cards.length;
+      let current    = 0;
+
+      function visibleCount() {
+        const vw = track.parentElement.offsetWidth;
+        if (vw < 600)  return 1;
+        if (vw < 960)  return 2;
+        return 3;
+      }
+
+      function maxIndex() { return Math.max(0, total - visibleCount()); }
+
+      function goTo(idx) {
+        current = Math.max(0, Math.min(idx, maxIndex()));
+        const cardW = cards[0].offsetWidth + 22; // width + gap
+        track.style.transform = `translateX(-${current * cardW}px)`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current >= maxIndex();
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+      dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+
+      // ── Drag / swipe support ─────────────────────────────────────
+      const viewport = track.parentElement;
+      let dragStartX = 0;
+      let dragCurrentX = 0;
+      let isDragging = false;
+      let baseOffset = 0;
+
+      function cardW() { return cards[0].offsetWidth + 22; }
+
+      function onDragStart(x) {
+        isDragging = true;
+        dragStartX = x;
+        baseOffset = current * cardW();
+        track.style.transition = 'none';
+        viewport.style.cursor = 'grabbing';
+      }
+
+      function onDragMove(x) {
+        if (!isDragging) return;
+        dragCurrentX = x;
+        const delta = dragStartX - dragCurrentX;
+        const clampedOffset = Math.max(-cardW() * 0.4, Math.min(maxIndex() * cardW() + cardW() * 0.4, baseOffset + delta));
+        track.style.transform = `translateX(-${clampedOffset}px)`;
+      }
+
+      function onDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.transition = '';
+        viewport.style.cursor = '';
+        const delta = dragStartX - dragCurrentX;
+        const threshold = cardW() * 0.2;
+        if (delta > threshold) goTo(current + 1);
+        else if (delta < -threshold) goTo(current - 1);
+        else goTo(current);
+      }
+
+      // Mouse events
+      viewport.addEventListener('mousedown',  e => { e.preventDefault(); onDragStart(e.clientX); });
+      window.addEventListener('mousemove',    e => onDragMove(e.clientX));
+      window.addEventListener('mouseup',      () => onDragEnd());
+
+      // Touch events
+      viewport.addEventListener('touchstart', e => onDragStart(e.touches[0].clientX), { passive: true });
+      viewport.addEventListener('touchmove',  e => onDragMove(e.touches[0].clientX),  { passive: true });
+      viewport.addEventListener('touchend',   () => onDragEnd());
+
+      // Prevent text selection while dragging
+      viewport.addEventListener('dragstart', e => e.preventDefault());
+
+      // Recalculate on resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => goTo(Math.min(current, maxIndex())), 120);
+      });
+
+      goTo(0); // initialise
+    })();
+
+    // Nav scroll shadow
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Mobile nav
+    const burger  = document.getElementById('navBurger');
+    const navMenu = document.getElementById('navLinks');
+    const icon    = document.getElementById('burgerIcon');
+
+    burger.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      icon.innerHTML = open
+        ? '<line x1="3" y1="3" x2="19" y2="19"/><line x1="19" y1="3" x2="3" y2="19"/>'
+        : '<line x1="2" y1="5" x2="20" y2="5"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="17" x2="20" y2="17"/>';
+    });
+
+    navMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        icon.innerHTML = '<line x1="2" y1="5" x2="20" y2="5"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="17" x2="20" y2="17"/>';
+      });
+    });
+
+    // Intersection observer fade-in
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+
+    // Hero items fire immediately on load
+    document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), 80 + i * 100);
+    });
+
+    // Everything else uses scroll observer
+    document.querySelectorAll('.fade-up:not(#hero .fade-up)').forEach(el => obs.observe(el));
+
+    // Experience toggle expand/collapse
+    document.querySelectorAll('.exp-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const details = btn.nextElementSibling;
+        const isOpen = details.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.childNodes[0].textContent = isOpen ? 'Hide Details ' : 'View Details ';
+      });
+    });
+  </script>
+</body>
+</html>
