@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LSP / NBN — Presentation Redesign Proposal · Yonah Friedman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="proposal.css" />
+  <style>
+    :root { --cover-bg: #12271a; }
+
+    /* Client logo badge on cover */
+    .p-cover-client {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .p-cover-client-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255,255,255,.15);
+    }
+
+    .p-cover-client-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .p-cover-client-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .p-cover-client-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,.9);
+      letter-spacing: -0.01em;
+    }
+
+    .p-cover-client-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,.4);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* Slide count highlight */
+    .p-slide-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      border: 1px solid #c7d7f9;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .p-slide-count svg { flex-shrink: 0; }
+
+    /* Deliverable cards */
+    .p-deliverables {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 700px) {
+      .p-deliverables { grid-template-columns: 1fr; }
+    }
+
+    .p-deliverable-card {
+      padding: 20px;
+      background: var(--bg-gray);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .p-deliverable-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .p-deliverable-icon svg { color: var(--accent); }
+
+    .p-deliverable-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .p-deliverable-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Language note box */
+    .p-lang-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 700px) {
+      .p-lang-box { grid-template-columns: 1fr; }
+    }
+
+    .p-lang-card {
+      padding: 20px 22px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .p-lang-card--active {
+      background: var(--accent-light);
+      border-color: #c7d7f9;
+    }
+
+    .p-lang-card--pending {
+      background: var(--bg-gray);
+    }
+
+    .p-lang-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .p-lang-card--active .p-lang-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .p-lang-card--pending .p-lang-badge {
+      background: var(--border);
+      color: var(--text-muted);
+    }
+
+    .p-lang-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .p-lang-desc {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.6;
+    }
+
+    /* Revisions badge */
+    .p-revisions-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--green-light);
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .p-revisions-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .p-revisions-text {
+      font-size: 14px;
+      color: #14532d;
+      line-height: 1.5;
+    }
+
+    .p-revisions-text strong { color: #14532d; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="p-nav">
+    <div class="p-nav-inner">
+      <span class="p-nav-brand">Yonah <em>Friedman</em></span>
+      <div class="p-nav-links">
+        <a href="#scope">Scope</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#investment">Investment</a>
+        <a href="#next-steps">Next Steps</a>
+      </div>
+      <a href="https://wa.me/972543518212" class="p-nav-links p-nav-cta" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Let's Talk
+      </a>
+    </div>
+  </nav>
+
+  <!-- COVER -->
+  <section class="p-cover">
+    <div class="p-cover-content">
+      <div class="p-cover-label">Proposal · Presentation Design</div>
+
+      <div class="p-cover-client">
+        <div class="p-cover-client-logo">
+          <img src="lsp-logo.png" alt="Lone Soldiers Program" />
+        </div>
+        <div class="p-cover-client-text">
+          <div class="p-cover-client-name">Noya Govrin × LSP / NBN</div>
+          <div class="p-cover-client-sub">Lone Soldiers Program · Nefesh B'Nefesh</div>
+        </div>
+      </div>
+
+      <h1 class="p-cover-title">Executive Overview<br>Presentation<br>Redesign</h1>
+      <p class="p-cover-subtitle">Elevating 14 slides to executive-level clarity,<br>visual polish, and professional impact.</p>
+
+      <div class="p-cover-meta">
+        <div class="p-cover-meta-item"><strong>Prepared for:</strong> Noya Govrin / Lone Soldiers Program</div>
+        <div class="p-cover-meta-item"><strong>Prepared by:</strong> Yonah Friedman, Brand &amp; Marketing Consultant</div>
+        <div class="p-cover-meta-item"><strong>Date:</strong> April 2026</div>
+        <div class="p-cover-meta-item"><strong>Scope:</strong> Presentation Redesign · Hebrew Version</div>
+      </div>
+    </div>
+    <div class="p-cover-footer">
+      <div>
+        <div class="p-cover-footer-name">Yonah Friedman</div>
+        <div class="p-cover-footer-role">Brand &amp; Marketing Consultant · yonah.agency</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: SCOPE -->
+  <section class="p-section" id="scope">
+    <div class="p-container">
+      <div class="p-section-heading">
+        <span class="p-section-num">01</span>
+        <h2 class="p-section-title">Project Scope</h2>
+      </div>
+
+      <div class="p-slide-count">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Full redesign of 14 slides — Hebrew version
+      </div>
+
+      <p>A full visual redesign of the existing Lone Soldiers Program Executive Overview presentation. The goal is to bring the deck to a level that matches the significance of the organization's mission — polished, clear, and built to impress in high-stakes executive conversations.</p>
+      <p>This is not a light refresh. Every slide will be rethought from the ground up: layout, hierarchy, visual language, and storytelling flow — all rebuilt to function as a cohesive, professional executive presentation.</p>
+
+      <p class="p-sub">What the redesign covers</p>
+      <ul class="p-list">
+        <li>Full redesign of all 14 slides — no slide left untouched</li>
+        <li>Layout and information hierarchy optimized for executive-level communication</li>
+        <li>Design system alignment across the full deck — typography, colors, spacing, and visual consistency</li>
+        <li>Refinement of visual storytelling and narrative flow from first slide to last</li>
+        <li>Integration of all existing Hebrew content into a clean, high-end format</li>
+        <li>All assets and imagery formatted, resized, and placed for maximum visual impact</li>
+      </ul>
+
+      <div class="p-highlight">
+        <strong>The standard we're aiming for:</strong> A deck that communicates confidence and credibility before a single word is read — where the design itself signals that the organization behind it is serious, professional, and worthy of attention.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: DELIVERABLES -->
+  <section class="p-section p-section--gray" id="deliverables">
+    <div class="p-container">
+      <div class="p-section-heading">
+        <span class="p-section-num">02</span>
+        <h2 class="p-section-title">Deliverables</h2>
+      </div>
+
+      <p>Everything needed to walk away with a fully finished, production-ready presentation — and the ability to continue using and editing it independently.</p>
+
+      <div class="p-deliverables">
+        <div class="p-deliverable-card">
+          <div class="p-deliverable-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="p-deliverable-title">Final Redesigned Presentation</div>
+          <div class="p-deliverable-desc">Complete, polished Hebrew deck — export-ready for PDF and live presentation.</div>
+        </div>
+        <div class="p-deliverable-card">
+          <div class="p-deliverable-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="p-deliverable-title">Editable Source File</div>
+          <div class="p-deliverable-desc">Fully editable file (PowerPoint / Keynote / Google Slides) so your team can update content independently.</div>
+        </div>
+        <div class="p-deliverable-card">
+          <div class="p-deliverable-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="p-deliverable-title">Working Design Files</div>
+          <div class="p-deliverable-desc">All working design assets prepared and organized for internal use and future updates.</div>
+        </div>
+      </div>
+
+      <div class="p-revisions-box">
+        <div class="p-revisions-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </div>
+        <div class="p-revisions-text">
+          <strong>Unlimited revisions included</strong> — all necessary rounds of feedback and revision are included in the project fee, until we reach final approval together.
+        </div>
+      </div>
+
+      <p class="p-sub">Language scope</p>
+
+      <div class="p-lang-box">
+        <div class="p-lang-card p-lang-card--active">
+          <div class="p-lang-badge">This proposal</div>
+          <div class="p-lang-title">🇮🇱 Hebrew Version</div>
+          <div class="p-lang-desc">Full redesign of the Hebrew presentation that has been shared. All 14 slides, as scoped above.</div>
+        </div>
+        <div class="p-lang-card p-lang-card--pending">
+          <div class="p-lang-badge">Separate proposal</div>
+          <div class="p-lang-title">🇺🇸 English Version</div>
+          <div class="p-lang-desc">A separate, adjusted proposal will be provided for the English version based on the scope of adaptation required.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: TIMELINE -->
+  <section class="p-section" id="timeline">
+    <div class="p-container">
+      <div class="p-section-heading">
+        <span class="p-section-num">03</span>
+        <h2 class="p-section-title">Timeline</h2>
+      </div>
+
+      <p>Estimated completion in <strong>2–3 weeks</strong> from kickoff, depending on feedback cycles and any content finalization on your end. Here's how the project flows:</p>
+
+      <div class="p-timeline">
+
+        <div class="p-milestone">
+          <div class="p-milestone-dot">1</div>
+          <div class="p-milestone-content">
+            <div class="p-milestone-label">Day 1–2</div>
+            <div class="p-milestone-title">Kickoff &amp; Brief Review</div>
+            <div class="p-milestone-desc">Kickoff call to align on objectives, visual direction, and any brand assets. Review of existing Hebrew deck and reference materials.</div>
+          </div>
+        </div>
+
+        <div class="p-milestone">
+          <div class="p-milestone-dot">2</div>
+          <div class="p-milestone-content">
+            <div class="p-milestone-label">Days 3–7</div>
+            <div class="p-milestone-title">Design Direction &amp; First Draft</div>
+            <div class="p-milestone-desc">Development of the design system — layout framework, typography, color palette, and slide structure. First full draft of all 14 slides delivered for review.</div>
+          </div>
+        </div>
+
+        <div class="p-milestone">
+          <div class="p-milestone-dot">3</div>
+          <div class="p-milestone-content">
+            <div class="p-milestone-label">Week 2</div>
+            <div class="p-milestone-title">Revision Rounds</div>
+            <div class="p-milestone-desc">Feedback incorporated and slides refined. As many rounds as needed until the deck feels right and earns your full approval.</div>
+          </div>
+        </div>
+
+        <div class="p-milestone">
+          <div class="p-milestone-dot">✓</div>
+          <div class="p-milestone-content">
+            <div class="p-milestone-label">Week 2–3</div>
+            <div class="p-milestone-title">Final Delivery</div>
+            <div class="p-milestone-desc">Final presentation exported and delivered — PDF, editable source file, and all working design assets. Ready to present.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-cancel-box" style="background:#f0f9ff;border-color:#bae6fd;color:#0c4a6e;margin-top:32px;">
+        <strong style="color:#075985;">Note on timelines:</strong> The 2–3 week estimate assumes timely feedback within 2–3 business days per round. Any delays in content approvals or feedback may extend the timeline accordingly — this will always be communicated in advance.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: INVESTMENT -->
+  <section class="p-section p-section--gray" id="investment">
+    <div class="p-container">
+      <div class="p-section-heading">
+        <span class="p-section-num">04</span>
+        <h2 class="p-section-title">Investment &amp; Payment Terms</h2>
+      </div>
+
+      <p>A straightforward two-payment structure — half to begin, half on delivery. No surprises.</p>
+
+      <div class="p-invest-total">
+        <div>
+          <div class="p-invest-total-label">Total Project Investment — Hebrew Version</div>
+          <div class="p-invest-total-amount">₪7,000</div>
+        </div>
+        <div class="p-invest-total-note">Excluding VAT · 2 payments</div>
+      </div>
+
+      <div class="p-payments">
+        <div class="p-payment">
+          <div class="p-payment-num">1</div>
+          <div class="p-payment-info">
+            <div class="p-payment-title">Kickoff Payment — 50%</div>
+            <div class="p-payment-desc">Due upon project kickoff — confirms your slot and work begins immediately</div>
+          </div>
+          <div class="p-payment-amount">₪3,500</div>
+        </div>
+        <div class="p-payment">
+          <div class="p-payment-num">2</div>
+          <div class="p-payment-info">
+            <div class="p-payment-title">Final Delivery — 50%</div>
+            <div class="p-payment-desc">Due upon delivery of the final approved presentation and all files</div>
+          </div>
+          <div class="p-payment-amount">₪3,500</div>
+        </div>
+      </div>
+
+      <div class="p-highlight" style="margin-top: 8px;">
+        <strong>English version:</strong> A separate, adjusted proposal will be prepared for the English adaptation once the Hebrew version is underway or complete. Pricing will reflect the scope of adaptation required.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: NEXT STEPS -->
+  <section class="p-section" id="next-steps">
+    <div class="p-container">
+      <div class="p-section-heading">
+        <span class="p-section-num">05</span>
+        <h2 class="p-section-title">Next Steps</h2>
+      </div>
+
+      <p>Ready to bring the Executive Overview to the level it deserves? Here's how we get started:</p>
+
+      <div class="p-steps">
+        <div class="p-step">
+          <div class="p-step-num">1</div>
+          <div class="p-step-text"><strong>Give the green light</strong> — Let me know you'd like to proceed, either via WhatsApp or email. I'll send over a brief project agreement to formalize the engagement.</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">2</div>
+          <div class="p-step-text"><strong>Kickoff payment</strong> — Once confirmed, the first payment of ₪3,500 secures your project slot and work begins.</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">3</div>
+          <div class="p-step-text"><strong>Kickoff call</strong> — A short call to align on design direction, brand references, and any specific requirements or preferences before the first draft.</div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">4</div>
+          <div class="p-step-text"><strong>First draft within a week</strong> — You'll have a full first draft of all 14 slides within 5–7 days of kickoff. From there, we refine until it's exactly right.</div>
+        </div>
+      </div>
+
+      <p class="p-sub" style="margin-top: 48px;">About Yonah Friedman</p>
+
+      <div class="p-about-grid">
+        <div class="p-about-photo">
+          <img src="../Portfolio Images/moti.jpeg" alt="Yonah Friedman" />
+        </div>
+        <div>
+          <div class="p-about-name">Yonah Friedman</div>
+          <div class="p-about-role">Brand &amp; Marketing Consultant · yonah.agency</div>
+          <p class="p-about-text">I design presentations, brand identities, and digital experiences for organizations that need to communicate clearly and compellingly at a high level. My work spans executive decks, investor presentations, brand strategy, and web design — for clients ranging from non-profits and healthcare organizations to tech startups and community institutions.</p>
+          <p class="p-about-text">I look forward to bringing the Lone Soldiers Program's story to the visual standard it deserves.</p>
+          <p class="p-about-text" style="margin-top:4px;"><strong>Contact:</strong> <a href="mailto:yonah@yonah.agency">yonah@yonah.agency</a> · <a href="https://wa.me/972543518212">WhatsApp</a></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="p-cta">
+    <div class="p-container">
+      <h2>Let's make this deck executive-ready.</h2>
+      <p>Reach out to confirm, ask questions, or get started — I'm ready when you are.</p>
+      <div class="p-cta-actions">
+        <a href="https://wa.me/972543518212" class="p-btn p-btn-whatsapp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="mailto:yonah@yonah.agency" class="p-btn p-btn-ghost">yonah@yonah.agency</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="p-footer">
+    <div class="p-container p-footer-inner">
+      <span class="p-footer-brand">Yonah <em style="font-style:normal;color:#6b7dff;">Friedman</em></span>
+      <span class="p-footer-copy">© 2026 · Confidential proposal for Noya Govrin / LSP / NBN</span>
+      <div class="p-footer-links">
+        <a href="https://resume-seven-weld-11.vercel.app">Portfolio</a>
+        <a href="mailto:yonah@yonah.agency">Email</a>
+        <a href="https://wa.me/972543518212">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
