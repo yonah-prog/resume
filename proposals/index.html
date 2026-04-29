@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Proposals — Yonah Friedman</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:      #3462e3;
+      --accent-light:#eaeffd;
+      --text:        #09090f;
+      --text-sec:    #4c4c5e;
+      --text-muted:  #8888a0;
+      --bg:          #f7f7fa;
+      --card:        #ffffff;
+      --border:      #e2e2ea;
+      --green:       #16a34a;
+      --green-light: #dcfce7;
+      --nav-h:       60px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-sec);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      height: var(--nav-h);
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 36px;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-brand {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-brand em { font-style: normal; color: var(--accent); }
+
+    .nav-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── Page ── */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .new-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity .15s;
+    }
+
+    .new-btn:hover { opacity: .88; }
+
+    /* ── Stats row ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Proposal cards ── */
+    .proposals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .p-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 26px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      transition: border-color .18s, box-shadow .18s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .p-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(52,98,227,.08);
+    }
+
+    .p-card-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .p-card-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .p-card-logo-initials {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+    }
+
+    .p-card-body { min-width: 0; }
+
+    .p-card-client {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .p-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .p-card-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .p-card-meta span { display: flex; align-items: center; gap: 4px; }
+
+    .p-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .p-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .p-status--sent     { background: var(--accent-light); color: var(--accent); }
+    .p-status--accepted { background: var(--green-light);  color: var(--green); }
+    .p-status--draft    { background: #f3f4f6; color: #6b7280; }
+
+    .p-status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .p-open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: background .15s, border-color .15s;
+      white-space: nowrap;
+    }
+
+    .p-open-btn:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+    /* ── Copy link ── */
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color .15s, background .15s;
+    }
+
+    .copy-btn:hover { color: var(--accent); background: var(--accent-light); }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--text);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty svg { margin: 0 auto 16px; opacity: .3; }
+
+    @media (max-width: 640px) {
+      .page { padding: 28px 18px 60px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .p-card { grid-template-columns: auto 1fr; }
+      .p-card-actions { grid-column: 1 / -1; justify-content: flex-end; }
+      .nav { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div>
+      <div class="nav-brand">Yonah <em>Friedman</em></div>
+    </div>
+    <span class="nav-sub">Proposals Dashboard</span>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-header">
+      <div>
+        <h1>Proposals</h1>
+        <p>All client proposals — not publicly linked.</p>
+      </div>
+      <a href="https://resume-seven-weld-11.vercel.app" class="new-btn" target="_blank">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        Portfolio
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total Proposals</div>
+        <div class="stat-value" id="totalCount">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Accepted</div>
+        <div class="stat-value" id="acceptedCount" style="color:var(--green);">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value" id="pendingCount" style="color:var(--accent);">—</div>
+      </div>
+    </div>
+
+    <div class="proposals-list" id="proposalsList"></div>
+
+  </div>
+
+  <div class="copy-toast" id="copyToast">Link copied</div>
+
+  <script>
+    var BASE = "https://resume-seven-weld-11.vercel.app/proposals/";
+
+    var PROPOSALS = [
+      {
+        id:       "lsp-nbn",
+        client:   "Noya Govrin / LSP · NBN",
+        title:    "Executive Overview Presentation Redesign",
+        date:     "April 2026",
+        value:    "₪7,000",
+        file:     "lsp-nbn.html",
+        logo:     "lsp-logo.png",
+        logoAlt:  "LSP",
+      },
+      {
+        id:       "israel365",
+        client:   "Israel365",
+        title:    "Israel Truth Report Online Information Hub",
+        date:     "April 2026",
+        value:    "₪80,000",
+        file:     "israel365.html",
+        logo:     null,
+        logoAlt:  "I3",
+      },
+    ];
+
+    function getStatus(id) {
+      var key   = "proposal_accepted_" + id;
+      // Check our own localStorage first; won't work cross-device but
+      // useful if Yonah views from the same browser the client used.
+      // Status is primarily indicated by the badge we set manually below.
+      return null;
+    }
+
+    function render() {
+      var list      = document.getElementById("proposalsList");
+      var accepted  = 0;
+
+      list.innerHTML = PROPOSALS.map(function(p) {
+        var storageKey = "proposal_accepted_" + p.id;
+        var saved      = null;
+        try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
+        var isAccepted = !!saved;
+        if (isAccepted) accepted++;
+
+        var statusHtml = isAccepted
+          ? '<span class="p-status p-status--accepted"><span class="p-status-dot"></span>Accepted</span>'
+          : '<span class="p-status p-status--sent"><span class="p-status-dot"></span>Sent</span>';
+
+        var logoHtml = p.logo
+          ? '<img src="' + p.logo + '" alt="' + p.logoAlt + '" />'
+          : '<span class="p-card-logo-initials">' + p.logoAlt + '</span>';
+
+        var acceptedBy = isAccepted
+          ? '<span>✓ ' + saved.name + ' · ' + saved.date + '</span>'
+          : '';
+
+        return '<div class="p-card">'
+          + '<div class="p-card-logo">' + logoHtml + '</div>'
+          + '<div class="p-card-body">'
+          +   '<div class="p-card-client">' + p.client + '</div>'
+          +   '<div class="p-card-title">' + p.title + '</div>'
+          +   '<div class="p-card-meta">'
+          +     '<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' + p.date + '</span>'
+          +     '<span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' + p.value + '</span>'
+          +     acceptedBy
+          +   '</div>'
+          + '</div>'
+          + '<div class="p-card-actions">'
+          +   statusHtml
+          +   '<a class="p-open-btn" href="' + p.file + '" target="_blank">'
+          +     '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>Open'
+          +   '</a>'
+          +   '<button class="copy-btn" onclick="copyLink(\'' + BASE + p.file + '\')" title="Copy link">'
+          +     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+          +   '</button>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+      document.getElementById("totalCount").textContent    = PROPOSALS.length;
+      document.getElementById("acceptedCount").textContent = accepted;
+      document.getElementById("pendingCount").textContent  = PROPOSALS.length - accepted;
+    }
+
+    function copyLink(url) {
+      navigator.clipboard.writeText(url).then(function() {
+        var t = document.getElementById("copyToast");
+        t.classList.add("show");
+        setTimeout(function() { t.classList.remove("show"); }, 2000);
+      });
+    }
+
+    render();
+  </script>
+
+</body>
+</html>
