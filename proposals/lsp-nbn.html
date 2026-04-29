@@ -460,6 +460,110 @@
     </div>
   </section>
 
+  <!-- ACCEPT -->
+  <section class="p-accept" id="accept">
+    <div class="p-container">
+      <div class="p-accept-inner">
+        <h2>Accept this Proposal</h2>
+        <p>By accepting, you confirm you've reviewed the scope, timeline, and investment terms above. A confirmation will be sent to Yonah and a record will appear below for your files.</p>
+
+        <div class="p-check-row" id="checkRow" onclick="toggleCheck()">
+          <div class="p-check-box" id="checkBox">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span class="p-check-label">I have read and agree to the scope, deliverables, timeline, and investment terms set out in this proposal.</span>
+        </div>
+
+        <div class="p-name-row">
+          <label for="signerName">Your full name</label>
+          <input type="text" id="signerName" class="p-name-input" placeholder="e.g. Noya Govrin" oninput="checkReady()" />
+        </div>
+
+        <button class="p-accept-btn" id="acceptBtn" onclick="acceptProposal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Accept Proposal
+        </button>
+
+        <div class="p-accepted-banner" id="acceptedBanner">
+          <div class="p-accepted-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="p-accepted-title">Proposal Accepted</div>
+            <div class="p-accepted-meta" id="acceptedMeta"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    var checked = false;
+    var PROPOSAL_NAME = "LSP / NBN — Executive Overview Presentation Redesign";
+    var WHATSAPP_NUM  = "972543518212";
+
+    // Restore from localStorage if already accepted
+    (function() {
+      var saved = localStorage.getItem("proposal_accepted_lsp-nbn");
+      if (saved) {
+        var d = JSON.parse(saved);
+        document.getElementById("checkRow").classList.add("checked");
+        document.getElementById("checkBox").classList.add("checked");
+        document.getElementById("signerName").value = d.name;
+        document.getElementById("signerName").disabled = true;
+        document.getElementById("checkRow").style.pointerEvents = "none";
+        document.getElementById("acceptBtn").style.display = "none";
+        showBanner(d.name, d.date);
+        checked = true;
+      }
+    })();
+
+    function toggleCheck() {
+      checked = !checked;
+      document.getElementById("checkRow").classList.toggle("checked", checked);
+      checkReady();
+    }
+
+    function checkReady() {
+      var name = document.getElementById("signerName").value.trim();
+      var btn  = document.getElementById("acceptBtn");
+      btn.classList.toggle("ready", checked && name.length > 1);
+    }
+
+    function showBanner(name, dateStr) {
+      var banner = document.getElementById("acceptedBanner");
+      var meta   = document.getElementById("acceptedMeta");
+      banner.classList.add("visible");
+      meta.innerHTML = "Accepted by <strong>" + name + "</strong><br>" + dateStr;
+    }
+
+    function acceptProposal() {
+      var name = document.getElementById("signerName").value.trim();
+      if (!checked || name.length < 2) return;
+
+      var now      = new Date();
+      var dateStr  = now.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
+                   + " at " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+
+      // Save to localStorage
+      localStorage.setItem("proposal_accepted_lsp-nbn", JSON.stringify({ name: name, date: dateStr }));
+
+      // Lock the UI
+      document.getElementById("signerName").disabled = true;
+      document.getElementById("checkRow").style.pointerEvents = "none";
+      document.getElementById("acceptBtn").style.display = "none";
+      showBanner(name, dateStr);
+
+      // Fire WhatsApp notification to Yonah
+      var msg = "✅ Proposal Accepted\n\n"
+              + "Proposal: " + PROPOSAL_NAME + "\n"
+              + "Accepted by: " + name + "\n"
+              + "Date: " + dateStr + "\n\n"
+              + "Please confirm receipt.";
+      window.open("https://wa.me/" + WHATSAPP_NUM + "?text=" + encodeURIComponent(msg), "_blank");
+    }
+  </script>
+
   <!-- CTA -->
   <section class="p-cta">
     <div class="p-container">

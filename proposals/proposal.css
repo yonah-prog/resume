@@ -618,6 +618,170 @@ strong { color: var(--text); font-weight: 600; }
   color: var(--text-sec);
 }
 
+/* ── Accept / Sign-off ─────────────────────────────────── */
+.p-accept {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.p-accept-inner {
+  max-width: 580px;
+}
+
+.p-accept-inner h2 {
+  font-size: clamp(20px, 2.8vw, 28px);
+  margin-bottom: 8px;
+}
+
+.p-accept-inner > p {
+  font-size: 15px;
+  color: var(--text-sec);
+  margin-bottom: 32px;
+}
+
+/* Checkbox row */
+.p-check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px;
+  background: var(--bg-gray);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: border-color .18s, background .18s;
+  user-select: none;
+}
+
+.p-check-row:hover { border-color: var(--accent); background: var(--accent-light); }
+.p-check-row.checked { border-color: var(--green); background: var(--green-light); }
+
+.p-check-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 2px solid var(--border);
+  background: #fff;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .18s, background .18s;
+}
+
+.p-check-row.checked .p-check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.p-check-box svg { display: none; }
+.p-check-row.checked .p-check-box svg { display: block; }
+
+.p-check-label {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-sec);
+  padding-top: 1px;
+}
+
+.p-check-row.checked .p-check-label { color: #14532d; }
+
+/* Name input */
+.p-name-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.p-name-row label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.p-name-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: var(--text);
+  transition: border-color .18s;
+}
+
+.p-name-input:focus { border-color: var(--accent); }
+.p-name-input::placeholder { color: var(--text-muted); }
+
+/* Accept button */
+.p-accept-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: opacity .18s, transform .18s;
+  opacity: .4;
+  pointer-events: none;
+}
+
+.p-accept-btn.ready {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.p-accept-btn.ready:hover { opacity: .88; transform: translateY(-2px); }
+
+/* Confirmed state */
+.p-accepted-banner {
+  display: none;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 26px;
+  background: var(--green-light);
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.p-accepted-banner.visible { display: flex; }
+
+.p-accepted-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.p-accepted-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #14532d;
+  margin-bottom: 4px;
+}
+
+.p-accepted-meta {
+  font-size: 13px;
+  color: #166534;
+  line-height: 1.65;
+}
+
 /* ── CTA / Signature ───────────────────────────────────── */
 .p-cta {
   background: var(--accent);
