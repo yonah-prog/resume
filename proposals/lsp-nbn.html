@@ -492,6 +492,10 @@
             <div class="p-accepted-title">Proposal Accepted</div>
             <div class="p-accepted-meta" id="acceptedMeta"></div>
             <div class="p-accepted-hash" id="acceptedHash"></div>
+            <div class="p-next-step" id="nextStep" style="display:none;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span id="nextStepText"></span>
+            </div>
             <button class="p-save-btn" onclick="window.print()">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Save / print a copy
@@ -526,7 +530,7 @@
         document.getElementById("signerName").disabled = true;
         document.getElementById("checkRow").style.pointerEvents = "none";
         document.getElementById("acceptBtn").style.display = "none";
-        showBanner(d.name, d.date, d.hash);
+        showBanner(d.name, d.date, d.hash, false);
         checked = true;
       }
     })();
@@ -542,7 +546,7 @@
       document.getElementById("acceptBtn").classList.toggle("ready", checked && name.length > 1);
     }
 
-    function showBanner(name, dateStr, hash) {
+    function showBanner(name, dateStr, hash, isNew) {
       document.getElementById("acceptedBanner").classList.add("visible");
       document.getElementById("acceptedMeta").innerHTML =
         "Accepted by <strong>" + name + "</strong> &nbsp;·&nbsp; " + dateStr;
@@ -550,6 +554,14 @@
         document.getElementById("acceptedHash").innerHTML =
           "<strong>Content fingerprint (SHA-256)</strong>" + hash +
           "<br><span style='font-family:inherit;font-size:10px;opacity:.7;'>If this proposal is ever changed, this fingerprint will no longer match.</span>";
+      }
+      if (isNew) {
+        var ns = document.getElementById("nextStep");
+        ns.style.display = "flex";
+        document.getElementById("nextStepText").innerHTML =
+          "Your confirmation is ready — please <strong>save this page as a PDF</strong> using the print dialog above, then send it to "
+          + "<a href='https://wa.me/" + WHATSAPP_NUM + "' target='_blank' style='color:#14532d;font-weight:600;'>WhatsApp</a>"
+          + " or <a href='mailto:yonah@yonah.agency' style='color:#14532d;font-weight:600;'>yonah@yonah.agency</a> to get the project started.";
       }
     }
 
@@ -561,30 +573,16 @@
       var dateStr = now.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
                   + " at " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
       var hash    = await hashContent();
-      var shortH  = hash.slice(0, 16) + "…";
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ name: name, date: dateStr, hash: hash }));
 
       document.getElementById("signerName").disabled = true;
       document.getElementById("checkRow").style.pointerEvents = "none";
       document.getElementById("acceptBtn").style.display = "none";
-      showBanner(name, dateStr, hash);
-
-      var msg = "✅ Proposal Accepted\n\n"
-              + "Proposal: " + PROPOSAL_NAME + "\n"
-              + "Accepted by: " + name + "\n"
-              + "Date: " + dateStr + "\n"
-              + "Content fingerprint: " + shortH + "\n\n"
-              + "Please confirm receipt.";
+      showBanner(name, dateStr, hash, true);
 
       // Small delay so the banner renders before print dialog opens
-      setTimeout(function() {
-        window.print();
-        // Open WhatsApp after print dialog is dismissed
-        setTimeout(function() {
-          window.open("https://wa.me/" + WHATSAPP_NUM + "?text=" + encodeURIComponent(msg), "_blank");
-        }, 800);
-      }, 600);
+      setTimeout(function() { window.print(); }, 600);
     }
   </script>
 
