@@ -488,9 +488,14 @@
           <div class="p-accepted-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <div>
+          <div style="flex:1;">
             <div class="p-accepted-title">Proposal Accepted</div>
             <div class="p-accepted-meta" id="acceptedMeta"></div>
+            <div class="p-accepted-hash" id="acceptedHash"></div>
+            <button class="p-save-btn" onclick="window.print()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Save / print a copy
+            </button>
           </div>
         </div>
       </div>
@@ -501,19 +506,27 @@
     var checked = false;
     var PROPOSAL_NAME = "LSP / NBN — Executive Overview Presentation Redesign";
     var WHATSAPP_NUM  = "972543518212";
+    var STORAGE_KEY   = "proposal_accepted_lsp-nbn";
+
+    // Hash the proposal content using SHA-256
+    async function hashContent() {
+      var sections = document.querySelectorAll('.p-section, .p-accept');
+      var text = Array.from(sections).map(function(s) { return s.innerText; }).join('\n');
+      var buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+    }
 
     // Restore from localStorage if already accepted
     (function() {
-      var saved = localStorage.getItem("proposal_accepted_lsp-nbn");
+      var saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         var d = JSON.parse(saved);
         document.getElementById("checkRow").classList.add("checked");
-        document.getElementById("checkBox").classList.add("checked");
         document.getElementById("signerName").value = d.name;
         document.getElementById("signerName").disabled = true;
         document.getElementById("checkRow").style.pointerEvents = "none";
         document.getElementById("acceptBtn").style.display = "none";
-        showBanner(d.name, d.date);
+        showBanner(d.name, d.date, d.hash);
         checked = true;
       }
     })();
@@ -526,41 +539,52 @@
 
     function checkReady() {
       var name = document.getElementById("signerName").value.trim();
-      var btn  = document.getElementById("acceptBtn");
-      btn.classList.toggle("ready", checked && name.length > 1);
+      document.getElementById("acceptBtn").classList.toggle("ready", checked && name.length > 1);
     }
 
-    function showBanner(name, dateStr) {
-      var banner = document.getElementById("acceptedBanner");
-      var meta   = document.getElementById("acceptedMeta");
-      banner.classList.add("visible");
-      meta.innerHTML = "Accepted by <strong>" + name + "</strong><br>" + dateStr;
+    function showBanner(name, dateStr, hash) {
+      document.getElementById("acceptedBanner").classList.add("visible");
+      document.getElementById("acceptedMeta").innerHTML =
+        "Accepted by <strong>" + name + "</strong> &nbsp;·&nbsp; " + dateStr;
+      if (hash) {
+        document.getElementById("acceptedHash").innerHTML =
+          "<strong>Content fingerprint (SHA-256)</strong>" + hash +
+          "<br><span style='font-family:inherit;font-size:10px;opacity:.7;'>If this proposal is ever changed, this fingerprint will no longer match.</span>";
+      }
     }
 
-    function acceptProposal() {
+    async function acceptProposal() {
       var name = document.getElementById("signerName").value.trim();
       if (!checked || name.length < 2) return;
 
-      var now      = new Date();
-      var dateStr  = now.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
-                   + " at " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+      var now     = new Date();
+      var dateStr = now.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })
+                  + " at " + now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+      var hash    = await hashContent();
+      var shortH  = hash.slice(0, 16) + "…";
 
-      // Save to localStorage
-      localStorage.setItem("proposal_accepted_lsp-nbn", JSON.stringify({ name: name, date: dateStr }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ name: name, date: dateStr, hash: hash }));
 
-      // Lock the UI
       document.getElementById("signerName").disabled = true;
       document.getElementById("checkRow").style.pointerEvents = "none";
       document.getElementById("acceptBtn").style.display = "none";
-      showBanner(name, dateStr);
+      showBanner(name, dateStr, hash);
 
-      // Fire WhatsApp notification to Yonah
       var msg = "✅ Proposal Accepted\n\n"
               + "Proposal: " + PROPOSAL_NAME + "\n"
               + "Accepted by: " + name + "\n"
-              + "Date: " + dateStr + "\n\n"
+              + "Date: " + dateStr + "\n"
+              + "Content fingerprint: " + shortH + "\n\n"
               + "Please confirm receipt.";
-      window.open("https://wa.me/" + WHATSAPP_NUM + "?text=" + encodeURIComponent(msg), "_blank");
+
+      // Small delay so the banner renders before print dialog opens
+      setTimeout(function() {
+        window.print();
+        // Open WhatsApp after print dialog is dismissed
+        setTimeout(function() {
+          window.open("https://wa.me/" + WHATSAPP_NUM + "?text=" + encodeURIComponent(msg), "_blank");
+        }, 800);
+      }, 600);
     }
   </script>
 
