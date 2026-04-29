@@ -127,7 +127,7 @@ strong { color: var(--text); font-weight: 600; }
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  background: var(--cover-bg, #0f172a);
+  background: var(--cover-bg, #1a3080);
 }
 
 .p-cover-img {
@@ -574,10 +574,7 @@ strong { color: var(--text); font-weight: 600; }
 
 /* ── About / closing ───────────────────────────────────── */
 .p-about-grid {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 28px;
-  align-items: start;
+  display: block;
   padding: 36px;
   background: var(--bg-gray);
   border: 1px solid var(--border);
