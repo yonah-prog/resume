@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Source One Eco — Turn waste into measurable margin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bone: #F4EFE6;
+    --bone-2: #ECE6D8;
+    --ink: #1A2A1F;
+    --ink-2: #2C3A30;
+    --muted: #6B7368;
+    --line: #D9D2C0;
+    --moss: #2D5A3D;
+    --moss-deep: #1F4129;
+    --clay: #C56B3F;
+    --clay-deep: #A8542C;
+    --sky: #D6E3D7;
+    --cream: #FBF7EE;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 400; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .serif { font-family: var(--serif); font-weight: 400; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ""; width: 22px; height: 1px; background: var(--moss); display: inline-block;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244, 239, 230, 0.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 22px; }
+  .logo-mark {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink);
+    position: relative;
+    display: inline-block;
+  }
+  .logo-mark::after {
+    content: ""; position: absolute; inset: 7px;
+    border-radius: 50%; background: var(--clay);
+  }
+  .logo-mark::before {
+    content: ""; position: absolute; right: -3px; top: 11px;
+    width: 9px; height: 4px; background: var(--ink); border-radius: 2px;
+    transform: rotate(-20deg);
+  }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    font-size: 14px; color: var(--ink-2);
+    position: relative; padding: 4px 0;
+  }
+  .nav-links a:hover { color: var(--moss); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .15s;
+  }
+  .nav-cta:hover { background: var(--moss-deep); }
+  .nav-cta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+
+  /* HERO */
+  .hero { padding: 80px 0 64px; position: relative; overflow: hidden; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px;
+    align-items: end;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(56px, 7.2vw, 108px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 28px 0 24px;
+  }
+  .hero h1 .accent { color: var(--moss); font-style: italic; }
+  .hero h1 .clay { color: var(--clay); font-style: italic; }
+  .hero-sub {
+    font-size: 20px; line-height: 1.45; color: var(--ink-2);
+    max-width: 560px; margin-bottom: 36px;
+  }
+  .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 26px; border-radius: 999px;
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform .15s, background .15s, color .15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--clay); color: var(--cream); }
+  .btn-primary:hover { background: var(--clay-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn .arrow {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(255,255,255,0.18); display: inline-flex;
+    align-items: center; justify-content: center; font-size: 11px;
+  }
+  .btn-ghost .arrow { background: rgba(26,42,31,0.08); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; margin-top: 56px;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+  .hero-stats .stat { padding-right: 20px; }
+  .stat-num {
+    font-family: var(--serif); font-size: 52px; line-height: 1;
+    color: var(--ink); letter-spacing: -0.02em;
+  }
+  .stat-num sup { font-size: 22px; vertical-align: top; margin-left: 2px; color: var(--moss); }
+  .stat-label {
+    font-size: 13px; color: var(--muted); margin-top: 8px; max-width: 200px;
+  }
+
+  /* Hero right card */
+  .hero-card {
+    background: var(--ink); color: var(--cream);
+    border-radius: 24px; padding: 28px;
+    position: relative; overflow: hidden;
+    min-height: 520px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .hero-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .hero-card-top .mono { color: rgba(251,247,238,0.6); }
+  .live-dot {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--sky);
+  }
+  .live-dot::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: #6FCB8A; box-shadow: 0 0 0 4px rgba(111,203,138,0.18);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  .ticker-block {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 22px;
+    margin-top: 18px;
+  }
+  .ticker-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(251,247,238,0.55); margin-bottom: 16px; }
+  .ticker-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    font-size: 14px;
+  }
+  .ticker-row:last-child { border-bottom: none; }
+  .ticker-row .stream { display: flex; align-items: center; gap: 12px; }
+  .ticker-row .swatch {
+    width: 12px; height: 12px; border-radius: 3px;
+  }
+  .ticker-row .val { font-family: var(--mono); font-size: 13px; color: var(--cream); }
+  .ticker-row .delta { color: #6FCB8A; font-family: var(--mono); font-size: 11px; margin-left: 8px; }
+
+  .bar-chart {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
+    align-items: end; height: 110px; margin-top: 18px;
+  }
+  .bar { background: var(--clay); border-radius: 4px 4px 0 0; position: relative; }
+  .bar.bar-moss { background: #6FCB8A; }
+  .bar-labels {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
+    margin-top: 6px; font-family: var(--mono); font-size: 10px; color: rgba(251,247,238,0.45);
+    text-align: center;
+  }
+
+  .hero-card-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 16px;
+  }
+  .hero-card-foot .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: rgba(251,247,238,0.5); text-transform: uppercase; }
+  .hero-card-foot .big { font-family: var(--serif); font-size: 38px; line-height: 1; }
+
+  /* Trust strip */
+  .trust {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    background: var(--bone-2);
+  }
+  .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .trust-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .trust-logos { display: flex; gap: 38px; align-items: center; flex-wrap: wrap; }
+  .trust-logo {
+    font-family: var(--serif); font-size: 22px; color: var(--ink-2); opacity: 0.7;
+    letter-spacing: -0.01em;
+  }
+  .trust-logo.alt { font-family: var(--sans); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 14px; }
+
+  /* Section heading */
+  .section { padding: 120px 0; }
+  .section-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; margin-bottom: 64px; align-items: end; }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--moss); }
+  .section-head .lede { font-size: 18px; color: var(--ink-2); max-width: 520px; }
+
+  /* Value cards */
+  .value-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .value-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex; flex-direction: column;
+    min-height: 380px;
+    position: relative;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .value-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -28px rgba(26,42,31,0.4); }
+  .value-card .num {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--moss); text-transform: uppercase;
+  }
+  .value-card h3 {
+    font-family: var(--serif); font-size: 32px; line-height: 1.05;
+    margin: 28px 0 14px; letter-spacing: -0.015em;
+  }
+  .value-card p { color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+  .value-card .metric {
+    margin-top: auto;
+    padding-top: 24px; border-top: 1px dashed var(--line);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .value-card .metric .big {
+    font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--ink); letter-spacing: -0.02em;
+  }
+  .value-card .metric .small { font-size: 13px; color: var(--muted); max-width: 160px; }
+  .value-card.dark { background: var(--moss-deep); color: var(--cream); border-color: var(--moss-deep); }
+  .value-card.dark .num { color: #9FD1A8; }
+  .value-card.dark p { color: rgba(251,247,238,0.78); }
+  .value-card.dark .metric { border-color: rgba(255,255,255,0.18); }
+  .value-card.dark .metric .big { color: var(--cream); }
+  .value-card.dark .metric .small { color: rgba(251,247,238,0.6); }
+
+  /* Process / Flight plan */
+  .process { background: var(--ink); color: var(--cream); }
+  .process .section-head h2 { color: var(--cream); }
+  .process .section-head h2 em { color: #6FCB8A; }
+  .process .section-head .lede { color: rgba(251,247,238,0.75); }
+  .process .eyebrow { color: #9FD1A8; }
+  .process .eyebrow::before { background: #9FD1A8; }
+
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.14);
+  }
+  .step {
+    padding: 36px 28px 36px 0;
+    border-right: 1px solid rgba(255,255,255,0.14);
+    display: flex; flex-direction: column; gap: 18px;
+    position: relative;
+  }
+  .step:last-child { border-right: none; padding-right: 0; }
+  .step:nth-child(n+2) { padding-left: 28px; }
+  .step .step-num {
+    font-family: var(--serif); font-size: 64px; line-height: 1;
+    color: var(--clay); letter-spacing: -0.02em;
+  }
+  .step h3 {
+    font-family: var(--serif); font-size: 26px; line-height: 1.1;
+  }
+  .step p { font-size: 14px; color: rgba(251,247,238,0.7); line-height: 1.6; }
+  .step .step-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #9FD1A8;
+    padding: 6px 10px; border: 1px solid rgba(159,209,168,0.4);
+    border-radius: 999px; align-self: flex-start; margin-top: auto;
+  }
+
+  .process-cta {
+    margin-top: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    gap: 32px;
+  }
+  .process-cta .text { font-family: var(--serif); font-size: 26px; line-height: 1.15; max-width: 640px; }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .service-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .service-image {
+    aspect-ratio: 16 / 9;
+    background:
+      repeating-linear-gradient(135deg, var(--bone-2) 0 14px, var(--bone) 14px 28px);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .service-image .placeholder-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+    background: var(--cream); padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+  .service-body { padding: 28px 28px 32px; display: flex; flex-direction: column; gap: 14px; }
+  .service-body h3 { font-family: var(--serif); font-size: 30px; letter-spacing: -0.01em; }
+  .service-body p { color: var(--ink-2); font-size: 15px; }
+  .service-body ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 8px; }
+  .service-body li { font-size: 14px; color: var(--ink-2); padding-left: 22px; position: relative; }
+  .service-body li::before {
+    content: ""; position: absolute; left: 0; top: 8px;
+    width: 10px; height: 10px; background: var(--moss);
+    clip-path: polygon(0 0, 100% 50%, 0 100%, 30% 50%);
+  }
+
+  /* About / Founder */
+  .founder { background: var(--bone-2); }
+  .founder-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
+  .founder-img {
+    aspect-ratio: 4/5;
+    border-radius: 24px;
+    background:
+      repeating-linear-gradient(135deg, var(--bone) 0 16px, var(--cream) 16px 32px);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .founder-img .placeholder-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+    background: var(--bone); padding: 8px 14px; border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+  .founder h2 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4.4vw, 56px);
+    line-height: 1.03; letter-spacing: -0.02em;
+    margin: 22px 0 24px;
+  }
+  .founder h2 em { font-style: italic; color: var(--moss); }
+  .founder-bio p { font-size: 17px; color: var(--ink-2); margin-bottom: 16px; line-height: 1.6; }
+  .founder-bio p:last-of-type { margin-bottom: 0; }
+  .founder-signature {
+    margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .sig-name { font-family: var(--serif); font-size: 22px; }
+  .sig-role { font-size: 13px; color: var(--muted); }
+  .sig-cred {
+    display: flex; gap: 24px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .sig-cred span strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; font-weight: 400; text-transform: none; margin-top: 2px; }
+
+  /* Results band */
+  .results { background: var(--moss-deep); color: var(--cream); padding: 80px 0; }
+  .results-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 32px; align-items: end; }
+  .results-head { padding-right: 32px; }
+  .results-head h2 { font-family: var(--serif); font-size: 44px; line-height: 1.04; letter-spacing: -0.02em; }
+  .results-head h2 em { font-style: italic; color: #E7C9A8; }
+  .results-stat { border-left: 1px solid rgba(255,255,255,0.18); padding-left: 24px; }
+  .results-stat .big { font-family: var(--serif); font-size: 76px; line-height: 0.95; letter-spacing: -0.03em; }
+  .results-stat .big sup { font-size: 28px; vertical-align: top; color: #E7C9A8; margin-left: 2px; }
+  .results-stat .label { font-size: 14px; color: rgba(251,247,238,0.78); margin-top: 12px; max-width: 200px; }
+
+  /* Contact / CTA */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .contact-left h2 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5.6vw, 76px);
+    line-height: 1; letter-spacing: -0.025em;
+    margin: 24px 0 24px;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--clay); }
+  .contact-left .lede { font-size: 18px; color: var(--ink-2); max-width: 460px; margin-bottom: 36px; }
+  .contact-list { display: flex; flex-direction: column; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .contact-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .contact-row .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .contact-row .v { font-family: var(--serif); font-size: 22px; }
+
+  .form-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px;
+  }
+  .form-card .form-head { margin-bottom: 24px; }
+  .form-card .form-head h3 { font-family: var(--serif); font-size: 28px; line-height: 1.1; }
+  .form-card .form-head p { color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .field label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .field input, .field textarea, .field select {
+    background: var(--bone);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 14px;
+    font-family: var(--sans); font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s, background .15s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--moss); background: var(--cream); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .form-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; gap: 16px; flex-wrap: wrap; }
+  .form-foot .meta { font-size: 12px; color: var(--muted); max-width: 280px; }
+
+  /* Footer */
+  footer { background: var(--ink); color: var(--cream); padding: 80px 0 32px; }
+  .foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .foot-brand h3 {
+    font-family: var(--serif); font-size: clamp(40px, 4.6vw, 64px);
+    line-height: 0.98; letter-spacing: -0.02em; margin-top: 8px;
+  }
+  .foot-brand p { color: rgba(251,247,238,0.7); margin-top: 18px; max-width: 360px; font-size: 15px; }
+  .foot-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(251,247,238,0.55); margin-bottom: 20px; }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .foot-col a { color: var(--cream); font-size: 15px; }
+  .foot-col a:hover { color: #9FD1A8; }
+  .foot-bot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 28px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(251,247,238,0.45);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* Float chat */
+  .float-chat {
+    position: fixed; right: 24px; bottom: 24px; z-index: 60;
+    background: var(--clay); color: var(--cream);
+    padding: 14px 20px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: 0 16px 36px -16px rgba(197,107,63,0.6);
+    cursor: pointer;
+    transition: transform .15s, background .15s;
+  }
+  .float-chat:hover { background: var(--clay-deep); transform: translateY(-2px); }
+  .float-chat .live-dot::before { background: var(--cream); box-shadow: 0 0 0 4px rgba(251,247,238,0.25); }
+  .float-chat .live-dot { color: rgba(251,247,238,0.8); }
+
+  @media (max-width: 1024px) {
+    .hero-grid, .section-head, .services-grid, .founder-grid, .contact-grid, .foot-top, .results-grid { grid-template-columns: 1fr; gap: 36px; }
+    .value-grid, .steps { grid-template-columns: 1fr 1fr; }
+    .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.14); padding: 28px 0; }
+    .step:nth-child(n+2) { padding-left: 0; }
+    .hero-stats { margin-top: 32px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 20px; }
+    .section { padding: 72px 0; }
+    .value-grid, .steps, .hero-stats { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    .founder-signature { flex-direction: column; align-items: flex-start; }
+    .sig-cred { flex-wrap: wrap; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="logo">
+      <span class="logo-mark"></span>
+      <span>Source One Eco</span>
+    </div>
+    <div class="nav-links">
+      <a href="#value">The Nest</a>
+      <a href="#process">How We Fly</a>
+      <a href="#services">Flight Plan</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#contact" class="nav-cta"><span class="dot"></span> Chirp us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">For hotels, restaurants &amp; offices</span>
+        <h1>
+          Pay less to throw<br />
+          things <span class="accent">away.</span><br />
+          Earn money on what's <span class="clay">left.</span>
+        </h1>
+        <p class="hero-sub">
+          Right now, your business pays someone to haul everything in your bins to landfill — food scraps, cardboard, glass, oil, packaging, the lot. <strong>A lot of that has real value.</strong> We help you separate the valuable stuff, sell or recycle it, and shrink the bill on the rest. You spend less, recover money you didn't know was there, and get a simple monthly report you can show your boss, your guests, or an auditor.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#contact" class="btn btn-primary">
+            Get a free 30-min waste check
+            <span class="arrow">→</span>
+          </a>
+          <a href="#process" class="btn btn-ghost">
+            Show me how it works
+            <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">−22<sup>%</sup></div>
+            <div class="stat-label">Lower waste-hauling bill, on average, after 3 months</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">70<sup>%</sup></div>
+            <div class="stat-label">Of your bin volume kept out of landfill — sold, reused or composted instead</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">1</div>
+            <div class="stat-label">Clear monthly report showing exactly where every kilo went</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero card / live dashboard -->
+      <aside class="hero-card" aria-label="Live waste recovery dashboard">
+        <div>
+          <div class="hero-card-top">
+            <div>
+              <div class="mono" style="color: rgba(251,247,238,0.55); margin-bottom: 6px;">Client view</div>
+              <div style="font-family: var(--serif); font-size: 24px;">The Cedar Hotel · Wk 17</div>
+            </div>
+            <span class="live-dot">Live</span>
+          </div>
+
+          <div class="ticker-block">
+            <div class="ticker-title">Recovered this week</div>
+            <div class="ticker-row">
+              <div class="stream"><span class="swatch" style="background:#6FCB8A;"></span>Organics · compost</div>
+              <div><span class="val">418 kg</span><span class="delta">+12%</span></div>
+            </div>
+            <div class="ticker-row">
+              <div class="stream"><span class="swatch" style="background:#E7C9A8;"></span>Cardboard · baled</div>
+              <div><span class="val">227 kg</span><span class="delta">+6%</span></div>
+            </div>
+            <div class="ticker-row">
+              <div class="stream"><span class="swatch" style="background:#C56B3F;"></span>Glass · sorted</div>
+              <div><span class="val">189 kg</span><span class="delta">+9%</span></div>
+            </div>
+            <div class="ticker-row">
+              <div class="stream"><span class="swatch" style="background:#9FD1A8;"></span>Plastics · PET/HDPE</div>
+              <div><span class="val">94 kg</span><span class="delta">+3%</span></div>
+            </div>
+          </div>
+
+          <div class="ticker-block" style="margin-top: 14px;">
+            <div class="ticker-title">Diversion rate · last 7 weeks</div>
+            <div class="bar-chart">
+              <div class="bar" style="height: 42%;"></div>
+              <div class="bar" style="height: 51%;"></div>
+              <div class="bar" style="height: 58%;"></div>
+              <div class="bar" style="height: 63%;"></div>
+              <div class="bar bar-moss" style="height: 71%;"></div>
+              <div class="bar bar-moss" style="height: 78%;"></div>
+              <div class="bar bar-moss" style="height: 84%;"></div>
+            </div>
+            <div class="bar-labels">
+              <span>W11</span><span>W12</span><span>W13</span><span>W14</span><span>W15</span><span>W16</span><span>W17</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-foot">
+          <div>
+            <div class="label">YTD savings</div>
+            <div class="big">$48.2k</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="label">CO₂e avoided</div>
+            <div class="big" style="color:#9FD1A8;">11.4t</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div class="container trust-inner">
+    <div class="trust-label">Trusted across hospitality &amp; commercial</div>
+    <div class="trust-logos">
+      <span class="trust-logo">Cedar Hotel Group</span>
+      <span class="trust-logo alt">Olive&amp;Vine</span>
+      <span class="trust-logo">Marais Bistros</span>
+      <span class="trust-logo alt">Northwind Resorts</span>
+      <span class="trust-logo">Harbor &amp; Co.</span>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE CARDS -->
+<section class="section" id="value">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What changes for your business</span>
+        <h2>Three things you'll <em>see</em><br />in the first 90 days.</h2>
+      </div>
+      <p class="lede">
+        Most waste companies just empty your bins. We do something different: we look at what you're actually throwing out, find what has value, and rebuild your setup so you save money and look good doing it. Here's what shows up on your side.
+      </p>
+    </div>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <span class="num">01 · You pay less</span>
+        <h3>Your waste bill goes down — usually by a fifth.</h3>
+        <p>Right now you're paying by weight or by bin pickup. When less of your trash needs hauling to landfill, those numbers drop. We also renegotiate or replace your pickup contract if it's overpriced. Most clients see a lower invoice from month two.</p>
+        <div class="metric">
+          <div class="big">−22%</div>
+          <div class="small">Typical drop in your monthly hauling bill</div>
+        </div>
+      </div>
+
+      <div class="value-card dark">
+        <span class="num">02 · You earn back</span>
+        <h3>Cardboard, glass, oil and food scraps become income — not cost.</h3>
+        <p>Recyclers pay for clean, sorted cardboard and metals. Composters take food scraps. Used cooking oil has a market. Most businesses throw all of this in one bin and pay to get rid of it. We help you separate it properly so it goes to the buyer instead of the dump.</p>
+        <div class="metric">
+          <div class="big">$48k</div>
+          <div class="small">Median yearly savings + revenue, mid-size venue</div>
+        </div>
+      </div>
+
+      <div class="value-card">
+        <span class="num">03 · You look credible</span>
+        <h3>One simple report shows exactly where every kilo of waste went.</h3>
+        <p>Guests ask. Investors ask. Hotel groups and corporate clients increasingly require it. Instead of a vague "we recycle," you get a one-page monthly report with real numbers — what was sorted, what was recovered, what was avoided. Use it on your website, in tenders, or with auditors.</p>
+        <div class="metric">
+          <div class="big">1 pg</div>
+          <div class="small">Monthly report you can actually show people</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process" id="process">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">How it works · The Flight Plan</span>
+        <h2>Four simple steps. <em>No disruption</em> to service.</h2>
+      </div>
+      <p class="lede">You don't need to know anything about recycling or sustainability to start. We come in, look at what you've got, and walk you through every move. Your kitchen keeps running. Your guests don't notice anything — except, eventually, that you're doing something they care about.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>We look at your bins.</h3>
+        <p>Free, 30 minutes on-site. We weigh what's in your bins, read your hauling contract, and tell you in plain numbers what you're losing. No commitment.</p>
+        <span class="step-tag">Week 1 · Free</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We set up sorting.</h3>
+        <p>Right-sized bins where your team already works. Clear labels in your staff's languages. Either we run the sorting on-site, or we collect the mixed waste and sort it at our facility — your choice based on space.</p>
+        <span class="step-tag">Week 2–4</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>We sell or send what has value.</h3>
+        <p>Cardboard to paper mills. Food scraps to composters. Oil to biofuel buyers. Glass and metal to recyclers. You see the weights and where each one went — every month, on one page.</p>
+        <span class="step-tag">Ongoing</span>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>We train your team &amp; swap your supplies.</h3>
+        <p>One short session per shift. We also help replace single-use plastics (cups, takeaway boxes, cling film) with compostable versions at similar prices — so the rest of your waste keeps getting cleaner.</p>
+        <span class="step-tag">Month 2+</span>
+      </div>
+    </div>
+
+    <div class="process-cta">
+      <div class="text">"You don't need a sustainability department. You need someone who knows where the value is hiding in your bin — and how to get it out."</div>
+      <a href="#contact" class="btn btn-primary">Book the free 30-min check <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Two ways we can do it</span>
+        <h2>You sort it in-house. Or <em>we take it all</em> and sort it for you.</h2>
+      </div>
+      <p class="lede">Same result either way — less landfill, lower bills, recovered value. The difference is just whether the sorting happens at your place or ours. We'll tell you which one fits your space and your team after the free check.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-image"><span class="placeholder-tag">Photo · on-site sorting station</span></div>
+        <div class="service-body">
+          <h3>Option A · You sort, we collect</h3>
+          <p>Best for hotels and bigger restaurants with room in the back. Sorting at the source gets you the cleanest material — and the best price for it.</p>
+          <ul>
+            <li>We design and install bins that fit your kitchen</li>
+            <li>Labels and quick visual guides in your team's languages</li>
+            <li>We weigh and log every pickup so you know what's there</li>
+            <li>We help swap single-use plastics for compostable versions</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image"><span class="placeholder-tag">Photo · off-site recovery facility</span></div>
+        <div class="service-body">
+          <h3>Option B · We collect, we sort</h3>
+          <p>Best if your back-of-house is tight or you run several locations. You keep using one bin like before — we do the heavy lifting on our end.</p>
+          <ul>
+            <li>Same pickup rhythm you already have</li>
+            <li>Everything sorted, weighed, and processed at our facility</li>
+            <li>One report across all your sites, in one place</li>
+            <li>We line up the buyers and recyclers, so you don't have to</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS BAND -->
+<section class="results">
+  <div class="container">
+    <div class="results-grid">
+      <div class="results-head">
+        <span class="eyebrow" style="color:#E7C9A8;">After six months with us</span>
+        <h2>This is what an average client <em>actually sees.</em></h2>
+      </div>
+      <div class="results-stat">
+        <div class="big">70<sup>%</sup></div>
+        <div class="label">Less waste sent to landfill — sold, recycled or composted instead</div>
+      </div>
+      <div class="results-stat">
+        <div class="big">$48k</div>
+        <div class="label">Saved per year on hauling bills, plus revenue from sold material</div>
+      </div>
+      <div class="results-stat">
+        <div class="big">11<sup>t</sup></div>
+        <div class="label">Less CO₂ released — the same as taking 2 cars off the road for a year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER / ABOUT -->
+<section class="section founder" id="about">
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-img"><span class="placeholder-tag">Photo · Jason Kornblum</span></div>
+      <div>
+        <span class="eyebrow">Who you'll actually deal with</span>
+        <h2>Meet Jason. He'll be the one <em>looking in your bins.</em></h2>
+        <div class="founder-bio">
+          <p>Jason started Source One Eco after years of watching hotels and restaurants pay good money to throw away things that other people would happily buy.</p>
+          <p>You won't get passed to a sales team or a call centre. He'll come to your venue, look at your setup, tell you what's working and what isn't — in normal English, no jargon — and put a real number on what you could save.</p>
+          <p>If it doesn't make sense for you, he'll tell you that too. No long contracts, no lock-in.</p>
+        </div>
+        <div class="founder-signature">
+          <div>
+            <div class="sig-name">Jason Kornblum</div>
+            <div class="sig-role">Founder · Source One Eco</div>
+          </div>
+          <div class="sig-cred">
+            <span>Experience<strong>10+ yrs</strong></span>
+            <span>Venues served<strong>40+</strong></span>
+            <span>Based<strong>Tel Aviv</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="eyebrow">Free 30-minute on-site check</span>
+        <h2>Curious what your bins are <em>actually costing you?</em></h2>
+        <p class="lede">Tell us a little about your business. Within 24 hours, Jason will come back with a quick number on what you might save — and whether it's even worth a longer conversation. No pressure, no hard sell.</p>
+        <div class="contact-list">
+          <div class="contact-row">
+            <span class="k">Direct line</span>
+            <span class="v">+972 53 933 7380</span>
+          </div>
+          <div class="contact-row">
+            <span class="k">Email</span>
+            <span class="v">jason@sourceoneeco.com</span>
+          </div>
+          <div class="contact-row">
+            <span class="k">Response time</span>
+            <span class="v">Within 24 hours</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent — we\'ll fly back to you.';">
+        <div class="form-head">
+          <h3>Tell us a bit about your place</h3>
+          <p>Takes 60 seconds. The more we know, the better our first answer.</p>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your full name" />
+          </div>
+          <div class="field">
+            <label for="venue">Venue / company</label>
+            <input id="venue" type="text" placeholder="Where you operate" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@venue.com" />
+          </div>
+          <div class="field">
+            <label for="role">Role</label>
+            <select id="role">
+              <option>GM / Owner</option>
+              <option>F&amp;B Director</option>
+              <option>Sustainability Lead</option>
+              <option>Operations</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="type">Operation type</label>
+          <select id="type">
+            <option>Hotel</option>
+            <option>Restaurant / café</option>
+            <option>Multi-site hospitality group</option>
+            <option>Commercial / office</option>
+            <option>Event venue</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">What's bugging you about your waste right now?</label>
+          <textarea id="msg" placeholder="E.g. the bill keeps going up, kitchen smells, our guests are asking, we just don't know where to start…"></textarea>
+        </div>
+        <div class="form-foot">
+          <span class="meta">No spam, no automated follow-ups. One real reply from Jason.</span>
+          <button type="submit" class="btn btn-primary">Send my details <span class="arrow">→</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo" style="color: var(--cream);">
+          <span class="logo-mark" style="background:var(--cream);"></span>
+          <span>Source One Eco</span>
+        </div>
+        <h3>Flipping the bird<br />to bad waste<br />management.</h3>
+        <p>We help hotels, restaurants and offices pay less to throw things away — and make money back on the stuff that's actually worth something.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Nest</h4>
+        <ul>
+          <li><a href="#value">What you get</a></li>
+          <li><a href="#process">How we fly</a></li>
+          <li><a href="#services">Flight plan</a></li>
+          <li><a href="#about">About Jason</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:jason@sourceoneeco.com">jason@sourceoneeco.com</a></li>
+          <li><a href="tel:+972539337380">+972 53 933 7380</a></li>
+          <li><a href="#contact">Book a waste audit</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>For operators</h4>
+        <ul>
+          <li><a href="#">Case study · hotel</a></li>
+          <li><a href="#">Case study · restaurant group</a></li>
+          <li><a href="#">ESG reporting one-pager</a></li>
+          <li><a href="#">Biodegradable swap guide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© Source One Eco 2026</span>
+      <span>Tel Aviv · serving hospitality &amp; commercial operators</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#contact" class="float-chat">
+  <span class="live-dot">Chat now</span>
+</a>
+
+</body>
+</html>
