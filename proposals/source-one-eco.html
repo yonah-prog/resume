@@ -3,32 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Source One Eco — Turn waste into measurable margin</title>
+<title>Source One Eco — Corporate waste diversion, end-to-end</title>
+<template id="__bundler_thumbnail" data-bg-color="#F2EDE2">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F2EDE2"/>
+    <circle cx="600" cy="400" r="180" fill="#1B2C22"/>
+    <circle cx="600" cy="400" r="92" fill="#F2EDE2"/>
+    <circle cx="600" cy="400" r="28" fill="#1B2C22"/>
+    <text x="600" y="660" text-anchor="middle" font-family="Georgia, serif" font-size="44" fill="#1B2C22">Source One Eco</text>
+  </svg>
+</template>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bone: #F4EFE6;
-    --bone-2: #ECE6D8;
-    --ink: #1A2A1F;
-    --ink-2: #2C3A30;
-    --muted: #6B7368;
-    --line: #D9D2C0;
-    --moss: #2D5A3D;
+    --paper: #F2EDE2;
+    --paper-2: #E8E1D0;
+    --cream: #FAF6EB;
+    --ink: #1B2C22;
+    --ink-2: #2E3C32;
+    --ink-3: #4A554B;
+    --muted: #6F7568;
+    --line: #D6CEBB;
+    --line-2: #C5BCA4;
+    --moss: #355C46;
     --moss-deep: #1F4129;
-    --clay: #C56B3F;
-    --clay-deep: #A8542C;
-    --sky: #D6E3D7;
-    --cream: #FBF7EE;
-    --serif: "Instrument Serif", "Times New Roman", serif;
-    --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-    --mono: "Geist Mono", ui-monospace, monospace;
+    --moss-soft: #C8D7C9;
+    --ochre: #B47A2C;
+    --ochre-deep: #8E5C1C;
+    --serif: "Newsreader", "Source Serif Pro", Georgia, serif;
+    --sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    background: var(--bone);
+    background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 16px;
@@ -37,417 +48,699 @@
     text-rendering: optimizeLegibility;
   }
   a { color: inherit; text-decoration: none; }
-  h1, h2, h3, h4 { margin: 0; font-weight: 400; letter-spacing: -0.01em; }
-  p { margin: 0; }
+  h1, h2, h3, h4, h5 { margin: 0; font-weight: 400; letter-spacing: -0.01em; }
+  p { margin: 0; text-wrap: pretty; }
   img { max-width: 100%; display: block; }
-  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 36px; }
   .serif { font-family: var(--serif); font-weight: 400; }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
   .eyebrow {
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--moss);
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center; gap: 12px;
   }
-  .eyebrow::before {
-    content: ""; width: 22px; height: 1px; background: var(--moss); display: inline-block;
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--moss); display: inline-block; }
+  .eyebrow.ochre { color: var(--ochre-deep); }
+  .eyebrow.ochre::before { background: var(--ochre-deep); }
+  .eyebrow.light { color: var(--moss-soft); }
+  .eyebrow.light::before { background: var(--moss-soft); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 15px 24px; border-radius: 4px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    border: 1px solid transparent;
+    font-family: var(--sans);
+    transition: background .15s, color .15s, border-color .15s, transform .15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--moss-deep); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .btn .arr { width: 14px; height: 1px; background: currentColor; position: relative; }
+  .btn .arr::after {
+    content: ""; position: absolute; right: -1px; top: -3px;
+    width: 7px; height: 7px;
+    border-right: 1px solid currentColor; border-top: 1px solid currentColor;
+    transform: rotate(45deg);
   }
 
   /* NAV */
   .nav {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(244, 239, 230, 0.85);
-    backdrop-filter: saturate(140%) blur(8px);
-    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    background: rgba(242, 237, 226, 0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
     border-bottom: 1px solid var(--line);
   }
-  .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 72px;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 22px; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
   .logo-mark {
-    width: 30px; height: 30px; border-radius: 50%;
+    width: 28px; height: 28px; border-radius: 50%;
     background: var(--ink);
     position: relative;
     display: inline-block;
   }
-  .logo-mark::after {
-    content: ""; position: absolute; inset: 7px;
-    border-radius: 50%; background: var(--clay);
+  .logo-mark::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--paper); }
+  .logo-mark::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; background: var(--ink); }
+  .logo-text { font-family: var(--serif); font-size: 22px; line-height: 1; }
+  .logo-text small {
+    display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+    color: var(--muted); text-transform: uppercase; margin-top: 4px;
   }
-  .logo-mark::before {
-    content: ""; position: absolute; right: -3px; top: 11px;
-    width: 9px; height: 4px; background: var(--ink); border-radius: 2px;
-    transform: rotate(-20deg);
-  }
-  .nav-links { display: flex; gap: 36px; }
+  .nav-links { display: flex; gap: 32px; }
   .nav-links a {
     font-size: 14px; color: var(--ink-2);
     position: relative; padding: 4px 0;
+    font-weight: 500;
   }
-  .nav-links a:hover { color: var(--moss); }
-  .nav-cta {
-    background: var(--ink); color: var(--cream);
-    padding: 10px 18px; border-radius: 999px;
-    font-size: 13px; font-weight: 500;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: background .15s;
+  .nav-links a:hover { color: var(--moss-deep); }
+  .nav-meta { display: flex; align-items: center; gap: 18px; }
+  .nav-locale {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    color: var(--muted); text-transform: uppercase;
+    padding-right: 18px; border-right: 1px solid var(--line);
   }
-  .nav-cta:hover { background: var(--moss-deep); }
-  .nav-cta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
 
   /* HERO */
-  .hero { padding: 80px 0 64px; position: relative; overflow: hidden; }
-  .hero-grid {
-    display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px;
-    align-items: end;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(56px, 7.2vw, 108px);
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    margin: 28px 0 24px;
-  }
-  .hero h1 .accent { color: var(--moss); font-style: italic; }
-  .hero h1 .clay { color: var(--clay); font-style: italic; }
-  .hero-sub {
-    font-size: 20px; line-height: 1.45; color: var(--ink-2);
-    max-width: 560px; margin-bottom: 36px;
-  }
-  .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 16px 26px; border-radius: 999px;
-    font-size: 15px; font-weight: 500; cursor: pointer;
-    border: 1px solid transparent;
-    transition: transform .15s, background .15s, color .15s;
-  }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--clay); color: var(--cream); }
-  .btn-primary:hover { background: var(--clay-deep); }
-  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
-  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
-  .btn .arrow {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: rgba(255,255,255,0.18); display: inline-flex;
-    align-items: center; justify-content: center; font-size: 11px;
-  }
-  .btn-ghost .arrow { background: rgba(26,42,31,0.08); }
-
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0; margin-top: 56px;
-    border-top: 1px solid var(--line);
-    padding-top: 28px;
-  }
-  .hero-stats .stat { padding-right: 20px; }
-  .stat-num {
-    font-family: var(--serif); font-size: 52px; line-height: 1;
-    color: var(--ink); letter-spacing: -0.02em;
-  }
-  .stat-num sup { font-size: 22px; vertical-align: top; margin-left: 2px; color: var(--moss); }
-  .stat-label {
-    font-size: 13px; color: var(--muted); margin-top: 8px; max-width: 200px;
-  }
-
-  /* Hero right card */
-  .hero-card {
-    background: var(--ink); color: var(--cream);
-    border-radius: 24px; padding: 28px;
-    position: relative; overflow: hidden;
-    min-height: 520px;
-    display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .hero-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-  .hero-card-top .mono { color: rgba(251,247,238,0.6); }
-  .live-dot {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--sky);
-  }
-  .live-dot::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: #6FCB8A; box-shadow: 0 0 0 4px rgba(111,203,138,0.18);
-    animation: pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-
-  .ticker-block {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 22px;
-    margin-top: 18px;
-  }
-  .ticker-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(251,247,238,0.55); margin-bottom: 16px; }
-  .ticker-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px dashed rgba(255,255,255,0.1);
-    font-size: 14px;
-  }
-  .ticker-row:last-child { border-bottom: none; }
-  .ticker-row .stream { display: flex; align-items: center; gap: 12px; }
-  .ticker-row .swatch {
-    width: 12px; height: 12px; border-radius: 3px;
-  }
-  .ticker-row .val { font-family: var(--mono); font-size: 13px; color: var(--cream); }
-  .ticker-row .delta { color: #6FCB8A; font-family: var(--mono); font-size: 11px; margin-left: 8px; }
-
-  .bar-chart {
-    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
-    align-items: end; height: 110px; margin-top: 18px;
-  }
-  .bar { background: var(--clay); border-radius: 4px 4px 0 0; position: relative; }
-  .bar.bar-moss { background: #6FCB8A; }
-  .bar-labels {
-    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
-    margin-top: 6px; font-family: var(--mono); font-size: 10px; color: rgba(251,247,238,0.45);
-    text-align: center;
-  }
-
-  .hero-card-foot {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 16px;
-  }
-  .hero-card-foot .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: rgba(251,247,238,0.5); text-transform: uppercase; }
-  .hero-card-foot .big { font-family: var(--serif); font-size: 38px; line-height: 1; }
-
-  /* Trust strip */
-  .trust {
-    border-top: 1px solid var(--line);
+  .hero { padding: 80px 0 96px; position: relative; }
+  .hero-meta {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 14px 0 40px;
     border-bottom: 1px solid var(--line);
-    padding: 22px 0;
-    background: var(--bone-2);
-  }
-  .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  .trust-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-  .trust-logos { display: flex; gap: 38px; align-items: center; flex-wrap: wrap; }
-  .trust-logo {
-    font-family: var(--serif); font-size: 22px; color: var(--ink-2); opacity: 0.7;
-    letter-spacing: -0.01em;
-  }
-  .trust-logo.alt { font-family: var(--sans); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 14px; }
-
-  /* Section heading */
-  .section { padding: 120px 0; }
-  .section-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; margin-bottom: 64px; align-items: end; }
-  .section-head h2 {
-    font-family: var(--serif);
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-  }
-  .section-head h2 em { font-style: italic; color: var(--moss); }
-  .section-head .lede { font-size: 18px; color: var(--ink-2); max-width: 520px; }
-
-  /* Value cards */
-  .value-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  }
-  .value-card {
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 32px;
-    display: flex; flex-direction: column;
-    min-height: 380px;
-    position: relative;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .value-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -28px rgba(26,42,31,0.4); }
-  .value-card .num {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
-    color: var(--moss); text-transform: uppercase;
-  }
-  .value-card h3 {
-    font-family: var(--serif); font-size: 32px; line-height: 1.05;
-    margin: 28px 0 14px; letter-spacing: -0.015em;
-  }
-  .value-card p { color: var(--ink-2); font-size: 15px; line-height: 1.55; }
-  .value-card .metric {
-    margin-top: auto;
-    padding-top: 24px; border-top: 1px dashed var(--line);
-    display: flex; align-items: baseline; gap: 12px;
-  }
-  .value-card .metric .big {
-    font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--ink); letter-spacing: -0.02em;
-  }
-  .value-card .metric .small { font-size: 13px; color: var(--muted); max-width: 160px; }
-  .value-card.dark { background: var(--moss-deep); color: var(--cream); border-color: var(--moss-deep); }
-  .value-card.dark .num { color: #9FD1A8; }
-  .value-card.dark p { color: rgba(251,247,238,0.78); }
-  .value-card.dark .metric { border-color: rgba(255,255,255,0.18); }
-  .value-card.dark .metric .big { color: var(--cream); }
-  .value-card.dark .metric .small { color: rgba(251,247,238,0.6); }
-
-  /* Process / Flight plan */
-  .process { background: var(--ink); color: var(--cream); }
-  .process .section-head h2 { color: var(--cream); }
-  .process .section-head h2 em { color: #6FCB8A; }
-  .process .section-head .lede { color: rgba(251,247,238,0.75); }
-  .process .eyebrow { color: #9FD1A8; }
-  .process .eyebrow::before { background: #9FD1A8; }
-
-  .steps {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-    border-top: 1px solid rgba(255,255,255,0.14);
-  }
-  .step {
-    padding: 36px 28px 36px 0;
-    border-right: 1px solid rgba(255,255,255,0.14);
-    display: flex; flex-direction: column; gap: 18px;
-    position: relative;
-  }
-  .step:last-child { border-right: none; padding-right: 0; }
-  .step:nth-child(n+2) { padding-left: 28px; }
-  .step .step-num {
-    font-family: var(--serif); font-size: 64px; line-height: 1;
-    color: var(--clay); letter-spacing: -0.02em;
-  }
-  .step h3 {
-    font-family: var(--serif); font-size: 26px; line-height: 1.1;
-  }
-  .step p { font-size: 14px; color: rgba(251,247,238,0.7); line-height: 1.6; }
-  .step .step-tag {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #9FD1A8;
-    padding: 6px 10px; border: 1px solid rgba(159,209,168,0.4);
-    border-radius: 999px; align-self: flex-start; margin-top: auto;
-  }
-
-  .process-cta {
-    margin-top: 56px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 28px 32px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
+    margin-bottom: 60px;
     gap: 32px;
   }
-  .process-cta .text { font-family: var(--serif); font-size: 26px; line-height: 1.15; max-width: 640px; }
+  .hero-meta .m-cell .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .hero-meta .m-cell .v { font-family: var(--serif); font-size: 18px; color: var(--ink); }
 
-  /* Services */
-  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .service-card {
+  .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: end; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(54px, 6.4vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 28px 0 28px;
+    font-weight: 400;
+  }
+  .hero h1 em { font-style: italic; color: var(--moss); font-weight: 400; }
+  .hero h1 .ochre { color: var(--ochre); font-style: italic; }
+  .hero-sub {
+    font-size: 19px; line-height: 1.55; color: var(--ink-2);
+    max-width: 580px; margin-bottom: 40px;
+  }
+  .hero-sub strong { font-weight: 600; color: var(--ink); }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .hero-cta .note {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--muted); text-transform: uppercase; margin-left: 8px;
+  }
+
+  /* Hero right column — picture collage */
+  .hero-collage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.55fr 1fr;
+    gap: 14px;
+    min-height: 520px;
+  }
+  .hc-photo {
+    position: relative;
+    margin: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--cream);
+  }
+  .hc-photo-main { grid-column: 1 / span 2; }
+  .hc-photo-b { grid-column: 1 / span 1; }
+  .hc-photo-c { grid-column: 2 / span 1; }
+  .hc-photo-fill {
+    position: absolute; inset: 0; display: block;
+  }
+  .hc-photo-fill[data-kind="hotel"] {
+    background:
+      linear-gradient(180deg, rgba(27,44,34,0) 45%, rgba(27,44,34,0.55) 100%),
+      repeating-linear-gradient(135deg, #d9cfb8 0 14px, #c7bca0 14px 28px);
+  }
+  .hc-photo-fill[data-kind="campus"] {
+    background:
+      linear-gradient(180deg, rgba(27,44,34,0) 50%, rgba(27,44,34,0.55) 100%),
+      repeating-linear-gradient(135deg, #b8c5b5 0 14px, #a4b3a1 14px 28px);
+  }
+  .hc-photo-fill[data-kind="compost"] {
+    background:
+      linear-gradient(180deg, rgba(27,44,34,0) 50%, rgba(27,44,34,0.55) 100%),
+      repeating-linear-gradient(135deg, #c2a878 0 14px, #ad9362 14px 28px);
+  }
+  .hc-photo figcaption {
+    position: absolute; left: 16px; right: 16px; bottom: 14px;
+    display: flex; flex-direction: column; gap: 4px;
+    color: var(--cream);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  }
+  .hc-cap-tag {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(250,246,235,0.85);
+  }
+  .hc-cap-text {
+    font-family: var(--serif); font-size: 16px; line-height: 1.2; color: var(--cream);
+  }
+  .hc-photo-main .hc-cap-text { font-size: 19px; }
+  .hc-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--ink); color: var(--cream);
+    padding: 12px 14px; border-radius: 4px;
+    max-width: 220px;
+    display: flex; flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 22px -10px rgba(0,0,0,0.45);
+  }
+  .hc-badge-k {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--moss-soft);
+  }
+  .hc-badge-v {
+    font-family: var(--serif); font-size: 14px; line-height: 1.25;
+  }
+  @media (max-width: 640px) {
+    .hero-collage { grid-template-rows: 220px 140px; min-height: 0; }
+  }
+
+  /* Hero right column — diversion overview card (legacy, retained) */
+  .hero-card {
+    background: var(--ink); color: var(--cream);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hc-head { padding: 20px 22px; border-bottom: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; }
+  .hc-head .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    color: rgba(250,246,235,0.55); text-transform: uppercase;
+  }
+  .hc-head .tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    color: var(--moss-soft); text-transform: uppercase;
+    padding: 5px 10px; border: 1px solid rgba(200,215,201,0.3); border-radius: 999px;
+  }
+  .hc-body { padding: 28px 24px 8px; }
+  .hc-body .title {
+    font-family: var(--serif); font-size: 22px; line-height: 1.15;
+    margin-bottom: 4px;
+  }
+  .hc-body .sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: rgba(250,246,235,0.55); text-transform: uppercase; margin-bottom: 22px; }
+
+  .streamlist { display: flex; flex-direction: column; }
+  .stream-row {
+    display: grid; grid-template-columns: 1fr auto auto;
+    align-items: center; gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.12);
+    font-size: 13.5px;
+  }
+  .stream-row:last-child { border-bottom: none; }
+  .stream-row .label-w { display: flex; align-items: center; gap: 12px; color: rgba(250,246,235,0.92); }
+  .stream-row .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .stream-row .tons { font-family: var(--mono); font-size: 13px; color: var(--cream); }
+  .stream-row .dest {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--moss-soft); min-width: 100px; text-align: right;
+  }
+  .hc-foot {
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding: 18px 24px; border-top: 1px solid rgba(255,255,255,0.12);
+    gap: 18px; background: rgba(0,0,0,0.18);
+  }
+  .hc-foot .cell .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    color: rgba(250,246,235,0.5); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .hc-foot .cell .v { font-family: var(--serif); font-size: 30px; line-height: 1; }
+  .hc-foot .cell .v sup { font-size: 14px; color: var(--moss-soft); vertical-align: top; margin-left: 1px; }
+
+  /* TRUST BAND */
+  .trust {
+    background: var(--paper-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .trust-inner {
+    display: grid; grid-template-columns: 1fr 2.4fr; gap: 48px;
+    padding-top: 36px; padding-bottom: 36px; align-items: center;
+  }
+  .trust-label { display: flex; flex-direction: column; gap: 6px; }
+  .trust-label .small {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .trust-label .big { font-family: var(--serif); font-size: 20px; line-height: 1.25; color: var(--ink); }
+  .trust-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .trust-item { display: flex; flex-direction: column; gap: 6px; padding-left: 18px; border-left: 1px solid var(--line); }
+  .trust-item .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; }
+  .trust-item .v { font-family: var(--serif); font-size: 17px; line-height: 1.25; color: var(--ink); }
+
+  /* SECTION */
+  .section { padding: 130px 0; }
+  .section.compact { padding: 100px 0; }
+  .section-head { display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; margin-bottom: 72px; align-items: end; }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5.2vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--moss); }
+  .section-head .lede { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 540px; }
+
+  /* SIX-MONTH GAINS */
+  .gains-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+  .gain {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 22px;
+    position: relative;
+  }
+  .gain:nth-child(n+2) { padding-left: 32px; }
+  .gain:last-child { border-right: none; padding-right: 0; }
+  .gain-num {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ochre-deep);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .gain-num::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .gain h3 {
+    font-family: var(--serif); font-size: 30px; line-height: 1.08;
+    letter-spacing: -0.018em;
+  }
+  .gain h3 em { font-style: italic; color: var(--moss); }
+  .gain p { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .gain .deliverable {
+    margin-top: auto;
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 16px 18px;
     background: var(--cream);
     border: 1px solid var(--line);
-    border-radius: 20px;
+    border-radius: 4px;
+  }
+  .gain .deliverable .icon {
+    width: 28px; height: 28px; flex-shrink: 0; border-radius: 4px;
+    background: var(--moss); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+  }
+  .gain .deliverable .text { font-size: 13.5px; color: var(--ink-2); line-height: 1.45; }
+  .gain .deliverable .text strong { color: var(--ink); display: block; font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+
+  /* FOUR STEPS — dark section */
+  .process { background: var(--ink); color: var(--cream); }
+  .process .section-head h2 { color: var(--cream); }
+  .process .section-head h2 em { color: var(--moss-soft); }
+  .process .section-head .lede { color: rgba(250,246,235,0.78); }
+  .steps-rail {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.16);
+  }
+  .pstep {
+    padding: 44px 32px 40px 0;
+    border-right: 1px solid rgba(255,255,255,0.16);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .pstep:nth-child(n+2) { padding-left: 32px; }
+  .pstep:last-child { border-right: none; padding-right: 0; }
+  .pstep-num {
+    font-family: var(--serif); font-size: 18px; color: var(--ochre);
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  .pstep-num::before {
+    content: ""; width: 6px; height: 6px; background: var(--ochre); border-radius: 50%;
+  }
+  .pstep h3 { font-family: var(--serif); font-size: 30px; line-height: 1.06; letter-spacing: -0.015em; }
+  .pstep p { font-size: 14.5px; line-height: 1.6; color: rgba(250,246,235,0.74); }
+  .pstep .deliverables {
+    margin-top: 14px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.14);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .pstep .deliverables .d-row {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--moss-soft);
+  }
+  .pstep .deliverables .d-row::before {
+    content: ""; width: 8px; height: 1px; background: var(--moss-soft); margin-top: 7px; flex-shrink: 0;
+  }
+  .process-meta {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center;
+    padding: 28px 32px; background: rgba(255,255,255,0.04);
+    border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .process-meta .text {
+    font-family: var(--serif); font-size: 24px; line-height: 1.25;
+    max-width: 720px;
+  }
+  .process-meta .text span { color: var(--moss-soft); font-style: italic; }
+
+  /* SERVICE OPTIONS */
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .svc-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 6px;
     overflow: hidden;
     display: flex; flex-direction: column;
   }
-  .service-image {
-    aspect-ratio: 16 / 9;
+  .svc-card.dark { background: var(--moss-deep); color: var(--cream); border-color: var(--moss-deep); }
+  .svc-head { padding: 28px 32px 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; border-bottom: 1px solid var(--line); }
+  .svc-card.dark .svc-head { border-bottom-color: rgba(255,255,255,0.14); }
+  .svc-head .tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--moss);
+    padding: 6px 11px; border: 1px solid var(--line-2); border-radius: 4px;
+  }
+  .svc-card.dark .svc-head .tag { color: var(--moss-soft); border-color: rgba(200,215,201,0.3); }
+  .svc-head .marker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .svc-card.dark .svc-head .marker { color: rgba(250,246,235,0.55); }
+  .svc-body { padding: 28px 32px 36px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+  .svc-body h3 { font-family: var(--serif); font-size: 36px; letter-spacing: -0.02em; line-height: 1.04; }
+  .svc-body h3 em { font-style: italic; }
+  .svc-card.dark h3 em { color: var(--moss-soft); }
+  .svc-card:not(.dark) h3 em { color: var(--moss); }
+  .svc-body > p { font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
+  .svc-card.dark .svc-body > p { color: rgba(250,246,235,0.78); }
+  .svc-body ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .svc-body li { font-size: 14px; line-height: 1.5; padding-left: 24px; position: relative; color: var(--ink-2); }
+  .svc-body li::before {
+    content: ""; position: absolute; left: 0; top: 10px;
+    width: 12px; height: 1px; background: var(--moss);
+  }
+  .svc-card.dark .svc-body li { color: rgba(250,246,235,0.82); }
+  .svc-card.dark .svc-body li::before { background: var(--moss-soft); }
+  .svc-foot {
+    margin-top: auto;
+    padding: 18px 32px; border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    background: var(--paper);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .svc-card.dark .svc-foot { background: rgba(0,0,0,0.18); border-top-color: rgba(255,255,255,0.14); color: rgba(250,246,235,0.55); }
+
+  /* SECTORS */
+  .sectors { background: var(--paper-2); }
+  .sectors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .sector {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 0 22px;
+    display: flex; flex-direction: column; gap: 12px;
+    overflow: hidden;
+  }
+  .sector-img {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: flex-end; justify-content: flex-start;
+    margin-bottom: 8px;
+  }
+  .sector-img[data-kind="campus"] {
+    background: linear-gradient(180deg, rgba(27,44,34,0) 55%, rgba(27,44,34,0.45) 100%),
+      repeating-linear-gradient(135deg, #b8c5b5 0 12px, #a4b3a1 12px 24px);
+  }
+  .sector-img[data-kind="hotel"] {
+    background: linear-gradient(180deg, rgba(27,44,34,0) 55%, rgba(27,44,34,0.45) 100%),
+      repeating-linear-gradient(135deg, #d9cfb8 0 12px, #c7bca0 12px 24px);
+  }
+  .sector-img[data-kind="plant"] {
+    background: linear-gradient(180deg, rgba(27,44,34,0) 55%, rgba(27,44,34,0.45) 100%),
+      repeating-linear-gradient(135deg, #9aa39a 0 12px, #828d83 12px 24px);
+  }
+  .sector-img[data-kind="retail"] {
+    background: linear-gradient(180deg, rgba(27,44,34,0) 55%, rgba(27,44,34,0.45) 100%),
+      repeating-linear-gradient(135deg, #c2a878 0 12px, #ad9362 12px 24px);
+  }
+  .sector-img-tag {
+    margin: 12px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--cream);
+    background: rgba(27,44,34,0.7); padding: 5px 9px; border-radius: 3px;
+    backdrop-filter: blur(2px);
+  }
+  .sector .num, .sector h4, .sector p { padding-left: 22px; padding-right: 22px; }
+  .sector .num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ochre-deep); }
+  .sector h4 { font-family: var(--serif); font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; }
+  .sector p { font-size: 13.5px; line-height: 1.5; color: var(--ink-3); }
+
+  /* CLOSED-LOOP DIAGRAM */
+  .loop {
+    background: var(--ink); color: var(--cream);
+    padding: 110px 0;
+  }
+  .loop .section-head h2 { color: var(--cream); }
+  .loop .section-head h2 em { color: var(--moss-soft); }
+  .loop .section-head .lede { color: rgba(250,246,235,0.78); }
+  .loop-diagram {
+    display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 40px; align-items: stretch;
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 6px;
+    padding: 40px;
+    background: rgba(255,255,255,0.03);
+  }
+  .loop-col { display: flex; flex-direction: column; gap: 14px; }
+  .loop-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 18px 18px;
+  }
+  .loop-card .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    color: var(--moss-soft); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .loop-card .v { font-family: var(--serif); font-size: 18px; line-height: 1.2; }
+  .loop-card.center { background: var(--moss-deep); border-color: var(--moss-deep); }
+  .loop-card.center .v { font-size: 24px; }
+  .loop-col.middle { justify-content: center; align-items: center; gap: 18px; }
+  .loop-hub {
+    width: 100%;
+    background: var(--cream); color: var(--ink);
+    border-radius: 6px; padding: 28px 28px;
+    text-align: center;
+  }
+  .loop-hub .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+    color: var(--moss-deep); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .loop-hub .v { font-family: var(--serif); font-size: 30px; line-height: 1.05; letter-spacing: -0.015em; }
+  .loop-hub .v em { font-style: italic; color: var(--moss); }
+  .loop-arrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    color: var(--moss-soft); text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .loop-arrow .l { flex: 1; height: 1px; background: var(--moss-soft); opacity: 0.5; }
+  .loop-caption {
+    margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    font-size: 13px; color: rgba(250,246,235,0.6); line-height: 1.5;
+  }
+  .loop-caption .lc { padding-left: 18px; border-left: 1px solid rgba(255,255,255,0.18); }
+  .loop-caption .lc strong { display: block; color: var(--moss-soft); font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+
+  /* CASE STUDY */
+  .case { background: var(--paper); }
+  .case-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: stretch; }
+  .case-left { display: flex; flex-direction: column; gap: 28px; }
+  .case-left h2 {
+    font-family: var(--serif); font-size: clamp(38px, 4.6vw, 58px);
+    line-height: 1.02; letter-spacing: -0.025em; margin-top: 24px;
+  }
+  .case-left h2 em { font-style: italic; color: var(--moss); }
+  .case-left .lede { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 520px; }
+  .case-data {
+    margin-top: 12px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .case-data .c {
+    padding: 22px 24px 22px 0;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .case-data .c:nth-child(2n) { border-right: none; padding-right: 0; padding-left: 24px; }
+  .case-data .c:nth-last-child(-n+2) { border-bottom: none; }
+  .case-data .c .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .case-data .c .v { font-family: var(--serif); font-size: 30px; line-height: 1; letter-spacing: -0.02em; }
+  .case-data .c .v sup { font-size: 14px; color: var(--moss); margin-left: 2px; vertical-align: top; }
+  .case-data .c .note { font-size: 13px; color: var(--ink-3); margin-top: 6px; line-height: 1.4; }
+
+  .case-right {
+    background: var(--cream); border: 1px solid var(--line); border-radius: 6px;
+    padding: 0; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .case-img {
+    aspect-ratio: 4/3;
     background:
-      repeating-linear-gradient(135deg, var(--bone-2) 0 14px, var(--bone) 14px 28px);
+      repeating-linear-gradient(135deg, var(--paper-2) 0 18px, var(--paper) 18px 36px);
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .service-image .placeholder-tag {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted);
-    background: var(--cream); padding: 6px 12px; border-radius: 999px;
-    border: 1px solid var(--line);
+  .case-img .tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); background: var(--cream);
+    padding: 8px 14px; border-radius: 4px; border: 1px solid var(--line);
   }
-  .service-body { padding: 28px 28px 32px; display: flex; flex-direction: column; gap: 14px; }
-  .service-body h3 { font-family: var(--serif); font-size: 30px; letter-spacing: -0.01em; }
-  .service-body p { color: var(--ink-2); font-size: 15px; }
-  .service-body ul { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 8px; }
-  .service-body li { font-size: 14px; color: var(--ink-2); padding-left: 22px; position: relative; }
-  .service-body li::before {
-    content: ""; position: absolute; left: 0; top: 8px;
-    width: 10px; height: 10px; background: var(--moss);
-    clip-path: polygon(0 0, 100% 50%, 0 100%, 30% 50%);
+  .case-quote { padding: 32px 32px 28px; }
+  .case-quote p {
+    font-family: var(--serif); font-size: 22px; line-height: 1.3; letter-spacing: -0.005em;
+    color: var(--ink);
   }
+  .case-quote .attr {
+    margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .case-quote .attr .name { font-family: var(--serif); font-size: 16px; }
+  .case-quote .attr .role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; }
 
-  /* About / Founder */
-  .founder { background: var(--bone-2); }
-  .founder-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
-  .founder-img {
+  /* LEADERSHIP */
+  .leader { background: var(--paper-2); }
+  .leader-grid { display: grid; grid-template-columns: 0.95fr 1.4fr; gap: 64px; align-items: start; }
+  .leader-portrait {
     aspect-ratio: 4/5;
-    border-radius: 24px;
+    border-radius: 6px;
     background:
-      repeating-linear-gradient(135deg, var(--bone) 0 16px, var(--cream) 16px 32px);
+      repeating-linear-gradient(135deg, var(--paper) 0 18px, var(--cream) 18px 36px);
     border: 1px solid var(--line);
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .founder-img .placeholder-tag {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted);
-    background: var(--bone); padding: 8px 14px; border-radius: 999px;
-    border: 1px solid var(--line);
-  }
-  .founder h2 {
-    font-family: var(--serif);
-    font-size: clamp(38px, 4.4vw, 56px);
-    line-height: 1.03; letter-spacing: -0.02em;
-    margin: 22px 0 24px;
-  }
-  .founder h2 em { font-style: italic; color: var(--moss); }
-  .founder-bio p { font-size: 17px; color: var(--ink-2); margin-bottom: 16px; line-height: 1.6; }
-  .founder-bio p:last-of-type { margin-bottom: 0; }
-  .founder-signature {
-    margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-  }
-  .sig-name { font-family: var(--serif); font-size: 22px; }
-  .sig-role { font-size: 13px; color: var(--muted); }
-  .sig-cred {
-    display: flex; gap: 24px;
+  .leader-portrait .tag {
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--muted);
+    background: var(--paper); padding: 8px 14px; border-radius: 4px; border: 1px solid var(--line);
   }
-  .sig-cred span strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; font-weight: 400; text-transform: none; margin-top: 2px; }
-
-  /* Results band */
-  .results { background: var(--moss-deep); color: var(--cream); padding: 80px 0; }
-  .results-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 32px; align-items: end; }
-  .results-head { padding-right: 32px; }
-  .results-head h2 { font-family: var(--serif); font-size: 44px; line-height: 1.04; letter-spacing: -0.02em; }
-  .results-head h2 em { font-style: italic; color: #E7C9A8; }
-  .results-stat { border-left: 1px solid rgba(255,255,255,0.18); padding-left: 24px; }
-  .results-stat .big { font-family: var(--serif); font-size: 76px; line-height: 0.95; letter-spacing: -0.03em; }
-  .results-stat .big sup { font-size: 28px; vertical-align: top; color: #E7C9A8; margin-left: 2px; }
-  .results-stat .label { font-size: 14px; color: rgba(251,247,238,0.78); margin-top: 12px; max-width: 200px; }
-
-  /* Contact / CTA */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-  .contact-left h2 {
+  .leader-content h2 {
     font-family: var(--serif);
-    font-size: clamp(44px, 5.6vw, 76px);
-    line-height: 1; letter-spacing: -0.025em;
+    font-size: clamp(40px, 5vw, 62px);
+    line-height: 1.02; letter-spacing: -0.025em;
     margin: 24px 0 24px;
   }
-  .contact-left h2 em { font-style: italic; color: var(--clay); }
-  .contact-left .lede { font-size: 18px; color: var(--ink-2); max-width: 460px; margin-bottom: 36px; }
-  .contact-list { display: flex; flex-direction: column; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); }
-  .contact-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
-  .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .contact-row .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-  .contact-row .v { font-family: var(--serif); font-size: 22px; }
+  .leader-content h2 em { font-style: italic; color: var(--moss); }
+  .leader-bio { display: flex; flex-direction: column; gap: 18px; }
+  .leader-bio p { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+  .leader-bio p strong { color: var(--ink); font-weight: 600; }
+
+  .leader-credentials {
+    margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px;
+  }
+  .lc .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .lc .v { font-family: var(--serif); font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; }
+  .lc .note { font-size: 13px; color: var(--ink-3); margin-top: 4px; }
+
+  .leader-award {
+    margin-top: 28px;
+    display: flex; gap: 20px; align-items: center;
+    padding: 22px 24px; background: var(--cream);
+    border: 1px solid var(--line); border-radius: 6px;
+  }
+  .award-medal {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--ochre); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; flex-shrink: 0;
+    font-style: italic;
+  }
+  .leader-award .text { display: flex; flex-direction: column; gap: 2px; }
+  .leader-award .text .top { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--ochre-deep); text-transform: uppercase; }
+  .leader-award .text .mid { font-family: var(--serif); font-size: 19px; line-height: 1.2; }
+  .leader-award .text .sub { font-size: 13px; color: var(--ink-3); }
+
+  /* WHY NOW (regulatory) */
+  .why .section-head .lede { max-width: 600px; }
+  .reg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .reg-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .reg-stat {
+    padding: 32px 24px 32px 0;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .reg-stat:nth-child(2n) { border-right: none; padding-right: 0; padding-left: 24px; }
+  .reg-stat:nth-last-child(-n+2) { border-bottom: none; }
+  .reg-stat .big { font-family: var(--serif); font-size: 64px; line-height: 0.95; letter-spacing: -0.03em; color: var(--ink); }
+  .reg-stat .big sup { font-size: 24px; color: var(--ochre-deep); vertical-align: top; margin-left: 2px; }
+  .reg-stat .big em { font-style: italic; color: var(--moss); }
+  .reg-stat .label { font-size: 14px; color: var(--ink-3); margin-top: 12px; line-height: 1.5; max-width: 240px; }
+
+  .reg-list { display: flex; flex-direction: column; gap: 18px; }
+  .reg-row {
+    display: grid; grid-template-columns: 64px 1fr; gap: 20px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--line);
+  }
+  .reg-row:last-child { border-bottom: none; }
+  .reg-row .year {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--ochre-deep); text-transform: uppercase;
+  }
+  .reg-row .desc { font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+  .reg-row .desc strong { color: var(--ink); display: block; margin-bottom: 4px; font-family: var(--serif); font-size: 17px; font-weight: 400; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: start; }
+  .contact-left h2 {
+    font-family: var(--serif);
+    font-size: clamp(46px, 5.6vw, 72px);
+    line-height: 1; letter-spacing: -0.028em;
+    margin: 24px 0 24px;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--moss); }
+  .contact-left .lede { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 460px; margin-bottom: 36px; }
+  .contact-list { padding-top: 28px; border-top: 1px solid var(--line); }
+  .contact-row {
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    align-items: baseline; padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    gap: 24px;
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row .k {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .contact-row .v { font-family: var(--serif); font-size: 20px; line-height: 1.2; }
+  .contact-row .v small { display: block; font-family: var(--sans); font-size: 13px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0; }
 
   .form-card {
     background: var(--cream);
     border: 1px solid var(--line);
-    border-radius: 24px;
+    border-radius: 6px;
     padding: 36px;
   }
-  .form-card .form-head { margin-bottom: 24px; }
-  .form-card .form-head h3 { font-family: var(--serif); font-size: 28px; line-height: 1.1; }
-  .form-card .form-head p { color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+  .form-head { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .form-head h3 { font-family: var(--serif); font-size: 26px; letter-spacing: -0.015em; line-height: 1.15; }
+  .form-head p { font-size: 14px; color: var(--ink-3); margin-top: 8px; }
   .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-  .field label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .field label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
   .field input, .field textarea, .field select {
-    background: var(--bone);
+    background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 14px;
+    border-radius: 4px;
+    padding: 13px 14px;
     font-family: var(--sans); font-size: 15px;
     color: var(--ink);
     outline: none;
@@ -455,382 +748,562 @@
   }
   .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--moss); background: var(--cream); }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .field textarea { min-height: 110px; resize: vertical; }
+  .field textarea { min-height: 110px; resize: vertical; font-family: var(--sans); }
   .form-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; gap: 16px; flex-wrap: wrap; }
-  .form-foot .meta { font-size: 12px; color: var(--muted); max-width: 280px; }
+  .form-foot .meta { font-size: 12px; color: var(--muted); max-width: 280px; line-height: 1.5; }
 
-  /* Footer */
-  footer { background: var(--ink); color: var(--cream); padding: 80px 0 32px; }
-  .foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  /* FOOTER */
+  footer { background: var(--ink); color: var(--cream); padding: 96px 0 36px; }
+  .foot-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.14); }
+  .foot-brand .logo-text { color: var(--cream); }
   .foot-brand h3 {
-    font-family: var(--serif); font-size: clamp(40px, 4.6vw, 64px);
-    line-height: 0.98; letter-spacing: -0.02em; margin-top: 8px;
+    font-family: var(--serif); font-size: clamp(34px, 3.4vw, 44px);
+    line-height: 1.04; letter-spacing: -0.02em; margin-top: 24px;
+    font-style: italic; color: var(--moss-soft);
   }
-  .foot-brand p { color: rgba(251,247,238,0.7); margin-top: 18px; max-width: 360px; font-size: 15px; }
-  .foot-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(251,247,238,0.55); margin-bottom: 20px; }
-  .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-  .foot-col a { color: var(--cream); font-size: 15px; }
-  .foot-col a:hover { color: #9FD1A8; }
+  .foot-brand p { color: rgba(250,246,235,0.7); margin-top: 18px; max-width: 360px; font-size: 15px; line-height: 1.55; }
+  .foot-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,246,235,0.55); margin-bottom: 20px; font-weight: 500; }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+  .foot-col a { color: var(--cream); font-size: 14.5px; }
+  .foot-col a:hover { color: var(--moss-soft); }
   .foot-bot {
     display: flex; justify-content: space-between; align-items: center;
-    margin-top: 28px; font-family: var(--mono); font-size: 11px;
+    margin-top: 32px; font-family: var(--mono); font-size: 11px;
     letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(251,247,238,0.45);
+    color: rgba(250,246,235,0.45);
     flex-wrap: wrap; gap: 12px;
   }
+  .foot-bot .right { display: flex; gap: 22px; }
 
-  /* Float chat */
-  .float-chat {
-    position: fixed; right: 24px; bottom: 24px; z-index: 60;
-    background: var(--clay); color: var(--cream);
-    padding: 14px 20px; border-radius: 999px;
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 14px; font-weight: 500;
-    box-shadow: 0 16px 36px -16px rgba(197,107,63,0.6);
-    cursor: pointer;
-    transition: transform .15s, background .15s;
-  }
-  .float-chat:hover { background: var(--clay-deep); transform: translateY(-2px); }
-  .float-chat .live-dot::before { background: var(--cream); box-shadow: 0 0 0 4px rgba(251,247,238,0.25); }
-  .float-chat .live-dot { color: rgba(251,247,238,0.8); }
-
-  @media (max-width: 1024px) {
-    .hero-grid, .section-head, .services-grid, .founder-grid, .contact-grid, .foot-top, .results-grid { grid-template-columns: 1fr; gap: 36px; }
-    .value-grid, .steps { grid-template-columns: 1fr 1fr; }
-    .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.14); padding: 28px 0; }
-    .step:nth-child(n+2) { padding-left: 0; }
-    .hero-stats { margin-top: 32px; }
+  @media (max-width: 1100px) {
+    .hero-grid, .section-head, .services-grid, .case-grid, .leader-grid, .reg-grid, .contact-grid, .foot-top, .trust-inner { grid-template-columns: 1fr; gap: 36px; }
+    .gains-grid, .steps-rail, .sectors-grid, .case-data, .reg-stats, .leader-credentials { grid-template-columns: 1fr 1fr; }
+    .gain, .pstep { border-right: none; padding: 28px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .pstep { border-bottom-color: rgba(255,255,255,0.14); }
+    .gain:nth-child(n+2), .pstep:nth-child(n+2) { padding-left: 0; }
+    .hero-meta { grid-template-columns: 1fr 1fr; }
+    .loop-diagram { grid-template-columns: 1fr; gap: 22px; padding: 24px; }
     .nav-links { display: none; }
+    .nav-locale { display: none; }
   }
   @media (max-width: 640px) {
-    .container { padding: 0 20px; }
-    .section { padding: 72px 0; }
-    .value-grid, .steps, .hero-stats { grid-template-columns: 1fr; }
-    .field-row { grid-template-columns: 1fr; }
-    .founder-signature { flex-direction: column; align-items: flex-start; }
-    .sig-cred { flex-wrap: wrap; gap: 20px; }
+    .container { padding: 0 22px; }
+    .section { padding: 80px 0; }
+    .gains-grid, .steps-rail, .sectors-grid, .case-data, .reg-stats, .leader-credentials, .hero-meta, .field-row, .trust-grid { grid-template-columns: 1fr; }
+    .trust-item { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+    .case-data .c, .reg-stat { padding: 22px 0 !important; border-right: none; }
   }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" data-screen-label="Nav">
   <div class="container nav-inner">
-    <div class="logo">
+    <a href="#top" class="logo" aria-label="Source One Eco">
       <span class="logo-mark"></span>
-      <span>Source One Eco</span>
-    </div>
+    </a>
     <div class="nav-links">
-      <a href="#value">The Nest</a>
-      <a href="#process">How We Fly</a>
-      <a href="#services">Flight Plan</a>
-      <a href="#about">About</a>
+      <a href="#approach">Approach</a>
+      <a href="#process">Method</a>
+      <a href="#services">Services</a>
+      <a href="#case">Case study</a>
+      <a href="#leadership">Leadership</a>
     </div>
-    <a href="#contact" class="nav-cta"><span class="dot"></span> Chirp us</a>
+    <div class="nav-meta">
+      <a href="#contact" class="btn btn-primary">Request a site audit <span class="arr"></span></a>
+    </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero" id="top" data-screen-label="01 Hero">
   <div class="container">
     <div class="hero-grid">
       <div>
-        <span class="eyebrow">For hotels, restaurants &amp; offices</span>
+        <span class="eyebrow">One partner. Every stream. Independently audited.</span>
         <h1>
-          Pay less to throw<br />
-          things <span class="accent">away.</span><br />
-          Earn money on what's <span class="clay">left.</span>
+          The <em>operational</em> backbone<br />
+          for Israel's corporate<br />
+          <span class="ochre">waste transition.</span>
         </h1>
         <p class="hero-sub">
-          Right now, your business pays someone to haul everything in your bins to landfill — food scraps, cardboard, glass, oil, packaging, the lot. <strong>A lot of that has real value.</strong> We help you separate the valuable stuff, sell or recycle it, and shrink the bill on the rest. You spend less, recover money you didn't know was there, and get a simple monthly report you can show your boss, your guests, or an auditor.
+          Source One Eco runs the full waste pathway for medium and large enterprises in Israel — <strong>audit, source-separation design, managed collection, sorting, recovery and ESG-grade reporting.</strong> A single accountable partner built for the country's mandated move from 80% landfill to 20% by 2030, and for the compliance disclosures your board, your auditor and your regulator now expect.
         </p>
-        <div class="hero-cta-row">
-          <a href="#contact" class="btn btn-primary">
-            Get a free 30-min waste check
-            <span class="arrow">→</span>
-          </a>
-          <a href="#process" class="btn btn-ghost">
-            Show me how it works
-            <span class="arrow">→</span>
-          </a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-num">−22<sup>%</sup></div>
-            <div class="stat-label">Lower waste-hauling bill, on average, after 3 months</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">70<sup>%</sup></div>
-            <div class="stat-label">Of your bin volume kept out of landfill — sold, reused or composted instead</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">1</div>
-            <div class="stat-label">Clear monthly report showing exactly where every kilo went</div>
-          </div>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Request a site audit <span class="arr"></span></a>
+          <a href="#process" class="btn btn-ghost">See the method <span class="arr"></span></a>
+          <span class="note">Response within 2 business days</span>
         </div>
       </div>
 
-      <!-- Hero card / live dashboard -->
-      <aside class="hero-card" aria-label="Live waste recovery dashboard">
-        <div>
-          <div class="hero-card-top">
-            <div>
-              <div class="mono" style="color: rgba(251,247,238,0.55); margin-bottom: 6px;">Client view</div>
-              <div style="font-family: var(--serif); font-size: 24px;">The Cedar Hotel · Wk 17</div>
-            </div>
-            <span class="live-dot">Live</span>
-          </div>
-
-          <div class="ticker-block">
-            <div class="ticker-title">Recovered this week</div>
-            <div class="ticker-row">
-              <div class="stream"><span class="swatch" style="background:#6FCB8A;"></span>Organics · compost</div>
-              <div><span class="val">418 kg</span><span class="delta">+12%</span></div>
-            </div>
-            <div class="ticker-row">
-              <div class="stream"><span class="swatch" style="background:#E7C9A8;"></span>Cardboard · baled</div>
-              <div><span class="val">227 kg</span><span class="delta">+6%</span></div>
-            </div>
-            <div class="ticker-row">
-              <div class="stream"><span class="swatch" style="background:#C56B3F;"></span>Glass · sorted</div>
-              <div><span class="val">189 kg</span><span class="delta">+9%</span></div>
-            </div>
-            <div class="ticker-row">
-              <div class="stream"><span class="swatch" style="background:#9FD1A8;"></span>Plastics · PET/HDPE</div>
-              <div><span class="val">94 kg</span><span class="delta">+3%</span></div>
-            </div>
-          </div>
-
-          <div class="ticker-block" style="margin-top: 14px;">
-            <div class="ticker-title">Diversion rate · last 7 weeks</div>
-            <div class="bar-chart">
-              <div class="bar" style="height: 42%;"></div>
-              <div class="bar" style="height: 51%;"></div>
-              <div class="bar" style="height: 58%;"></div>
-              <div class="bar" style="height: 63%;"></div>
-              <div class="bar bar-moss" style="height: 71%;"></div>
-              <div class="bar bar-moss" style="height: 78%;"></div>
-              <div class="bar bar-moss" style="height: 84%;"></div>
-            </div>
-            <div class="bar-labels">
-              <span>W11</span><span>W12</span><span>W13</span><span>W14</span><span>W15</span><span>W16</span><span>W17</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-card-foot">
-          <div>
-            <div class="label">YTD savings</div>
-            <div class="big">$48.2k</div>
-          </div>
-          <div style="text-align: right;">
-            <div class="label">CO₂e avoided</div>
-            <div class="big" style="color:#9FD1A8;">11.4t</div>
-          </div>
+      <aside class="hero-collage" aria-label="Programmes in operation — hospitality and corporate">
+        <figure class="hc-photo hc-photo-main">
+          <span class="hc-photo-fill" data-kind="hotel"></span>
+          <figcaption>
+            <span class="hc-cap-tag">Hospitality</span>
+            <span class="hc-cap-text">Hotel back-of-house · source-separation in operation</span>
+          </figcaption>
+        </figure>
+        <figure class="hc-photo hc-photo-b">
+          <span class="hc-photo-fill" data-kind="campus"></span>
+          <figcaption>
+            <span class="hc-cap-tag">Corporate</span>
+            <span class="hc-cap-text">Campus sort &amp; recovery hub</span>
+          </figcaption>
+        </figure>
+        <figure class="hc-photo hc-photo-c">
+          <span class="hc-photo-fill" data-kind="compost"></span>
+          <figcaption>
+            <span class="hc-cap-tag">On-site</span>
+            <span class="hc-cap-text">Compost output</span>
+          </figcaption>
+        </figure>
+        <div class="hc-badge">
+          <span class="hc-badge-k">In operation</span>
+          <span class="hc-badge-v">Programmes across hospitality &amp; corporate sites</span>
         </div>
       </aside>
     </div>
   </div>
 </header>
 
-<!-- TRUST STRIP -->
-<section class="trust">
+<!-- TRUST -->
+<section class="trust" data-screen-label="02 Trust">
   <div class="container trust-inner">
-    <div class="trust-label">Trusted across hospitality &amp; commercial</div>
-    <div class="trust-logos">
-      <span class="trust-logo">Cedar Hotel Group</span>
-      <span class="trust-logo alt">Olive&amp;Vine</span>
-      <span class="trust-logo">Marais Bistros</span>
-      <span class="trust-logo alt">Northwind Resorts</span>
-      <span class="trust-logo">Harbor &amp; Co.</span>
+    <div class="trust-label">
+      <span class="small">A specialist operator, not a hauler</span>
+      <span class="big">Built on two decades of measured diversion outcomes in hospitality and corporate operations.</span>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="k">Founder track record</span>
+        <span class="v">97% diversion at flagship hotel site, Cape Town</span>
+      </div>
+      <div class="trust-item">
+        <span class="k">Award</span>
+        <span class="v">Imvelo Responsible Tourism Award, 2011</span>
+      </div>
+      <div class="trust-item">
+        <span class="k">Regulatory frame</span>
+        <span class="v">EPR-aligned · NWES 2021–2030</span>
+      </div>
+      <div class="trust-item">
+        <span class="k">Operating model</span>
+        <span class="v">End-to-end · independently audited</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- VALUE CARDS -->
-<section class="section" id="value">
+<!-- APPROACH / VALUE -->
+<section class="section" id="approach" data-screen-label="03 Approach">
   <div class="container">
     <div class="section-head">
       <div>
-        <span class="eyebrow">What changes for your business</span>
-        <h2>Three things you'll <em>see</em><br />in the first 90 days.</h2>
+        <span class="eyebrow ochre">What changes for your operation</span>
+        <h2>Three things you'll have<br />in the first <em>six months.</em></h2>
       </div>
       <p class="lede">
-        Most waste companies just empty your bins. We do something different: we look at what you're actually throwing out, find what has value, and rebuild your setup so you save money and look good doing it. Here's what shows up on your side.
+        We don't promise to lower your hauling invoice. We do something more useful — and harder. We give you a defensible diversion programme: measured, designed, operated and audited. The compliance position your board, your auditor and your regulator can actually trust.
       </p>
     </div>
 
-    <div class="value-grid">
-      <div class="value-card">
-        <span class="num">01 · You pay less</span>
-        <h3>Your waste bill goes down — usually by a fifth.</h3>
-        <p>Right now you're paying by weight or by bin pickup. When less of your trash needs hauling to landfill, those numbers drop. We also renegotiate or replace your pickup contract if it's overpriced. Most clients see a lower invoice from month two.</p>
-        <div class="metric">
-          <div class="big">−22%</div>
-          <div class="small">Typical drop in your monthly hauling bill</div>
+    <div class="gains-grid">
+      <div class="gain">
+        <span class="gain-num">01 · Baseline</span>
+        <h3>A complete <em>waste-flow audit</em> of every stream on your site.</h3>
+        <p>Stream-by-stream weighing across every bin and back-of-house point. Contamination rates. Contractual baseline. The destinations of what you're paying to throw out today. Delivered as a single, defensible document — built to the same standard as the audits referenced in Israel's State Comptroller reporting.</p>
+        <div class="deliverable">
+          <span class="icon">01</span>
+          <span class="text"><strong>Deliverable</strong>Waste Audit &amp; Flow Map — month 1, signed</span>
         </div>
       </div>
 
-      <div class="value-card dark">
-        <span class="num">02 · You earn back</span>
-        <h3>Cardboard, glass, oil and food scraps become income — not cost.</h3>
-        <p>Recyclers pay for clean, sorted cardboard and metals. Composters take food scraps. Used cooking oil has a market. Most businesses throw all of this in one bin and pay to get rid of it. We help you separate it properly so it goes to the buyer instead of the dump.</p>
-        <div class="metric">
-          <div class="big">$48k</div>
-          <div class="small">Median yearly savings + revenue, mid-size venue</div>
+      <div class="gain">
+        <span class="gain-num">02 · Infrastructure</span>
+        <h3>A working <em>source-separation system</em> across your site.</h3>
+        <p>Bin placement, signage, multi-language staff protocols and pickup cadence — designed for the way your people already move. Either run on-site with on-site sorting and a composter, or operated off-site through our facility. Either way, your kitchen, plant or office floor keeps running.</p>
+        <div class="deliverable">
+          <span class="icon">02</span>
+          <span class="text"><strong>Deliverable</strong>Site SOPs &amp; staff training pack — months 2–3</span>
         </div>
       </div>
 
-      <div class="value-card">
-        <span class="num">03 · You look credible</span>
-        <h3>One simple report shows exactly where every kilo of waste went.</h3>
-        <p>Guests ask. Investors ask. Hotel groups and corporate clients increasingly require it. Instead of a vague "we recycle," you get a one-page monthly report with real numbers — what was sorted, what was recovered, what was avoided. Use it on your website, in tenders, or with auditors.</p>
-        <div class="metric">
-          <div class="big">1 pg</div>
-          <div class="small">Monthly report you can actually show people</div>
+      <div class="gain">
+        <span class="gain-num">03 · Reporting</span>
+        <h3>An <em>auditable, monthly</em> diversion and compliance pack.</h3>
+        <p>Tonnage by stream. Certified destinations. Recovery rates. EPR alignment for packaging, batteries and e-waste. ESG-disclosure-ready data for your annual report, your hotel group, your parent company or your tender response. Independently audited — not self-reported.</p>
+        <div class="deliverable">
+          <span class="icon">03</span>
+          <span class="text"><strong>Deliverable</strong>Monthly Diversion Report — from month 4</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="section process" id="process">
+<!-- FOUR STEPS -->
+<section class="section process" id="process" data-screen-label="04 Method">
   <div class="container">
     <div class="section-head">
       <div>
-        <span class="eyebrow">How it works · The Flight Plan</span>
-        <h2>Four simple steps. <em>No disruption</em> to service.</h2>
+        <span class="eyebrow light">The method · four phases</span>
+        <h2>Four steps. <em>No disruption</em><br />to your operation.</h2>
       </div>
-      <p class="lede">You don't need to know anything about recycling or sustainability to start. We come in, look at what you've got, and walk you through every move. Your kitchen keeps running. Your guests don't notice anything — except, eventually, that you're doing something they care about.</p>
+      <p class="lede">A single workflow runs from the first audit through to the monthly compliance pack. Your operations team doesn't need new headcount — we plug into your existing site, your existing teams and your existing reporting cycle.</p>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>We look at your bins.</h3>
-        <p>Free, 30 minutes on-site. We weigh what's in your bins, read your hauling contract, and tell you in plain numbers what you're losing. No commitment.</p>
-        <span class="step-tag">Week 1 · Free</span>
+    <div class="steps-rail">
+      <div class="pstep">
+        <div class="pstep-num">Step 01 · Week 1–2</div>
+        <h3>Audit</h3>
+        <p>Free on-site assessment. We weigh and characterise every stream, review your current hauling contracts and identify where recovery is feasible. No commitment.</p>
+        <div class="deliverables">
+          <div class="d-row">Waste-flow map</div>
+          <div class="d-row">Baseline tonnage</div>
+          <div class="d-row">Contractual review</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>We set up sorting.</h3>
-        <p>Right-sized bins where your team already works. Clear labels in your staff's languages. Either we run the sorting on-site, or we collect the mixed waste and sort it at our facility — your choice based on space.</p>
-        <span class="step-tag">Week 2–4</span>
+      <div class="pstep">
+        <div class="pstep-num">Step 02 · Week 3–6</div>
+        <h3>Design</h3>
+        <p>Source-separation infrastructure mapped to your site. Bin types, signage, fleet cadence and either on-site sorting or off-site processing — chosen based on space, throughput and team.</p>
+        <div class="deliverables">
+          <div class="d-row">Site layout &amp; bin spec</div>
+          <div class="d-row">Staff protocols</div>
+          <div class="d-row">Routing plan</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>We sell or send what has value.</h3>
-        <p>Cardboard to paper mills. Food scraps to composters. Oil to biofuel buyers. Glass and metal to recyclers. You see the weights and where each one went — every month, on one page.</p>
-        <span class="step-tag">Ongoing</span>
+      <div class="pstep">
+        <div class="pstep-num">Step 03 · Ongoing</div>
+        <h3>Operate</h3>
+        <p>We run collection, sorting, recovery and routing. Recyclables to certified processors. Organics to composting. Residuals tracked to disposal. Recovered streams monetised back into the closed loop.</p>
+        <div class="deliverables">
+          <div class="d-row">Managed collection</div>
+          <div class="d-row">Sorting &amp; recovery</div>
+          <div class="d-row">Stream monetisation</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <h3>We train your team &amp; swap your supplies.</h3>
-        <p>One short session per shift. We also help replace single-use plastics (cups, takeaway boxes, cling film) with compostable versions at similar prices — so the rest of your waste keeps getting cleaner.</p>
-        <span class="step-tag">Month 2+</span>
+      <div class="pstep">
+        <div class="pstep-num">Step 04 · Monthly</div>
+        <h3>Report</h3>
+        <p>One report. Tonnage by stream, certified destinations, recovery rate, EPR and ESG-aligned data. Independently audited. Built to drop into your annual disclosures or tender responses.</p>
+        <div class="deliverables">
+          <div class="d-row">Diversion report</div>
+          <div class="d-row">EPR / ESG pack</div>
+          <div class="d-row">Independent audit</div>
+        </div>
       </div>
     </div>
 
-    <div class="process-cta">
-      <div class="text">"You don't need a sustainability department. You need someone who knows where the value is hiding in your bin — and how to get it out."</div>
-      <a href="#contact" class="btn btn-primary">Book the free 30-min check <span class="arrow">→</span></a>
+    <div class="process-meta">
+      <div class="text">
+        Israel's National Waste Economy Strategy targets a <span>reduction in landfilled waste from 80% to 20% by 2030.</span> Corporate diversion programmes are now the operational mechanism behind that target.
+      </div>
+      <a href="#contact" class="btn btn-primary" style="background: var(--moss-soft); color: var(--moss-deep);">Book the audit <span class="arr"></span></a>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section" id="services">
+<!-- SERVICES (You sort / We sort) -->
+<section class="section" id="services" data-screen-label="05 Services">
   <div class="container">
     <div class="section-head">
       <div>
-        <span class="eyebrow">Two ways we can do it</span>
-        <h2>You sort it in-house. Or <em>we take it all</em> and sort it for you.</h2>
+        <span class="eyebrow">Two operating models</span>
+        <h2>Sort it <em>in-house.</em><br />Or hand it to us, <em>end-to-end.</em></h2>
       </div>
-      <p class="lede">Same result either way — less landfill, lower bills, recovered value. The difference is just whether the sorting happens at your place or ours. We'll tell you which one fits your space and your team after the free check.</p>
+      <p class="lede">The recovery outcome is identical — measured diversion, certified destinations, audited reporting. The difference is whether the sorting happens on your campus or at our facility. We'll recommend one or the other after the audit, based on your space, your throughput and your team.</p>
     </div>
 
     <div class="services-grid">
-      <div class="service-card">
-        <div class="service-image"><span class="placeholder-tag">Photo · on-site sorting station</span></div>
-        <div class="service-body">
-          <h3>Option A · You sort, we collect</h3>
-          <p>Best for hotels and bigger restaurants with room in the back. Sorting at the source gets you the cleanest material — and the best price for it.</p>
+      <div class="svc-card">
+        <div class="svc-head">
+          <span class="tag">Option A</span>
+          <span class="marker">On-site sorting facility</span>
+        </div>
+        <div class="svc-body">
+          <h3>You <em>sort.</em> We design, operate &amp; report.</h3>
+          <p>The closed-loop model. Sorting happens at your campus, in infrastructure we design and run. Cleanest material, highest recovery value, and the strongest compliance narrative — because your waste never leaves your control until it's already sorted.</p>
           <ul>
-            <li>We design and install bins that fit your kitchen</li>
-            <li>Labels and quick visual guides in your team's languages</li>
-            <li>We weigh and log every pickup so you know what's there</li>
-            <li>We help swap single-use plastics for compostable versions</li>
+            <li>Site-level source-separation design &amp; bin programme</li>
+            <li>On-site sorting station and (where viable) on-site composter producing agricultural-grade output</li>
+            <li>Multi-language staff training, signage and SOPs</li>
+            <li>Optional supply of compostable replacements for single-use items</li>
+            <li>Independent monthly audit and diversion certification</li>
           </ul>
+        </div>
+        <div class="svc-foot">
+          <span>Best for · large campuses · industrial sites · multi-tenant parks</span>
+          <span>Setup · 4–8 weeks</span>
         </div>
       </div>
 
-      <div class="service-card">
-        <div class="service-image"><span class="placeholder-tag">Photo · off-site recovery facility</span></div>
-        <div class="service-body">
-          <h3>Option B · We collect, we sort</h3>
-          <p>Best if your back-of-house is tight or you run several locations. You keep using one bin like before — we do the heavy lifting on our end.</p>
+      <div class="svc-card dark">
+        <div class="svc-head">
+          <span class="tag">Option B</span>
+          <span class="marker">Off-site processing</span>
+        </div>
+        <div class="svc-body">
+          <h3>We <em>collect.</em> We sort. We report.</h3>
+          <p>The managed model. You keep using a single pickup rhythm. We take everything to our facility, sort it stream by stream, route each fraction to its certified destination, and return one consolidated diversion report across all your sites.</p>
           <ul>
-            <li>Same pickup rhythm you already have</li>
-            <li>Everything sorted, weighed, and processed at our facility</li>
-            <li>One report across all your sites, in one place</li>
-            <li>We line up the buyers and recyclers, so you don't have to</li>
+            <li>Single, simple pickup contract — no operational change on your side</li>
+            <li>Sorting and recovery at our facility, with documented destinations</li>
+            <li>Consolidated multi-site reporting in one ESG-ready pack</li>
+            <li>We line up certified processors, recyclers and compost off-take</li>
+            <li>Same independent audit standard, off-site rather than on-site</li>
           </ul>
+        </div>
+        <div class="svc-foot">
+          <span>Best for · hotels · multi-site groups · constrained back-of-house</span>
+          <span>Setup · 2–4 weeks</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS BAND -->
-<section class="results">
+<!-- SECTORS -->
+<section class="section compact sectors" data-screen-label="06 Sectors">
   <div class="container">
-    <div class="results-grid">
-      <div class="results-head">
-        <span class="eyebrow" style="color:#E7C9A8;">After six months with us</span>
-        <h2>This is what an average client <em>actually sees.</em></h2>
-      </div>
-      <div class="results-stat">
-        <div class="big">70<sup>%</sup></div>
-        <div class="label">Less waste sent to landfill — sold, recycled or composted instead</div>
-      </div>
-      <div class="results-stat">
-        <div class="big">$48k</div>
-        <div class="label">Saved per year on hauling bills, plus revenue from sold material</div>
-      </div>
-      <div class="results-stat">
-        <div class="big">11<sup>t</sup></div>
-        <div class="label">Less CO₂ released — the same as taking 2 cars off the road for a year</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUNDER / ABOUT -->
-<section class="section founder" id="about">
-  <div class="container">
-    <div class="founder-grid">
-      <div class="founder-img"><span class="placeholder-tag">Photo · Jason Kornblum</span></div>
+    <div class="section-head">
       <div>
-        <span class="eyebrow">Who you'll actually deal with</span>
-        <h2>Meet Jason. He'll be the one <em>looking in your bins.</em></h2>
-        <div class="founder-bio">
-          <p>Jason started Source One Eco after years of watching hotels and restaurants pay good money to throw away things that other people would happily buy.</p>
-          <p>You won't get passed to a sales team or a call centre. He'll come to your venue, look at your setup, tell you what's working and what isn't — in normal English, no jargon — and put a real number on what you could save.</p>
-          <p>If it doesn't make sense for you, he'll tell you that too. No long contracts, no lock-in.</p>
+        <span class="eyebrow ochre">Who we work with</span>
+        <h2>Built for <em>operations</em><br />at corporate scale.</h2>
+      </div>
+      <p class="lede">Designed for organisations that operate at scale, run audited reporting cycles, and have a real obligation to evidence what happens to their waste — not just dispose of it.</p>
+    </div>
+    <div class="sectors-grid">
+      <div class="sector">
+        <div class="sector-img" data-kind="campus"><span class="sector-img-tag">Photo · corporate park</span></div>
+        <span class="num">01</span>
+        <h4>Corporate parks &amp; campuses</h4>
+        <p>Multi-tenant centres in central and northern Israel. Anchor accounts in identified corporate hubs — the operational unit our model is built around.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-img" data-kind="hotel"><span class="sector-img-tag">Photo · hospitality</span></div>
+        <span class="num">02</span>
+        <h4>Hospitality groups</h4>
+        <p>Hotels, resort campuses and F&amp;B groups. The sector our founder built his record in — Cape Town, London, Tel Aviv.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-img" data-kind="plant"><span class="sector-img-tag">Photo · industrial site</span></div>
+        <span class="num">03</span>
+        <h4>Industrial &amp; manufacturing</h4>
+        <p>Plant operations with mixed packaging, organics, recyclables and special streams under EPR. Compliance-grade routing and reporting.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-img" data-kind="retail"><span class="sector-img-tag">Photo · multi-site estate</span></div>
+        <span class="num">04</span>
+        <h4>Multi-site enterprises</h4>
+        <p>Retail and office estates that need one consolidated diversion report across every location, not separate site-by-site stories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSED-LOOP DIAGRAM -->
+<section class="loop" data-screen-label="07 Closed loop">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow light">The closed-loop model</span>
+        <h2>Sorted at source. <em>Routed</em><br />to certified destinations.</h2>
+      </div>
+      <p class="lede">Every stream has a documented destination — and a documented chain of custody to it. Recyclables monetised through certified buyers. Organics composted to agricultural-grade output. Residuals routed and tracked. Nothing leaves the system unaccounted for.</p>
+    </div>
+
+    <div class="loop-diagram">
+      <div class="loop-col">
+        <div class="loop-card">
+          <div class="k">Stream 01</div>
+          <div class="v">Recyclables — paper, plastic, glass, metals</div>
         </div>
-        <div class="founder-signature">
-          <div>
-            <div class="sig-name">Jason Kornblum</div>
-            <div class="sig-role">Founder · Source One Eco</div>
+        <div class="loop-card">
+          <div class="k">Stream 02</div>
+          <div class="v">Compostable &amp; biodegradable food waste</div>
+        </div>
+        <div class="loop-card">
+          <div class="k">Stream 03</div>
+          <div class="v">Residual waste — landfill-bound</div>
+        </div>
+        <div class="loop-card">
+          <div class="k">Stream 04</div>
+          <div class="v">Special streams — batteries, e-waste, packaging EPR</div>
+        </div>
+      </div>
+
+      <div class="loop-col middle">
+        <div class="loop-arrow"><span class="l"></span>SORT<span class="l"></span></div>
+        <div class="loop-hub">
+          <div class="k">Source One Eco</div>
+          <div class="v">Sort &amp; recovery hub<br /><em>on-site or off-site</em></div>
+        </div>
+        <div class="loop-arrow"><span class="l"></span>ROUTE<span class="l"></span></div>
+      </div>
+
+      <div class="loop-col">
+        <div class="loop-card">
+          <div class="k">Destination 01</div>
+          <div class="v">Certified recycling facility</div>
+        </div>
+        <div class="loop-card center">
+          <div class="k">Destination 02</div>
+          <div class="v">On-site composter — agricultural-grade output</div>
+        </div>
+        <div class="loop-card">
+          <div class="k">Destination 03</div>
+          <div class="v">Municipal collection · tracked</div>
+        </div>
+        <div class="loop-card">
+          <div class="k">Destination 04</div>
+          <div class="v">EPR / specialist processor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loop-caption">
+      <div class="lc"><strong>Auditable</strong>Every weight, every destination, every month — verified by an independent party.</div>
+      <div class="lc"><strong>Monetised</strong>Revenue from recovered streams (plastic, paper, compost) flows back into the client programme.</div>
+      <div class="lc"><strong>Compliance-ready</strong>Output formatted for ESG disclosure, EPR reporting and corporate audit packs.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section case" id="case" data-screen-label="08 Case Study">
+  <div class="container">
+    <div class="case-grid">
+      <div class="case-left">
+        <span class="eyebrow ochre">Programme in operation · corporate campus</span>
+        <h2>A multi-stream corporate site, <em>routed and reported</em> stream by stream.</h2>
+        <p class="lede">A live Source One Eco programme on a large corporate campus, running as a single managed workflow across food waste, paper, plastic, glass, cans and PET — roughly 800 staff, six-day operation, full diversion reporting. Target landfill share: 0.5% of monthly volume. Client identity withheld at the client's request.</p>
+        <div class="case-data">
+          <div class="c">
+            <div class="k">Annual volume</div>
+            <div class="v">~145<sup>t</sup></div>
+            <div class="note">Across all categorised waste streams</div>
           </div>
-          <div class="sig-cred">
-            <span>Experience<strong>10+ yrs</strong></span>
-            <span>Venues served<strong>40+</strong></span>
-            <span>Based<strong>Tel Aviv</strong></span>
+          <div class="c">
+            <div class="k">Staff served</div>
+            <div class="v">800</div>
+            <div class="note">8-hour shifts, six days a week</div>
           </div>
+          <div class="c">
+            <div class="k">Target landfill</div>
+            <div class="v">0.5<sup>%</sup></div>
+            <div class="note">Maximum monthly residual to landfill</div>
+          </div>
+          <div class="c">
+            <div class="k">Categorised streams</div>
+            <div class="v">6</div>
+            <div class="note">Food, paper, plastic, glass, cans, PET</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-right">
+        <div class="case-img"><span class="tag">Photo · programme in operation</span></div>
+        <div class="case-quote">
+          <p>"The brief was simple — give us a single accountable partner who can run the full waste programme on the campus and give us the data back in a form our auditors will accept. That's what we got."</p>
+          <div class="attr">
+            <span class="name">Operations Director</span>
+            <span class="role">Multi-site corporate client · Israel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="section leader" id="leadership" data-screen-label="09 Leadership">
+  <div class="container">
+    <div class="leader-grid">
+      <div class="leader-portrait"><span class="tag">Portrait · Jason Kornblum</span></div>
+      <div class="leader-content">
+        <span class="eyebrow ochre">Leadership</span>
+        <h2>Jason Kornblum.<br />Founder &amp; <em>Chief Executive.</em></h2>
+        <div class="leader-bio">
+          <p>Jason has spent his career inside large hospitality and corporate operations — in South Africa, London and Tel Aviv — and he founded Source One Eco specifically to do the work that integrated haulers and advisory-only consultants don't do: <strong>run a measurable, audited waste programme end-to-end, on behalf of a corporate client.</strong></p>
+          <p>As Resources Manager at the Southern Sun Waterfront Hotel in Cape Town, he replaced the site's trash-compactor model with a designed source-separation system across 20 tonnes of monthly waste, taking the property to <strong>97% diversion from landfill</strong> — and on the strength of that programme the hotel won the Imvelo Responsible Tourism Award for Best Single Resource Management Programme for Waste.</p>
+          <p>Today Source One Eco brings that operating model — audit, design, operate, report — to corporate campuses, hospitality groups and industrial sites across Israel, at exactly the moment Israel's regulatory framework is moving in the same direction.</p>
+        </div>
+
+        <div class="leader-award">
+          <div class="award-medal">★</div>
+          <div class="text">
+            <span class="top">Imvelo Responsible Tourism Award · 2011</span>
+            <span class="mid">Best Single Resource Management Programme for Waste</span>
+            <span class="sub">Awarded for the recycling programme at Southern Sun Waterfront, Cape Town.</span>
+          </div>
+        </div>
+
+        <div class="leader-credentials">
+          <div class="lc">
+            <div class="k">Career sector</div>
+            <div class="v">Hospitality &amp; corporate operations</div>
+            <div class="note">South Africa · London · Tel Aviv</div>
+          </div>
+          <div class="lc">
+            <div class="k">Flagship outcome</div>
+            <div class="v">97% diversion, 20t / month</div>
+            <div class="note">Southern Sun Waterfront, Cape Town</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW / REGULATORY -->
+<section class="section why" data-screen-label="10 Why now">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Regulatory context · Israel</span>
+        <h2>Why corporate diversion <em>is now</em><br />the operational question.</h2>
+      </div>
+      <p class="lede">Israel is moving from one of the most landfill-dependent waste systems in the OECD to one structured around sorting, recovery and treatment. Corporate-scale diversion programmes are the mechanism behind that policy — and the obligation is shifting from the integrated hauler to the operator.</p>
+    </div>
+
+    <div class="reg-grid">
+      <div class="reg-stats">
+        <div class="reg-stat">
+          <div class="big">80<sup>%</sup></div>
+          <div class="label">Israel's current landfill dependency — versus a 40% OECD average</div>
+        </div>
+        <div class="reg-stat">
+          <div class="big">20<sup>%</sup></div>
+          <div class="label">Mandated landfill share by 2030 under the National Waste Economy Strategy</div>
+        </div>
+        <div class="reg-stat">
+          <div class="big">14</div>
+          <div class="label">Active alternative sorting &amp; treatment facilities nationally — a documented capacity gap</div>
+        </div>
+        <div class="reg-stat">
+          <div class="big">6<sup>%</sup></div>
+          <div class="label">Share of national GHG emissions attributable to food waste alone</div>
+        </div>
+      </div>
+
+      <div class="reg-list">
+        <div class="reg-row">
+          <span class="year">2021–2030</span>
+          <span class="desc"><strong>National Waste Economy Strategy</strong>The headline framework mandating Israel's move from landfill to sorting, recovery and recycling — and the regulatory backdrop your programme will be assessed against.</span>
+        </div>
+        <div class="reg-row">
+          <span class="year">Active</span>
+          <span class="desc"><strong>Extended Producer Responsibility (EPR)</strong>Compliance-ready handling required for packaging, batteries and e-waste. Corporate clients increasingly expected to evidence how their EPR streams are managed in practice.</span>
+        </div>
+        <div class="reg-row">
+          <span class="year">2026</span>
+          <span class="desc"><strong>Inter-ministerial regulatory review</strong>A broader waste-sector regulatory process launched in early 2026, with the packaging market being re-opened to supervised competition.</span>
+        </div>
+        <div class="reg-row">
+          <span class="year">Ongoing</span>
+          <span class="desc"><strong>State Comptroller follow-up audit, 2025</strong>Found that existing landfill capacity is insufficient for projected volumes — accelerating the pressure on corporate-scale diversion programmes.</span>
         </div>
       </div>
     </div>
@@ -838,77 +1311,81 @@
 </section>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
+<section class="section" id="contact" data-screen-label="11 Contact">
   <div class="container">
     <div class="contact-grid">
       <div class="contact-left">
-        <span class="eyebrow">Free 30-minute on-site check</span>
-        <h2>Curious what your bins are <em>actually costing you?</em></h2>
-        <p class="lede">Tell us a little about your business. Within 24 hours, Jason will come back with a quick number on what you might save — and whether it's even worth a longer conversation. No pressure, no hard sell.</p>
+        <span class="eyebrow ochre">Begin with the audit</span>
+        <h2>Tell us about<br />the <em>site.</em></h2>
+        <p class="lede">An on-site assessment runs roughly 90 minutes per facility, with a written waste-flow map and baseline within two weeks. There's no commitment — and no obligation — beyond the audit itself.</p>
         <div class="contact-list">
           <div class="contact-row">
+            <span class="k">Office</span>
+            <span class="v">Tel Aviv, Israel<small>Programmes in central &amp; northern Israel</small></span>
+          </div>
+          <div class="contact-row">
             <span class="k">Direct line</span>
-            <span class="v">+972 53 933 7380</span>
+            <span class="v">+972 53 933 7380<small>Jason Kornblum, CEO</small></span>
           </div>
           <div class="contact-row">
             <span class="k">Email</span>
-            <span class="v">jason@sourceoneeco.com</span>
+            <span class="v">jason@sourceoneeco.com<small>Reply within 2 business days</small></span>
           </div>
           <div class="contact-row">
-            <span class="k">Response time</span>
-            <span class="v">Within 24 hours</span>
+            <span class="k">Web</span>
+            <span class="v">sourceoneeco.com</span>
           </div>
         </div>
       </div>
 
-      <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent — we\'ll fly back to you.';">
+      <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Request received — we will be in touch.';">
         <div class="form-head">
-          <h3>Tell us a bit about your place</h3>
-          <p>Takes 60 seconds. The more we know, the better our first answer.</p>
+          <h3>Request a site audit</h3>
+          <p>Five fields. We'll come back within two business days to schedule the on-site assessment.</p>
         </div>
         <div class="field-row">
           <div class="field">
             <label for="name">Name</label>
-            <input id="name" type="text" placeholder="Your full name" />
+            <input id="name" type="text" placeholder="Full name" />
           </div>
           <div class="field">
-            <label for="venue">Venue / company</label>
-            <input id="venue" type="text" placeholder="Where you operate" />
+            <label for="company">Company</label>
+            <input id="company" type="text" placeholder="Organisation" />
           </div>
         </div>
         <div class="field-row">
           <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="you@venue.com" />
+            <label for="email">Work email</label>
+            <input id="email" type="email" placeholder="you@company.com" />
           </div>
           <div class="field">
             <label for="role">Role</label>
             <select id="role">
-              <option>GM / Owner</option>
-              <option>F&amp;B Director</option>
-              <option>Sustainability Lead</option>
-              <option>Operations</option>
-              <option>Other</option>
+              <option>Operations / Facilities</option>
+              <option>Sustainability / ESG</option>
+              <option>Procurement</option>
+              <option>General Manager</option>
+              <option>Executive / Board</option>
             </select>
           </div>
         </div>
         <div class="field">
-          <label for="type">Operation type</label>
-          <select id="type">
-            <option>Hotel</option>
-            <option>Restaurant / café</option>
-            <option>Multi-site hospitality group</option>
-            <option>Commercial / office</option>
-            <option>Event venue</option>
+          <label for="op">Operation type</label>
+          <select id="op">
+            <option>Corporate park or campus</option>
+            <option>Hotel or hospitality group</option>
+            <option>Industrial / manufacturing site</option>
+            <option>Multi-site enterprise</option>
+            <option>Other</option>
           </select>
         </div>
         <div class="field">
-          <label for="msg">What's bugging you about your waste right now?</label>
-          <textarea id="msg" placeholder="E.g. the bill keeps going up, kitchen smells, our guests are asking, we just don't know where to start…"></textarea>
+          <label for="msg">A note about the site</label>
+          <textarea id="msg" placeholder="Approximate staff count, location, any compliance reporting already in place, and what you'd most like to fix."></textarea>
         </div>
         <div class="form-foot">
-          <span class="meta">No spam, no automated follow-ups. One real reply from Jason.</span>
-          <button type="submit" class="btn btn-primary">Send my details <span class="arrow">→</span></button>
+          <span class="meta">Information shared here is used only to schedule the audit. We don't run marketing automation.</span>
+          <button type="submit" class="btn btn-primary">Request the audit <span class="arr"></span></button>
         </div>
       </form>
     </div>
@@ -916,24 +1393,33 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer data-screen-label="Footer">
   <div class="container">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="logo" style="color: var(--cream);">
-          <span class="logo-mark" style="background:var(--cream);"></span>
-          <span>Source One Eco</span>
-        </div>
-        <h3>Flipping the bird<br />to bad waste<br />management.</h3>
-        <p>We help hotels, restaurants and offices pay less to throw things away — and make money back on the stuff that's actually worth something.</p>
+        <a href="#top" class="logo">
+          <span class="logo-mark" style="background: var(--cream);"></span>
+          <span class="logo-text" style="color: var(--cream);">Source One Eco<small style="color: rgba(250,246,235,0.55);">Corporate Diversion · Israel</small></span>
+        </a>
+        <h3>One partner for every stream of corporate waste.</h3>
+        <p>An end-to-end diversion platform for Israel's medium and large enterprises — audit, design, operate, report. Built for the country's transition out of landfill.</p>
       </div>
       <div class="foot-col">
-        <h4>The Nest</h4>
+        <h4>Approach</h4>
         <ul>
-          <li><a href="#value">What you get</a></li>
-          <li><a href="#process">How we fly</a></li>
-          <li><a href="#services">Flight plan</a></li>
-          <li><a href="#about">About Jason</a></li>
+          <li><a href="#approach">First six months</a></li>
+          <li><a href="#process">The method</a></li>
+          <li><a href="#services">Operating models</a></li>
+          <li><a href="#case">Case study</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#leadership">Leadership</a></li>
+          <li><a href="#">Advisory board</a></li>
+          <li><a href="#">Press &amp; media</a></li>
+          <li><a href="#">Careers</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -941,31 +1427,21 @@
         <ul>
           <li><a href="mailto:jason@sourceoneeco.com">jason@sourceoneeco.com</a></li>
           <li><a href="tel:+972539337380">+972 53 933 7380</a></li>
-          <li><a href="#contact">Book a waste audit</a></li>
+          <li><a href="#contact">Request an audit</a></li>
           <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>For operators</h4>
-        <ul>
-          <li><a href="#">Case study · hotel</a></li>
-          <li><a href="#">Case study · restaurant group</a></li>
-          <li><a href="#">ESG reporting one-pager</a></li>
-          <li><a href="#">Biodegradable swap guide</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bot">
-      <span>© Source One Eco 2026</span>
-      <span>Tel Aviv · serving hospitality &amp; commercial operators</span>
-      <span>Privacy · Terms</span>
+      <span>© Source One Eco 2026 · Registered in Israel</span>
+      <span class="right">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Compliance disclosures</a>
+      </span>
     </div>
   </div>
 </footer>
-
-<a href="#contact" class="float-chat">
-  <span class="live-dot">Chat now</span>
-</a>
 
 </body>
 </html>
