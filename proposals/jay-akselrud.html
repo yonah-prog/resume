@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jay Akselrud — Enterprise Test Strategy & Quality Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --bg: #F7F8FC;
+      --surface: #ffffff;
+      --border: #E4E8F0;
+      --text-primary: #0A0E1A;
+      --text-secondary: #5A6478;
+      --text-muted: #9BA5BB;
+      --accent: #0047FF;
+      --accent-soft: #EEF3FF;
+      --accent-mid: #C7D7FF;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247,248,252,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: #0038CC !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 140px 32px 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-photo-col {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      width: 400px;
+      flex-shrink: 0;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent-mid));
+      z-index: 0;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 160px;
+      height: 160px;
+      border-radius: 20px;
+      background: var(--accent-soft);
+      border: 2px solid var(--accent-mid);
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%230047FF' fill-opacity='0.2'/%3E%3C/svg%3E");
+      background-size: 12px 12px;
+    }
+    .hero-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 20px;
+      display: block;
+      border: 3px solid var(--white);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-photo-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px;
+      background: linear-gradient(160deg, #e8edf8 0%, #d0d9f0 100%);
+      border: 3px solid var(--white);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-family: var(--mono);
+    }
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 24px;
+      left: -16px;
+      z-index: 2;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-dot {
+      width: 8px; height: 8px;
+      background: #34D399;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .badge-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .badge-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-mid);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      margin-bottom: 32px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-headline {
+      font-size: clamp(36px, 4.5vw, 62px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      color: var(--text-primary);
+      max-width: 820px;
+      margin-bottom: 28px;
+    }
+    .hero-headline .accent { color: var(--accent); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(0,71,255,0.3);
+    }
+    .btn-primary:hover {
+      background: #0038CC;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,71,255,0.38);
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text-primary);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat-item {}
+    .stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ── TRUSTED BANNER ── */
+    #trusted {
+      background: var(--text-primary);
+      padding: 20px 32px;
+      overflow: hidden;
+    }
+    .trust-ticker {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap;
+    }
+    .trust-ticker-wrap {
+      display: flex;
+      overflow: hidden;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .trust-item {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      flex-shrink: 0;
+    }
+    .trust-sep {
+      color: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 32px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover {
+      border-color: var(--accent-mid);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; }
+    .service-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.4px;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── FRAMEWORK ── */
+    #framework { background: var(--bg); }
+    .framework-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .framework-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .framework-tab {
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1.5px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .framework-tab:hover {
+      background: var(--white);
+      color: var(--text-primary);
+    }
+    .framework-tab.active {
+      background: var(--white);
+      color: var(--accent);
+      border-color: var(--accent-mid);
+      box-shadow: var(--shadow-sm);
+    }
+    .tab-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      width: 20px;
+    }
+    .framework-tab.active .tab-num { color: var(--accent); }
+    .framework-content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      min-height: 360px;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .tab-panel-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .tab-panel h3 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    .tab-panel p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-mid);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--mono);
+    }
+
+    /* ── TESTIMONIAL ── */
+    #testimonial { background: var(--white); padding: 80px 32px; }
+    .testimonial-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 32px;
+    }
+    .star { color: var(--accent); font-size: 18px; }
+    .testimonial-quote {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      line-height: 1.4;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+    }
+    .testimonial-quote em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .author-avatar {
+      width: 44px; height: 44px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--accent);
+      border: 2px solid var(--accent-mid);
+    }
+    .author-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .author-role {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── CASE STUDIES ── */
+    #work { background: var(--bg); }
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      gap: 32px;
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .work-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .work-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+      border-color: var(--accent-mid);
+    }
+    .work-card-img {
+      height: 180px;
+      background: linear-gradient(135deg, #0A0E1A 0%, #1a2a5e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .work-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230047FF' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .work-card-logo {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      z-index: 1;
+      letter-spacing: -1px;
+    }
+    .work-card-body { padding: 28px; }
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .work-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-mid);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .work-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+    .work-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 18px;
+      transition: gap 0.2s;
+    }
+    .work-card:hover .work-link { gap: 10px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .about-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .about-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .bullet-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .about-bullet p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .skills-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .skill-group {}
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .skill-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .skill-item:hover {
+      border-color: var(--accent-mid);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* ── DELIVERY ── */
+    #delivery { background: var(--bg); }
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .delivery-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .delivery-card:hover {
+      border-color: var(--accent-mid);
+      box-shadow: var(--shadow-md);
+    }
+    .delivery-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .delivery-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .delivery-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--text-primary); }
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-left .section-label { color: #6B85FF; }
+    .contact-left .section-title { color: #ffffff; }
+    .contact-left .section-sub { color: rgba(255,255,255,0.5); max-width: 420px; }
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-top: 40px;
+    }
+    .contact-badge-dot {
+      width: 8px; height: 8px;
+      background: #34D399;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .contact-badge-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 14px;
+      color: white;
+      font-family: var(--sans);
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-input:focus, .form-textarea:focus {
+      border-color: #6B85FF;
+      background: rgba(255,255,255,0.08);
+    }
+    .form-textarea { height: 120px; resize: vertical; }
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .form-check input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--accent);
+    }
+    .form-check-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .form-submit {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 4px;
+    }
+    .form-submit:hover { background: #0038CC; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080B14;
+      padding: 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+      font-family: var(--mono);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── GRID DECORATION ── */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,71,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,71,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-layout { grid-template-columns: 1fr 360px; gap: 48px; }
+      .hero-photo-wrap { width: 100%; }
+    }
+    @media (max-width: 900px) {
+      .hero-layout { grid-template-columns: 1fr; }
+      .hero-photo-col { justify-content: flex-start; margin-top: 40px; }
+      .hero-photo-wrap { width: 280px; }
+      .services-grid, .work-grid, .delivery-grid { grid-template-columns: 1fr 1fr; }
+      .framework-layout { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 640px) {
+      .services-grid, .work-grid, .delivery-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 32px; }
+      .work-header { flex-direction: column; align-items: flex-start; }
+      .hero-photo-wrap { width: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Jay<span>.</span>Akselrud</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-layout">
+    <div class="hero-text-col">
+      <div class="hero-tag">Available for Enterprise Engagements</div>
+      <h1 class="hero-headline">
+        Test Strategy for Systems That <span class="accent">Can't Afford</span> Surprises.
+      </h1>
+      <p class="hero-sub">
+        I lead test strategy, automation architecture, and performance validation for complex SAP, Oracle, and cloud environments — where a bad release shows up immediately in operations, finance, or customer impact.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Call</a>
+        <a href="#work" class="btn-secondary">View Case Studies</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item reveal">
+          <div class="stat-num">20<span>+</span></div>
+          <div class="stat-label">Years Enterprise QA</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-num">F500<span>.</span></div>
+          <div class="stat-label">Fortune 500 Clients</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Critical Go-Live Failures</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-num">SAP<span>+</span></div>
+          <div class="stat-label">S/4HANA & Oracle Cloud</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-photo-col">
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="../Images/jay.png" alt="Jay Akselrud" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="hero-photo-placeholder" style="display:none;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>jay-headshot.jpg</span>
+        </div>
+        <div class="hero-photo-badge">
+          <div>
+            <div class="badge-dot" style="display:inline-block; margin-bottom:3px;"></div>
+          </div>
+          <div>
+            <div class="badge-text">Jay Akselrud</div>
+            <div class="badge-sub">Enterprise QA Leader</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED TICKER -->
+<div id="trusted">
+  <div class="trust-ticker-wrap">
+    <div class="trust-ticker">
+      <span class="trust-item">Humana</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">JetBlue Airways</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Yamaha Motor Corporation</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">The Coca-Cola Company</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">General Electric</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">SAP S/4HANA</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Oracle Cloud</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Tricentis Tosca</span>
+      <span class="trust-sep">—</span>
+      <!-- duplicate for seamless loop -->
+      <span class="trust-item">Humana</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">JetBlue Airways</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Yamaha Motor Corporation</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">The Coca-Cola Company</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">General Electric</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">SAP S/4HANA</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Oracle Cloud</span>
+      <span class="trust-sep">—</span>
+      <span class="trust-item">Tricentis Tosca</span>
+      <span class="trust-sep">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title reveal">End-to-End Quality Engineering<br>Across the Full Stack</h2>
+    <p class="section-sub reveal">Three interconnected disciplines that determine whether enterprise releases succeed or fail.</p>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="service-title">Enterprise Risk-Based Testing</div>
+        <div class="service-desc">20+ years delivering testing strategy across Fortune 500 and public-sector environments. Focused on identifying real risk in SAP S/4HANA, Oracle Cloud, and complex integrations before they reach production.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="service-title">Automation Architecture at Enterprise Scale</div>
+        <div class="service-desc">Design and lead enterprise automation frameworks spanning UI, API, and data layers. Proven delivery across large programs without creating brittle test suites or long-term technical debt.</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="service-title">Performance Testing for Real-World Load</div>
+        <div class="service-desc">Own performance testing strategy and execution for systems where automation and performance together determine release readiness. Validate behavior under peak load, data volume, and integration pressure.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section id="framework">
+  <div class="section-inner">
+    <div class="section-label">How I Work</div>
+    <h2 class="section-title reveal">A Practical Framework for<br>High-Stakes Enterprise Testing</h2>
+    <p class="section-sub reveal">Four pillars that guide how I design, execute, and assess testing for complex SAP and cloud systems.</p>
+
+    <div class="framework-layout">
+      <div class="framework-tabs">
+        <div class="framework-tab active" data-tab="risk">
+          <span class="tab-num">01</span> Risk-Based Test Strategy
+        </div>
+        <div class="framework-tab" data-tab="automation">
+          <span class="tab-num">02</span> Enterprise Automation Architecture
+        </div>
+        <div class="framework-tab" data-tab="performance">
+          <span class="tab-num">03</span> Performance & Scalability Testing
+        </div>
+        <div class="framework-tab" data-tab="release">
+          <span class="tab-num">04</span> Release Readiness
+        </div>
+      </div>
+
+      <div class="framework-content">
+        <div class="tab-panel active" id="panel-risk">
+          <div class="tab-panel-label">01 / Strategy before execution</div>
+          <h3>Risk-Based Test Strategy</h3>
+          <p>Define testing scope based on business criticality, change impact, and system risk — not blanket coverage. I start by mapping end-to-end business processes (P2P, O2C, finance, manufacturing) to underlying SAP and cloud objects, integrations, and data flows.</p>
+          <p>Using impact analysis, transport-level change detection, and object usage, I prioritize testing where failures would cause operational disruption, financial exposure, or compliance risk.</p>
+          <div class="tag-list">
+            <span class="tag">Change Impact Analysis</span>
+            <span class="tag">SAP S/4HANA</span>
+            <span class="tag">P2P / O2C</span>
+            <span class="tag">Regression Scoping</span>
+            <span class="tag">Compliance Risk</span>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-automation">
+          <div class="tab-panel-label">02 / Built to scale, not to break</div>
+          <h3>Enterprise Automation Architecture</h3>
+          <p>Design frameworks that span UI, API, and data layers across large SAP and cloud programs. The goal is sustainable automation — not high test counts that create long-term maintenance debt.</p>
+          <p>Model-based testing with Tricentis Tosca, CI/CD-aligned execution pipelines, and data-driven test design that keeps automation viable as systems evolve.</p>
+          <div class="tag-list">
+            <span class="tag">Tricentis Tosca</span>
+            <span class="tag">UI / API / Data</span>
+            <span class="tag">CI/CD Integration</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Azure DevOps</span>
+            <span class="tag">Model-Based Testing</span>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-performance">
+          <div class="tab-panel-label">03 / Validation under real conditions</div>
+          <h3>Performance & Scalability Testing</h3>
+          <p>Workload modeling built on real transaction mix and user behavior — not synthetic guesses. Phased execution: smoke, load, stress, endurance. Bottleneck isolation across application, integration, and infrastructure layers.</p>
+          <p>Correlated with observability tooling (Datadog, Grafana, InfluxDB) to connect test findings to production monitoring.</p>
+          <div class="tag-list">
+            <span class="tag">NeoLoad</span>
+            <span class="tag">LoadRunner</span>
+            <span class="tag">JMeter</span>
+            <span class="tag">Datadog</span>
+            <span class="tag">Grafana</span>
+            <span class="tag">Endurance Testing</span>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-release">
+          <div class="tab-panel-label">04 / Decision-grade confidence</div>
+          <h3>Release Readiness</h3>
+          <p>Release readiness assessments for SIT, UAT, and go-live decisions that stakeholders can act on. Reporting focused on risk exposure — not test counts — with defect triage and severity assessment aligned to business impact.</p>
+          <p>I produce the kind of analysis that gives executives the information they need to make go/no-go decisions with confidence.</p>
+          <div class="tag-list">
+            <span class="tag">SIT / UAT / Go-Live</span>
+            <span class="tag">Risk Reporting</span>
+            <span class="tag">Defect Triage</span>
+            <span class="tag">Stakeholder Readiness</span>
+            <span class="tag">Go/No-Go</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section id="testimonial">
+  <div class="testimonial-inner">
+    <div class="stars">
+      <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+    </div>
+    <p class="testimonial-quote reveal">
+      "They brought clarity to a migration that <em>could have failed.</em> The testing strategy they built caught what we would have missed."
+    </p>
+    <div class="testimonial-author reveal">
+      <div class="author-avatar">JM</div>
+      <div>
+        <div class="author-name">James Mitchell</div>
+        <div class="author-role">VP of Operations, Fortune 500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="section-inner">
+    <div class="work-header">
+      <div>
+        <div class="section-label">Engagements</div>
+        <h2 class="section-title reveal">Built in the Field</h2>
+        <p class="section-sub reveal">Programs where testing strategy determined whether go-live succeeded or failed.</p>
+      </div>
+    </div>
+
+    <div class="work-grid">
+
+      <a class="work-card reveal" href="#">
+        <div class="work-card-img">
+          <div class="work-card-logo">Humana</div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-tags">
+            <span class="work-tag">SAP Migration</span>
+            <span class="work-tag">Healthcare</span>
+            <span class="work-tag">Performance</span>
+          </div>
+          <div class="work-title">Modernizing Performance and Automation Testing for a Large-Scale Healthcare ERP Transformation</div>
+          <div class="work-desc">SAP migration requiring mid-program testing strategy rebuild and execution overhaul for S/4HANA risk management.</div>
+          <span class="work-link">View project →</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" href="#">
+        <div class="work-card-img">
+          <div class="work-card-logo">JetBlue</div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-tags">
+            <span class="work-tag">Customer-Facing</span>
+            <span class="work-tag">Airline</span>
+            <span class="work-tag">Scalability</span>
+          </div>
+          <div class="work-title">Engineering Scalable Performance Validation for Customer-Facing Airline Systems</div>
+          <div class="work-desc">End-to-end performance validation for high-traffic customer-facing airline reservation and operations systems.</div>
+          <span class="work-link">View project →</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-2" href="#">
+        <div class="work-card-img">
+          <div class="work-card-logo">Yamaha</div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-tags">
+            <span class="work-tag">Integration</span>
+            <span class="work-tag">Automation</span>
+            <span class="work-tag">Manufacturing</span>
+          </div>
+          <div class="work-title">Optimizing SAP S/4HANA Performance and Automation for Global Manufacturing Operations</div>
+          <div class="work-desc">Multi-system integration across legacy and modern platforms with complex performance demands.</div>
+          <span class="work-link">View project →</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="#">
+        <div class="work-card-img">
+          <div class="work-card-logo">Coca-Cola</div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-tags">
+            <span class="work-tag">Multi-Region</span>
+            <span class="work-tag">UAT</span>
+            <span class="work-tag">Global</span>
+          </div>
+          <div class="work-title">Coordinating Global SAP Automation and UAT Across Multi-Region Enterprise Systems</div>
+          <div class="work-desc">Global coordination of automation and UAT strategy across multi-region enterprise systems.</div>
+          <span class="work-link">View project →</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal reveal-delay-1" href="#">
+        <div class="work-card-img">
+          <div class="work-card-logo">GE</div>
+        </div>
+        <div class="work-card-body">
+          <div class="work-tags">
+            <span class="work-tag">Cloud Architecture</span>
+            <span class="work-tag">Integration</span>
+            <span class="work-tag">Industrial</span>
+          </div>
+          <div class="work-title">Driving Enterprise SAP Integration and UAT Strategy Across Industrial Systems at General Electric</div>
+          <div class="work-desc">Cloud modernization with testing framework built from the ground up for new architecture.</div>
+          <span class="work-link">View project →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / SKILLS -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title reveal">Experience Built Across<br>the Full Testing Stack</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>My experience isn't built around a single tool or role. It's built from working across functional testing, automation, performance, integration, and release readiness over decades of enterprise programs.</p>
+        <p>That range creates judgment: knowing where issues actually surface, how failures cascade, and where effort delivers real value.</p>
+        <div class="about-bullets">
+          <div class="about-bullet">
+            <div class="bullet-dot"></div>
+            <p>Hands-on experience across functional QA, automation frameworks, performance testing, and release management</p>
+          </div>
+          <div class="about-bullet">
+            <div class="bullet-dot"></div>
+            <p>Broad certifications and platform exposure used to connect disciplines, not silo them</p>
+          </div>
+          <div class="about-bullet">
+            <div class="bullet-dot"></div>
+            <p>Able to diagnose issues that sit between teams, systems, and testing layers</p>
+          </div>
+        </div>
+        <div style="margin-top: 36px; display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="#" class="btn-primary" style="font-size: 14px; padding: 12px 22px;">Download Resume</a>
+          <a href="https://linkedin.com" class="btn-secondary" style="font-size: 14px; padding: 12px 22px;">LinkedIn ↗</a>
+        </div>
+      </div>
+
+      <div class="skills-panel">
+        <div class="skill-group">
+          <div class="skill-group-title">Enterprise Systems & Platforms</div>
+          <div class="skill-items">
+            <span class="skill-item">SAP S/4HANA</span>
+            <span class="skill-item">SAP ECC</span>
+            <span class="skill-item">SAP Solution Manager</span>
+            <span class="skill-item">Oracle Cloud (OCI)</span>
+            <span class="skill-item">Oracle Integration Cloud</span>
+            <span class="skill-item">Workday</span>
+            <span class="skill-item">PeopleSoft</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Automation & Test Engineering</div>
+          <div class="skill-items">
+            <span class="skill-item">Tricentis Tosca</span>
+            <span class="skill-item">Tosca TDS</span>
+            <span class="skill-item">Tricentis DEX</span>
+            <span class="skill-item">UI Automation</span>
+            <span class="skill-item">API Automation</span>
+            <span class="skill-item">Data-Driven Testing</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Performance & Scalability</div>
+          <div class="skill-items">
+            <span class="skill-item">NeoLoad</span>
+            <span class="skill-item">LoadRunner</span>
+            <span class="skill-item">JMeter</span>
+            <span class="skill-item">Datadog</span>
+            <span class="skill-item">Grafana</span>
+            <span class="skill-item">InfluxDB</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Certifications</div>
+          <div class="skill-items">
+            <span class="skill-item">AS1 / AS2 Automation Specialist</span>
+            <span class="skill-item">AE1 / AE2 Automation Engineer</span>
+            <span class="skill-item">TDS1 / TDS2 Data Specialist</span>
+            <span class="skill-item">SAP Testing Specialist</span>
+            <span class="skill-item">API Testing Specialist</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Delivery & Tooling</div>
+          <div class="skill-items">
+            <span class="skill-item">Jenkins</span>
+            <span class="skill-item">Azure DevOps</span>
+            <span class="skill-item">GitHub Actions</span>
+            <span class="skill-item">Jira</span>
+            <span class="skill-item">HP ALM</span>
+            <span class="skill-item">qTest</span>
+            <span class="skill-item">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="delivery">
+  <div class="section-inner">
+    <div class="section-label">Working Style</div>
+    <h2 class="section-title reveal">Working Inside Delivery,<br>Not Outside It</h2>
+    <p class="section-sub reveal">Embedded inside delivery teams, adapting to existing processes, tooling, and culture.</p>
+    <div class="delivery-grid">
+      <div class="delivery-card reveal">
+        <div class="delivery-num">01</div>
+        <div class="delivery-title">Seamless Integration</div>
+        <div class="delivery-desc">Collaborates directly with developers, architects, QA leads, DevOps, and business stakeholders. Integrates quickly, earns trust through execution.</div>
+      </div>
+      <div class="delivery-card reveal reveal-delay-1">
+        <div class="delivery-num">02</div>
+        <div class="delivery-title">Flexible Delivery Models</div>
+        <div class="delivery-desc">Comfortable operating across onshore/offshore models, Agile, hybrid, and large-scale enterprise delivery. Adapts to the team's existing cadence.</div>
+      </div>
+      <div class="delivery-card reveal reveal-delay-2">
+        <div class="delivery-num">03</div>
+        <div class="delivery-title">Clarity Without Disruption</div>
+        <div class="delivery-desc">Brings structure, clarity, and execution without disrupting ownership or velocity. Focuses on strengthening internal capability, not running a parallel function.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label">Let's Talk</div>
+      <h2 class="section-title">Share What You're Building.<br>I'll Tell You What<br>Testing Needs to Happen.</h2>
+      <p class="section-sub">Describe your situation — SAP migration, cloud transition, integration complexity — and get a direct perspective on what it actually takes to deliver safely.</p>
+      <div class="contact-badge">
+        <div class="contact-badge-dot"></div>
+        <span class="contact-badge-text">Currently accepting new engagements</span>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="you@company.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Describe Your Situation</label>
+        <textarea class="form-textarea" placeholder="Tell me about your system, migration, or upcoming release..."></textarea>
+      </div>
+      <label class="form-check">
+        <input type="checkbox" />
+        <span class="form-check-label">I agree to the terms and privacy policy</span>
+      </label>
+      <button class="form-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Jay<span>.</span>Akselrud</div>
+    <div class="footer-copy">© 2025 Jay Akselrud. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="https://linkedin.com">LinkedIn ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Framework tabs
+  document.querySelectorAll('.framework-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      document.querySelectorAll('.framework-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + target).classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
