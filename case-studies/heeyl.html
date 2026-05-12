@@ -1,141 +1,804 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Heeyl — Case Study · Yonah Friedman</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://resume-seven-weld-11.vercel.app/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Yonah Friedman" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://resume-seven-weld-11.vercel.app/og-image.png" />
-  <link rel="stylesheet" href="case-study.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Heeyl — Field notes on cannabis care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #0E1614;
+    --bg-soft:   #131F1B;
+    --bg-card:   #1A2622;
+    --ink:       #EFE9DA;
+    --ink-soft:  rgba(239,233,218,0.62);
+    --ink-mute:  rgba(239,233,218,0.36);
+    --rule:      rgba(239,233,218,0.14);
+    --lime:      #C5F267;
+    --blush:     #E6A88F;
+    --moss:      #6E9070;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body { font-size: 16px; line-height: 1.5; letter-spacing: -0.005em; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--lime); color: var(--bg); }
+
+  .wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+
+  .mini {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============ HEADER ============ */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,22,20,0.78);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--rule);
+  }
+  .head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height: 64px;
+    gap: 40px;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .brand .logo {
+    background: var(--ink); padding: 6px 10px; border-radius: 6px;
+  }
+  .brand .logo img { height: 18px; }
+  .brand .sub { color: var(--ink-mute); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  nav.primary {
+    justify-self: center;
+    display: inline-flex; gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+  nav.primary a {
+    padding: 8px 16px; font-size: 13px; color: var(--ink-soft);
+    border-radius: 999px;
+    transition: background .15s ease, color .15s ease;
+  }
+  nav.primary a:hover { color: var(--ink); }
+  nav.primary a.active { background: var(--ink); color: var(--bg); }
+
+  .head-right { display: inline-flex; align-items: center; gap: 16px; }
+  .head-right .account { font-size: 13px; color: var(--ink-soft); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 16px 9px 18px;
+    font-size: 13px; font-weight: 500;
+    border-radius: 999px;
+    background: var(--lime); color: var(--bg);
+    transition: transform .15s ease;
+  }
+  .pill::after {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--bg);
+  }
+  .pill:hover { transform: translateY(-1px); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-mute);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 18px;
+    margin-bottom: 56px;
+  }
+  .hero-meta .l { display: inline-flex; align-items: center; gap: 10px; }
+  .hero-meta .l::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime);
+    box-shadow: 0 0 0 4px rgba(197,242,103,0.18);
+  }
+
+  .hero-h1 {
+    text-align: center;
+    font-size: clamp(56px, 11vw, 192px);
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .hero-h1 .row { display: block; }
+  .hero-h1 .row.tight { letter-spacing: -0.065em; }
+  .hero-h1 .lime { color: var(--lime); font-weight: 600; font-style: italic; }
+  .hero-h1 .blush { color: var(--blush); font-weight: 600; }
+  .hero-h1 .frame {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--ink); border-radius: 999px;
+    padding: 0 0.35em 0.05em;
+    font-weight: 400;
+  }
+  .hero-h1 .leaf {
+    display: inline-block; width: 0.78em; height: 0.78em;
+    border-radius: 50%; background: var(--lime);
+    transform: translateY(0.06em);
+    margin: 0 0.05em;
+    position: relative;
+  }
+  .hero-h1 .leaf::before {
+    content: ""; position: absolute;
+    width: 50%; height: 100%; left: 0; top: 0;
+    background: var(--bg);
+    border-radius: 50% 0 0 50%;
+  }
+
+  .hero-tail {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-top: 64px;
+  }
+  .hero-tail p {
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+  .hero-tail p.right { justify-self: end; text-align: right; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    flex-direction: column;
+  }
+  .hero-cta .pill { font-size: 14px; padding: 14px 22px 14px 24px; }
+  .hero-cta .alt {
+    font-size: 13px; color: var(--ink-mute);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 4px;
+  }
+  .hero-cta .alt:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  /* ============ MARQUEE ============ */
+  .marquee {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+    padding: 22px 0;
+    background: var(--bg-soft);
+  }
+  .marquee-track {
+    display: inline-flex; gap: 56px;
+    white-space: nowrap;
+    animation: scroll 38s linear infinite;
+    padding-left: 56px;
+  }
+  .marquee-track span {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    display: inline-flex; align-items: center; gap: 56px;
+  }
+  .marquee-track span::after {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--lime);
+    display: inline-block;
+  }
+  @keyframes scroll {
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ TICKET / PRICING ============ */
+  .ticket-section { padding: 120px 0; }
+  .ticket-head { text-align: center; margin-bottom: 56px; }
+  .ticket-head .mini { color: var(--ink-mute); margin-bottom: 16px; }
+  .ticket-head h2 {
+    font-size: clamp(36px, 4.6vw, 64px);
+    line-height: 1; letter-spacing: -0.035em; font-weight: 500;
+    max-width: 18ch; margin: 0 auto;
+  }
+  .ticket {
+    max-width: 920px; margin: 0 auto;
+    background: var(--ink); color: var(--bg);
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .ticket-side {
+    padding: 40px 44px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 320px;
+  }
+  .ticket-side.right { background: var(--lime); }
+  .ticket .field {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(14,22,20,0.55);
+    font-weight: 600;
+  }
+  .ticket .value {
+    font-size: 22px; font-weight: 500; letter-spacing: -0.015em;
+    margin-top: 6px;
+    color: var(--bg);
+  }
+  .ticket .row { display: flex; gap: 48px; margin-bottom: 28px; flex-wrap: wrap; }
+  .ticket .price-main {
+    font-size: 96px; font-weight: 500; letter-spacing: -0.05em; line-height: 0.9;
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .ticket .price-main .c { font-size: 32px; font-weight: 400; }
+  .ticket .price-alt {
+    font-size: 13px; color: rgba(14,22,20,0.6);
+    margin-top: 12px; letter-spacing: 0.04em;
+  }
+  .ticket .barcode {
+    height: 56px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--bg) 0 2px, transparent 2px 4px,
+        var(--bg) 4px 5px, transparent 5px 9px,
+        var(--bg) 9px 11px, transparent 11px 16px);
+    margin-top: 28px;
+    border-radius: 2px;
+  }
+  .ticket-mid {
+    background: var(--ink);
+    width: 1px;
+    position: relative;
+  }
+  .ticket-mid::before, .ticket-mid::after {
+    content: "";
+    position: absolute;
+    left: -16px; width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--bg);
+  }
+  .ticket-mid::before { top: -16px; }
+  .ticket-mid::after { bottom: -16px; }
+  .ticket-mid .perf {
+    position: absolute;
+    top: 16px; bottom: 16px; left: 0;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom,
+      rgba(14,22,20,0.4) 0 4px, transparent 4px 10px);
+  }
+
+  /* ============ FOUR PILLARS ============ */
+  .pillars { padding: 120px 0; border-top: 1px solid var(--rule); }
+  .pillars-head {
+    display: grid; grid-template-columns: 0.7fr 1.3fr;
+    gap: 56px; align-items: end;
+    margin-bottom: 72px;
+  }
+  .pillars-head .mini { color: var(--ink-mute); }
+  .pillars-head h2 {
+    font-size: clamp(40px, 5.2vw, 80px);
+    line-height: 0.96; letter-spacing: -0.04em; font-weight: 500;
+    margin-top: 24px;
+  }
+  .pillars-head h2 .it { font-style: italic; font-weight: 500; }
+  .pillars-head p {
+    font-size: 17px; line-height: 1.5; color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .pillar-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule);
+  }
+  .pillar {
+    padding: 36px 28px 36px 0;
+    border-right: 1px solid var(--rule);
+    position: relative;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .pillar:last-child { border-right: 0; padding-right: 0; }
+  .pillar .num {
+    font-size: 13px; color: var(--ink-mute); letter-spacing: 0.14em;
+    margin-bottom: 24px;
+  }
+  .pillar .swatch {
+    width: 36px; height: 36px; border-radius: 50%;
+    margin-bottom: 24px;
+  }
+  .pillar h3 {
+    font-size: 28px; font-weight: 500; letter-spacing: -0.025em;
+    line-height: 1.05; color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .pillar p {
+    font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+    margin-bottom: auto;
+  }
+  .pillar .tag {
+    margin-top: 28px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* ============ MANIFESTO ============ */
+  .manifesto { padding: 140px 0; border-top: 1px solid var(--rule); position: relative; }
+  .manifesto-eyebrow { text-align: center; color: var(--ink-mute); margin-bottom: 48px; }
+  .manifesto h2 {
+    text-align: center;
+    font-size: clamp(40px, 5.5vw, 88px);
+    line-height: 1.04; letter-spacing: -0.04em; font-weight: 400;
+    max-width: 20ch; margin: 0 auto;
+    color: var(--ink);
+  }
+  .manifesto h2 .strike { text-decoration: line-through; text-decoration-thickness: 3px; color: var(--ink-mute); }
+  .manifesto h2 .lime { color: var(--lime); font-style: italic; font-weight: 500; }
+  .manifesto h2 .blush { color: var(--blush); font-style: italic; font-weight: 500; }
+  .manifesto .sign {
+    display: flex; justify-content: space-between;
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-mute);
+  }
+
+  /* ============ STEPS ============ */
+  .steps-section { padding: 120px 0; border-top: 1px solid var(--rule); }
+  .steps-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 64px; }
+  .steps-head .mini { color: var(--ink-mute); margin-bottom: 16px; }
+  .steps-head h2 {
+    font-size: clamp(40px, 4.6vw, 72px);
+    line-height: 0.98; letter-spacing: -0.035em; font-weight: 500;
+  }
+  .steps-head .right p {
+    font-size: 17px; color: var(--ink-soft); line-height: 1.5; max-width: 42ch;
+    justify-self: end;
+  }
+  .step-row {
+    display: grid;
+    grid-template-columns: 100px 1.1fr 1fr 200px;
+    gap: 40px;
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .step-row:last-child { border-bottom: 1px solid var(--rule); }
+  .step-row .n {
+    font-size: 64px; font-weight: 400; letter-spacing: -0.04em;
+    line-height: 1; color: var(--ink);
+  }
+  .step-row h3 {
+    font-size: 26px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .step-row p { font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  .step-row .meta {
+    text-align: right;
+    color: var(--ink-mute);
+  }
+  .step-row .meta .b {
+    display: block; color: var(--ink);
+    font-size: 20px; font-weight: 500; letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  /* ============ STAT BAND ============ */
+  .stats { padding: 100px 0; background: var(--bg-soft); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  }
+  .stat { padding: 0 32px; border-left: 1px solid var(--rule); }
+  .stat:first-child { padding-left: 0; border-left: 0; }
+  .stat .v {
+    font-size: clamp(56px, 6vw, 96px);
+    font-weight: 500; letter-spacing: -0.045em; line-height: 0.92;
+    color: var(--ink);
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .stat .v .u { font-size: 0.32em; color: var(--ink-soft); letter-spacing: 0; font-weight: 400; margin-left: 6px; }
+  .stat .l {
+    font-size: 13px; color: var(--ink-soft); margin-top: 18px;
+    max-width: 24ch; line-height: 1.4;
+  }
+  .stat:nth-child(2) .v { color: var(--lime); }
+  .stat:nth-child(4) .v { color: var(--blush); }
+
+  /* ============ FAQ TEASE ============ */
+  .closer { padding: 140px 0 120px; text-align: center; }
+  .closer h2 {
+    font-size: clamp(56px, 9vw, 144px);
+    line-height: 0.92; letter-spacing: -0.05em; font-weight: 500;
+    color: var(--ink);
+  }
+  .closer h2 .it { font-style: italic; }
+  .closer .pill { margin-top: 56px; font-size: 15px; padding: 16px 26px; }
+  .closer p {
+    margin-top: 28px; color: var(--ink-soft); font-size: 15px;
+    max-width: 38ch; margin-left: auto; margin-right: auto;
+  }
+
+  /* ============ FOOTER ============ */
+  footer.site {
+    padding: 56px 0 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .foot {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .foot-brand .logo { background: var(--ink); padding: 8px 12px; border-radius: 6px; display: inline-block; }
+  .foot-brand .logo img { height: 22px; }
+  .foot-brand p { margin-top: 24px; font-size: 13px; color: var(--ink-soft); line-height: 1.6; max-width: 32ch; }
+  .foot-col h4 {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 20px; font-weight: 500;
+  }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .foot-col a { font-size: 14px; color: var(--ink); }
+  .foot-col a:hover { color: var(--lime); }
+
+  .foot-bot {
+    margin-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-mute); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .foot-bot .lang {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border: 1px solid var(--rule); border-radius: 999px;
+  }
+  .foot-bot .lang::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lime);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    nav.primary { display: none; }
+    .pillar-grid { grid-template-columns: 1fr 1fr; }
+    .pillar:nth-child(2) { border-right: 0; padding-right: 0; }
+    .pillar:nth-child(1), .pillar:nth-child(2) { border-bottom: 1px solid var(--rule); }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+    .stat:nth-child(1), .stat:nth-child(2) { padding-bottom: 40px; }
+    .stat:nth-child(3), .stat:nth-child(4) { padding-top: 40px; border-top: 1px solid var(--rule); }
+    .step-row { grid-template-columns: 60px 1fr; }
+    .step-row p, .step-row .meta { grid-column: 2 / -1; }
+    .step-row .meta { text-align: left; }
+    .hero-tail { grid-template-columns: 1fr; }
+    .hero-tail p.right { text-align: left; justify-self: start; }
+    .pillars-head, .steps-head { grid-template-columns: 1fr; gap: 24px; }
+    .foot { grid-template-columns: 1fr 1fr; }
+    .ticket { grid-template-columns: 1fr; }
+    .ticket-mid { display: none; }
+    .ticket-side.right { border-top: 1px dashed rgba(14,22,20,0.3); }
+  }
+  @media (max-width: 600px) {
+    .foot, .pillar-grid, .stat-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--rule); }
+    .pillar:last-child { border-bottom: 0; }
+    .stat { padding: 28px 0; border-left: 0; border-top: 1px solid var(--rule); }
+    .stat:first-child { border-top: 0; padding-top: 0; }
+    .hero-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
 </head>
 <body>
 
-  <nav class="cs-nav">
-    <div class="cs-container cs-nav-inner">
-      <a href="../index.html" class="cs-back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to Portfolio
-      </a>
-      <a href="../index.html" class="cs-nav-logo">Yonah <em>Friedman</em></a>
-      <a href="../index.html#contact" class="cs-contact-btn">Contact Me</a>
+<!-- ============ HEADER ============ -->
+<header class="site" data-screen-label="Header">
+  <div class="wrap head">
+    <a href="#" class="brand">
+      <span class="logo"><img src="assets/heeyl-logo.png" alt="Heeyl" /></span>
+      <span class="sub mini">Cannabis · Care</span>
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <a href="#" class="active">Home</a>
+      <a href="#">Guidance</a>
+      <a href="#">Research</a>
+      <a href="#">Wellness</a>
+      <a href="#">About</a>
+      <a href="#">FAQ</a>
+    </nav>
+    <div class="head-right">
+      <a href="#" class="account">My account</a>
+      <a href="#" class="pill">Book consultation</a>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="cs-hero">
-    <div class="cs-container">
-      <div class="cs-hero-meta">
-        <span class="cs-tag">Healthcare</span>
-        <span class="cs-tag">Branding</span>
-        <span class="cs-tag">Web Design</span>
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" data-screen-label="01 Hero">
+    <div class="wrap">
+      <div class="hero-meta mini">
+        <span class="l">Now booking · May 2026</span>
+        <span>Vol. 003 — Field notes on cannabis care</span>
+        <span>Toronto / Austin / Online</span>
       </div>
-      <h1 class="cs-hero-title">Heeyl</h1>
-      <p class="cs-hero-sub">Reframing medical cannabis — a brand built on access, trust, and the belief that patients deserve better.</p>
-    </div>
-    <div class="cs-hero-img-wrap">
-      <img src="../Portfolio Images/heeyl screenshot.png" alt="Heeyl website" class="cs-hero-img" />
+
+      <h1 class="hero-h1">
+        <span class="row">Helping you</span>
+        <span class="row tight">explore how</span>
+        <span class="row">cannabis can <span class="lime">help.</span></span>
+      </h1>
+
+      <div class="hero-tail">
+        <p>Schedule a consultation with a physician or certified cannabis advisor — and begin a journey that's clinical, considered, and entirely your own.</p>
+
+        <div class="hero-cta">
+          <a href="#" class="pill">Get started</a>
+          <a href="#" class="alt mini">How it works ↓</a>
+        </div>
+
+        <p class="right">Heeyl is a network of licensed physicians and advisors building a calmer, kinder front door to cannabis healthcare.</p>
+      </div>
     </div>
   </section>
 
-  <!-- OVERVIEW -->
-  <section class="cs-section cs-overview">
-    <div class="cs-container cs-overview-grid">
-      <div class="cs-overview-text">
-        <span class="cs-label">The Brief</span>
-        <h2>A medical cannabis company that needed to be believed</h2>
-        <p>Heeyl was entering the medical marijuana space with a mission rooted in patient access — removing the obstacles that prevent people from getting the cannabis-based care they qualify for. The concept was strong. But in a market full of either overly clinical operators or lifestyle-forward recreational brands, building genuine trust with patients was going to require a different approach.</p>
-        <p>The company needed a full brand identity and website that could cut through the noise — something that felt warm, credible, and human, without veering into either the sterile world of pharmaceutical marketing or the relaxed aesthetics of recreational cannabis culture. It needed to speak to real patients facing real health challenges.</p>
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Physician-led</span>
+      <span>Evidence-based</span>
+      <span>Private &amp; HIPAA-aligned</span>
+      <span>$15 USD / $20 CAD</span>
+      <span>Same-day plans</span>
+      <span>420+ clinicians</span>
+      <span>Physician-led</span>
+      <span>Evidence-based</span>
+      <span>Private &amp; HIPAA-aligned</span>
+      <span>$15 USD / $20 CAD</span>
+      <span>Same-day plans</span>
+      <span>420+ clinicians</span>
+    </div>
+  </div>
+
+  <!-- ============ TICKET / PRICING ============ -->
+  <section class="ticket-section" data-screen-label="02 Pricing">
+    <div class="wrap">
+      <div class="ticket-head">
+        <div class="mini">One flat fee — no membership, no surprises</div>
+        <h2>Physician-certified consultations, on the same day.</h2>
       </div>
-      <div class="cs-overview-details">
-        <div class="cs-detail-card">
-          <div class="cs-detail-logo">
-            <img src="../Portfolio Images/heeyl.png" alt="Heeyl" />
+
+      <div class="ticket" role="group" aria-label="Consultation pricing">
+        <div class="ticket-side">
+          <div>
+            <div class="field">Service</div>
+            <div class="value">Physician consultation</div>
           </div>
-          <ul class="cs-detail-list">
-            <li><span>Client</span> Heeyl</li>
-            <li><span>Sector</span> Medical Cannabis / Healthcare</li>
-            <li><span>Deliverables</span> Brand Identity, Website Design</li>
-            <li><span>Audience</span> Patients seeking medical cannabis care</li>
-          </ul>
+          <div>
+            <div class="row">
+              <div>
+                <div class="field">Length</div>
+                <div class="value">≈ 22 min</div>
+              </div>
+              <div>
+                <div class="field">Format</div>
+                <div class="value">Video / phone</div>
+              </div>
+            </div>
+            <div>
+              <div class="field">Boarding</div>
+              <div class="value">Today &amp; tomorrow</div>
+            </div>
+          </div>
+          <div class="barcode" aria-hidden="true"></div>
+        </div>
+
+        <div class="ticket-mid"><span class="perf"></span></div>
+
+        <div class="ticket-side right">
+          <div>
+            <div class="field">Pay once</div>
+            <div class="price-main">
+              <span class="c">$</span>15
+            </div>
+            <div class="price-alt">USD · $20 CAD · No subscription</div>
+          </div>
+          <div>
+            <div class="field">Includes</div>
+            <div class="value" style="font-size:16px; line-height:1.4; font-weight:500;">
+              Intake · Diagnosis review · Written plan · 7-day messaging
+            </div>
+          </div>
+          <a href="#" style="display:inline-flex; align-items:center; gap:10px; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; font-weight:600; color:var(--bg); padding-top:18px; border-top:1px dashed rgba(14,22,20,0.3);">
+            Reserve a slot →
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CHALLENGE -->
-  <section class="cs-section cs-section--gray">
-    <div class="cs-container cs-two-col">
-      <div>
-        <span class="cs-label">The Challenge</span>
-        <h2>Navigating stigma, trust, and medical credibility at once</h2>
-        <p>Medical cannabis sits at a unique intersection: it's a legitimate healthcare option for many patients, yet it carries significant social stigma that still prevents people from exploring it — even when their doctor might recommend it.</p>
-        <p>The brand needed to be accessible enough to lower that barrier, while being professional enough that patients would trust it with something as personal as their health. Too clinical, and it would feel cold and distant. Too casual, and it would undermine the medical seriousness the product required. Getting that balance right was the central creative challenge of the project.</p>
+  <!-- ============ PILLARS ============ -->
+  <section class="pillars" data-screen-label="03 Pillars">
+    <div class="wrap">
+      <div class="pillars-head">
+        <div>
+          <div class="mini" style="color:var(--ink-mute);">Our practice — 04 pillars</div>
+        </div>
+        <div>
+          <h2>We're looking <span class="it">at the whole picture.</span></h2>
+          <p>Health, wellness, guidance, and research — full circle. Advancing understanding and effectiveness for patients, clinicians, and researchers alike.</p>
+        </div>
       </div>
-      <div>
-        <span class="cs-label">The Approach</span>
-        <h2>Warmth as a medical value</h2>
-        <p>The brand strategy started with reframing what Heeyl was actually offering: not a product, but a pathway. The headline "Cannabis healthcare when you need it" grounded the entire identity in accessibility and patient need.</p>
-        <p>Visually, the identity used a clean, modern palette — a deep navy paired with a warm teal — that felt simultaneously grounded and fresh. Typography was confident but not cold. Imagery focused on real people rather than abstract wellness imagery, reinforcing the human-first ethos of the brand.</p>
-        <p>The website was built around a frictionless consultation journey — clear information, a low-barrier entry point, and a booking flow designed to feel like a natural next step rather than a commitment. Every design decision was made to reduce hesitation and build confidence in the patient.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- IMAGES -->
-  <section class="cs-section cs-gallery-section">
-    <div class="cs-container cs-gallery-two">
-      <img src="../Portfolio Images/heeyl screenshot.png" alt="Heeyl website" class="cs-gallery-img" />
-      <img src="../Portfolio Images/heeyl.jpg" alt="Heeyl brand" class="cs-gallery-img" />
-    </div>
-  </section>
-
-  <!-- RESULTS -->
-  <section class="cs-section">
-    <div class="cs-container cs-results">
-      <span class="cs-label">The Result</span>
-      <h2>A brand that made patients feel seen — and ready to take action</h2>
-      <p>Heeyl launched with a brand identity and website that successfully threaded the needle between medical credibility and human approachability. The consultation booking flow gave patients a clear, comfortable path from awareness to action — removing the friction that so often stops people from pursuing care they genuinely need.</p>
-      <div class="cs-result-pills">
-        <div class="cs-pill">Brand Identity</div>
-        <div class="cs-pill">Naming &amp; Logo</div>
-        <div class="cs-pill">Website Design</div>
-        <div class="cs-pill">Patient Journey UX</div>
-        <div class="cs-pill">Consultation Booking Flow</div>
-        <div class="cs-pill">Brand Messaging</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cs-cta">
-    <div class="cs-container">
-      <h2>Working in a sensitive or complex space?</h2>
-      <p>Healthcare, regulated industries, and mission-driven organizations all need marketing that earns trust. Let's build something that does exactly that.</p>
-      <div class="cs-cta-actions">
-        <a href="https://wa.me/972543518212" class="cs-btn cs-btn-whatsapp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp
-        </a>
-        <a href="mailto:yonah@yonah.agency" class="cs-btn cs-btn-ghost">yonah@yonah.agency</a>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="num">01 / Clinical</div>
+          <div class="swatch" style="background:var(--lime);"></div>
+          <h3>Health</h3>
+          <p>Physician-led diagnoses and recommendations, grounded in your medical history and current symptoms.</p>
+          <div class="tag">Diagnoses · Plans</div>
+        </div>
+        <div class="pillar">
+          <div class="num">02 / Daily</div>
+          <div class="swatch" style="background:var(--blush);"></div>
+          <h3>Wellness</h3>
+          <p>Sleep, anxiety, pain, focus — the everyday wins that determine whether a plan actually fits your life.</p>
+          <div class="tag">Sleep · Pain · Focus</div>
+        </div>
+        <div class="pillar">
+          <div class="num">03 / Human</div>
+          <div class="swatch" style="background:var(--moss);"></div>
+          <h3>Guidance</h3>
+          <p>Certified advisors translate between clinical recommendations and real choices at the dispensary.</p>
+          <div class="tag">Advising · Follow-ups</div>
+        </div>
+        <div class="pillar">
+          <div class="num">04 / Evidence</div>
+          <div class="swatch" style="background:var(--ink); border:1px solid var(--rule);"></div>
+          <h3>Research</h3>
+          <p>Anonymized outcomes data flows back to clinicians and researchers — so the field gets sharper, faster.</p>
+          <div class="tag">Outcomes · Studies</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="cs-footer">
-    <div class="cs-container cs-footer-inner">
-      <span>© 2026 Yonah Friedman</span>
-      <a href="../index.html">← Back to Portfolio</a>
+  <!-- ============ MANIFESTO ============ -->
+  <section class="manifesto" data-screen-label="04 Manifesto">
+    <div class="wrap">
+      <div class="manifesto-eyebrow mini">— A short note from our medical director</div>
+      <h2>
+        Cannabis healthcare shouldn't feel <span class="strike">awkward</span> <span class="lime">accidental.</span><br/>
+        It should feel <span class="blush">considered</span> — like every other part of your care.
+      </h2>
+      <div class="sign mini">
+        <span>Dr. Aisha Okafor, MD</span>
+        <span>Medical Director, Heeyl</span>
+      </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="steps-section" data-screen-label="05 How It Works">
+    <div class="wrap">
+      <div class="steps-head">
+        <div>
+          <div class="mini" style="color:var(--ink-mute);">How it works</div>
+          <h2>Four steps. Roughly thirty minutes.</h2>
+        </div>
+        <div class="right">
+          <p>From intake to a written plan in your inbox, the entire path is designed to fit between a coffee and a meeting — and to keep you supported long after the call ends.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="n">01</div>
+        <h3>Tell us about you</h3>
+        <p>A short, confidential intake covers your symptoms, history, and goals — so your physician arrives prepared.</p>
+        <div class="meta"><span class="b">≈ 4 min</span>Async, on your phone</div>
+      </div>
+      <div class="step-row">
+        <div class="n">02</div>
+        <h3>Meet a certified physician</h3>
+        <p>Video or phone — your choice. Discuss whether cannabis is appropriate, and explore alternatives without pressure.</p>
+        <div class="meta"><span class="b">≈ 22 min</span>Live, scheduled today</div>
+      </div>
+      <div class="step-row">
+        <div class="n">03</div>
+        <h3>Get your plan</h3>
+        <p>A tailored recommendation, a dosage guide, and a follow-up cadence — all in writing, in your inbox.</p>
+        <div class="meta"><span class="b">Same day</span>PDF + secure portal</div>
+      </div>
+      <div class="step-row">
+        <div class="n">04</div>
+        <h3>Stay supported</h3>
+        <p>Message your advisor anytime. We track outcomes and adjust — because care doesn't end at the appointment.</p>
+        <div class="meta"><span class="b">Ongoing</span>Included for 7 days</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats" data-screen-label="06 Stats">
+    <div class="wrap stat-grid">
+      <div class="stat">
+        <div class="v">420<span class="u">+ clinicians</span></div>
+        <div class="l">A network of certified physicians and cannabis advisors, growing weekly.</div>
+      </div>
+      <div class="stat">
+        <div class="v">18<span class="u">min avg wait</span></div>
+        <div class="l">From intake completed to a clinician on the line — most of the time.</div>
+      </div>
+      <div class="stat">
+        <div class="v">9<span class="u">languages</span></div>
+        <div class="l">Care in the language you actually live and feel in, not just English.</div>
+      </div>
+      <div class="stat">
+        <div class="v">4.9<span class="u">/ 5 patient</span></div>
+        <div class="l">Across 28,000+ verified consultations since 2023.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSER ============ -->
+  <section class="closer" data-screen-label="07 Closer">
+    <div class="wrap">
+      <h2>Begin <span class="it">when you're ready.</span></h2>
+      <p>No subscription. No pressure. Just a fifteen-minute conversation with someone who's trained to help.</p>
+      <a href="#" class="pill">Book a consultation — $15</a>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <span class="logo"><img src="assets/heeyl-logo.png" alt="Heeyl" /></span>
+        <p>Cannabis healthcare, made everyday. Physician-led, evidence-based, and built for the person, not the prescription.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Care</h4>
+        <ul>
+          <li><a href="#">Physician consultations</a></li>
+          <li><a href="#">Wellness advising</a></li>
+          <li><a href="#">Follow-up plans</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Research</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Heeyl Health, Inc.</span>
+      <span class="lang">en_US — English</span>
+      <span>Toronto · Austin · Online</span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
