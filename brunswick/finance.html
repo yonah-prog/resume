@@ -51,6 +51,20 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14px; color: var(--ink-2); }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: "▾"; font-size: 9px; opacity: .5; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: -16px; background: #fff; border: 1px solid var(--line); min-width: 180px; padding: 8px 0; z-index: 200; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+    .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+
+    /* Case study card */
+    .case-study-card { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; border-top: 1px solid var(--ink); padding-top: 48px; }
+    .cs-img-placeholder { background: var(--box); aspect-ratio: 4/3; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    @media (max-width: 768px) { .case-study-card { grid-template-columns: 1fr; gap: 32px; } }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
     .btn.ghost { background: transparent; color: var(--ink); }
     .btn:hover { transform: translateY(-1px); }
@@ -125,7 +139,14 @@
       <span>Brunswick</span>
     </a>
     <div class="nav-links">
-      <a href="/brunswick/about.html">About</a>
+      <div class="nav-dropdown">
+        <a href="/brunswick/about.html">About</a>
+        <div class="dropdown-menu">
+          <a href="/brunswick/about.html">About</a>
+          <a href="/brunswick/julian.html">Julian's Story</a>
+          <a href="/brunswick/team.html">Meet the Team</a>
+        </div>
+      </div>
       <a href="/brunswick/finance.html" class="active">Finance</a>
       <a href="/brunswick/content.html">Content</a>
       <a href="/brunswick/community.html">Community</a>
@@ -216,41 +237,19 @@
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- Case Study -->
 <section>
   <div class="wrap">
-    <div class="section-label">Before you ask</div>
-    <h2 style="margin-bottom:48px;">Finance questions.</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">01</span>
-          <span class="qtext">Do you replace my financial advisor?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>No. We handle the operating layer — bookkeeping, entities, and taxes. Your advisor manages investments and wealth planning. We feed them clean, real-time numbers.</p>
-        </div>
+    <div class="section-label">Case study</div>
+    <div class="case-study-card">
+      <div class="cs-image">
+        <div class="cs-img-placeholder">Featured Image</div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">02</span>
-          <span class="qtext">What software do you use?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>We build on QuickBooks, and layer proprietary reporting on top. You get access to a live dashboard without needing to log into anything complicated.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">03</span>
-          <span class="qtext">What if I'm already mid-season with a mess?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>That's most of our onboarding. We've cleaned up books going back 5+ years. We start where you are.</p>
-        </div>
+      <div class="cs-body">
+        <div class="cs-tag mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Finance · Tax Strategy</div>
+        <h3 style="font-size:28px;margin-bottom:16px;">How we restructured a multi-entity tax strategy mid-season without disrupting a single dollar.</h3>
+        <p style="color:var(--ink-2);margin-bottom:28px;">When a client signed two new endorsement deals in Q3, their existing entity structure wasn't built for it. We rebuilt it in six weeks — new LLC, updated K-1s, clean payroll — while the season was in full swing.</p>
+        <a href="#" class="btn ghost">Read more <span class="arr">→</span></a>
       </div>
     </div>
   </div>

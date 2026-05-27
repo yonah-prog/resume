@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brunswick — Julian's Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111;
+      --ink-2: #3a3a3a;
+      --muted: #6b6b6b;
+      --line: #cfcfcf;
+      --line-2: #e6e6e6;
+      --bg: #fafafa;
+      --paper: #fff;
+      --box: #ececec;
+      --box-2: #dcdcdc;
+      --accent: #111;
+      --maxw: 1240px;
+      --pad: 48px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--ink); }
+    body { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .mono { font-family: "IBM Plex Mono", monospace; }
+    .serif { font-family: "IBM Plex Serif", Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+    h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
+    h1 { font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; }
+    h2 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; }
+    h3 { font-size: 22px; line-height: 1.25; }
+    h4 { font-size: 16px; line-height: 1.3; }
+    p { margin: 0; }
+    .lede { font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 62ch; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+    section { padding: 96px 0; border-top: 1px solid var(--line); background: var(--paper); }
+    section:first-of-type { border-top: 0; }
+    .section-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
+    .section-label::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--ink); }
+
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 90; background: rgba(255,255,255,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 18px var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; font-size: 18px; }
+    .logo-mark { width: 26px; height: 26px; border: 1.5px solid var(--ink); display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--ink-2); }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
+    .btn.ghost { background: transparent; color: var(--ink); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn .arr { display: inline-block; transition: transform .2s ease; }
+    .btn:hover .arr { transform: translateX(4px); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: "▾"; font-size: 9px; opacity: .5; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: -16px; background: #fff; border: 1px solid var(--line); min-width: 180px; padding: 8px 0; z-index: 200; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+    .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+
+    /* Page hero */
+    .page-hero { padding: 100px 0 80px; border-top: 0; }
+    .page-hero .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+    .page-hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--muted); }
+
+    /* Article layout */
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 0 var(--pad); }
+    .article-body { font-family: "IBM Plex Serif", Georgia, serif; font-size: 18px; line-height: 1.7; color: var(--ink-2); }
+    .article-body p { margin-bottom: 24px; }
+    .article-body h2 { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 28px; margin-bottom: 20px; margin-top: 48px; color: var(--ink); }
+    .article-body h3 { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 20px; margin-bottom: 16px; margin-top: 36px; color: var(--ink); }
+
+    /* Byline */
+    .byline { display: flex; align-items: center; gap: 20px; padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 64px; }
+    .byline-img { width: 56px; height: 56px; background: var(--box); display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+    .byline-name { font-weight: 500; font-size: 15px; margin-bottom: 2px; }
+    .byline-meta { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    /* Pullquote */
+    .pullquote { font-family: "IBM Plex Serif", Georgia, serif; font-size: 24px; line-height: 1.35; font-style: italic; border-left: 2px solid var(--ink); padding: 8px 0 8px 24px; margin: 40px 0; color: var(--ink); }
+
+    /* Top pull quote */
+    .top-quote { font-family: "IBM Plex Serif", Georgia, serif; font-size: 22px; line-height: 1.4; font-style: italic; color: var(--ink); padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+
+    /* More from Brunswick */
+    .more-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+    .more-card { padding: 32px 28px 32px 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+    .more-card:not(:first-child) { padding-left: 28px; }
+    .more-card:last-child { border-right: 0; padding-right: 0; }
+    .more-card .mc-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .more-card h3 { font-size: 20px; margin-bottom: 12px; }
+    .more-card p { color: var(--ink-2); font-size: 14px; margin-bottom: auto; }
+    .more-card .mc-link { margin-top: 24px; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+
+    /* Footer CTA */
+    .footer-cta { background: #0e0e0e; color: #fff; padding: 120px 0 80px; text-align: left; border-top: 0; }
+    .footer-cta .section-label { color: #7f7f7f; }
+    .footer-cta .section-label::before { background: #fff; }
+    .footer-cta h2 { font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; max-width: 16ch; margin-bottom: 48px; }
+    .footer-cta .btn { background: #fff; color: #111; border-color: #fff; }
+    .footer-cta .btn.ghost { background: transparent; color: #fff; border-color: #fff; }
+    .footer-bottom { margin-top: 80px; padding-top: 32px; border-top: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #7f7f7f; }
+    .footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-top: 64px; }
+    .footer-cols h4 { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #7f7f7f; font-weight: 400; margin-bottom: 16px; }
+    .footer-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .footer-cols ul a { font-size: 14px; color: #dedede; }
+    .footer-cols ul a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 1000px) { h1{font-size:48px;} h2{font-size:34px;} .footer-cols{grid-template-columns:1fr 1fr;} .more-cards{grid-template-columns:1fr;} .more-card{border-right:0;border-bottom:1px solid var(--line);padding:24px 0;} .more-card:not(:first-child){padding-left:0;} }
+    @media (max-width: 640px) { :root{--pad:24px;} h1{font-size:36px;} h2{font-size:28px;} .footer-cta h2{font-size:38px;} .footer-cols{grid-template-columns:1fr;} .article-body{font-size:17px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/brunswick/">
+      <span class="logo-mark">B</span>
+      <span>Brunswick</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/brunswick/about.html" class="active">About</a>
+        <div class="dropdown-menu">
+          <a href="/brunswick/about.html">About</a>
+          <a href="/brunswick/julian.html">Julian's Story</a>
+          <a href="/brunswick/team.html">Meet the Team</a>
+        </div>
+      </div>
+      <a href="/brunswick/finance.html">Finance</a>
+      <a href="/brunswick/content.html">Content</a>
+      <a href="/brunswick/community.html">Community</a>
+      <a href="/brunswick/concierge.html">Concierge</a>
+      <a href="/brunswick/partnerships.html">Partnerships</a>
+    </div>
+    <a href="#contact" class="btn">Get in touch <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">Julian's Story</div>
+    <h1>It started around the game.</h1>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:24px;">Founder &amp; Managing Partner · Brunswick Sports Management</p>
+  </div>
+</section>
+
+<!-- Article -->
+<section style="padding-top:64px;">
+  <div class="article-wrap">
+
+    <!-- Byline -->
+    <div class="byline">
+      <div class="byline-img">Photo</div>
+      <div>
+        <div class="byline-name">Julian Aiken</div>
+        <div class="byline-meta">Founder &amp; Managing Partner · Published 2024</div>
+      </div>
+    </div>
+
+    <!-- Top pull quote -->
+    <div class="top-quote">
+      "Access without intention is just a story to tell at a party. Access with intention is an education you can't buy."
+    </div>
+
+    <!-- Article body -->
+    <div class="article-body">
+
+      <p>"How did you get into sports?"</p>
+
+      <p>It's the question I get asked the most.</p>
+
+      <p>The truth is, sports has been in my orbit my whole life, I just made a conscious choice to learn from it instead of just enjoy it.</p>
+
+      <p>As a kid, my uncle played 7 years in the NBA. Most kids in that situation would've been starstruck. I was curious. I watched. I listened. I asked questions. Not about the highlights — about how the business worked, how players carried themselves, how the people around them operated.</p>
+
+      <p>Years later, my brother's best friend Kyrie Irving was traded to the Boston Celtics, while he was playing at Harvard, and suddenly I had a front-row seat to how a global icon navigates the game, the business, and the spotlight.</p>
+
+      <p>Most people in that environment sit back. They take pictures. They tell their friends.</p>
+
+      <p>I did the opposite.</p>
+
+      <p>I observed. I shook hands. I introduced myself. I learned as much as I could from every conversation, every room, every interaction — the same way I'd done as a kid around my uncle.</p>
+
+      <p>Because access without intention is just a story to tell at a party. Access with intention is an education you can't buy.</p>
+
+      <p>But knowing the game and knowing the business are two different things. So I went to work, literally. Nearly two years, completely for free, just to get inside the industry. No paycheck. No promises. Just a bet on myself that if I learned the business cold, the right door would eventually open. Meanwhile, holding a full-time role in technology — a lot of late nights.</p>
+
+      <p>In 2018, it did.</p>
+
+      <p>Allonzo Trier of the New York Knicks gave me my shot. One opportunity. One yes. That turned into 6 clients by the end of that year and has since grown into managing 30+ clients at Brunswick Sports Management, with many of those relationships now over a decade deep.</p>
+
+      <h2>The landscape</h2>
+
+      <p>Here's what I tell anyone trying to break into this space:</p>
+
+      <p>Sports isn't one industry. It's a dozen industries wearing the same jersey.</p>
+
+      <p>You can work for a team — there are dozens of corporate roles inside one franchise. You can work for an agency, same thing. You can specialize as a financial advisor. A CPA handling athlete tax strategy. A marketing agent landing endorsement deals. A PA-certified contract agent negotiating contracts. Or you can build in new media as a podcaster, content creator, or storyteller shaping the culture itself.</p>
+
+      <p>Each one is a completely different game. You can't play them all. You have to pick your position.</p>
+
+      <p>And the landscape today looks nothing like it did in the '90s, when my uncle was playing. The athlete is the media company now. The platform is the leverage. The brand is the business.</p>
+
+      <p>So if you're trying to find your way in?</p>
+
+      <p>Don't chase the title. Chase the value you can uniquely create. Be the person in the room who observes more than they talk. Learn the business before you ask the business to pay you. And bet on yourself long enough for someone else to bet on you too.</p>
+
+      <blockquote class="pullquote">"Don't chase the title. Chase the value you can uniquely create."</blockquote>
+
+      <h2>This is my life's work</h2>
+
+      <p>Being a business manager isn't just a job — it's my life.</p>
+
+      <p>Leaving the tech world for the sports industry was never just a career pivot for me. It was a calling. It was a return to exactly who I am.</p>
+
+      <p>I come from a lineage of full scholarship and professional athletes. My uncle Bobby McCann played five years in the NBA. My dad was a Big East Champion running track at UConn. My brothers, Bryce Aiken &amp; Kyle Alexander earned full rides to play basketball at Harvard, Seton Hall, and HBCU Lincoln. I walked that exact same path as a full scholarship athlete and a three-year captain at Assumption University. We lived and breathed this culture our entire lives.</p>
+
+      <p>But I also saw the gaps. I stepped into this business with a deep personal mission: to help athletes build out actual enterprises that eclipse their playing careers. To help them become so much more than just a name on a jersey. This is my life's work.</p>
+
+      <p>We understand that doing things differently comes with bumps and bruises, but we are built for it. After a career in tech, I have seen how industries must change, adapt, and modernize over time. With social media, content creation, and equity partnerships becoming the true drivers of value in today's society, we aren't just participating in the business management space — we are innovating it.</p>
+
+      <p>Tech entrepreneur Julian Aiken, a former DII point guard, is also no stranger to professional sports. His uncle, Bob McCann, played in the NBA for five years, and many of his high school friends grew up to be professional athletes. Aiken is the founder and CEO of Brunswick Sports Management, a firm that helps athletes transition to business. Recently, alongside the NBA trifecta of Michael Carter-Williams (retired), Mo Harkless (retired), and Andre Drummond (active), Aiken founded his latest endeavor: Special Teams Real Estate, a property venture that converts vacant commercial buildings into residential ones.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- More from Brunswick -->
+<section>
+  <div class="wrap">
+    <div class="section-label">More from Brunswick</div>
+    <div class="more-cards">
+      <div class="more-card">
+        <div class="mc-label">01 · Finance</div>
+        <h3>Complete financial clarity, year-round.</h3>
+        <p>Bookkeeping, business entities, and in-house tax — all managed together, all year long.</p>
+        <a href="/brunswick/finance.html" class="mc-link">Finance →</a>
+      </div>
+      <div class="more-card">
+        <div class="mc-label">02 · Content</div>
+        <h3>Your platform is leverage. We build the engine.</h3>
+        <p>Brand strategy, production, and platform growth. Your story, told the right way.</p>
+        <a href="/brunswick/content.html" class="mc-link">Content →</a>
+      </div>
+      <div class="more-card">
+        <div class="mc-label">03 · Community</div>
+        <h3>Brand equity built beyond the game.</h3>
+        <p>Camps, charity, and community appearances that create real, lasting relationships.</p>
+        <a href="/brunswick/community.html" class="mc-link">Community →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer CTA -->
+<section class="footer-cta" id="contact">
+  <div class="wrap">
+    <div class="section-label">By introduction</div>
+    <h2>Let's build something that lasts.</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:0;">
+      <a href="mailto:hello@brunswick.co" class="btn">Email the team <span class="arr">→</span></a>
+      <a href="/brunswick/#contact" class="btn ghost">Request an introduction <span class="arr">→</span></a>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="logo-mark" style="border-color:#fff;color:#fff;">B</span>
+          <span>Brunswick</span>
+        </div>
+        <p style="color:#9a9a9a;max-width:36ch;margin-top:16px;font-size:14px;">A boutique management firm built for the modern athlete. By referral.</p>
+      </div>
+      <div>
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="/brunswick/finance.html">Finance</a></li>
+          <li><a href="/brunswick/content.html">Content</a></li>
+          <li><a href="/brunswick/community.html">Community</a></li>
+          <li><a href="/brunswick/concierge.html">Concierge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/brunswick/about.html">About</a></li>
+          <li><a href="/brunswick/#roster">Roster</a></li>
+          <li><a href="/brunswick/partnerships.html">Partnerships</a></li>
+          <li><a href="/brunswick/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@brunswick.co">hello@brunswick.co</a></li>
+          <li><a href="#">Press inquiries</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brunswick Management</span>
+      <span>NFL · NBA · MLB · NIL</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      const y = t.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>

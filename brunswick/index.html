@@ -51,6 +51,15 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14px; color: var(--ink-2); }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: "▾"; font-size: 9px; opacity: .5; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: -16px; background: #fff; border: 1px solid var(--line); min-width: 180px; padding: 8px 0; z-index: 200; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+    .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
     .btn.ghost { background: transparent; color: var(--ink); }
     .btn:hover { transform: translateY(-1px); }
@@ -97,6 +106,47 @@
     .roster-item:nth-child(4n) { border-right: 0; padding-right: 0; }
     .roster-item .r-name { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
     .roster-item .r-meta { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    /* Roster cards */
+    .roster-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+    .r-card { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .r-card:nth-child(4n) { border-right: 0; }
+    .r-card:nth-last-child(-n+4) { border-bottom: 0; }
+    .r-card-img { background: var(--box); aspect-ratio: 3/4; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .r-card-body { padding: 16px 20px 20px; }
+    .r-card-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .r-card-pos { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+    .r-card-team { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    @media (max-width: 1000px) { .roster-cards { grid-template-columns: repeat(2, 1fr); } .r-card:nth-child(4n) { border-right: 1px solid var(--line); } .r-card:nth-child(2n) { border-right: 0; } }
+    @media (max-width: 640px) { .roster-cards { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Marquee */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; background: var(--paper); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 60s linear infinite; }
+    .marquee-track span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Ecosystem grid */
+    .eco-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); }
+    .eco-col { padding: 40px 32px; border-right: 1px solid var(--line); }
+    .eco-col:last-child { border-right: 0; }
+    .eco-col--featured { background: var(--ink); color: #fff; }
+    .eco-col--featured .eco-label { color: #9a9a9a; }
+    .eco-col--featured .eco-desc { color: #ccc; }
+    .eco-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .eco-role { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .eco-desc { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+    .eco-col--featured .eco-desc { color: #aaa; }
+    .eco-you { margin-top: 24px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; color: #9a9a9a; }
+    @media (max-width: 768px) { .eco-grid { grid-template-columns: 1fr 1fr; } .eco-col { border-bottom: 1px solid var(--line); } }
+    @media (max-width: 480px) { .eco-grid { grid-template-columns: 1fr; } }
+
+    /* Founder section */
+    .founder-img-placeholder { background: var(--box); aspect-ratio: 3/4; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .press-row { display: flex; flex-wrap: wrap; gap: 16px; }
+    .press-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 14px; border: 1px solid var(--line); }
+    .press-abbr { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 600; }
+    .press-name { font-size: 10px; color: var(--muted); text-align: center; }
 
     /* Pullquote */
     .pullquote { font-family: "IBM Plex Serif", Georgia, serif; font-size: 24px; line-height: 1.35; font-style: italic; border-left: 2px solid var(--ink); padding: 8px 0 8px 24px; margin: 0 0 32px; color: var(--ink); max-width: 48ch; }
@@ -161,7 +211,14 @@
       <span>Brunswick</span>
     </a>
     <div class="nav-links">
-      <a href="/brunswick/about.html">About</a>
+      <div class="nav-dropdown">
+        <a href="/brunswick/about.html">About</a>
+        <div class="dropdown-menu">
+          <a href="/brunswick/about.html">About</a>
+          <a href="/brunswick/julian.html">Julian's Story</a>
+          <a href="/brunswick/team.html">Meet the Team</a>
+        </div>
+      </div>
       <a href="/brunswick/finance.html">Finance</a>
       <a href="/brunswick/content.html">Content</a>
       <a href="/brunswick/community.html">Community</a>
@@ -253,66 +310,132 @@
   </div>
 </section>
 
-<!-- About Julian -->
-<section>
+<!-- Ecosystem -->
+<section id="ecosystem">
   <div class="wrap">
-    <div class="section-label">The founder</div>
-    <div class="two-col">
-      <div>
-        <h2 style="margin-bottom:32px;">Julian Aiken</h2>
-        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;">Founder & Managing Partner</p>
-        <p style="color:var(--ink-2);margin-bottom:20px;">Julian grew up around the NBA — his uncle played seven years in the league. He spent nearly two years working in the industry for free, learning the business cold before founding Brunswick in 2018.</p>
-        <p style="color:var(--ink-2);margin-bottom:36px;">Today he leads a firm managing 35+ professional athletes across the NFL, NBA, and MLB — with a full team running operations behind every relationship.</p>
-        <a href="/brunswick/about.html" class="btn ghost">About Brunswick <span class="arr">→</span></a>
+    <div class="section-label">Where we fit</div>
+    <h2 style="margin-bottom:16px;">Agent. Advisor. Brand.</h2>
+    <p class="lede" style="margin-bottom:64px;">We run everything in between.<br>You already have people negotiating contracts and managing investments. Brunswick is the operating layer that connects them — and handles everything they don't.</p>
+    <div class="eco-grid">
+      <div class="eco-col eco-col--muted">
+        <div class="eco-label mono">Agent</div>
+        <div class="eco-role">Contracts</div>
+        <div class="eco-desc">Deals &amp; team relations.</div>
       </div>
-      <div>
-        <blockquote class="pullquote">"Access without intention is just a story to tell at a party. Access with intention is an education you can't buy."</blockquote>
-        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">— Julian Aiken, Founder</p>
+      <div class="eco-col eco-col--muted">
+        <div class="eco-label mono">Advisor</div>
+        <div class="eco-role">Wealth</div>
+        <div class="eco-desc">Investments &amp; retirement.</div>
+      </div>
+      <div class="eco-col eco-col--featured">
+        <div class="eco-label mono">Brunswick</div>
+        <div class="eco-role">Operations</div>
+        <div class="eco-desc">Finance · Content · Community · Day-to-day.</div>
+        <div class="eco-you">← You are here</div>
+      </div>
+      <div class="eco-col eco-col--muted">
+        <div class="eco-label mono">Brand</div>
+        <div class="eco-role">Endorsements</div>
+        <div class="eco-desc">Partnerships &amp; sponsors.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Roster -->
+<!-- Boutique -->
+<section id="approach">
+  <div class="wrap">
+    <div class="section-label">The approach</div>
+    <h2 style="margin-bottom:16px;">A boutique firm, by design.</h2>
+    <p class="lede" style="margin-bottom:64px;">We keep the roster small on purpose. It's how every client gets the attention, discretion, and senior focus they deserve.</p>
+    <div class="card-grid">
+      <div class="card">
+        <span class="idx">01</span>
+        <h3>One roof</h3>
+        <p>Finance, tax, content, and concierge — all in-house. No handoffs, no finger-pointing.</p>
+        <a href="#practice" class="more">How we work →</a>
+      </div>
+      <div class="card">
+        <span class="idx">02</span>
+        <h3>Elite experience</h3>
+        <p>Built alongside All-NBA and All-Star caliber talent, now applied to every athlete on the roster.</p>
+        <a href="#roster" class="more">See the roster →</a>
+      </div>
+      <div class="card">
+        <span class="idx">03</span>
+        <h3>Technology-native</h3>
+        <p>Founded by an operator with 10+ years in software. Technology runs quietly in the background.</p>
+        <a href="/brunswick/julian.html" class="more">Our story →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Julian -->
+<section id="founder">
+  <div class="wrap">
+    <div class="section-label">The founder</div>
+    <div class="two-col even" style="gap:80px;align-items:start;">
+      <div>
+        <div class="founder-img-placeholder">Julian Aiken</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Chapter 05 — In conversation</div>
+        <h2 style="font-size:36px;margin-bottom:8px;">Julian Aiken</h2>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:32px;">Founder & Managing Partner</p>
+        <p style="font-style:italic;font-family:'IBM Plex Serif',Georgia,serif;font-size:20px;line-height:1.4;margin-bottom:28px;color:var(--ink);">It started around the game.<br>Then I learned the business of it.</p>
+        <blockquote class="pullquote" style="margin-bottom:32px;">"Access without intention is just a story to tell at a party. Access with intention is an education you can't buy."</blockquote>
+        <p style="color:var(--ink-2);margin-bottom:20px;">Julian grew up around the NBA — his uncle played seven years in the league. He spent nearly two years working in the industry for free, learning the business cold. In 2018, one yes turned into six clients.</p>
+        <p style="color:var(--ink-2);margin-bottom:36px;">Today, Brunswick manages 35+. Julian is the relationship — but his commitment to every athlete is backed by a full team running finance, content, community, and day-to-day. Nothing depends on one person alone.</p>
+        <div style="margin-bottom:36px;">
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Featured in</p>
+          <div class="press-row">
+            <span class="press-item"><span class="press-abbr">NYT</span><span class="press-name">New York Times</span></span>
+            <span class="press-item"><span class="press-abbr">B</span><span class="press-name">Bloomberg</span></span>
+            <span class="press-item"><span class="press-abbr">SI</span><span class="press-name">Sports Illustrated</span></span>
+            <span class="press-item"><span class="press-abbr">E</span><span class="press-name">Entrepreneur</span></span>
+            <span class="press-item"><span class="press-abbr">H</span><span class="press-name">Hulu</span></span>
+            <span class="press-item"><span class="press-abbr">TA</span><span class="press-name">The Athletic</span></span>
+          </div>
+        </div>
+        <a href="/brunswick/julian.html" class="btn ghost">Meet the firm → Our team <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="roster">
   <div class="wrap">
     <div class="section-label">Select roster</div>
-    <h2 style="margin-bottom:48px;">35+ athletes.<br>Every major league.</h2>
-    <div class="roster-strip">
-      <div class="roster-item">
-        <div class="r-name">Marcus Webb</div>
-        <div class="r-meta">WR · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">DeShawn Carver</div>
-        <div class="r-meta">SG · NBA</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Jordan Okafor</div>
-        <div class="r-meta">CF · MLB</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Tyler Reese</div>
-        <div class="r-meta">QB · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Khalil Moses</div>
-        <div class="r-meta">PF · NBA</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Antonio Reyes</div>
-        <div class="r-meta">SP · MLB</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Devon Ashby</div>
-        <div class="r-meta">CB · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">James Holloway</div>
-        <div class="r-meta">C · NBA</div>
-      </div>
+    <h2 style="margin-bottom:16px;">The Roster</h2>
+    <p class="lede" style="margin-bottom:56px;">Athletes across the NFL, NBA, and MLB trust Brunswick to run the business of their careers. Many have been with us for over a decade.</p>
+    <div class="roster-cards">
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Marcus Webb</div><div class="r-card-pos">Wide Receiver</div><div class="r-card-team mono">NFL</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">DeShawn Carver</div><div class="r-card-pos">Shooting Guard</div><div class="r-card-team mono">NBA</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Jordan Okafor</div><div class="r-card-pos">Center Field</div><div class="r-card-team mono">MLB</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Tyler Reese</div><div class="r-card-pos">Quarterback</div><div class="r-card-team mono">NFL</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Khalil Moses</div><div class="r-card-pos">Power Forward</div><div class="r-card-team mono">NBA</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Antonio Reyes</div><div class="r-card-pos">Starting Pitcher</div><div class="r-card-team mono">MLB</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Devon Ashby</div><div class="r-card-pos">Cornerback</div><div class="r-card-team mono">NFL</div></div></div>
+      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">James Holloway</div><div class="r-card-pos">Center</div><div class="r-card-team mono">NBA</div></div></div>
     </div>
-    <p style="margin-top:32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Roster shown by introduction only. Full list available upon request.</p>
+    <p style="margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Roster shown by introduction only. Full list available upon request.</p>
+  </div>
+</section>
+
+<!-- Brands -->
+<section id="brands">
+  <div class="wrap">
+    <div class="section-label">Brand partners</div>
+    <h2 style="margin-bottom:16px;">Brands We Work With</h2>
+    <p class="lede" style="margin-bottom:64px;">The brand business of an athlete's career runs through Brunswick. A selection of partners we've placed our roster with — across performance, lifestyle, hospitality, finance, and culture.</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span><span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span><span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
+      <!-- duplicate for seamless loop -->
+      <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span><span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span><span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
+    </div>
   </div>
 </section>
 

@@ -51,6 +51,15 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14px; color: var(--ink-2); }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: "▾"; font-size: 9px; opacity: .5; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: -16px; background: #fff; border: 1px solid var(--line); min-width: 180px; padding: 8px 0; z-index: 200; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+    .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
     .btn.ghost { background: transparent; color: var(--ink); }
     .btn:hover { transform: translateY(-1px); }
@@ -132,7 +141,14 @@
       <span>Brunswick</span>
     </a>
     <div class="nav-links">
-      <a href="/brunswick/about.html" class="active">About</a>
+      <div class="nav-dropdown">
+        <a href="/brunswick/about.html" class="active">About</a>
+        <div class="dropdown-menu">
+          <a href="/brunswick/about.html">About</a>
+          <a href="/brunswick/julian.html">Julian's Story</a>
+          <a href="/brunswick/team.html">Meet the Team</a>
+        </div>
+      </div>
       <a href="/brunswick/finance.html">Finance</a>
       <a href="/brunswick/content.html">Content</a>
       <a href="/brunswick/community.html">Community</a>
@@ -248,56 +264,6 @@
       <div class="stat" style="padding-left:48px;">
         <div class="num">10+</div>
         <div class="lbl">Yrs deepest relationships</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section>
-  <div class="wrap">
-    <div class="section-label">Before you ask</div>
-    <h2 style="margin-bottom:48px;">Questions about Brunswick.</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">01</span>
-          <span class="qtext">Who does Brunswick work with?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>We work with professional athletes across the NFL, NBA, and MLB — and increasingly with NIL athletes entering the pros. Every relationship starts with an introduction.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">02</span>
-          <span class="qtext">How big is the team?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>The firm runs lean by design. You'll always work directly with Julian and a small senior team — never handed off to a junior associate.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">03</span>
-          <span class="qtext">Are you based in one city?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>We operate where our athletes play. Primary offices in New York and Los Angeles, with team members embedded in key markets across the country.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">04</span>
-          <span class="qtext">How do I get in touch?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>Most relationships start through a referral from a player, agent, or advisor already in the Brunswick network. If you believe you have a connection, reach out directly.</p>
-        </div>
       </div>
     </div>
   </div>

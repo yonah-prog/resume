@@ -51,6 +51,20 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14px; color: var(--ink-2); }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after { content: "▾"; font-size: 9px; opacity: .5; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: -16px; background: #fff; border: 1px solid var(--line); min-width: 180px; padding: 8px 0; z-index: 200; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+    .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+
+    /* Case study card */
+    .case-study-card { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; border-top: 1px solid var(--ink); padding-top: 48px; }
+    .cs-img-placeholder { background: var(--box); aspect-ratio: 4/3; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    @media (max-width: 768px) { .case-study-card { grid-template-columns: 1fr; gap: 32px; } }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
     .btn.ghost { background: transparent; color: var(--ink); }
     .btn:hover { transform: translateY(-1px); }
@@ -109,7 +123,14 @@
       <span>Brunswick</span>
     </a>
     <div class="nav-links">
-      <a href="/brunswick/about.html">About</a>
+      <div class="nav-dropdown">
+        <a href="/brunswick/about.html">About</a>
+        <div class="dropdown-menu">
+          <a href="/brunswick/about.html">About</a>
+          <a href="/brunswick/julian.html">Julian's Story</a>
+          <a href="/brunswick/team.html">Meet the Team</a>
+        </div>
+      </div>
       <a href="/brunswick/finance.html">Finance</a>
       <a href="/brunswick/content.html">Content</a>
       <a href="/brunswick/community.html" class="active">Community</a>
@@ -191,6 +212,24 @@
         <span class="idx">03</span>
         <h3>Execution & Logistics</h3>
         <p>Everything managed end to end. You show up. We handle everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Case Study -->
+<section>
+  <div class="wrap">
+    <div class="section-label">Case study</div>
+    <div class="case-study-card">
+      <div class="cs-image">
+        <div class="cs-img-placeholder">Featured Image</div>
+      </div>
+      <div class="cs-body">
+        <div class="cs-tag mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Community · Charitable Giving</div>
+        <h3 style="font-size:28px;margin-bottom:16px;">The summer camp that became a foundation: how we turned a one-day appearance into a 501(c)(3).</h3>
+        <p style="color:var(--ink-2);margin-bottom:28px;">What started as a single youth basketball clinic grew into a registered nonprofit with an annual event, corporate sponsors, and a scholarship fund — three years later.</p>
+        <a href="#" class="btn ghost">Read more <span class="arr">→</span></a>
       </div>
     </div>
   </div>

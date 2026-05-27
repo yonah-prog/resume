@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brunswick — Concierge</title>
+  <title>Brunswick — Meet the Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -51,6 +51,11 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14px; color: var(--ink-2); }
     .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
+    .btn.ghost { background: transparent; color: var(--ink); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn .arr { display: inline-block; transition: transform .2s ease; }
+    .btn:hover .arr { transform: translateX(4px); }
 
     /* Dropdown nav */
     .nav-dropdown { position: relative; }
@@ -61,53 +66,20 @@
     .dropdown-menu a:hover { color: var(--ink); background: var(--bg); }
     .nav-dropdown:hover .dropdown-menu { display: block; }
 
-    /* Case study card */
-    .case-study-card { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; border-top: 1px solid var(--ink); padding-top: 48px; }
-    .cs-img-placeholder { background: var(--box); aspect-ratio: 4/3; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-    @media (max-width: 768px) { .case-study-card { grid-template-columns: 1fr; gap: 32px; } }
-    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
-    .btn.ghost { background: transparent; color: var(--ink); }
-    .btn:hover { transform: translateY(-1px); }
-    .btn .arr { display: inline-block; transition: transform .2s ease; }
-    .btn:hover .arr { transform: translateX(4px); }
-
     /* Page hero */
     .page-hero { padding: 100px 0 80px; border-top: 0; }
     .page-hero .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
     .page-hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--muted); }
 
-    /* Grid cards */
-    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); }
-    .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
-    .card { padding: 32px 28px 32px 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 280px; }
-    .card:not(:first-child) { padding-left: 28px; }
-    .card:last-child { border-right: 0; padding-right: 0; }
-    .card .idx { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); margin-bottom: 48px; }
-    .card h3 { font-size: 24px; margin-bottom: 14px; }
-    .card p { color: var(--ink-2); margin-bottom: auto; }
-    .card .more { margin-top: 32px; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
-
-    /* Two-col layout */
-    .two-col { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
-    .two-col.even { grid-template-columns: 1fr 1fr; }
-
-    /* Handle list */
-    .handle-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
-    .handle-list li { display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--ink-2); padding: 20px 0; border-bottom: 1px solid var(--line-2); }
-    .handle-list li:first-child { border-top: 1px solid var(--line-2); }
-    .handle-list li .h-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); width: 140px; flex-shrink: 0; padding-top: 2px; }
-
-    /* FAQ */
-    .faq-list { border-top: 1px solid var(--line); }
-    .faq-item { border-bottom: 1px solid var(--line); }
-    .faq-q { display: grid; grid-template-columns: 48px 1fr 32px; gap: 24px; align-items: center; padding: 28px 0; cursor: pointer; width: 100%; text-align: left; }
-    .faq-q .qnum { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); letter-spacing: .06em; }
-    .faq-q .qtext { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
-    .faq-q .qtog { width: 24px; height: 24px; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 18px; transition: transform .25s ease; justify-self: end; }
-    .faq-item.is-open .qtog { transform: rotate(45deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .25s ease; padding-left: 72px; padding-right: 48px; color: var(--ink-2); }
-    .faq-item.is-open .faq-a { max-height: 300px; padding-bottom: 32px; }
+    /* Team grid */
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+    .team-card { border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+    .team-card:last-child { border-right: 0; }
+    .team-card-img { background: var(--box); aspect-ratio: 3/4; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .team-card-body { padding: 24px 28px 32px; }
+    .team-card-name { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+    .team-card-title { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .team-card-bio { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
 
     /* Footer CTA */
     .footer-cta { background: #0e0e0e; color: #fff; padding: 120px 0 80px; text-align: left; border-top: 0; }
@@ -124,8 +96,8 @@
     .footer-cols ul a:hover { color: #fff; }
 
     /* Responsive */
-    @media (max-width: 1000px) { h1{font-size:48px;} h2{font-size:34px;} .card-grid,.card-grid.cols-4{grid-template-columns:1fr 1fr;} .two-col,.two-col.even{grid-template-columns:1fr;gap:32px;} .footer-cols{grid-template-columns:1fr 1fr;} }
-    @media (max-width: 640px) { :root{--pad:24px;} h1{font-size:36px;} h2{font-size:28px;} .card-grid,.card-grid.cols-2,.card-grid.cols-4{grid-template-columns:1fr;} .card{border-right:0;border-bottom:1px solid var(--line);padding:24px 0;} .card:not(:first-child){padding-left:0;} .footer-cta h2{font-size:38px;} .footer-cols{grid-template-columns:1fr;} .handle-list li{flex-direction:column;gap:6px;} .handle-list li .h-label{width:auto;} }
+    @media (max-width: 1000px) { h1{font-size:48px;} h2{font-size:34px;} .team-grid{grid-template-columns:1fr 1fr;} .team-card:nth-child(2n){border-right:0;} .team-card:nth-child(3){border-right:1px solid var(--line);border-top:1px solid var(--line);} .footer-cols{grid-template-columns:1fr 1fr;} }
+    @media (max-width: 640px) { :root{--pad:24px;} h1{font-size:36px;} h2{font-size:28px;} .team-grid{grid-template-columns:1fr;} .team-card{border-right:0;border-bottom:1px solid var(--line);} .footer-cta h2{font-size:38px;} .footer-cols{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
@@ -138,7 +110,7 @@
     </a>
     <div class="nav-links">
       <div class="nav-dropdown">
-        <a href="/brunswick/about.html">About</a>
+        <a href="/brunswick/about.html" class="active">About</a>
         <div class="dropdown-menu">
           <a href="/brunswick/about.html">About</a>
           <a href="/brunswick/julian.html">Julian's Story</a>
@@ -148,7 +120,7 @@
       <a href="/brunswick/finance.html">Finance</a>
       <a href="/brunswick/content.html">Content</a>
       <a href="/brunswick/community.html">Community</a>
-      <a href="/brunswick/concierge.html" class="active">Concierge</a>
+      <a href="/brunswick/concierge.html">Concierge</a>
       <a href="/brunswick/partnerships.html">Partnerships</a>
     </div>
     <a href="#contact" class="btn">Get in touch <span class="arr">→</span></a>
@@ -158,86 +130,40 @@
 <!-- Page Hero -->
 <section class="page-hero">
   <div class="wrap">
-    <div class="eyebrow">04 · Concierge</div>
-    <h1>Your week, handled.</h1>
-    <p class="lede" style="margin-top:32px;">Travel, family logistics, relocation, and the hundred things that pile up when you're focused on performing. The best athletes don't manage their own schedules. We do it for them.</p>
+    <div class="eyebrow">The team</div>
+    <h1>The people behind every client.</h1>
+    <p class="lede" style="margin-top:32px;">Brunswick runs as a full team behind every relationship. Bios and profiles coming soon.</p>
   </div>
 </section>
 
-<!-- What's Included -->
+<!-- Team Grid -->
 <section>
   <div class="wrap">
-    <div class="section-label">The service</div>
-    <h2 style="margin-bottom:64px;">Everything outside the game.</h2>
-    <div class="card-grid cols-4">
-      <div class="card">
-        <span class="idx">01</span>
-        <h3>Travel</h3>
-        <p>Flights, hotels, ground transport, and travel coordination for you, your family, and your team.</p>
+    <div class="section-label">The team</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-img">Photo</div>
+        <div class="team-card-body">
+          <div class="team-card-name">Team Member</div>
+          <div class="team-card-title">Role · Finance</div>
+          <p class="team-card-bio">Full bio and profile coming soon. Brunswick's team brings senior-level expertise across finance, content, community, and concierge operations.</p>
+        </div>
       </div>
-      <div class="card">
-        <span class="idx">02</span>
-        <h3>Family Services</h3>
-        <p>School searches, childcare, household staffing, and family logistics managed with complete discretion.</p>
+      <div class="team-card">
+        <div class="team-card-img">Photo</div>
+        <div class="team-card-body">
+          <div class="team-card-name">Team Member</div>
+          <div class="team-card-title">Role · Content</div>
+          <p class="team-card-bio">Full bio and profile coming soon. Brunswick's team brings senior-level expertise across finance, content, community, and concierge operations.</p>
+        </div>
       </div>
-      <div class="card">
-        <span class="idx">03</span>
-        <h3>Relocation</h3>
-        <p>End-to-end relocation support when you're traded, signed, or transitioning markets.</p>
-      </div>
-      <div class="card">
-        <span class="idx">04</span>
-        <h3>Day-to-Day</h3>
-        <p>The list of things that never get done — handled. One point of contact. Nothing falls through.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- The Standard -->
-<section>
-  <div class="wrap">
-    <div class="section-label">How we work</div>
-    <h2 style="margin-bottom:48px;">You have one contact. They have everything.</h2>
-    <div class="two-col even">
-      <div>
-        <p style="color:var(--ink-2);margin-bottom:20px;">Every Brunswick athlete has a dedicated concierge — not a rotating staff, not a shared inbox. One person who knows your preferences, your family, and your schedule.</p>
-        <p style="color:var(--ink-2);margin-bottom:20px;">Available when you need them. Proactive before you ask. If something is going to be a problem on Thursday, we're solving it on Monday.</p>
-        <p style="color:var(--ink-2);">We handle the things you shouldn't have to think about — so you can focus on the things that matter.</p>
-      </div>
-      <div>
-        <ul class="handle-list">
-          <li>
-            <span class="h-label">Travel</span>
-            <span>All logistics coordinated and confirmed before you're thinking about it.</span>
-          </li>
-          <li>
-            <span class="h-label">Family</span>
-            <span>Schools, staffing, childcare — handled with the same standard as everything else.</span>
-          </li>
-          <li>
-            <span class="h-label">Relocation</span>
-            <span>Full market transition managed start to finish, including housing and setup.</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Case Study -->
-<section>
-  <div class="wrap">
-    <div class="section-label">Case study</div>
-    <div class="case-study-card">
-      <div class="cs-image">
-        <div class="cs-img-placeholder">Featured Image</div>
-      </div>
-      <div class="cs-body">
-        <div class="cs-tag mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Concierge · Relocation</div>
-        <h3 style="font-size:28px;margin-bottom:16px;">Moving a family of five from Houston to Miami in eleven days during free agency.</h3>
-        <p style="color:var(--ink-2);margin-bottom:28px;">Housing, schools, vehicles, utilities, and a storage unit across two cities — coordinated while our client was in contract negotiations. Nothing touched his desk.</p>
-        <a href="#" class="btn ghost">Read more <span class="arr">→</span></a>
+      <div class="team-card">
+        <div class="team-card-img">Photo</div>
+        <div class="team-card-body">
+          <div class="team-card-name">Team Member</div>
+          <div class="team-card-title">Role · Concierge</div>
+          <p class="team-card-bio">Full bio and profile coming soon. Brunswick's team brings senior-level expertise across finance, content, community, and concierge operations.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -305,14 +231,6 @@
       e.preventDefault();
       const y = t.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: y, behavior: 'smooth' });
-    });
-  });
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      const isOpen = item.classList.contains('is-open');
-      item.classList.toggle('is-open');
-      q.setAttribute('aria-expanded', String(!isOpen));
     });
   });
 </script>
