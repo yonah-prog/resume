@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brunswick — Concierge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111;
+      --ink-2: #3a3a3a;
+      --muted: #6b6b6b;
+      --line: #cfcfcf;
+      --line-2: #e6e6e6;
+      --bg: #fafafa;
+      --paper: #fff;
+      --box: #ececec;
+      --box-2: #dcdcdc;
+      --accent: #111;
+      --maxw: 1240px;
+      --pad: 48px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--ink); }
+    body { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .mono { font-family: "IBM Plex Mono", monospace; }
+    .serif { font-family: "IBM Plex Serif", Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+    h1, h2, h3, h4 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
+    h1 { font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; }
+    h2 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; }
+    h3 { font-size: 22px; line-height: 1.25; }
+    h4 { font-size: 16px; line-height: 1.3; }
+    p { margin: 0; }
+    .lede { font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 62ch; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+    section { padding: 96px 0; border-top: 1px solid var(--line); background: var(--paper); }
+    section:first-of-type { border-top: 0; }
+    .section-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
+    .section-label::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--ink); }
+
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 90; background: rgba(255,255,255,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 18px var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; font-size: 18px; }
+    .logo-mark { width: 26px; height: 26px; border: 1.5px solid var(--ink); display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--ink-2); }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid var(--ink); font-size: 14px; font-weight: 500; background: var(--ink); color: #fff; transition: transform .15s ease; cursor: pointer; }
+    .btn.ghost { background: transparent; color: var(--ink); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn .arr { display: inline-block; transition: transform .2s ease; }
+    .btn:hover .arr { transform: translateX(4px); }
+
+    /* Page hero */
+    .page-hero { padding: 100px 0 80px; border-top: 0; }
+    .page-hero .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+    .page-hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--muted); }
+
+    /* Grid cards */
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+    .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .card { padding: 32px 28px 32px 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 280px; }
+    .card:not(:first-child) { padding-left: 28px; }
+    .card:last-child { border-right: 0; padding-right: 0; }
+    .card .idx { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); margin-bottom: 48px; }
+    .card h3 { font-size: 24px; margin-bottom: 14px; }
+    .card p { color: var(--ink-2); margin-bottom: auto; }
+    .card .more { margin-top: 32px; font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+
+    /* Two-col layout */
+    .two-col { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+    .two-col.even { grid-template-columns: 1fr 1fr; }
+
+    /* Handle list */
+    .handle-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+    .handle-list li { display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--ink-2); padding: 20px 0; border-bottom: 1px solid var(--line-2); }
+    .handle-list li:first-child { border-top: 1px solid var(--line-2); }
+    .handle-list li .h-label { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); width: 140px; flex-shrink: 0; padding-top: 2px; }
+
+    /* FAQ */
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-q { display: grid; grid-template-columns: 48px 1fr 32px; gap: 24px; align-items: center; padding: 28px 0; cursor: pointer; width: 100%; text-align: left; }
+    .faq-q .qnum { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); letter-spacing: .06em; }
+    .faq-q .qtext { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+    .faq-q .qtog { width: 24px; height: 24px; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-size: 18px; transition: transform .25s ease; justify-self: end; }
+    .faq-item.is-open .qtog { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .25s ease; padding-left: 72px; padding-right: 48px; color: var(--ink-2); }
+    .faq-item.is-open .faq-a { max-height: 300px; padding-bottom: 32px; }
+
+    /* Footer CTA */
+    .footer-cta { background: #0e0e0e; color: #fff; padding: 120px 0 80px; text-align: left; border-top: 0; }
+    .footer-cta .section-label { color: #7f7f7f; }
+    .footer-cta .section-label::before { background: #fff; }
+    .footer-cta h2 { font-size: 64px; line-height: 1.05; letter-spacing: -0.02em; max-width: 16ch; margin-bottom: 48px; }
+    .footer-cta .btn { background: #fff; color: #111; border-color: #fff; }
+    .footer-cta .btn.ghost { background: transparent; color: #fff; border-color: #fff; }
+    .footer-bottom { margin-top: 80px; padding-top: 32px; border-top: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #7f7f7f; }
+    .footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-top: 64px; }
+    .footer-cols h4 { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #7f7f7f; font-weight: 400; margin-bottom: 16px; }
+    .footer-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .footer-cols ul a { font-size: 14px; color: #dedede; }
+    .footer-cols ul a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 1000px) { h1{font-size:48px;} h2{font-size:34px;} .card-grid,.card-grid.cols-4{grid-template-columns:1fr 1fr;} .two-col,.two-col.even{grid-template-columns:1fr;gap:32px;} .footer-cols{grid-template-columns:1fr 1fr;} }
+    @media (max-width: 640px) { :root{--pad:24px;} h1{font-size:36px;} h2{font-size:28px;} .card-grid,.card-grid.cols-2,.card-grid.cols-4{grid-template-columns:1fr;} .card{border-right:0;border-bottom:1px solid var(--line);padding:24px 0;} .card:not(:first-child){padding-left:0;} .footer-cta h2{font-size:38px;} .footer-cols{grid-template-columns:1fr;} .handle-list li{flex-direction:column;gap:6px;} .handle-list li .h-label{width:auto;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/brunswick/">
+      <span class="logo-mark">B</span>
+      <span>Brunswick</span>
+    </a>
+    <div class="nav-links">
+      <a href="/brunswick/about.html">About</a>
+      <a href="/brunswick/finance.html">Finance</a>
+      <a href="/brunswick/content.html">Content</a>
+      <a href="/brunswick/community.html">Community</a>
+      <a href="/brunswick/concierge.html" class="active">Concierge</a>
+      <a href="/brunswick/partnerships.html">Partnerships</a>
+    </div>
+    <a href="#contact" class="btn">Get in touch <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">04 · Concierge</div>
+    <h1>Your week, handled.</h1>
+    <p class="lede" style="margin-top:32px;">Travel, family logistics, relocation, and the hundred things that pile up when you're focused on performing. The best athletes don't manage their own schedules. We do it for them.</p>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section>
+  <div class="wrap">
+    <div class="section-label">The service</div>
+    <h2 style="margin-bottom:64px;">Everything outside the game.</h2>
+    <div class="card-grid cols-4">
+      <div class="card">
+        <span class="idx">01</span>
+        <h3>Travel</h3>
+        <p>Flights, hotels, ground transport, and travel coordination for you, your family, and your team.</p>
+      </div>
+      <div class="card">
+        <span class="idx">02</span>
+        <h3>Family Services</h3>
+        <p>School searches, childcare, household staffing, and family logistics managed with complete discretion.</p>
+      </div>
+      <div class="card">
+        <span class="idx">03</span>
+        <h3>Relocation</h3>
+        <p>End-to-end relocation support when you're traded, signed, or transitioning markets.</p>
+      </div>
+      <div class="card">
+        <span class="idx">04</span>
+        <h3>Day-to-Day</h3>
+        <p>The list of things that never get done — handled. One point of contact. Nothing falls through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Standard -->
+<section>
+  <div class="wrap">
+    <div class="section-label">How we work</div>
+    <h2 style="margin-bottom:48px;">You have one contact. They have everything.</h2>
+    <div class="two-col even">
+      <div>
+        <p style="color:var(--ink-2);margin-bottom:20px;">Every Brunswick athlete has a dedicated concierge — not a rotating staff, not a shared inbox. One person who knows your preferences, your family, and your schedule.</p>
+        <p style="color:var(--ink-2);margin-bottom:20px;">Available when you need them. Proactive before you ask. If something is going to be a problem on Thursday, we're solving it on Monday.</p>
+        <p style="color:var(--ink-2);">We handle the things you shouldn't have to think about — so you can focus on the things that matter.</p>
+      </div>
+      <div>
+        <ul class="handle-list">
+          <li>
+            <span class="h-label">Travel</span>
+            <span>All logistics coordinated and confirmed before you're thinking about it.</span>
+          </li>
+          <li>
+            <span class="h-label">Family</span>
+            <span>Schools, staffing, childcare — handled with the same standard as everything else.</span>
+          </li>
+          <li>
+            <span class="h-label">Relocation</span>
+            <span>Full market transition managed start to finish, including housing and setup.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="section-label">Before you ask</div>
+    <h2 style="margin-bottom:48px;">Concierge questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="qnum">01</span>
+          <span class="qtext">Is this available during the season?</span>
+          <span class="qtog">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Our team is available year-round, with elevated support during training camp, the season, and playoff runs.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="qnum">02</span>
+          <span class="qtext">What's the response time?</span>
+          <span class="qtog">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Most requests are handled same-day. Urgent requests within the hour.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="qnum">03</span>
+          <span class="qtext">Does this include family?</span>
+          <span class="qtog">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Family support is a core part of the service — not an add-on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer CTA -->
+<section class="footer-cta" id="contact">
+  <div class="wrap">
+    <div class="section-label">By introduction</div>
+    <h2>Let's build something that lasts.</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:0;">
+      <a href="mailto:hello@brunswick.co" class="btn">Email the team <span class="arr">→</span></a>
+      <a href="/brunswick/#contact" class="btn ghost">Request an introduction <span class="arr">→</span></a>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="logo-mark" style="border-color:#fff;color:#fff;">B</span>
+          <span>Brunswick</span>
+        </div>
+        <p style="color:#9a9a9a;max-width:36ch;margin-top:16px;font-size:14px;">A boutique management firm built for the modern athlete. By referral.</p>
+      </div>
+      <div>
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="/brunswick/finance.html">Finance</a></li>
+          <li><a href="/brunswick/content.html">Content</a></li>
+          <li><a href="/brunswick/community.html">Community</a></li>
+          <li><a href="/brunswick/concierge.html">Concierge</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/brunswick/about.html">About</a></li>
+          <li><a href="/brunswick/#roster">Roster</a></li>
+          <li><a href="/brunswick/partnerships.html">Partnerships</a></li>
+          <li><a href="/brunswick/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@brunswick.co">hello@brunswick.co</a></li>
+          <li><a href="#">Press inquiries</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brunswick Management</span>
+      <span>NFL · NBA · MLB · NIL</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      const y = t.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('is-open');
+      item.classList.toggle('is-open');
+      q.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>
+</body>
+</html>

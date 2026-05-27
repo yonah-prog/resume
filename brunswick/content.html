@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brunswick — Sports Management</title>
+  <title>Brunswick — Content</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -57,16 +57,10 @@
     .btn .arr { display: inline-block; transition: transform .2s ease; }
     .btn:hover .arr { transform: translateX(4px); }
 
-    /* Hero */
-    .hero { padding: 120px 0 100px; border-top: 0; background: var(--paper); }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
-    .hero-tag { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-    .hero-tag::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--muted); }
-    .hero h1 { margin-bottom: 32px; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; }
-    .hero-right { display: flex; flex-direction: column; gap: 32px; padding-bottom: 8px; }
-    .hero-aside { font-size: 14px; color: var(--muted); border-left: 1px solid var(--line); padding-left: 24px; }
-    .hero-leagues { display: flex; gap: 24px; font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    /* Page hero */
+    .page-hero { padding: 100px 0 80px; border-top: 0; }
+    .page-hero .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+    .page-hero .eyebrow::before { content: ""; display: inline-block; width: 24px; height: 1px; background: var(--muted); }
 
     /* Stat bar */
     .stat-bar { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -90,16 +84,6 @@
     /* Two-col layout */
     .two-col { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
     .two-col.even { grid-template-columns: 1fr 1fr; }
-
-    /* Roster strip */
-    .roster-strip { border-top: 1px solid var(--ink); padding-top: 40px; display: flex; flex-wrap: wrap; gap: 0; }
-    .roster-item { flex: 0 0 25%; padding: 24px 28px 24px 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .roster-item:nth-child(4n) { border-right: 0; padding-right: 0; }
-    .roster-item .r-name { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
-    .roster-item .r-meta { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-
-    /* Pullquote */
-    .pullquote { font-family: "IBM Plex Serif", Georgia, serif; font-size: 24px; line-height: 1.35; font-style: italic; border-left: 2px solid var(--ink); padding: 8px 0 8px 24px; margin: 0 0 32px; color: var(--ink); max-width: 48ch; }
 
     /* FAQ */
     .faq-list { border-top: 1px solid var(--line); }
@@ -127,29 +111,8 @@
     .footer-cols ul a:hover { color: #fff; }
 
     /* Responsive */
-    @media (max-width: 1000px) {
-      h1{font-size:48px;} h2{font-size:34px;}
-      .hero-inner{grid-template-columns:1fr;gap:40px;}
-      .card-grid,.card-grid.cols-4{grid-template-columns:1fr 1fr;}
-      .two-col,.two-col.even{grid-template-columns:1fr;gap:32px;}
-      .footer-cols{grid-template-columns:1fr 1fr;}
-      .roster-item{flex:0 0 50%;}
-      .roster-item:nth-child(4n){border-right:1px solid var(--line);padding-right:28px;}
-      .roster-item:nth-child(2n){border-right:0;padding-right:0;}
-    }
-    @media (max-width: 640px) {
-      :root{--pad:24px;}
-      h1{font-size:36px;} h2{font-size:28px;}
-      .card-grid,.card-grid.cols-2,.card-grid.cols-4{grid-template-columns:1fr;}
-      .card{border-right:0;border-bottom:1px solid var(--line);padding:24px 0;}
-      .card:not(:first-child){padding-left:0;}
-      .stat-bar{grid-template-columns:1fr;}
-      .stat{border-right:0;border-bottom:1px solid var(--line);}
-      .footer-cta h2{font-size:38px;}
-      .footer-cols{grid-template-columns:1fr;}
-      .roster-item{flex:0 0 100%;border-right:0;padding-right:0;}
-      .roster-item:nth-child(4n){border-right:0;padding-right:0;}
-    }
+    @media (max-width: 1000px) { h1{font-size:48px;} h2{font-size:34px;} .card-grid,.card-grid.cols-4{grid-template-columns:1fr 1fr;} .two-col,.two-col.even{grid-template-columns:1fr;gap:32px;} .footer-cols{grid-template-columns:1fr 1fr;} .stat-bar{grid-template-columns:1fr 1fr;} }
+    @media (max-width: 640px) { :root{--pad:24px;} h1{font-size:36px;} h2{font-size:28px;} .card-grid,.card-grid.cols-2,.card-grid.cols-4{grid-template-columns:1fr;} .card{border-right:0;border-bottom:1px solid var(--line);padding:24px 0;} .card:not(:first-child){padding-left:0;} .stat-bar{grid-template-columns:1fr;} .stat{border-right:0;border-bottom:1px solid var(--line);} .footer-cta h2{font-size:38px;} .footer-cols{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
@@ -163,7 +126,7 @@
     <div class="nav-links">
       <a href="/brunswick/about.html">About</a>
       <a href="/brunswick/finance.html">Finance</a>
-      <a href="/brunswick/content.html">Content</a>
+      <a href="/brunswick/content.html" class="active">Content</a>
       <a href="/brunswick/community.html">Community</a>
       <a href="/brunswick/concierge.html">Concierge</a>
       <a href="/brunswick/partnerships.html">Partnerships</a>
@@ -172,218 +135,130 @@
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
+<!-- Page Hero -->
+<section class="page-hero">
   <div class="wrap">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-tag">By referral only</div>
-        <h1>Management built for the modern athlete.</h1>
-        <p class="lede">Finance, content, community, and concierge — run in-house, under one roof, for a roster we know by name.</p>
-        <div class="hero-actions">
-          <a href="/brunswick/about.html" class="btn">About the firm <span class="arr">→</span></a>
-          <a href="#practice" class="btn ghost">Our practice <span class="arr">→</span></a>
-        </div>
-      </div>
-      <div class="hero-right">
-        <p class="hero-aside">Brunswick operates at the intersection of elite athlete management and operational excellence. Every client gets senior attention — never an associate.</p>
-        <div class="hero-leagues">
-          <span>NFL</span>
-          <span>NBA</span>
-          <span>MLB</span>
-          <span>NIL</span>
-        </div>
-      </div>
-    </div>
+    <div class="eyebrow">02 · Content</div>
+    <h1>Your platform is leverage.<br>We build the engine.</h1>
+    <p class="lede" style="margin-top:32px;">A full-stack content and brand operation — strategy, production, distribution, and monetization. Your story, told the right way, to the right audience, at the right time.</p>
   </div>
 </section>
 
-<!-- Stats -->
-<section style="padding:0;">
+<!-- What's Included -->
+<section>
   <div class="wrap">
-    <div class="stat-bar">
-      <div class="stat">
-        <div class="num">$1.6B+</div>
-        <div class="lbl">Career earnings managed</div>
-      </div>
-      <div class="stat" style="padding-left:48px;">
-        <div class="num">35+</div>
-        <div class="lbl">Athletes on roster</div>
-      </div>
-      <div class="stat" style="padding-left:48px;">
-        <div class="num">2018</div>
-        <div class="lbl">Founded</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Practice -->
-<section id="practice">
-  <div class="wrap">
-    <div class="section-label">The practice</div>
-    <h2 style="margin-bottom:16px;">Four disciplines. One firm.</h2>
-    <p class="lede" style="margin-bottom:64px;">Every service runs in-house. No handoffs, no gaps, no finger-pointing when something goes wrong.</p>
-    <div class="card-grid cols-4">
+    <div class="section-label">The service</div>
+    <h2 style="margin-bottom:64px;">Content that works as hard as you do.</h2>
+    <div class="card-grid">
       <div class="card">
         <span class="idx">01</span>
-        <h3>Finance</h3>
-        <p>Bookkeeping, business entities, and in-house tax — all managed together, all year long.</p>
-        <a href="/brunswick/finance.html" class="more">Finance →</a>
+        <h3>Brand Strategy</h3>
+        <p>Positioning, voice, and visual identity. The foundation everything else is built on.</p>
       </div>
       <div class="card">
         <span class="idx">02</span>
-        <h3>Content</h3>
-        <p>Brand strategy, production, and platform growth. Your story, told the right way.</p>
-        <a href="/brunswick/content.html" class="more">Content →</a>
+        <h3>Content Production</h3>
+        <p>Video, photography, and written content — planned, produced, and distributed on schedule.</p>
       </div>
       <div class="card">
         <span class="idx">03</span>
-        <h3>Community</h3>
-        <p>Camps, charity, and appearances that build real relationships with fans and cities.</p>
-        <a href="/brunswick/community.html" class="more">Community →</a>
+        <h3>Platform Growth</h3>
+        <p>Instagram, YouTube, TikTok — managed with a real distribution strategy, not just posts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brand as Business -->
+<section>
+  <div class="wrap">
+    <div class="section-label">The opportunity</div>
+    <h2 style="margin-bottom:48px;">The athletes who win off the field built something while they were still on it.</h2>
+    <div class="two-col even">
+      <div>
+        <p style="color:var(--ink-2);margin-bottom:20px;">The modern athlete's career is dual-tracked. There's what happens on the field — and there's what you're building around it. The platforms, the relationships, the narrative. Both compound over time.</p>
+        <p style="color:var(--ink-2);margin-bottom:20px;">We've seen what happens when an athlete with real platform presence hits the open market — in free agency, in brand negotiations, in business. The leverage is real. The difference is real.</p>
+        <p style="color:var(--ink-2);">Brunswick treats content not as marketing, but as asset development. Every piece of content is either building equity or wasting time. We're here to make sure it's the former.</p>
+      </div>
+      <div>
+        <div class="stat-bar" style="border:0;display:flex;flex-direction:column;gap:0;">
+          <div class="stat" style="border-right:0;border-bottom:1px solid var(--line);padding-left:0;">
+            <div class="num">2.4B</div>
+            <div class="lbl">Social impressions generated</div>
+          </div>
+          <div class="stat" style="border-right:0;border-bottom:1px solid var(--line);padding-left:0;">
+            <div class="num">18</div>
+            <div class="lbl">Brand deals negotiated</div>
+          </div>
+          <div class="stat" style="border-right:0;padding-left:0;">
+            <div class="num">$0</div>
+            <div class="lbl">Left on the table</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section>
+  <div class="wrap">
+    <div class="section-label">The process</div>
+    <h2 style="margin-bottom:64px;">Planned. Produced. Published.</h2>
+    <div class="card-grid">
+      <div class="card">
+        <span class="idx">01</span>
+        <h3>Quarterly Strategy</h3>
+        <p>We map your brand pillars, content calendar, and platform targets every quarter.</p>
       </div>
       <div class="card">
-        <span class="idx">04</span>
-        <h3>Concierge</h3>
-        <p>Travel, family logistics, relocation, and everything that piles up during a season.</p>
-        <a href="/brunswick/concierge.html" class="more">Concierge →</a>
+        <span class="idx">02</span>
+        <h3>Production Cadence</h3>
+        <p>Regular shoots, editing, and graphics handled by our in-house team.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- About Julian -->
-<section>
-  <div class="wrap">
-    <div class="section-label">The founder</div>
-    <div class="two-col">
-      <div>
-        <h2 style="margin-bottom:32px;">Julian Aiken</h2>
-        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;">Founder & Managing Partner</p>
-        <p style="color:var(--ink-2);margin-bottom:20px;">Julian grew up around the NBA — his uncle played seven years in the league. He spent nearly two years working in the industry for free, learning the business cold before founding Brunswick in 2018.</p>
-        <p style="color:var(--ink-2);margin-bottom:36px;">Today he leads a firm managing 35+ professional athletes across the NFL, NBA, and MLB — with a full team running operations behind every relationship.</p>
-        <a href="/brunswick/about.html" class="btn ghost">About Brunswick <span class="arr">→</span></a>
-      </div>
-      <div>
-        <blockquote class="pullquote">"Access without intention is just a story to tell at a party. Access with intention is an education you can't buy."</blockquote>
-        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">— Julian Aiken, Founder</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Roster -->
-<section id="roster">
-  <div class="wrap">
-    <div class="section-label">Select roster</div>
-    <h2 style="margin-bottom:48px;">35+ athletes.<br>Every major league.</h2>
-    <div class="roster-strip">
-      <div class="roster-item">
-        <div class="r-name">Marcus Webb</div>
-        <div class="r-meta">WR · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">DeShawn Carver</div>
-        <div class="r-meta">SG · NBA</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Jordan Okafor</div>
-        <div class="r-meta">CF · MLB</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Tyler Reese</div>
-        <div class="r-meta">QB · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Khalil Moses</div>
-        <div class="r-meta">PF · NBA</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Antonio Reyes</div>
-        <div class="r-meta">SP · MLB</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">Devon Ashby</div>
-        <div class="r-meta">CB · NFL</div>
-      </div>
-      <div class="roster-item">
-        <div class="r-name">James Holloway</div>
-        <div class="r-meta">C · NBA</div>
-      </div>
-    </div>
-    <p style="margin-top:32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Roster shown by introduction only. Full list available upon request.</p>
-  </div>
-</section>
-
-<!-- Partnerships CTA -->
-<section>
-  <div class="wrap">
-    <div class="section-label">For agents & advisors</div>
-    <div class="two-col even" style="align-items:center;">
-      <div>
-        <h2 style="margin-bottom:24px;">Work with us without competing with us.</h2>
-        <p class="lede" style="margin-bottom:36px;">Brunswick is built to complement your practice — not replace it. We handle the operating layer so you can focus on what you do best.</p>
-        <a href="/brunswick/partnerships.html" class="btn">Partnerships <span class="arr">→</span></a>
-      </div>
-      <div style="display:grid;gap:24px;">
-        <div style="padding:28px;background:var(--bg);border:1px solid var(--line);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Agents</div>
-          <p style="color:var(--ink-2);">Your client's personal life runs cleanly. Their brand grows. They're less distracted, better prepared for the next negotiation.</p>
-        </div>
-        <div style="padding:28px;background:var(--bg);border:1px solid var(--line);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Advisors</div>
-          <p style="color:var(--ink-2);">Clean, reconciled financials in real time. Every entity, every account, closed on time. You make better decisions with better data.</p>
-        </div>
+      <div class="card">
+        <span class="idx">03</span>
+        <h3>Distribution & Deals</h3>
+        <p>Content posted on schedule. Brand partnerships activated when the audience is ready.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section>
   <div class="wrap">
     <div class="section-label">Before you ask</div>
-    <h2 style="margin-bottom:48px;">Questions about Brunswick.</h2>
+    <h2 style="margin-bottom:48px;">Content questions.</h2>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           <span class="qnum">01</span>
-          <span class="qtext">Who does Brunswick work with?</span>
+          <span class="qtext">Do I need a big following to start?</span>
           <span class="qtog">+</span>
         </button>
         <div class="faq-a">
-          <p>We work with professional athletes across the NFL, NBA, and MLB — and increasingly with NIL athletes entering the pros. Every relationship starts with an introduction.</p>
+          <p>No. We've helped athletes go from 40k to 800k by building the right content, not by chasing virality.</p>
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           <span class="qnum">02</span>
-          <span class="qtext">What does "boutique" actually mean?</span>
+          <span class="qtext">What platforms do you manage?</span>
           <span class="qtog">+</span>
         </button>
         <div class="faq-a">
-          <p>It means we keep the roster small on purpose. Every client works directly with Julian and a senior team — never handed to a junior associate or left in a CRM queue.</p>
+          <p>Instagram, YouTube, and TikTok primarily. We go where your audience is, not where everyone else is.</p>
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           <span class="qnum">03</span>
-          <span class="qtext">How is Brunswick different from a traditional agency?</span>
+          <span class="qtext">How involved do I need to be?</span>
           <span class="qtog">+</span>
         </button>
         <div class="faq-a">
-          <p>Most agencies focus on contract negotiation and endorsements. Brunswick focuses on everything around the career — finance, brand, community, and daily operations. We work alongside agents and advisors, not instead of them.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          <span class="qnum">04</span>
-          <span class="qtext">How do I get in touch?</span>
-          <span class="qtog">+</span>
-        </button>
-        <div class="faq-a">
-          <p>Most relationships start through a referral from a player, agent, or advisor already in the Brunswick network. If you believe you have a connection, reach out directly at hello@brunswick.co.</p>
+          <p>As involved or hands-off as you want. Some clients co-create everything. Others hand us the keys. We adapt.</p>
         </div>
       </div>
     </div>
@@ -397,7 +272,7 @@
     <h2>Let's build something that lasts.</h2>
     <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:0;">
       <a href="mailto:hello@brunswick.co" class="btn">Email the team <span class="arr">→</span></a>
-      <a href="#contact" class="btn ghost">Request an introduction <span class="arr">→</span></a>
+      <a href="/brunswick/#contact" class="btn ghost">Request an introduction <span class="arr">→</span></a>
     </div>
     <div class="footer-cols">
       <div>
@@ -420,9 +295,9 @@
         <h4>Firm</h4>
         <ul>
           <li><a href="/brunswick/about.html">About</a></li>
-          <li><a href="#roster">Roster</a></li>
+          <li><a href="/brunswick/#roster">Roster</a></li>
           <li><a href="/brunswick/partnerships.html">Partnerships</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="/brunswick/#faq">FAQ</a></li>
         </ul>
       </div>
       <div>
