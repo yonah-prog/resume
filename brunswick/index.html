@@ -126,10 +126,16 @@
     .r-card-team { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
     /* Marquee */
-    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; background: var(--paper); }
-    .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 60s linear infinite; }
-    .marquee-track span { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-rows { display: flex; flex-direction: column; gap: 0; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .marquee-row { overflow: hidden; padding: 20px 0; border-bottom: 1px solid var(--line-2); }
+    .marquee-row:last-child { border-bottom: 0; }
+    .marquee-track { display: flex; gap: 64px; width: max-content; animation: marquee-left 90s linear infinite; }
+    .marquee-track.reverse { animation: marquee-right 80s linear infinite; }
+    .marquee-track.slow { animation-duration: 100s; }
+    .marquee-track span { font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; font-weight: 500; }
+    .marquee-track span::before { content: "·"; margin-right: 64px; color: var(--line); }
+    @keyframes marquee-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
     /* Ecosystem grid */
     .eco-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); }
@@ -456,10 +462,27 @@
     <h2 style="margin-bottom:16px;">Brands We Work With</h2>
     <p class="lede" style="margin-bottom:64px;">The brand business of an athlete's career runs through Brunswick. A selection of partners we've placed our roster with — across performance, lifestyle, hospitality, finance, and culture.</p>
   </div>
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span><span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span><span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
-      <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span><span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span><span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
+  <div class="marquee-rows">
+    <!-- Row 1 → left -->
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span>
+        <span>NIKE</span><span>NEW BALANCE</span><span>MACKAGE</span><span>NOBULL</span><span>HOLLISTER</span><span>FASHION NOVA</span><span>P448</span><span>TRAVIS MATHEW</span><span>OAKLEY</span><span>SERATELLI HATS</span><span>SLIP SILK</span><span>ANTA</span><span>STRIA SPORT</span><span>BETTINARDI</span><span>GATORADE</span><span>ZENWTR</span><span>RECOVER 180</span><span>HYDRO FLASK</span>
+      </div>
+    </div>
+    <!-- Row 2 ← right -->
+    <div class="marquee-row">
+      <div class="marquee-track reverse">
+        <span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span>
+        <span>RAISING CANE'S</span><span>7-ELEVEN</span><span>24 HOUR ENERGY</span><span>LOUIS XIII</span><span>REMY MARTIN</span><span>MR PORTER</span><span>NET-A-PORTER</span><span>VENUS ET FLEUR</span><span>DOVE</span><span>DOLLAR SHAVE CLUB</span><span>GILLETTE</span><span>CVS</span><span>MET-RX</span><span>NEOSCULPT</span><span>SOUR PUNCH</span><span>GQ</span><span>ENTREPRENEUR</span><span>SLATE</span>
+      </div>
+    </div>
+    <!-- Row 3 → left (slow) -->
+    <div class="marquee-row">
+      <div class="marquee-track slow">
+        <span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
+        <span>TOPPS</span><span>FANATICS</span><span>EBAY</span><span>WHATNOT</span><span>DYNASTY SPORTS</span><span>I LOVE BOSTON SPORTS</span><span>EAST COAST COLLECTIBLES</span><span>CONCEPTS</span><span>POSTGAME OFFICIAL</span><span>DRAFTKINGS</span><span>OPENDORSE</span><span>EQLZ</span><span>JORDAN'S FURNITURE</span><span>TARGET</span><span>SHARK NINJA</span><span>MORGAN &amp; MORGAN</span><span>BIG BROTHERS BIG SISTERS</span>
+      </div>
     </div>
   </div>
 </section>
