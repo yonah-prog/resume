@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Before You Get a Dog — By Chomie Gross</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --border: #e8e2d9;
+      --accent: #3d6b4f;
+      --accent-light: #eaf2ed;
+      --accent-dark: #2d5039;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --radius: 18px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ══════════════════════════════════════
+       HERO SECTION
+    ══════════════════════════════════════ */
+    .hero {
+      width: 100%;
+      background: linear-gradient(135deg, #1e3d2a 0%, #2d5039 50%, #3d6b4f 100%);
+      padding: 56px 24px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .hero-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 4px solid rgba(255,255,255,0.25);
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 4px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+
+    .hero-paw {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 36px;
+      height: 36px;
+      background: #f5a623;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border: 3px solid #2d5039;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a8d4b8;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle strong { color: #ffffff; }
+
+    .hero-how {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .hero-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .hero-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-arrow {
+      display: flex;
+      justify-content: center;
+      padding: 16px 0 0;
+    }
+
+    .hero-arrow svg {
+      color: rgba(255,255,255,0.4);
+      animation: bounce-arrow 2s infinite;
+    }
+
+    @keyframes bounce-arrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* ══════════════════════════════════════
+       CHAT SECTION
+    ══════════════════════════════════════ */
+    #chat-wrapper {
+      width: 100%;
+      max-width: 720px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 16px 16px;
+      margin: 0 auto;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 20px 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 200px;
+    }
+
+    .msg {
+      display: flex;
+      flex-direction: column;
+      max-width: 85%;
+      animation: fadeUp 0.22s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .msg.bot  { align-self: flex-start; align-items: flex-start; }
+
+    .bubble {
+      padding: 13px 17px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .msg.user .bubble {
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 5px;
+    }
+
+    .msg.bot .bubble {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+
+    .msg.bot .bubble strong { color: var(--accent-dark); }
+    .msg.bot .bubble em { color: var(--muted); font-style: italic; }
+
+    /* typing dots */
+    .typing-dots {
+      display: flex; gap: 5px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-bottom-left-radius: 5px;
+      width: fit-content;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+    .typing-dots span {
+      width: 8px; height: 8px;
+      background: #bbb; border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%,60%,100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    /* ══════════════════════════════════════
+       TRIAGE PROGRESS + OPTIONS
+    ══════════════════════════════════════ */
+    #progress {
+      display: flex;
+      gap: 6px;
+      padding: 10px 0 2px;
+      align-self: flex-start;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .dot.done   { background: var(--accent); }
+    .dot.active { background: var(--accent); opacity: 0.5; }
+
+    #options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 4px 0 10px;
+      align-self: flex-start;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .option-btn {
+      padding: 11px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent-dark);
+    }
+
+    .option-btn .btn-label { display: block; font-weight: 600; }
+    .option-btn .btn-sub   { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* quick-reply chips */
+    #chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 4px 0 10px;
+    }
+
+    .chip {
+      padding: 7px 14px;
+      border: 1.5px solid var(--accent);
+      border-radius: 20px;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .chip:hover { background: var(--accent); color: white; }
+
+    /* ══════════════════════════════════════
+       INPUT BAR
+    ══════════════════════════════════════ */
+    #input-bar {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      font-size: 15px;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.5;
+      max-height: 140px;
+      min-height: 48px;
+      overflow-y: auto;
+      transition: border-color 0.2s;
+    }
+    #user-input:focus { border-color: var(--accent); }
+    #user-input::placeholder { color: #bbb; }
+
+    #send-btn {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+    }
+    #send-btn:hover  { background: var(--accent-dark); }
+    #send-btn:active { transform: scale(0.93); }
+    #send-btn:disabled { background: #ccc; cursor: default; }
+    #send-btn svg { width: 20px; height: 20px; fill: white; }
+
+    #reset-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: center;
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+    #reset-btn:hover { color: var(--text); }
+
+    #error-toast {
+      display: none;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      padding: 10px 16px 24px;
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 560px) {
+      .hero-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 28px;
+        align-items: center;
+      }
+      .hero-how { align-items: flex-start; }
+      .hero-step { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="hero-photo-wrap">
+      <img
+        src="./chomie.jpg"
+        alt="Chomie Gross with her dog"
+        class="hero-photo"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <div class="hero-photo-placeholder" style="display:none;">🐾</div>
+      <div class="hero-paw">🐾</div>
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-eyebrow">By Chomie Gross · Dog Trainer & Family Consultant</p>
+      <h1 class="hero-title">Before You<br>Get a Dog</h1>
+      <p class="hero-subtitle">
+        Most families jump straight to <strong>"What breed?"</strong> — but that's the wrong first question.
+        After working with hundreds of families, Chomie found that <strong>the why matters more than the what.</strong>
+        This chatbot will have the honest conversation with you first.
+      </p>
+      <div class="hero-how">
+        <div class="hero-step">
+          <span class="hero-step-num">1</span>
+          Answer 3 quick questions about where you're at
+        </div>
+        <div class="hero-step">
+          <span class="hero-step-num">2</span>
+          Have a real conversation — no pressure, no sales pitch
+        </div>
+        <div class="hero-step">
+          <span class="hero-step-num">3</span>
+          Walk away knowing if a dog is right for you right now
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAT
+══════════════════════════════════════ -->
+<div id="chat-wrapper">
+  <div id="messages"></div>
+  <div id="progress" style="display:none;"></div>
+  <div id="options-container" style="display:none;"></div>
+  <div id="chips-container"></div>
+  <div id="error-toast"></div>
+  <div id="input-bar">
+    <textarea id="user-input" rows="1" placeholder="Type your message…" disabled></textarea>
+    <button id="send-btn" disabled title="Send">
+      <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+    </button>
+    <button id="reset-btn" title="Start over">↺</button>
+  </div>
+</div>
+
+<footer>Based on "Before You Get a Dog" by Chomie Gross. Educational purposes only.</footer>
+
+<script>
+const SYSTEM_PROMPT = `You are an advisor based on the book "Before You Get a Dog" by Chomie Gross, a dog trainer and family consultant who has spent years sitting with families before they get a dog. You have talked hundreds of families out of getting a dog, and you were happy about it every single time.
+
+## YOUR VOICE AND PERSONALITY
+You are warm, direct, and a little bit sharp. You use wit the way a good doctor uses it — to make hard truths land softly. You are the friend who tells you what you need to hear, delivered in a way that makes you laugh instead of flinch.
+
+Your tone in practice:
+- When someone says their kids will help: "I love that for you. I also have teenagers. They are currently unavailable."
+- When someone says they grew up with dogs: "Growing up with dogs and being responsible for dogs are two very different experiences. You enjoyed the dog. Your parents owned the dog."
+- When someone says a dog will help their anxious child: "Dogs can absolutely help. But here's the thing — a dog arrives needing everything. It is not a therapist. It is a puppy."
+- When someone says they have a yard: "A yard is wonderful. I love yards. But a yard is not a lifestyle. A yard is a tool. Your dog still needs you."
+- When someone seems unprepared but eager: "I am not here to crush your dream. I am here to make sure it does not crush you."
+- When someone has clearly thought it through: "Okay. Now we are talking. This is exactly the kind of thinking that makes dogs successful."
+
+You ask one or two questions at a time, never five. You let people discover answers through conversation, not lectures. When something is a red flag, you name it with warmth and a touch of humor.
+
+## CORE PHILOSOPHY
+- The first question is never "What breed?" — it is "Why do you want a dog?"
+- Dogs do not fix problems. They expose them. Whatever is strong gets stronger; whatever is weak gets more visible.
+- The adults must want the dog. Children enjoy the dog. Adults own it.
+- A dog is a 10-15 year commitment. Every day. Not when convenient.
+- Time is the real expense — more than money.
+- The purchase price is the cheapest part. Real costs: vet, grooming, training, boarding, food, emergencies.
+- "I grew up with dogs" means you have wonderful memories. It does not mean you understand adult dog ownership.
+- A dog is not a fresh start. You bring yourself with you.
+- A yard is not exercise. A yard is a larger place to be bored.
+- Poodles and doodles are NOT easy dogs. Hypoallergenic does not mean low maintenance.
+- A working dog without a job will create one — and you will not like the job it picks.
+
+## INTAKE CONTEXT
+At the start you receive JSON describing the person's situation. Use it to personalize your opening.
+- stage: "just_thinking" — go gently but honestly
+- stage: "actively_looking" — slow them down and make sure the decision is solid
+- stage: "already_got_one" — focus on next steps and success
+- stage: "on_the_fence" — something real is holding them back; explore it
+- driver: "my_kids" — warm but direct; children want lots of things
+- driver: "my_partner" — one person may not be on board; that matters enormously
+- household: "family_young_kids" — puppy plus toddler equals two babies; tread carefully
+- household: "single_adult" — who is home during the day? That is the whole question.
+
+## CONVERSATION FLOW
+1. Warm, slightly witty opening that reacts to their intake.
+2. Ask why they want a dog — the most important question.
+3. Explore naturally: motivation, lifestyle and time, family dynamics, finances, home readiness, then breed last.
+4. Keep responses to 3-6 sentences. No walls of text.
+5. End most responses with one question — the most important one right now.
+6. When someone is genuinely ready, say so clearly. When they are not, say that too — kindly, honestly, with humor.
+
+## WHAT YOU NEVER DO
+- Never recommend a specific breeder or rescue.
+- Never make the decision for them — help them make it themselves.
+- Never shame past choices.
+- Never pretend dog ownership is easy.
+- Never jump to breed before understanding their life.
+- Never give five questions at once.`;
+
+const TRIAGE = [
+  {
+    id: 'stage',
+    botMsg: `Hi there! Before we dive in, I want to make sure I'm actually helpful — not just cheerful.\n\nSo let me ask you a couple of quick questions to figure out where you're at. Then we'll have a real conversation.\n\n**Where are you in this dog journey?**`,
+    options: [
+      { value: 'just_thinking',    label: 'Just starting to think about it',    sub: 'Curious, but nothing decided yet' },
+      { value: 'actively_looking', label: "Actively looking — it's happening",  sub: "We've basically decided, now what?" },
+      { value: 'already_got_one',  label: 'We already got the dog',             sub: "Looking for guidance now that we're in it" },
+      { value: 'on_the_fence',     label: "On the fence — can't decide",        sub: "Something's holding me back" },
+    ]
+  },
+  {
+    id: 'driver',
+    botMsg: `Got it. And honestly — **who is the main force behind this?**`,
+    options: [
+      { value: 'i_want_one',   label: 'Me — I genuinely want a dog.',        sub: 'This is my idea and my commitment' },
+      { value: 'my_kids',      label: 'My kids are asking constantly',        sub: "They've been begging for months" },
+      { value: 'my_partner',   label: 'My partner wants one',                 sub: "I'm the less enthusiastic one" },
+      { value: 'everyone',     label: 'Everyone is on board',                 sub: 'Whole family wants this' },
+    ]
+  },
+  {
+    id: 'household',
+    botMsg: `One more and then we talk. **What does your household look like?**`,
+    options: [
+      { value: 'single_adult',      label: 'Just me',                         sub: 'Living alone or with other adults' },
+      { value: 'couple_no_kids',    label: 'Couple, no kids',                 sub: 'Two adults in the picture' },
+      { value: 'family_young_kids', label: 'Family with young kids',          sub: 'Children under 8 in the home' },
+      { value: 'family_teens',      label: 'Family with older kids or teens', sub: 'Kids who can theoretically help' },
+      { value: 'empty_nesters',     label: 'Empty nesters',                   sub: 'House is quieter these days' },
+    ]
+  }
+];
+
+let apiKey = localStorage.getItem('dog_chatbot_key') || '';
+let messages = [];
+let triageAnswers = {};
+let triageStep = 0;
+let isLoading = false;
+
+const messagesEl  = document.getElementById('messages');
+const progressEl  = document.getElementById('progress');
+const optionsEl   = document.getElementById('options-container');
+const chipsEl     = document.getElementById('chips-container');
+const userInput   = document.getElementById('user-input');
+const sendBtn     = document.getElementById('send-btn');
+const resetBtn    = document.getElementById('reset-btn');
+const errorToast  = document.getElementById('error-toast');
+
+// Start — show key modal if no key saved
+if (apiKey) {
+  startTriage();
+} else {
+  showKeyModal();
+}
+
+function showKeyModal() {
+  const overlay = document.createElement('div');
+  overlay.id = 'key-overlay';
+  overlay.style.cssText = `
+    position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    display:flex; align-items:center; justify-content:center;
+    z-index:100; padding:16px;
+  `;
+  overlay.innerHTML = `
+    <div style="background:#fff; border-radius:18px; padding:28px 28px 24px; max-width:420px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.25);">
+      <div style="font-size:28px; margin-bottom:12px;">🐾</div>
+      <h2 style="font-size:18px; font-weight:700; color:#1a1a1a; margin-bottom:8px;">Enter your API Key to start</h2>
+      <p style="font-size:13px; color:#6b6560; line-height:1.5; margin-bottom:18px;">
+        This chatbot uses the Anthropic API. Your key is saved only in your browser and never sent anywhere except directly to Anthropic.<br><br>
+        Get a free key at <strong>console.anthropic.com</strong>.
+      </p>
+      <div style="display:flex; gap:8px;">
+        <input id="modal-key-input" type="password" placeholder="sk-ant-..." autocomplete="off"
+          style="flex:1; padding:10px 14px; border:1.5px solid #e8e2d9; border-radius:10px; font-size:13px; font-family:monospace; outline:none;" />
+        <button id="modal-key-btn"
+          style="padding:10px 18px; background:#3d6b4f; color:white; border:none; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap;">
+          Start →
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const input = document.getElementById('modal-key-input');
+  const btn   = document.getElementById('modal-key-btn');
+
+  const submit = () => {
+    const key = input.value.trim();
+    if (!key.startsWith('sk-')) {
+      input.style.borderColor = '#f87171';
+      input.placeholder = 'Must start with sk-ant-...';
+      return;
+    }
+    apiKey = key;
+    localStorage.setItem('dog_chatbot_key', key);
+    overlay.remove();
+    startTriage();
+  };
+
+  btn.addEventListener('click', submit);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+}
+
+function startTriage() {
+  triageStep = 0;
+  triageAnswers = {};
+  messages = [];
+  messagesEl.innerHTML = '';
+  chipsEl.innerHTML = '';
+  optionsEl.innerHTML = '';
+  optionsEl.style.display = 'none';
+  progressEl.style.display = 'none';
+  userInput.disabled = true;
+  sendBtn.disabled = true;
+  renderTriageStep();
+}
+
+function renderTriageStep() {
+  const q = TRIAGE[triageStep];
+
+  progressEl.style.display = 'flex';
+  progressEl.innerHTML = '';
+  TRIAGE.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i < triageStep ? ' done' : i === triageStep ? ' active' : '');
+    progressEl.appendChild(dot);
+  });
+
+  addMessage('bot', q.botMsg);
+
+  optionsEl.style.display = 'flex';
+  optionsEl.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="btn-label">${opt.label}</span>${opt.sub ? `<span class="btn-sub">${opt.sub}</span>` : ''}`;
+    btn.addEventListener('click', () => handleTriageAnswer(q.id, opt.value, opt.label));
+    optionsEl.appendChild(btn);
+  });
+
+  scrollToBottom();
+}
+
+function handleTriageAnswer(key, value, label) {
+  triageAnswers[key] = value;
+  optionsEl.style.display = 'none';
+  optionsEl.innerHTML = '';
+  addMessage('user', label);
+  triageStep++;
+
+  if (triageStep < TRIAGE.length) {
+    setTimeout(renderTriageStep, 400);
+  } else {
+    progressEl.style.display = 'none';
+    setTimeout(beginConversation, 400);
+  }
+}
+
+async function beginConversation() {
+  userInput.disabled = false;
+  sendBtn.disabled = false;
+
+  const intakeJson = JSON.stringify(triageAnswers);
+  const primer = `[INTAKE DATA] ${intakeJson}\n\nBased on this intake, give a warm, personalized, slightly witty opening that reacts to where they are and asks the single most important question: Why do you want a dog? Keep it to 3-4 sentences max. Do not repeat their words back verbatim — react to them.`;
+
+  messages = [{ role: 'user', content: primer }];
+  setLoading(true);
+  showTyping();
+
+  try {
+    const reply = await callClaude(messages);
+    messages.push({ role: 'assistant', content: reply });
+    removeTyping();
+    addMessage('bot', reply);
+    showContextualChips('opening');
+  } catch(err) {
+    removeTyping();
+    showError('Error: ' + err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function handleUserMessage(text) {
+  if (!text.trim() || isLoading) return;
+  chipsEl.innerHTML = '';
+  addMessage('user', text);
+  messages.push({ role: 'user', content: text });
+  userInput.value = '';
+  userInput.style.height = 'auto';
+  setLoading(true);
+  showTyping();
+
+  try {
+    const reply = await callClaude(messages);
+    messages.push({ role: 'assistant', content: reply });
+    removeTyping();
+    addMessage('bot', reply);
+    showContextualChips(getConversationPhase());
+  } catch(err) {
+    removeTyping();
+    showError('Error: ' + err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function callClaude(msgs) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-opus-4-8',
+      max_tokens: 900,
+      system: SYSTEM_PROMPT,
+      messages: msgs
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error?.message || `API error ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.content[0].text;
+}
+
+function getConversationPhase() {
+  const count = messages.filter(m => m.role === 'user').length;
+  if (count <= 2) return 'motivation';
+  if (count <= 4) return 'lifestyle';
+  if (count <= 7) return 'practical';
+  return 'breed';
+}
+
+const CHIP_SETS = {
+  opening: [
+    "My kids really want one",
+    "I genuinely love dogs",
+    "My partner suggested it",
+    "I want a companion",
+    "Honestly not totally sure",
+  ],
+  motivation: [
+    "I grew up with dogs",
+    "Our family feels like something is missing",
+    "The kids promised they would help",
+    "A dog will be good for the kids",
+    "I live alone and want company",
+  ],
+  lifestyle: [
+    "I work from home",
+    "We are both out most of the day",
+    "We travel a fair amount",
+    "I have young kids at home",
+    "My teenagers will help out",
+  ],
+  practical: [
+    "What does it actually cost per year?",
+    "We have a yard — does that help?",
+    "What about hiring a dog walker?",
+    "Puppy vs. adult dog — which is better?",
+    "How much time does training really take?",
+  ],
+  breed: [
+    "What breed do you recommend for us?",
+    "Are doodles actually easy dogs?",
+    "We want something small",
+    "What is a good first-time dog?",
+    "We are thinking about a rescue",
+  ]
+};
+
+function showContextualChips(phase) {
+  chipsEl.innerHTML = '';
+  (CHIP_SETS[phase] || []).forEach(opt => {
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.textContent = opt;
+    chip.addEventListener('click', () => {
+      chipsEl.innerHTML = '';
+      handleUserMessage(opt);
+    });
+    chipsEl.appendChild(chip);
+  });
+}
+
+function addMessage(role, content) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `msg ${role}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.innerHTML = formatText(content);
+  msgDiv.appendChild(bubble);
+  messagesEl.appendChild(msgDiv);
+  scrollToBottom();
+  return msgDiv;
+}
+
+function formatText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  const el = document.createElement('div');
+  el.className = 'msg bot';
+  el.id = 'typing-indicator';
+  el.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
+  messagesEl.appendChild(el);
+  scrollToBottom();
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function scrollToBottom() {
+  setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 50);
+}
+
+function showError(msg) {
+  errorToast.style.display = 'block';
+  errorToast.textContent = msg;
+  setTimeout(() => { errorToast.style.display = 'none'; }, 6000);
+}
+
+function setLoading(val) {
+  isLoading = val;
+  sendBtn.disabled = val;
+  userInput.disabled = val;
+}
+
+userInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    handleUserMessage(userInput.value.trim());
+  }
+});
+userInput.addEventListener('input', () => {
+  userInput.style.height = 'auto';
+  userInput.style.height = Math.min(userInput.scrollHeight, 140) + 'px';
+});
+sendBtn.addEventListener('click', () => handleUserMessage(userInput.value.trim()));
+resetBtn.addEventListener('click', () => {
+  if (confirm('Start over from the beginning?')) startTriage();
+});
+</script>
+</body>
+</html>
