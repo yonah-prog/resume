@@ -124,6 +124,10 @@
     .r-card-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
     .r-card-pos { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
     .r-card-team { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    a.r-card { display: block; text-decoration: none; color: inherit; }
+    a.r-card:hover .r-card-img { background: var(--box-2); }
+    .r-card-cs { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+    a.r-card:hover .r-card-cs { color: var(--ink); }
 
     /* Marquee */
     .marquee-rows { display: flex; flex-direction: column; gap: 0; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -297,16 +301,143 @@
     <h2 style="margin-bottom:16px;">The Roster</h2>
     <p class="lede" style="margin-bottom:56px;">Athletes across the NFL, NBA, and MLB trust Brunswick to run the business of their careers. Many have been with us for over a decade.</p>
     <div class="roster-cards">
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Marcus Webb</div><div class="r-card-pos">Wide Receiver</div><div class="r-card-team">NFL</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">DeShawn Carver</div><div class="r-card-pos">Shooting Guard</div><div class="r-card-team">NBA</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Jordan Okafor</div><div class="r-card-pos">Center Field</div><div class="r-card-team">MLB</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Tyler Reese</div><div class="r-card-pos">Quarterback</div><div class="r-card-team">NFL</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Khalil Moses</div><div class="r-card-pos">Power Forward</div><div class="r-card-team">NBA</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Antonio Reyes</div><div class="r-card-pos">Starting Pitcher</div><div class="r-card-team">MLB</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">Devon Ashby</div><div class="r-card-pos">Cornerback</div><div class="r-card-team">NFL</div></div></div>
-      <div class="r-card"><div class="r-card-img"><span>Photo</span></div><div class="r-card-body"><div class="r-card-name">James Holloway</div><div class="r-card-pos">Center</div><div class="r-card-team">NBA</div></div></div>
+      <a href="/brunswick/athletes/demario-douglas.html" class="r-card">
+        <div class="r-card-img"><span>DD</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">DeMario "Pop" Douglas</div>
+          <div class="r-card-pos">Wide Receiver</div>
+          <div class="r-card-team">NFL · Patriots</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/anfernee-jennings.html" class="r-card">
+        <div class="r-card-img"><span>AJ</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Anfernee Jennings</div>
+          <div class="r-card-pos">Linebacker</div>
+          <div class="r-card-team">NFL · Patriots</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/deatrich-wise.html" class="r-card">
+        <div class="r-card-img"><span>DW</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Deatrich Wise Jr.</div>
+          <div class="r-card-pos">Defensive End</div>
+          <div class="r-card-team">NFL · Patriots</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/andre-drummond.html" class="r-card">
+        <div class="r-card-img"><span>AD</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Andre Drummond</div>
+          <div class="r-card-pos">Center</div>
+          <div class="r-card-team">NBA</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/tyler-nubin.html" class="r-card">
+        <div class="r-card-img"><span>TN</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Tyler Nubin</div>
+          <div class="r-card-pos">Safety</div>
+          <div class="r-card-team">NFL · Giants</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/boogie-fland.html" class="r-card">
+        <div class="r-card-img"><span>BF</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Boogie Fland</div>
+          <div class="r-card-pos">Guard</div>
+          <div class="r-card-team">NCAA / NIL</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/alahn-sumler.html" class="r-card">
+        <div class="r-card-img"><span>AS</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">A'Lahn Sumler</div>
+          <div class="r-card-pos">Guard</div>
+          <div class="r-card-team">NCAA / NIL</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
+      <a href="/brunswick/athletes/aaron-scott-jr.html" class="r-card">
+        <div class="r-card-img"><span>AS</span></div>
+        <div class="r-card-body">
+          <div class="r-card-name">Aaron Scott Jr.</div>
+          <div class="r-card-pos">Cornerback</div>
+          <div class="r-card-team">NFL · Oregon</div>
+          <div class="r-card-cs">View Case Study →</div>
+        </div>
+      </a>
     </div>
     <p style="margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Roster shown by introduction only. Full list available upon request.</p>
+  </div>
+</section>
+
+<!-- Client Showcase -->
+<section id="client-showcase">
+  <div class="wrap">
+    <div class="section-label">Client showcase</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:56px;">
+      <h2 style="max-width:14ch;">Results that speak<br>for themselves.</h2>
+      <p class="lede" style="max-width:44ch;">A selection of the work Brunswick has built for its roster — across NIL, brand, community, and business.</p>
+    </div>
+    <!-- Featured 3 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);">
+      <a href="/brunswick/athletes/demario-douglas.html" style="display:flex;flex-direction:column;justify-content:space-between;min-height:480px;background:#111;color:#fff;padding:40px 36px;border-right:1px solid #2a2a2a;text-decoration:none;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7f7f7f;margin-bottom:24px;">NFL · Brand</div>
+          <div style="font-size:40px;font-weight:500;letter-spacing:-0.02em;line-height:1.05;color:#fff;margin-bottom:24px;">DeMario<br>&ldquo;Pop&rdquo; Douglas</div>
+          <p style="font-size:14px;line-height:1.65;color:#aaa;max-width:30ch;">From 40K to 225K followers — and a signature soda with national press.</p>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a;padding-top:28px;border-top:1px solid #2a2a2a;margin-top:40px;">Read case study →</div>
+      </a>
+      <a href="/brunswick/athletes/boogie-fland.html" style="display:flex;flex-direction:column;justify-content:space-between;min-height:480px;background:#111;color:#fff;padding:40px 36px;border-right:1px solid #2a2a2a;text-decoration:none;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7f7f7f;margin-bottom:24px;">NIL · Brand</div>
+          <div style="font-size:40px;font-weight:500;letter-spacing:-0.02em;line-height:1.05;color:#fff;margin-bottom:24px;">Boogie<br>Fland</div>
+          <p style="font-size:14px;line-height:1.65;color:#aaa;max-width:30ch;">One of the most lucrative NIL deals in college basketball history.</p>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a;padding-top:28px;border-top:1px solid #2a2a2a;margin-top:40px;">Read case study →</div>
+      </a>
+      <a href="/brunswick/athletes/andre-drummond.html" style="display:flex;flex-direction:column;justify-content:space-between;min-height:480px;background:#111;color:#fff;padding:40px 36px;text-decoration:none;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#7f7f7f;margin-bottom:24px;">NBA · Business</div>
+          <div style="font-size:40px;font-weight:500;letter-spacing:-0.02em;line-height:1.05;color:#fff;margin-bottom:24px;">Andre<br>Drummond</div>
+          <p style="font-size:14px;line-height:1.65;color:#aaa;max-width:30ch;">All-NBA infrastructure. Applied to real estate, sport, and business.</p>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a;padding-top:28px;border-top:1px solid #2a2a2a;margin-top:40px;">Read case study →</div>
+      </a>
+    </div>
+    <!-- Other 5 -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);">
+      <a href="/brunswick/athletes/anfernee-jennings.html" style="display:flex;align-items:center;justify-content:space-between;padding:20px 16px 20px 20px;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:3px;">Anfernee Jennings</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">NFL · Community</div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">→</span>
+      </a>
+      <a href="/brunswick/athletes/deatrich-wise.html" style="display:flex;align-items:center;justify-content:space-between;padding:20px 16px 20px 20px;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:3px;">Deatrich Wise Jr.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">NFL · Foundation</div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">→</span>
+      </a>
+      <a href="/brunswick/athletes/tyler-nubin.html" style="display:flex;align-items:center;justify-content:space-between;padding:20px 16px 20px 20px;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:3px;">Tyler Nubin</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">NFL · Brand</div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">→</span>
+      </a>
+      <a href="/brunswick/athletes/alahn-sumler.html" style="display:flex;align-items:center;justify-content:space-between;padding:20px 16px 20px 20px;border-right:1px solid var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:3px;">A&rsquo;Lahn Sumler</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">NIL · Transfer</div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">→</span>
+      </a>
+      <a href="/brunswick/athletes/aaron-scott-jr.html" style="display:flex;align-items:center;justify-content:space-between;padding:20px 16px 20px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:3px;">Aaron Scott Jr.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">NFL · Transfer</div></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">→</span>
+      </a>
+    </div>
+    <!-- NIL Disclaimer -->
+    <p style="margin-top:32px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">*NIL compensation figures reflect publicly reported ranges or Brunswick&rsquo;s characterization of deal scale. Specific financial terms are confidential. Past results do not guarantee future outcomes.*</p>
   </div>
 </section>
 
