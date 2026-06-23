@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "framework": null,
+  "env": {
+    "RESEND_API_KEY": "re_bQg7LZva_AmHnvYQC2fXm9QtodPT9mxup"
+  }
+}

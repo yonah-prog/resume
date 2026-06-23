@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block confirmation/utility pages from indexing
+Disallow: /contact-confirmation/
+Disallow: /contact-confirmation-iron-request/
+Disallow: /contact-confirmation-energyboost/
+Disallow: /contact-confirmation-hematology-and-iron/
+Disallow: /contact-confirmation-gracias/
+Disallow: /contact-confirmation-atlanta-iron-consult/
+Disallow: /atlanta-contact-confirmation-energyboost/
+Disallow: /welcome/
+
+Sitemap: https://www.premierhematology.com/sitemap.xml
