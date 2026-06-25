@@ -253,67 +253,112 @@ def service_page(slug, title, yoast_title, meta_desc, eyebrow, h1, lead,
 </html>"""
 
 
-def location_page(slug, city, address, phone, yoast_title, meta_desc, nearby=""):
+def location_page(slug, city, address, phone, yoast_title, meta_desc, nearby="", place_id=""):
+    maps_q = address.replace(" ", "+")
+    maps_embed = f"https://maps.google.com/maps?q={maps_q}&output=embed&z=15"
+    place_id_attr = f'data-place-id="{place_id}"' if place_id else ""
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 {HEAD(yoast_title or f"{city} Infusion Center | Premier Hematology Oncology",
       meta_desc or f"Premier Hematology Oncology's {city} Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.")}
+  <script src="/assets/js/reviews.js" defer></script>
 </head>
 <body>
 
 {HEADER}
 
-  <section class="service-hero">
-    <div class="service-hero__inner">
+  <!-- Location hero — text only, no image -->
+  <section class="loc-hero">
+    <div class="loc-hero__inner">
       <div class="breadcrumb">
         <a href="/">Home</a><span class="breadcrumb__sep">/</span>
         <a href="/locations/">Locations</a><span class="breadcrumb__sep">/</span>
         <span class="breadcrumb__current">{city}</span>
       </div>
-      <div class="eyebrow-sans service-hero__eyebrow">Infusion Center</div>
-      <h1 class="service-hero__h1">{city} Infusion Center</h1>
-      <p class="service-hero__lead">Expert IV therapy and compassionate care — conveniently located in {city}{", " + nearby if nearby else ""}, close to home.</p>
+      <div class="eyebrow-sans" style="margin-bottom:12px;">Infusion Center</div>
+      <h1 class="loc-hero__h1">{city} Infusion Center</h1>
+      <p class="loc-hero__lead">Expert IV therapy and compassionate care — conveniently located in {city}{", " + nearby if nearby else ""}, close to home.</p>
     </div>
   </section>
 
-  <section class="service-media">
-    <div class="service-media__img img-placeholder">{city} infusion center interior</div>
-  </section>
+  <!-- Two-column: content left, contact + map right -->
+  <section class="loc-body">
+    <div class="loc-body__inner">
 
-  <section class="service-body">
-    <div>
-      <h2 class="service-body__h2">Your {city} care center</h2>
-      <p class="service-body__p">At our {city} infusion center, we deliver personalized IV therapy and hematology-oncology care in a comfortable, welcoming environment. Our board-certified team tailors every treatment plan to your specific needs — no long hospital waits required.</p>
-      <p class="service-body__p">We perform treatments on-site with an in-house lab, so you get faster results and spend less time waiting. Next-day appointments are available for most services.</p>
+      <!-- LEFT: copy + services + reviews -->
+      <div class="loc-content">
+        <h2 class="loc-content__h2">Your {city} care center</h2>
+        <p class="loc-content__p">At our {city} infusion center, we deliver personalized IV therapy and hematology-oncology care in a comfortable, welcoming environment. Our board-certified team tailors every treatment plan to your specific needs — no long hospital waits required.</p>
+        <p class="loc-content__p">We perform treatments on-site with an in-house lab, so you get faster results and spend less time waiting. Next-day appointments are available for most services.</p>
 
-      <h3 class="service-body__h3">Services offered at this location</h3>
-      <div class="checklist">
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Iron infusion therapy for iron-deficiency anemia</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Chemotherapy and immunotherapy administration</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Wellness and hydration infusions</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Injectable medications and biologics</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">On-site lab work and monitoring</span></div>
+        <h3 class="loc-content__h3">Services at this location</h3>
+        <div class="checklist">
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Iron infusion therapy for iron-deficiency anemia</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Chemotherapy and immunotherapy administration</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Wellness and hydration infusions</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Injectable medications and biologics</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">On-site lab work and monitoring</span></div>
+        </div>
+
+        <!-- Google Reviews carousel — populated by reviews.js when place_id is set -->
+        <div class="reviews-section" {place_id_attr}>
+          <div class="reviews-section__header">
+            <h3 class="reviews-section__title">What our patients say</h3>
+            <div class="reviews-section__rating" id="reviews-rating-{slug}"></div>
+          </div>
+          <div class="reviews-carousel" id="reviews-carousel-{slug}">
+            <!-- Skeleton shown until JS loads reviews -->
+            <div class="reviews-skeleton">
+              <div class="reviews-skeleton__card"></div>
+              <div class="reviews-skeleton__card"></div>
+              <div class="reviews-skeleton__card"></div>
+            </div>
+          </div>
+          <div class="reviews-nav" id="reviews-nav-{slug}"></div>
+        </div>
       </div>
-      <div class="pullquote">
-        <p>"Skip the long waits at hospitals and labs. At Premier Hematology, we perform treatments right on site."</p>
-      </div>
+
+      <!-- RIGHT: contact card + map -->
+      <aside class="loc-sidebar">
+        <div class="loc-contact-card">
+          <div class="loc-contact-card__label">Location details</div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>{address}</span>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:{phone.replace('-','')}" style="color:var(--purple);text-decoration:none;">{phone}</a>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mon–Fri, 9 am – 5 pm</span>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <span>Next-day appointments · In-house lab</span>
+          </div>
+          <a href="/anemia-iron-deficiency-consultation/" class="btn" style="display:block;text-align:center;margin-top:20px;">Book an appointment &rarr;</a>
+        </div>
+
+        <!-- Google Maps embed — no API key required -->
+        <div class="loc-map">
+          <iframe
+            src="{maps_embed}"
+            width="100%"
+            height="320"
+            style="border:0;border-radius:14px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="{city} Infusion Center map">
+          </iframe>
+        </div>
+      </aside>
+
     </div>
-
-    <aside class="service-sidebar">
-      <div class="sidebar-cta">
-        <h3 class="sidebar-cta__h3">Ready to begin?</h3>
-        <p class="sidebar-cta__p">Next-day appointments available at our {city} location.</p>
-        <a href="/anemia-iron-deficiency-consultation/" class="btn" style="display:block;text-align:center;">Book an appointment</a>
-      </div>
-      <div class="sidebar-facts">
-        <div class="sidebar-facts__label">Location details</div>
-        <div class="fact-row"><span class="fact-row__key">Address</span><span class="fact-row__val">{address}</span></div>
-        <div class="fact-row"><span class="fact-row__key">Phone</span><span class="fact-row__val">{phone}</span></div>
-        <div class="fact-row"><span class="fact-row__key">Appointments</span><span class="fact-row__val">Next-day</span></div>
-        <div class="fact-row"><span class="fact-row__key">Lab results</span><span class="fact-row__val">On-site</span></div>
-      </div>
-    </aside>
   </section>
 
   <section class="related-section">
@@ -321,28 +366,13 @@ def location_page(slug, city, address, phone, yoast_title, meta_desc, nearby="")
       <h2 class="related-section__h2">Our services</h2>
       <div class="related-grid">
         <a href="/hematology/" class="card" style="text-decoration:none;color:inherit;">
-          <div class="related-card__img img-placeholder">Hematology</div>
-          <div class="related-card__body">
-            <h3 class="related-card__title">Hematology</h3>
-            <p class="related-card__desc">Specialized care for blood health and blood-related diseases.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Hematology</h3><p class="related-card__desc">Specialized care for blood health and blood-related diseases.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
         <a href="/wellness-infusions/" class="card" style="text-decoration:none;color:inherit;">
-          <div class="related-card__img img-placeholder">Wellness Infusions</div>
-          <div class="related-card__body">
-            <h3 class="related-card__title">Wellness Infusions</h3>
-            <p class="related-card__desc">Nutritional support and supplementation for patients who need it.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Wellness Infusions</h3><p class="related-card__desc">Nutritional support and supplementation for patients who need it.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
         <a href="/womens-health-services/" class="card" style="text-decoration:none;color:inherit;">
-          <div class="related-card__img img-placeholder">Women's Health</div>
-          <div class="related-card__body">
-            <h3 class="related-card__title">Women's Health</h3>
-            <p class="related-card__desc">Care attuned to your unique health needs at every stage.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Women's Health</h3><p class="related-card__desc">Care attuned to your unique health needs at every stage.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
       </div>
     </div>
@@ -842,19 +872,20 @@ write("billing-inquiries/index.html", simple_page(
 print("\n📍 Location pages...")
 
 NY_LOCATIONS = [
-    ("astoria-infusion-center",    "Astoria",       "23-10 31st St, Astoria, NY 11105",         "718-866-3037", "near Ditmars Blvd"),
-    ("boro-park-infusion-center",  "Boro Park",     "4915 13th Ave, Brooklyn, NY 11219",         "718-866-3037", ""),
-    ("brooklyn-infusion-center",   "Brooklyn",      "Brooklyn, NY",                              "718-866-3037", ""),
-    ("five-towns-infusion-center", "Five Towns",    "Lawrence, NY 11559",                        "718-866-3037", "serving Woodmere, Hewlett & Lawrence"),
-    ("great-neck-infusion-center", "Great Neck",    "Great Neck, NY 11021",                      "718-866-3037", ""),
-    ("howard-beach-infusion-center","Howard Beach", "Howard Beach, Queens, NY 11414",            "718-866-3037", ""),
-    ("jamaica-infusion-center",    "Jamaica",       "Jamaica, Queens, NY 11432",                 "718-866-3037", ""),
-    ("manhattan-infusion-center",  "Manhattan",     "Manhattan, New York, NY",                   "718-866-3037", ""),
-    ("monroe-infusion-center",     "Monroe",        "Monroe, NY 10950",                          "718-866-3037", "serving Orange County"),
-    ("monsey-infusion-center",     "Monsey",        "Monsey, NY 10952",                          "718-866-3037", "serving Rockland County"),
-    ("port-jefferson-infusion-center","Port Jefferson","Port Jefferson, NY 11777",               "718-866-3037", "serving Suffolk County"),
-    ("queens-infusion-center",     "Queens",        "Queens, NY",                                "718-866-3037", ""),
-    ("staten-island-infusion-center","Staten Island","Staten Island, NY",                        "718-866-3037", ""),
+    # (slug, city, address, phone, nearby, place_id)
+    ("astoria-infusion-center",       "Astoria",       "25-31 30th Rd #1F, Astoria, NY 11102",       "718-866-3037", "near Ditmars Blvd",             "ChIJg60C9lZfwokRzA4bIgPAXbk"),
+    ("boro-park-infusion-center",     "Boro Park",     "3711 13th Ave, Brooklyn, NY 11218",           "718-866-3037", "",                              "ChIJAZ5hwH5bwokRWoxGhP4DcE8"),
+    ("brooklyn-infusion-center",      "Brooklyn",      "5221 Foster Ave, Brooklyn, NY 11203",         "718-866-3037", "",                              "ChIJmerIfYpdwokRLo8zhagmYlg"),
+    ("five-towns-infusion-center",    "Five Towns",    "270 Doughty Blvd, Inwood, NY 11096",          "718-866-3037", "serving Woodmere, Hewlett & Lawrence", "ChIJVXjmhIBlwokRqigOUHWGWck"),
+    ("great-neck-infusion-center",    "Great Neck",    "170 Great Neck Rd Ste 1, Great Neck, NY 11021","718-866-3037", "",                             "ChIJJZslEYuJwokRna9wNqr4L4Q"),
+    ("howard-beach-infusion-center",  "Howard Beach",  "161-50 92nd St, Howard Beach, NY 11414",      "718-866-3037", "",                              "ChIJq6nwSQVnwokRj0V1ztABhjs"),
+    ("jamaica-infusion-center",       "Jamaica",       "140-40 Queens Blvd, Jamaica, NY 11435",       "718-866-3037", "",                              "ChIJNwOmYyJhwokRx7hZmFvGbRc"),
+    ("manhattan-infusion-center",     "Manhattan",     "55 E 87th St #1D, New York, NY 10128",        "718-866-3037", "",                              "ChIJJyBDVG1ZwokRdVP1rWYW600"),
+    ("monroe-infusion-center",        "Monroe",        "505 NY-208, Monroe, NY 10950",                "718-866-3037", "serving Orange County",         "ChIJn6_qi3zXwokRg_0rsa6X_TM"),
+    ("monsey-infusion-center",        "Monsey",        "10 Johnsons Ln, New City, NY 10956",          "718-866-3037", "serving Rockland County",       "ChIJh59lZp7DwokRld2Fi9W2Zxo"),
+    ("port-jefferson-infusion-center","Port Jefferson","2 Medical Dr, Port Jefferson Station, NY 11776","718-866-3037","serving Suffolk County",       "ChIJOeZ2HzVB6IkRjp-ur_X99os"),
+    ("queens-infusion-center",        "Queens",        "163-03 Horace Harding Expy Lower Level, Fresh Meadows, NY 11365", "718-866-3037", "Fresh Meadows", "ChIJhXQgkCphwokRgw0nKWHFD1M"),
+    ("staten-island-infusion-center", "Staten Island", "1332 Rockland Ave, Staten Island, NY 10314",  "718-866-3037", "",                              "ChIJYX8jISdNwokRaNma5nzguEw"),
 ]
 
 LOCATION_YOAST = {
@@ -873,9 +904,9 @@ LOCATION_YOAST = {
     "staten-island-infusion-center":("Staten Island Infusion Center | Premier Hematology Oncology", "Premier Hematology Oncology's Staten Island Infusion Center provides expert IV therapy and compassionate care close to home."),
 }
 
-for slug, city, address, phone, nearby in NY_LOCATIONS:
+for slug, city, address, phone, nearby, place_id in NY_LOCATIONS:
     yt, md = LOCATION_YOAST.get(slug, ("", ""))
-    write(f"{slug}/index.html", location_page(slug, city, address, phone, yt, md, nearby))
+    write(f"{slug}/index.html", location_page(slug, city, address, phone, yt, md, nearby, place_id))
 
 # Atlanta cluster
 print("\n🍑 Atlanta pages...")
@@ -911,11 +942,12 @@ write("atlanta/index.html", service_page(
 ))
 
 write("atlanta-infusion-center/index.html", location_page(
-    "atlanta-infusion-center", "Atlanta", "325 Hammond Dr SW, Atlanta, GA 30315",
+    "atlanta-infusion-center", "Atlanta", "325 Hammond Dr Ste 201, Atlanta, GA 30328",
     "404-555-0100",
     "Atlanta Center | Premier Hematology Oncology",
-    "Visit Premier Hematology's Atlanta infusion center at 325 Hammond Dr SW, West End. Comfortable private infusion bays, in-house lab, and next-day appointments.",
-    nearby="West End, Atlanta",
+    "Visit Premier Hematology's Atlanta infusion center at 325 Hammond Dr, Sandy Springs. Comfortable private infusion bays, in-house lab, and next-day appointments.",
+    nearby="Sandy Springs, Atlanta",
+    place_id="ChIJT3peMUMD9YgRXjMXn1OIHDg",
 ))
 
 write("atlanta-care-team/index.html", simple_page(
@@ -1070,6 +1102,19 @@ LEADGEN_PAGES = [
      "Request a consultation with Premier Hematology & Oncology. Our team will reach out within 24 hours to schedule your appointment.",
      "Request a Consultation",
      "Fill out the form below and our team will reach out within 24 hours to schedule your appointment at the location most convenient for you."),
+    # WP ad landing page variants — separate slugs for tracking, same content as energy-boost
+    ("energy-boost-atlanta-hematology-and-iron-infusion-appointments",
+     "Energy Boost — Atlanta Hematology and Iron Infusion Appointments",
+     "Anemia & Iron Deficiency Consultation | Premier Hematology",
+     "Struggling with fatigue, dizziness, or shortness of breath? Premier Hematology offers next-day consultations and personalized treatment plans.",
+     "Reclaim Your Energy — Atlanta",
+     "Constant fatigue, brain fog, or shortness of breath? It may be iron deficiency — and it's highly treatable. Our Atlanta specialists deliver next-day iron infusions."),
+    ("energy-boost-hematology-and-iron-infusion-appointments-openai",
+     "Energy Boost — Hematology and Iron Infusion Appointments",
+     "Anemia & Iron Deficiency Consultation | Premier Hematology",
+     "Struggling with fatigue, dizziness, or shortness of breath? Premier Hematology offers next-day consultations and personalized treatment plans.",
+     "Reclaim Your Energy with Iron Infusion Therapy",
+     "Constant fatigue, brain fog, or shortness of breath? It may be iron deficiency — and it's highly treatable. Our specialists deliver next-day iron infusions at 13 convenient locations."),
 ]
 
 for slug, title, yt, md, h1, lead in LEADGEN_PAGES:
@@ -1348,3 +1393,8 @@ write("sms-privacy-policy/index.html", simple_page(
 ))
 
 print(f"\n✅ Done! Site generated in {ROOT}")
+
+# Always inject forms immediately after generation so they're never accidentally omitted
+import subprocess as _sp
+print("\n⚙️  Injecting forms via build_forms.py...")
+_sp.run(["python3", os.path.join(ROOT, "build_forms.py")], check=True)

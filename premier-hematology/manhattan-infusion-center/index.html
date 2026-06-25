@@ -3,91 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manhattan Infusion Center | Premier Hematology Care</title>
+  <meta name="description" content="Premier Hematology Oncology's Manhattan Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
-  <title>Manhattan Infusion Center | Premier Hematology Care</title>
-  <meta name="description" content="Premier Hematology Oncology’s Manhattan Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.">
-  <link rel="canonical" href="https://www.premierhematology.com/manhattan-infusion-center/">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Manhattan Infusion Center | Premier Hematology Care">
-  <meta property="og:description" content="Premier Hematology Oncology’s Manhattan Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.">
-  <meta property="og:url" content="https://www.premierhematology.com/manhattan-infusion-center/">
-  <meta property="og:image" content="/assets/img/og-default.jpg">
-  <meta property="og:site_name" content="Premier Hematology & Oncology">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Manhattan Infusion Center | Premier Hematology Care">
-  <meta name="twitter:description" content="Premier Hematology Oncology’s Manhattan Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.">
-  <meta name="twitter:image" content="/assets/img/og-default.jpg">
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": [
-        "MedicalClinic",
-        "LocalBusiness"
-      ],
-      "@id": "https://www.premierhematology.com/manhattan-infusion-center/#clinic",
-      "name": "Premier Hematology & Oncology \u2014 Manhattan",
-      "url": "https://www.premierhematology.com/manhattan-infusion-center/",
-      "description": "Premier Hematology Oncology\u2019s Manhattan Infusion Center provides expert IV therapy and compassionate care in a welcoming environment.",
-      "telephone": "+17188663037",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Manhattan, New York, NY",
-        "addressLocality": "Manhattan",
-        "addressRegion": "NY",
-        "addressCountry": "US"
-      },
-      "medicalSpecialty": [
-        "Hematology",
-        "Oncology"
-      ],
-      "availableService": [
-        {
-          "@type": "MedicalTherapy",
-          "name": "Iron Infusion Therapy"
-        },
-        {
-          "@type": "MedicalTherapy",
-          "name": "Chemotherapy Administration"
-        },
-        {
-          "@type": "MedicalTherapy",
-          "name": "Wellness Infusions"
-        }
-      ],
-      "openingHours": "Mo-Fr 09:00-17:00",
-      "isPartOf": {
-        "@id": "https://www.premierhematology.com/#organization"
-      }
-    },
-    {
-      "@type": "MedicalOrganization",
-      "@id": "https://www.premierhematology.com/#organization",
-      "name": "Premier Hematology & Oncology",
-      "url": "https://www.premierhematology.com",
-      "logo": "https://www.premierhematology.com/assets/img/logo.png",
-      "telephone": "+17189972281",
-      "sameAs": [
-        "https://www.facebook.com/premierhematology"
-      ],
-      "address": {
-        "streetAddress": "Multiple locations across New York metro",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "postalCode": "11373",
-        "addressCountry": "US"
-      }
-    }
-  ]
-}
-  </script>
+  <script src="/assets/js/reviews.js" defer></script>
 </head>
 <body>
 
@@ -152,56 +74,96 @@
     </div>
   </header>
 
-  <section class="service-hero">
-    <div class="service-hero__inner">
+  <!-- Location hero — text only, no image -->
+  <section class="loc-hero">
+    <div class="loc-hero__inner">
       <div class="breadcrumb">
         <a href="/">Home</a><span class="breadcrumb__sep">/</span>
         <a href="/locations/">Locations</a><span class="breadcrumb__sep">/</span>
         <span class="breadcrumb__current">Manhattan</span>
       </div>
-      <div class="eyebrow-sans service-hero__eyebrow">Infusion Center</div>
-      <h1 class="service-hero__h1">Manhattan Infusion Center</h1>
-      <p class="service-hero__lead">Expert IV therapy and compassionate care — conveniently located in Manhattan, close to home.</p>
+      <div class="eyebrow-sans" style="margin-bottom:12px;">Infusion Center</div>
+      <h1 class="loc-hero__h1">Manhattan Infusion Center</h1>
+      <p class="loc-hero__lead">Expert IV therapy and compassionate care — conveniently located in Manhattan, close to home.</p>
     </div>
   </section>
 
-  <section class="service-media">
-    <img src="/assets/img/wp/2025/02/Infusion-Therapy-Centers.png" alt="Manhattan infusion center interior" loading="lazy" class="page-img">
-  </section>
+  <!-- Two-column: content left, contact + map right -->
+  <section class="loc-body">
+    <div class="loc-body__inner">
 
-  <section class="service-body">
-    <div>
-      <h2 class="service-body__h2">Your Manhattan care center</h2>
-      <p class="service-body__p">At our Manhattan infusion center, we deliver personalized IV therapy and hematology-oncology care in a comfortable, welcoming environment. Our board-certified team tailors every treatment plan to your specific needs — no long hospital waits required.</p>
-      <p class="service-body__p">We perform treatments on-site with an in-house lab, so you get faster results and spend less time waiting. Next-day appointments are available for most services.</p>
+      <!-- LEFT: copy + services + reviews -->
+      <div class="loc-content">
+        <h2 class="loc-content__h2">Your Manhattan care center</h2>
+        <p class="loc-content__p">At our Manhattan infusion center, we deliver personalized IV therapy and hematology-oncology care in a comfortable, welcoming environment. Our board-certified team tailors every treatment plan to your specific needs — no long hospital waits required.</p>
+        <p class="loc-content__p">We perform treatments on-site with an in-house lab, so you get faster results and spend less time waiting. Next-day appointments are available for most services.</p>
 
-      <h3 class="service-body__h3">Services offered at this location</h3>
-      <div class="checklist">
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Iron infusion therapy for iron-deficiency anemia</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Chemotherapy and immunotherapy administration</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Wellness and hydration infusions</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Injectable medications and biologics</span></div>
-        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">On-site lab work and monitoring</span></div>
+        <h3 class="loc-content__h3">Services at this location</h3>
+        <div class="checklist">
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Iron infusion therapy for iron-deficiency anemia</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Chemotherapy and immunotherapy administration</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Wellness and hydration infusions</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Injectable medications and biologics</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">On-site lab work and monitoring</span></div>
+        </div>
+
+        <!-- Google Reviews carousel — populated by reviews.js when place_id is set -->
+        <div class="reviews-section" data-place-id="ChIJJyBDVG1ZwokRdVP1rWYW600">
+          <div class="reviews-section__header">
+            <h3 class="reviews-section__title">What our patients say</h3>
+            <div class="reviews-section__rating" id="reviews-rating-manhattan-infusion-center"></div>
+          </div>
+          <div class="reviews-carousel" id="reviews-carousel-manhattan-infusion-center">
+            <!-- Skeleton shown until JS loads reviews -->
+            <div class="reviews-skeleton">
+              <div class="reviews-skeleton__card"></div>
+              <div class="reviews-skeleton__card"></div>
+              <div class="reviews-skeleton__card"></div>
+            </div>
+          </div>
+          <div class="reviews-nav" id="reviews-nav-manhattan-infusion-center"></div>
+        </div>
       </div>
-      <div class="pullquote">
-        <p>"Skip the long waits at hospitals and labs. At Premier Hematology, we perform treatments right on site."</p>
-      </div>
+
+      <!-- RIGHT: contact card + map -->
+      <aside class="loc-sidebar">
+        <div class="loc-contact-card">
+          <div class="loc-contact-card__label">Location details</div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>55 E 87th St #1D, New York, NY 10128</span>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:7188663037" style="color:var(--purple);text-decoration:none;">718-866-3037</a>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mon–Fri, 9 am – 5 pm</span>
+          </div>
+          <div class="loc-contact-card__row">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <span>Next-day appointments · In-house lab</span>
+          </div>
+          <a href="/anemia-iron-deficiency-consultation/" class="btn" style="display:block;text-align:center;margin-top:20px;">Book an appointment &rarr;</a>
+        </div>
+
+        <!-- Google Maps embed — no API key required -->
+        <div class="loc-map">
+          <iframe
+            src="https://maps.google.com/maps?q=55+E+87th+St+#1D,+New+York,+NY+10128&output=embed&z=15"
+            width="100%"
+            height="320"
+            style="border:0;border-radius:14px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Manhattan Infusion Center map">
+          </iframe>
+        </div>
+      </aside>
+
     </div>
-
-    <aside class="service-sidebar">
-      <div class="sidebar-cta">
-        <h3 class="sidebar-cta__h3">Ready to begin?</h3>
-        <p class="sidebar-cta__p">Next-day appointments available at our Manhattan location.</p>
-        <a href="/anemia-iron-deficiency-consultation/" class="btn" style="display:block;text-align:center;">Book an appointment</a>
-      </div>
-      <div class="sidebar-facts">
-        <div class="sidebar-facts__label">Location details</div>
-        <div class="fact-row"><span class="fact-row__key">Address</span><span class="fact-row__val">Manhattan, New York, NY</span></div>
-        <div class="fact-row"><span class="fact-row__key">Phone</span><span class="fact-row__val">718-866-3037</span></div>
-        <div class="fact-row"><span class="fact-row__key">Appointments</span><span class="fact-row__val">Next-day</span></div>
-        <div class="fact-row"><span class="fact-row__key">Lab results</span><span class="fact-row__val">On-site</span></div>
-      </div>
-    </aside>
   </section>
 
   <section class="related-section">
@@ -209,28 +171,13 @@
       <h2 class="related-section__h2">Our services</h2>
       <div class="related-grid">
         <a href="/hematology/" class="card" style="text-decoration:none;color:inherit;">
-          <img src="/assets/img/wp/2025/02/Infusion-Therapy-Centers.png" alt="Hematology" loading="lazy" class="page-img">
-          <div class="related-card__body">
-            <h3 class="related-card__title">Hematology</h3>
-            <p class="related-card__desc">Specialized care for blood health and blood-related diseases.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Hematology</h3><p class="related-card__desc">Specialized care for blood health and blood-related diseases.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
         <a href="/wellness-infusions/" class="card" style="text-decoration:none;color:inherit;">
-          <img src="/assets/img/wp/2025/02/Infusion-Therapy-Centers.png" alt="Wellness Infusions" loading="lazy" class="page-img">
-          <div class="related-card__body">
-            <h3 class="related-card__title">Wellness Infusions</h3>
-            <p class="related-card__desc">Nutritional support and supplementation for patients who need it.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Wellness Infusions</h3><p class="related-card__desc">Nutritional support and supplementation for patients who need it.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
         <a href="/womens-health-services/" class="card" style="text-decoration:none;color:inherit;">
-          <img src="/assets/img/wp/2025/02/Infusion-Therapy-Centers.png" alt="Women's Health" loading="lazy" class="page-img">
-          <div class="related-card__body">
-            <h3 class="related-card__title">Women's Health</h3>
-            <p class="related-card__desc">Care attuned to your unique health needs at every stage.</p>
-            <span class="related-card__link">Learn more &rarr;</span>
-          </div>
+          <div class="related-card__body"><h3 class="related-card__title">Women's Health</h3><p class="related-card__desc">Care attuned to your unique health needs at every stage.</p><span class="related-card__link">Learn more &rarr;</span></div>
         </a>
       </div>
     </div>

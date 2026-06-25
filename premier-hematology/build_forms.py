@@ -517,6 +517,17 @@ PAGES = {
 
     "billing-inquiries":
         billing_form(),
+
+    # WP ad landing page variants — same form, separate slugs for tracking
+    "energy-boost-atlanta-hematology-and-iron-infusion-appointments":
+        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
+                         title="Reclaim Your Energy — Atlanta",
+                         sub="Tell us your symptoms and we'll connect you with an Atlanta specialist."),
+
+    "energy-boost-hematology-and-iron-infusion-appointments-openai":
+        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
+                         title="Reclaim Your Energy",
+                         sub="Tell us your symptoms and we'll connect you with a specialist."),
 }
 
 # ---------------------------------------------------------------------------
