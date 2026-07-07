@@ -261,7 +261,16 @@
       #bw-preloader .bw-face, #bw-preloader .bw-word, #bw-preloader .bw-tag { animation: none; opacity: 1; }
       #bw-preloader { animation: bw-lift .3s ease .8s forwards; }
     }
+    .bw-no-preload #bw-preloader { display: none; }
   </style>
+  <script>
+    // Play the preloader once per browser session; skip on reloads and internal navigation
+    if (sessionStorage.getItem('bwPreloaded')) {
+      document.documentElement.classList.add('bw-no-preload');
+    } else {
+      sessionStorage.setItem('bwPreloaded', '1');
+    }
+  </script>
 </head>
 <body>
 
