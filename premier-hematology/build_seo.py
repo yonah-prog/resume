@@ -24,7 +24,8 @@ ROOT    = os.path.dirname(os.path.abspath(__file__))
 SEO_FILE = os.path.join(ROOT, "seo.json")
 SITE_URL = "https://www.premierhematology.com"
 DEFAULT_OG_IMAGE = f"{SITE_URL}/assets/img/og-default.jpg"
-ORG_NAME = "Premier Hematology & Oncology"
+ORG_NAME     = "Premier Hematology & Oncology"
+ORG_NAME_WP  = "Premier Hematology"   # og:site_name matches WP
 PHONE    = "+17189972281"
 ADDRESS  = {
     "streetAddress": "Multiple locations across New York metro",
@@ -165,19 +166,23 @@ def build_head_block(title, description, url, og_image, schema_json,
     esc_url   = url
     schema_str = json.dumps(schema_json, indent=2)
 
-    noindex = '\n  <meta name="robots" content="noindex, nofollow">' if is_noindex else ""
+    if is_noindex:
+        robots_meta = '\n  <meta name="robots" content="noindex, nofollow">'
+    else:
+        robots_meta = '\n  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">'
 
     return f"""\
   <title>{title}</title>
-  <meta name="description" content="{esc_desc}">{noindex}
+  <meta name="description" content="{esc_desc}">{robots_meta}
   <link rel="canonical" href="{esc_url}">
   <!-- Open Graph -->
+  <meta property="og:locale" content="en_US">
   <meta property="og:type" content="{og_type}">
   <meta property="og:title" content="{esc_title}">
   <meta property="og:description" content="{esc_desc}">
   <meta property="og:url" content="{esc_url}">
   <meta property="og:image" content="{og_image}">
-  <meta property="og:site_name" content="{ORG_NAME}">
+  <meta property="og:site_name" content="{ORG_NAME_WP}">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{esc_title}">
@@ -308,7 +313,7 @@ if os.path.exists(home_path):
     home_schema = webpage_schema(
         home_url,
         "Premier Hematology & Oncology | Infusion Therapy & Cancer Care",
-        "Expert hematology & oncology care in New York. Services include cancer genetic testing, infusion therapy, & women's health support.",
+        "Expert hematology & oncology care in New York. Services include cancer genetic testing treatment, infusion therapy, & women's health support.",
     )
     home_schema["@graph"].append({
         "@type": "MedicalOrganization",
@@ -322,7 +327,7 @@ if os.path.exists(home_path):
     })
     head = build_head_block(
         "Premier Hematology & Oncology | Infusion Therapy & Cancer Care",
-        "Expert hematology & oncology care in New York. Services include cancer genetic testing, infusion therapy, & women's health support.",
+        "Expert hematology & oncology care in New York. Services include cancer genetic testing treatment, infusion therapy, & women's health support.",
         home_url,
         DEFAULT_OG_IMAGE,
         home_schema,
