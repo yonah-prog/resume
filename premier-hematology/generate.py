@@ -846,7 +846,7 @@ write("cancers-and-conditions-we-treat/index.html", f"""<!DOCTYPE html>
   <!-- HERO IMAGE -->
   <section class="service-media">
     <div class="service-media__img" style="height:420px;overflow:hidden;">
-      <img src="http://premierhematology.com/wp-content/uploads/2024/04/office-interior.webp" alt="Premier Hematology office interior" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <img src="/assets/img/wp/2024/04/office-interior.webp" alt="Premier Hematology office interior" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
   </section>
 
@@ -1241,7 +1241,7 @@ for slug, city, address, phone, nearby, place_id in NY_LOCATIONS:
 # Atlanta cluster
 print("\n🍑 Atlanta pages...")
 
-ATL_IMG = "http://premierhematology.com/wp-content/uploads/"
+ATL_IMG = "/assets/img/wp/"
 
 # ── Atlanta Home ──────────────────────────────────────────────────────────────
 write("atlanta/index.html", f"""<!DOCTYPE html>
@@ -1901,7 +1901,7 @@ write("physician-referal/index.html", f"""<!DOCTYPE html>
 {HEAD("Physician Referral | Premier Hematology &amp; Oncology", "Refer your patients to Premier Hematology &amp; Oncology. Our team will contact the patient within 24 hours. Submit the secure referral form online.")}
 <style>
   .ref-hero {{
-    background-image: url('http://premierhematology.com/wp-content/uploads/2021/05/GettyImages-1189547726.jpg');
+    background-image: url('/assets/img/wp/2021/05/GettyImages-1189547726.jpg');
     background-size: cover; background-position: center;
   }}
   .ref-hero__inner {{
@@ -2114,7 +2114,7 @@ write("physician-referal/index.html", f"""<!DOCTYPE html>
 </body>
 </html>""")
 
-WP_IMG = "http://premierhematology.com/wp-content/uploads/"
+WP_IMG = "/assets/img/wp/"
 
 write("anemia-iron-deficiency-consultation/index.html", f"""<!DOCTYPE html>
 <html lang="en">
@@ -2512,8 +2512,8 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
       </div>
     </div>
     <div class="eb-hero__imgs">
-      <img class="eb-hero__img eb-hero__img--top" src="http://premierhematology.com/wp-content/uploads/2024/04/0_0.webp" alt="Women's iron infusion care">
-      <img class="eb-hero__img eb-hero__img--bottom" src="http://premierhematology.com/wp-content/uploads/2025/02/yonah0704_15145_headshot._smiling_latina_physician._purple_blou_6043a991-d6fd-41e8-ae2f-4ce291077430.png" alt="Premier Hematology physician">
+      <img class="eb-hero__img eb-hero__img--top" src="/assets/img/wp/2024/04/0_0.webp" alt="Women's iron infusion care">
+      <img class="eb-hero__img eb-hero__img--bottom" src="/assets/img/wp/2025/02/yonah0704_15145_headshot._smiling_latina_physician._purple_blou_6043a991-d6fd-41e8-ae2f-4ce291077430.png" alt="Premier Hematology physician">
     </div>
   </section>
 
@@ -2527,7 +2527,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
       <a href="#bottom_form" class="btn" style="margin-top:8px;">Find Out What&rsquo;s Really Going On &rarr;</a>
     </div>
     <div>
-      <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/questions.png" alt="Iron deficiency questions">
+      <img class="eb-split__img" src="/assets/img/wp/2025/07/questions.png" alt="Iron deficiency questions">
     </div>
   </section>
 
@@ -2535,7 +2535,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
   <section class="eb-dark">
     <div class="eb-dark__inner">
       <div>
-        <img class="eb-dark__img" src="http://premierhematology.com/wp-content/uploads/2025/07/aging-2-1.png" alt="Aging and iron deficiency">
+        <img class="eb-dark__img" src="/assets/img/wp/2025/07/aging-2-1.png" alt="Aging and iron deficiency">
       </div>
       <div>
         <div class="eyebrow-sans" style="color:#c3aef0;margin-bottom:14px;">The Overlooked Epidemic</div>
@@ -2561,7 +2561,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
       </div>
       <div class="eb-how__grid">
         <div class="eb-step-card">
-          <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2025/07/womens-infusion.png" alt="Lab-guided diagnosis">
+          <img class="eb-step-card__img" src="/assets/img/wp/2025/07/womens-infusion.png" alt="Lab-guided diagnosis">
           <div class="eb-step-card__body">
             <div class="eb-step-card__num">01</div>
             <h3 class="eb-step-card__title">Lab-Guided Diagnosis</h3>
@@ -2569,7 +2569,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
           </div>
         </div>
         <div class="eb-step-card">
-          <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2024/04/0_0.webp" alt="Personalized infusion protocol">
+          <img class="eb-step-card__img" src="/assets/img/wp/2024/04/0_0.webp" alt="Personalized infusion protocol">
           <div class="eb-step-card__body">
             <div class="eb-step-card__num">02</div>
             <h3 class="eb-step-card__title">Personalized Infusion Protocol</h3>
@@ -2577,7 +2577,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
           </div>
         </div>
         <div class="eb-step-card">
-          <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2024/04/care.webp" alt="Track and support your recovery">
+          <img class="eb-step-card__img" src="/assets/img/wp/2024/04/care.webp" alt="Track and support your recovery">
           <div class="eb-step-card__body">
             <div class="eb-step-card__num">03</div>
             <h3 class="eb-step-card__title">Track + Support Your Recovery</h3>
@@ -2611,14 +2611,14 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
       <a href="#bottom_form" class="btn">Book Your Appointment Now &rarr;</a>
     </div>
     <div>
-      <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2024/04/fatigue.webp" alt="Woman experiencing fatigue from iron deficiency">
+      <img class="eb-split__img" src="/assets/img/wp/2024/04/fatigue.webp" alt="Woman experiencing fatigue from iron deficiency">
     </div>
   </section>
 
   <!-- Why Choose Premier — image left, text right -->
   <section class="eb-split eb-split--img-left" style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div>
-      <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/smiling.png" alt="Happy patient after treatment">
+      <img class="eb-split__img" src="/assets/img/wp/2025/07/smiling.png" alt="Happy patient after treatment">
     </div>
     <div>
       <div class="eyebrow-sans" style="margin-bottom:14px;">Thousands Helped Across New York</div>
@@ -2648,7 +2648,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
         <a href="#bottom_form" class="btn btn--white">Book a Consultation &rarr;</a>
       </div>
       <div>
-        <img class="eb-dark__img" src="http://premierhematology.com/wp-content/uploads/2025/07/premier-team.png" alt="Premier Hematology care team">
+        <img class="eb-dark__img" src="/assets/img/wp/2025/07/premier-team.png" alt="Premier Hematology care team">
       </div>
     </div>
   </section>
@@ -2681,7 +2681,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
   <!-- Everything You Need -->
   <section class="eb-split eb-split--img-left" style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div>
-      <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/smiling.png" alt="Premier Hematology infusion center">
+      <img class="eb-split__img" src="/assets/img/wp/2025/07/smiling.png" alt="Premier Hematology infusion center">
     </div>
     <div>
       <div class="eyebrow-sans" style="margin-bottom:14px;">10 Locations Across New York</div>
@@ -2712,7 +2712,7 @@ ENERGY_BOOST_PAGE = f"""<!DOCTYPE html>
     <div class="eb-faq__grid">
       <div>
         <h2 class="eb-faq__h2">Frequently Asked Questions</h2>
-        <img class="eb-faq__img" src="http://premierhematology.com/wp-content/uploads/2024/04/care.webp" alt="Premier Hematology infusion care">
+        <img class="eb-faq__img" src="/assets/img/wp/2024/04/care.webp" alt="Premier Hematology infusion care">
       </div>
       <div>
         <div class="eb-faq__item">
