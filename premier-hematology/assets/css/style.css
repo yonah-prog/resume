@@ -524,7 +524,7 @@ img.page-img {
 .article-hero-wrap {
   max-width: 1000px; margin: 36px auto 0; padding: 0 40px;
 }
-.article-hero-wrap__img { height: 420px; border-radius: 18px; }
+.article-hero-wrap__img { height: 420px; border-radius: 18px; width: 100%; object-fit: cover; display: block; }
 
 .article-prose {
   max-width: 720px; margin: 0 auto; padding: 52px 40px 80px;

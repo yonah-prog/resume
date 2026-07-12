@@ -5,7 +5,26 @@ Run: python3 generate.py
 Outputs all HTML pages into the correct directory structure.
 """
 
-import os, textwrap
+import os, textwrap, json
+
+# Load seo.json once for og_image lookups
+_SEO_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seo.json")
+_SEO = json.load(open(_SEO_PATH)) if os.path.exists(_SEO_PATH) else {}
+
+def _og_image(slug):
+    """Return local og_image path for a slug, or a sensible default."""
+    entry = _SEO.get(slug, {})
+    url = entry.get("og_image", "")
+    # Convert absolute WP URL to local path if needed
+    for prefix in ["https://www.premierhematology.com", "https://premierhematology.com",
+                   "http://premierhematology.com"]:
+        if url.startswith(prefix + "/wp-content/uploads/"):
+            return "/assets/img/wp/" + url.split("/wp-content/uploads/")[1]
+        if url.startswith(prefix + "/assets/"):
+            return url.replace(prefix, "")
+    if url.startswith("/assets/"):
+        return url
+    return "/assets/img/wp/2025/03/Oncologist.webp"  # site-wide fallback
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -484,7 +503,7 @@ def location_page(slug, city, address, phone, yoast_title, meta_desc, nearby="",
 </html>"""
 
 
-def article_page(slug, title, yoast_title, meta_desc, category, author, date, read_time, body_html, related_posts):
+def article_page(slug, title, yoast_title, meta_desc, category, author, date, read_time, body_html, related_posts, og_image=None):
     related_html = ""
     for p in related_posts:
         related_html += f"""
@@ -523,7 +542,7 @@ def article_page(slug, title, yoast_title, meta_desc, category, author, date, re
 
   <!-- HERO IMAGE -->
   <div class="article-hero-wrap">
-    <div class="article-hero-wrap__img img-placeholder">{title[:40]}</div>
+    <img class="article-hero-wrap__img" src="{og_image or _og_image(slug)}" alt="{title}" loading="lazy">
   </div>
 
   <!-- PROSE -->
@@ -915,28 +934,28 @@ write("care-team/index.html", simple_page(
     lead="Our board-certified specialists bring decades of combined experience in hematology and oncology — and a genuine commitment to every patient.",
     body_html="""    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:30px;">
       <div class="card" style="padding:28px;text-align:center;">
-        <div style="width:100px;height:100px;border-radius:50%;background:#ebe3fa;margin:0 auto 18px;"></div>
+        <img src="/assets/img/wp/2024/04/Dr.-Delfino-Crescenzo.jpeg" alt="Dr. Delfino Crescenzo" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
         <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Dr. Delfino Crescenzo</h3>
-        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Hematologist And Oncologist</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College in New York City, New York and earned his medical degree from the University of Bologna in Bologna, Italy. Following this, he completed his residency in Internal Medicine and Fellowship in Hematology/Oncology at Brookdale Hospital Medical Center.</p>
+        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Hematologist &amp; Oncologist</p>
+        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College and earned his medical degree from the University of Bologna, Italy. He completed his residency in Internal Medicine and Fellowship in Hematology/Oncology at Brookdale Hospital Medical Center.</p>
       </div>
       <div class="card" style="padding:28px;text-align:center;">
-        <div style="width:100px;height:100px;border-radius:50%;background:#ebe3fa;margin:0 auto 18px;"></div>
+        <img src="/assets/img/wp/2024/04/shani-spector.png" alt="Shani Spector, NP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
         <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Shani Spector</h3>
         <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Shani Spector is a dedicated Nurse Practitioner with a Master's in Nursing from Stony Brook University. She brings a wealth of expertise in in-patient oncology, hematology, and infusion services. Beyond her clinical role, Shani serves as a devoted patient advocate.</p>
+        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Shani Spector is a dedicated Nurse Practitioner with a Master's in Nursing from Stony Brook University. She brings expertise in in-patient oncology, hematology, and infusion services, and serves as a devoted patient advocate.</p>
       </div>
       <div class="card" style="padding:28px;text-align:center;">
-        <div style="width:100px;height:100px;border-radius:50%;background:#ebe3fa;margin:0 auto 18px;"></div>
+        <img src="/assets/img/wp/2024/04/yocheved-brazil.jpeg" alt="Yocheved Brazil, NP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
         <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Yocheved Brazil</h3>
         <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Yocheved Brazil is an adult primacy care nurse practitioner who specializes in hematology and women's health. She completed her Associates in Nursing at the Phillip's Beth Israel School of Nursing, background in cardiology, oncology, and hematology.</p>
+        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Yocheved Brazil is an adult primary care nurse practitioner specializing in hematology and women's health. She completed her nursing degree at the Phillip's Beth Israel School of Nursing with a background in cardiology, oncology, and hematology.</p>
       </div>
       <div class="card" style="padding:28px;text-align:center;">
-        <div style="width:100px;height:100px;border-radius:50%;background:#ebe3fa;margin:0 auto 18px;"></div>
+        <img src="/assets/img/wp/2022/08/staff-06.jpg" alt="Ariella Goldhammer, FNP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
         <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Ariella Goldhammer</h3>
         <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Family Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Ariella Goldhammer is a compassionate Family Nurse Practitioner, holding a Master's in Nursing from the College of Mount Saint Vincent. With a focus on primary care, hematology, and infusion services.</p>
+        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Ariella Goldhammer is a compassionate Family Nurse Practitioner holding a Master's in Nursing from the College of Mount Saint Vincent, with a focus on primary care, hematology, and infusion services.</p>
       </div>
     </div>
     <div style="margin-top:48px;text-align:center;">
@@ -3330,6 +3349,7 @@ for slug, title, cat, focus_kw in ALL_POSTS:
         read_time="5",
         body_html=body,
         related_posts=related_posts,
+        og_image=_og_image(slug),
     ))
 
 # WP posts not in ALL_POSTS — write them too
@@ -3350,6 +3370,7 @@ for _wp_slug, wp in _wp_map.items():
             read_time="5",
             body_html=_body,
             related_posts=BLOG_RELATED,
+            og_image=_og_image(_wp_slug),
         ))
 
 # ---------------------------------------------------------------------------
