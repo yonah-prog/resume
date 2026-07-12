@@ -3,16 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Physician Referral | Premier Hematology</title>
-  <meta name="description" content="Connect with Premier Hematology for seamless physician referrals. Our streamlined process ensures quick and efficient service.">
+  <title>Physician Referral | Premier Hematology &amp; Oncology</title>
+  <meta name="description" content="Refer your patients to Premier Hematology &amp; Oncology. Our team will contact the patient within 24 hours. Submit the secure referral form online.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .ref-hero {
+    background-image: url('http://premierhematology.com/wp-content/uploads/2021/05/GettyImages-1189547726.jpg');
+    background-size: cover; background-position: center;
+  }
+  .ref-hero__inner {
+    background: rgba(28,22,51,0.68);
+    padding: 90px 40px;
+    text-align: center;
+  }
+  .ref-hero__h1 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 54px;
+    letter-spacing: -0.02em; line-height: 1.06; color: #fff; margin: 0;
+  }
+  .ref-body {
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 40px 96px;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start;
+  }
+  .ref-left__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 36px;
+    line-height: 1.12; letter-spacing: -0.015em; color: #1C1633; margin-bottom: 18px;
+  }
+  .ref-left__p {
+    font-size: 15.5px; line-height: 1.78; color: #56526A; margin-bottom: 14px;
+  }
+  .ref-left__note {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: 15.5px; line-height: 1.6; color: #1C1633; margin-bottom: 20px;
+  }
+  /* form card */
+  .ref-form-card {
+    background: #fff; border: 1px solid #DDD8F0;
+    border-radius: 18px; padding: 36px 32px; box-shadow: 0 4px 24px rgba(28,22,51,0.07);
+  }
+  .ref-form-card h3 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 24px;
+    color: #1C1633; margin-bottom: 24px;
+  }
+  .ref-form-card .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #7C6FAD;
+    border-bottom: 1px solid #EDE9F8; padding-bottom: 6px; margin: 24px 0 16px;
+  }
+  .ref-row { display: grid; gap: 12px; margin-bottom: 12px; }
+  .ref-row--2 { grid-template-columns: 1fr 1fr; }
+  .ref-row--1 { grid-template-columns: 1fr; }
+  .ref-field { display: flex; flex-direction: column; gap: 5px; }
+  .ref-field label {
+    font-size: 12px; font-weight: 600; color: #43405a;
+    letter-spacing: 0.03em;
+  }
+  .ref-field label .req { color: #DC2626; margin-left: 2px; }
+  .ref-field input,
+  .ref-field select,
+  .ref-field textarea {
+    width: 100%; padding: 10px 13px; font-size: 14px; font-family: inherit;
+    border: 1.5px solid #DDD8F0; border-radius: 8px; background: #fff; color: #1C1633;
+    outline: none; transition: border-color 0.15s;
+  }
+  .ref-field input::placeholder,
+  .ref-field textarea::placeholder { color: #a89ecf; }
+  .ref-field input:focus,
+  .ref-field select:focus,
+  .ref-field textarea:focus { border-color: #5B4FCF; }
+  .ref-field textarea { resize: vertical; min-height: 100px; }
+  .ref-field--file label { cursor: pointer; }
+  .ref-field input[type="file"] {
+    padding: 7px 10px; font-size: 13px; cursor: pointer;
+    background: #F7F6FB;
+  }
+  .ref-submit {
+    width: 100%; margin-top: 22px; padding: 13px;
+    background: var(--purple); color: #fff;
+    border: none; border-radius: 8px; font-size: 14px;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .ref-submit:hover { background: var(--purple-deep); }
+  @media (max-width: 860px) {
+    .ref-body { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+    .ref-row--2 { grid-template-columns: 1fr; }
+    .ref-hero__h1 { font-size: 38px; }
+  }
+</style>
   <script src="/assets/js/form-handler.js" defer></script>
 </head>
 <body>
-
   <!-- UTILITY BAR -->
   <div class="util-bar">
     <div class="util-bar__inner">
@@ -51,7 +135,7 @@
           </div>
         </li>
         <li class="site-nav__item">
-          <span class="site-nav__link">Locations <span class="site-nav__arrow">&#9660;</span></span>
+          <a class="site-nav__link" href="/locations/">Locations <span class="site-nav__arrow">&#9660;</span></a>
           <div class="site-nav__dropdown">
             <a href="/astoria-infusion-center/">Astoria</a>
             <a href="/boro-park-infusion-center/">Boro Park</a>
@@ -73,6 +157,130 @@
       </ul>
     </div>
   </header>
+
+<!-- HERO -->
+<div class="ref-hero">
+  <div class="ref-hero__inner">
+    <h1 class="ref-hero__h1">Physician Referral</h1>
+  </div>
+</div>
+
+<!-- BODY: 2-col -->
+<div class="ref-body">
+
+  <!-- LEFT: copy -->
+  <div>
+    <h2 class="ref-left__h2">Your Trusted Care Partner.</h2>
+    <p class="ref-left__p">Thank you for choosing Premier Hematology and Oncology as your trusted care partner. We greatly appreciate your confidence in our team to provide exceptional care for your patients. Your referral is invaluable to us, and we are committed to ensuring a seamless and collaborative experience.</p>
+    <p class="ref-left__note"><em>Our care team will contact the patient within 24 hours.</em></p>
+    <p class="ref-left__p">Thank you for taking the time to fill out this form and for your continued partnership in delivering outstanding patient care.</p>
+  </div>
+
+  <!-- RIGHT: form -->
+  <div class="ref-form-card">
+    <h3>Referral Form</h3>
+    <form action="/contact-confirmation/" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="form_type" value="physician-referral">
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field">
+          <label for="ref_doctor">Referring Doctor <span class="req">*</span></label>
+          <input type="text" id="ref_doctor" name="referring_doctor" placeholder="Referring Doctor" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--2">
+        <div class="ref-field">
+          <label for="ref_phone">Office Phone <span class="req">*</span></label>
+          <input type="tel" id="ref_phone" name="office_phone" placeholder="(000)-000-0000" required>
+        </div>
+        <div class="ref-field">
+          <label for="ref_fax">Office Fax <span class="req">*</span></label>
+          <input type="tel" id="ref_fax" name="office_fax" placeholder="(000)-000-0000" required>
+        </div>
+      </div>
+
+      <div class="section-label">Patient Information</div>
+
+      <div class="ref-row ref-row--2">
+        <div class="ref-field">
+          <label for="pt_first">Patient's First Name <span class="req">*</span></label>
+          <input type="text" id="pt_first" name="patient_first_name" placeholder="First Name" required>
+        </div>
+        <div class="ref-field">
+          <label for="pt_last">Patient's Last Name <span class="req">*</span></label>
+          <input type="text" id="pt_last" name="patient_last_name" placeholder="Last Name" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--2">
+        <div class="ref-field">
+          <label for="pt_dob">Patients Date of Birth <span class="req">*</span></label>
+          <input type="date" id="pt_dob" name="patient_dob" placeholder="Date of Birth" required>
+        </div>
+        <div class="ref-field">
+          <label for="pt_phone">Patient's Phone Number <span class="req">*</span></label>
+          <input type="tel" id="pt_phone" name="patient_phone" placeholder="Phone Number" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field">
+          <label for="pt_address">Patient's Address <span class="req">*</span></label>
+          <input type="text" id="pt_address" name="patient_address" placeholder="Address" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field">
+          <label for="pt_email">Patient's Email <span class="req">*</span></label>
+          <input type="email" id="pt_email" name="patient_email" placeholder="Patient's Email" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--2">
+        <div class="ref-field">
+          <label for="pt_insurance">Patient's Insurance <span class="req">*</span></label>
+          <input type="text" id="pt_insurance" name="patient_insurance" placeholder="Insurance Carrier" required>
+        </div>
+        <div class="ref-field">
+          <label for="pt_ins_id">Patient's Insurance ID <span class="req">*</span></label>
+          <input type="text" id="pt_ins_id" name="patient_insurance_id" placeholder="Insurance ID #" required>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field">
+          <label for="ref_reason">Reason for Referral <span class="req">*</span></label>
+          <textarea id="ref_reason" name="reason_for_referral" placeholder="Reason for Referral" required></textarea>
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field ref-field--file">
+          <label for="chart_note">Upload a Chart Note</label>
+          <input type="file" id="chart_note" name="chart_note" accept=".pdf,.doc,.docx,.jpg,.png">
+        </div>
+      </div>
+
+      <div class="ref-row ref-row--1">
+        <div class="ref-field">
+          <label for="ref_priority">Referral Priority <span class="req">*</span></label>
+          <select id="ref_priority" name="referral_priority" required>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="ref-submit">Send</button>
+    </form>
+  </div>
+
+</div>
+
+  
   <section class="form-section">
     <div class="form-layout">
       <div class="form-layout__trust">
@@ -202,6 +410,7 @@
           <a href="tel:7189972281">718-997-2281</a>
           <a href="/contact/">Email Us</a>
           <a href="/physician-referal/">Physician Referral Form</a>
+          <a href="/billing-inquiries/">Billing Inquiries</a>
         </div>
       </div>
       <div>

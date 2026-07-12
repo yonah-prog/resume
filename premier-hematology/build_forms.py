@@ -19,7 +19,8 @@ ENDPOINT = "/api/submit"
 # ---------------------------------------------------------------------------
 
 def general_form(form_type, redirect, title="Request a Consultation",
-                 sub="Our team will reach out within 24 hours."):
+                 sub="Our team will reach out within 24 hours.", webhook=None):
+    wh = webhook or ENDPOINT
     return f"""
   <section class="form-section">
     <div class="form-layout">
@@ -30,14 +31,14 @@ def general_form(form_type, redirect, title="Request a Consultation",
         <div>
           <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Board-certified hematology &amp; oncology specialists</span></div>
           <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">In-house lab — faster results, no extra trips</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">13 convenient locations across NY metro + Atlanta</span></div>
+          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Broad network of convenient locations throughout NY</span></div>
           <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Most major insurance plans accepted</span></div>
         </div>
       </div>
       <div class="form-card">
         <div class="form-card__title">{title}</div>
         <div class="form-card__sub">{sub}</div>
-        <form data-webhook="{ENDPOINT}" data-redirect="{redirect}" novalidate>
+        <form data-webhook="{wh}" data-redirect="{redirect}" novalidate>
           <input type="hidden" name="form_type" value="{form_type}">
           <div class="form-row">
             <div class="form-group">
@@ -178,10 +179,18 @@ def iron_infusions_form(form_type, redirect, title="Request an Iron Infusion App
   </section>"""
 
 
+ZAPIER_ENERGYBOOST        = "https://hooks.zapier.com/hooks/catch/18791657/uubv670/"
+ZAPIER_ANEMIA             = "https://hooks.zapier.com/hooks/catch/18791657/4bysijr/"
+ZAPIER_ATLANTA_ENERGYBOOST = "https://hooks.zapier.com/hooks/catch/18791657/uj8me0c/"
+ZAPIER_ATLANTA_ANEMIA     = "https://hooks.zapier.com/hooks/catch/18791657/4o4o3n6/"
+ZAPIER_ATLANTA_CONTACT    = "https://hooks.zapier.com/hooks/catch/18791657/4o4yg90/"
+
 def energyboost_form(form_type, redirect, title="Request a Free Consultation",
-                     sub="Tell us about your symptoms and we'll connect you with a specialist."):
+                     sub="Tell us about your symptoms and we'll connect you with a specialist.",
+                     webhook=None):
+    wh = webhook or ENDPOINT
     return f"""
-  <section class="form-section">
+  <section class="form-section" id="bottom_form">
     <div class="form-layout">
       <div class="form-layout__trust">
         <div class="eyebrow-serif" style="margin-bottom:14px;">Energy &amp; Wellness</div>
@@ -197,7 +206,7 @@ def energyboost_form(form_type, redirect, title="Request a Free Consultation",
       <div class="form-card">
         <div class="form-card__title">{title}</div>
         <div class="form-card__sub">{sub}</div>
-        <form data-webhook="{ENDPOINT}" data-redirect="{redirect}" novalidate>
+        <form data-webhook="{wh}" data-redirect="{redirect}" novalidate>
           <input type="hidden" name="form_type" value="{form_type}">
           <div class="form-row">
             <div class="form-group">
@@ -389,17 +398,7 @@ def physician_referral_form(form_type, redirect, location=""):
 def billing_form(redirect="/contact-confirmation/"):
     return f"""
   <section class="form-section">
-    <div class="form-layout">
-      <div class="form-layout__trust">
-        <div class="eyebrow-serif" style="margin-bottom:14px;">Billing &amp; Insurance</div>
-        <h2>Billing questions? We're here to help.</h2>
-        <p>Our billing team is available Monday–Friday, 9 am–5 pm. For urgent billing matters, call us at <a href="tel:7189972281" style="color:var(--purple);">718-997-2281</a>.</p>
-        <div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Response within 1–2 business days</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Assistance with insurance claims</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Payment plan options available</span></div>
-        </div>
-      </div>
+    <div style="max-width:600px;margin:0 auto;">
       <div class="form-card">
         <div class="form-card__title">Billing Inquiry</div>
         <div class="form-card__sub">Fill out the form and our billing team will follow up within 1–2 business days.</div>
@@ -457,8 +456,9 @@ REFERRAL_RD      = "/welcome/?firstname={first}&lastname={last}"
 PAGES = {
     "anemia-iron-deficiency-consultation":
         general_form("general", "/contact-confirmation-iron-request/",
-                     title="Request an Anemia Consultation",
-                     sub="Our specialist team will reach out within 24 hours."),
+                     title="Book My Consultation",
+                     sub="Our specialist team will reach out within 24 hours.",
+                     webhook=ZAPIER_ANEMIA),
 
     "hematology-and-iron-infusion-appointments":
         general_form("general", "/contact-confirmation-iron-request/",
@@ -488,12 +488,14 @@ PAGES = {
                             title="Request a Bariatric Iron Infusion Appointment"),
 
     "consultation-request":
-        energyboost_form("energyboost", "/contact-confirmation-energyboost/"),
+        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
+                         webhook=ZAPIER_ENERGYBOOST),
 
     "energy-boost":
         energyboost_form("energyboost", "/contact-confirmation-energyboost/",
                          title="Reclaim Your Energy",
-                         sub="Tell us your symptoms and we'll connect you with a specialist."),
+                         sub="Tell us your symptoms and we'll connect you with a specialist.",
+                         webhook=ZAPIER_ENERGYBOOST),
 
     "chronic-heart-failure":
         iron_infusions_form("iron-infusions", "/contact-confirmation/",
@@ -508,26 +510,36 @@ PAGES = {
     "contact-atlanta-center":
         general_form("atlanta-contact", "/contact-confirmation-iron-request/",
                      title="Contact Our Atlanta Center",
-                     sub="Our Atlanta team will reach out within 24 hours."),
+                     sub="Our Atlanta team will reach out within 24 hours.",
+                     webhook=ZAPIER_ATLANTA_CONTACT),
 
     "atlanta-anemia-iron-deficiency-consultation":
-        general_form("atlanta-contact", "/contact-confirmation-iron-request/",
+        general_form("atlanta-anemia", "/contact-confirmation-atlanta-iron-consult/",
                      title="Atlanta: Request an Anemia Consultation",
-                     sub="Our Atlanta specialist team will reach out within 24 hours."),
+                     sub="Our Atlanta specialist team will reach out within 24 hours.",
+                     webhook=ZAPIER_ATLANTA_ANEMIA),
 
     "billing-inquiries":
         billing_form(),
 
     # WP ad landing page variants — same form, separate slugs for tracking
     "energy-boost-atlanta-hematology-and-iron-infusion-appointments":
-        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
+        energyboost_form("atlanta-energyboost", "/atlanta-contact-confirmation-energyboost/",
                          title="Reclaim Your Energy — Atlanta",
-                         sub="Tell us your symptoms and we'll connect you with an Atlanta specialist."),
+                         sub="Tell us your symptoms and we'll connect you with an Atlanta specialist.",
+                         webhook=ZAPIER_ATLANTA_ENERGYBOOST),
 
     "energy-boost-hematology-and-iron-infusion-appointments-openai":
         energyboost_form("energyboost", "/contact-confirmation-energyboost/",
                          title="Reclaim Your Energy",
-                         sub="Tell us your symptoms and we'll connect you with a specialist."),
+                         sub="Tell us your symptoms and we'll connect you with a specialist.",
+                         webhook=ZAPIER_ENERGYBOOST),
+
+    "energy-boost-heavy-periods":
+        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
+                         title="Reclaim Your Energy",
+                         sub="Tell us your symptoms and we'll connect you with a specialist.",
+                         webhook=ZAPIER_ENERGYBOOST),
 }
 
 # ---------------------------------------------------------------------------
@@ -553,8 +565,22 @@ for slug, form_html in PAGES.items():
     with open(path) as f:
         html = f.read()
 
+    # Skip if form already injected (prevents double-injection on repeated runs)
+    if 'data-webhook="' in html and "<!-- form injected by build_forms.py -->" not in html:
+        print(f"  ✓ {slug} (already injected)")
+        updated += 1
+        continue
+
     if SCRIPT_INCLUDE not in html:
         html = html.replace('</head>', f'  {SCRIPT_INCLUDE}\n</head>', 1)
+
+    if "<!-- form injected by build_forms.py -->" in html:
+        html = html.replace("<div><!-- form injected by build_forms.py --></div>", f"<div>{form_html}</div>", 1)
+        with open(path, "w") as f:
+            f.write(html)
+        updated += 1
+        print(f"  ✓ {slug}")
+        continue
 
     if SECTION_PATTERN.search(html):
         html = SECTION_PATTERN.sub(form_html, html, count=1)
@@ -566,6 +592,13 @@ for slug, form_html in PAGES.items():
 
     if "<!-- FOOTER -->" in html:
         html = html.replace("<!-- FOOTER -->", form_html + "\n\n  <!-- FOOTER -->", 1)
+        with open(path, "w") as f:
+            f.write(html)
+        updated += 1
+        print(f"  ✓ {slug}")
+        continue
+    elif "<!-- ATLANTA FOOTER -->" in html:
+        html = html.replace("<!-- ATLANTA FOOTER -->", form_html + "\n\n  <!-- ATLANTA FOOTER -->", 1)
         with open(path, "w") as f:
             f.write(html)
         updated += 1

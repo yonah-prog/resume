@@ -3,6 +3,10 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+  ],
   "env": {
     "RESEND_API_KEY": "re_bQg7LZva_AmHnvYQC2fXm9QtodPT9mxup",
     "GOOGLE_PLACES_API_KEY": "AIzaSyCNSppQMFmpGoLHWqvxVbs95QbfN4fqU8w"

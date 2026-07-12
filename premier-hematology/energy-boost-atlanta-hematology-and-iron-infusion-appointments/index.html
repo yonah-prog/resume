@@ -3,32 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anemia & Iron Deficiency Consultation | Premier Hematology</title>
-  <meta name="description" content="Struggling with fatigue, dizziness, or shortness of breath? Premier Hematology offers next-day consultations and personalized treatment plans.">
+  <title>Anemia & Iron Deficiency Consultation | Premier Hematology Atlanta</title>
+  <meta name="description" content="Struggling with fatigue, dizziness, or shortness of breath? Premier Hematology Atlanta offers next-day consultations and personalized treatment plans for anemia and iron deficiency.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .eb-insurance-bar {
+    background: var(--purple); color: #fff;
+    text-align: center; padding: 11px 20px;
+    font-size: 13.5px; font-weight: 600; letter-spacing: 0.06em;
+  }
+  .eb-hero {
+    max-width: 1200px; margin: 0 auto; padding: 80px 40px 72px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center;
+  }
+  .eb-hero__h1 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 48px;
+    line-height: 1.06; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px;
+  }
+  .eb-hero__lead {
+    font-size: 17px; line-height: 1.7; color: var(--body); margin-bottom: 26px; max-width: 480px;
+  }
+  .eb-hero__imgs { display: flex; flex-direction: column; gap: 14px; }
+  .eb-hero__img { width: 100%; border-radius: 18px; object-fit: cover; display: block; }
+  .eb-hero__img--top { height: 260px; }
+  .eb-hero__img--bottom { height: 220px; }
+  .eb-hero__testimonial {
+    margin-top: 28px; padding: 18px 22px;
+    background: var(--lavender-bg); border-radius: 14px;
+    border-left: 3px solid var(--purple);
+  }
+  .eb-hero__testimonial p {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: 15.5px; line-height: 1.55; color: var(--ink); margin-bottom: 8px;
+  }
+  .eb-hero__testimonial cite {
+    font-size: 13px; font-weight: 600; color: var(--purple); font-style: normal;
+  }
+  .eb-split {
+    max-width: 1200px; margin: 0 auto; padding: 80px 40px;
+    display: grid; gap: 64px; align-items: center;
+  }
+  .eb-split--img-right { grid-template-columns: 1fr 1fr; }
+  .eb-split--img-left  { grid-template-columns: 1fr 1fr; }
+  .eb-split__img { width: 100%; border-radius: 20px; object-fit: cover; display: block; height: 440px; }
+  .eb-split__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 38px;
+    line-height: 1.12; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 18px;
+  }
+  .eb-split__body { font-size: 16.5px; line-height: 1.75; color: var(--body); margin-bottom: 18px; }
+  .eb-dark { background: var(--ink); }
+  .eb-dark__inner {
+    max-width: 1200px; margin: 0 auto; padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  .eb-dark__img { width: 100%; border-radius: 20px; object-fit: cover; display: block; height: 440px; }
+  .eb-dark__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 38px;
+    line-height: 1.12; color: #fff; margin-bottom: 18px;
+  }
+  .eb-dark__body { font-size: 16px; line-height: 1.75; color: #c9c3e0; margin-bottom: 24px; }
+  .eb-dark .checklist__check { background: rgba(255,255,255,0.12); color: #fff; border: none; }
+  .eb-dark .checklist__text { color: #c9c3e0; }
+  .eb-how { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .eb-how__inner { max-width: 1200px; margin: 0 auto; padding: 88px 40px; }
+  .eb-how__header { text-align: center; margin-bottom: 56px; }
+  .eb-how__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 40px;
+    letter-spacing: -0.015em; color: var(--ink); margin-bottom: 14px;
+  }
+  .eb-how__lead { font-size: 17px; line-height: 1.65; color: var(--body); max-width: 560px; margin: 0 auto; }
+  .eb-how__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-bottom: 44px; }
+  .eb-step-card { background: #fff; border: 1px solid var(--border-card); border-radius: 20px; overflow: hidden; }
+  .eb-step-card__img { width: 100%; height: 190px; object-fit: cover; display: block; }
+  .eb-step-card__body { padding: 28px 26px 30px; }
+  .eb-step-card__num {
+    font-family: 'Newsreader', serif; font-style: italic; font-size: 28px;
+    color: var(--step-numeral); margin-bottom: 8px; line-height: 1;
+  }
+  .eb-step-card__title { font-family: 'Newsreader', serif; font-weight: 600; font-size: 20px; color: var(--ink); margin-bottom: 10px; }
+  .eb-step-card__desc { font-size: 14.5px; line-height: 1.65; color: var(--body-muted); }
+  .eb-cta-band { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
+  .eb-cta-band__inner {
+    background: linear-gradient(110deg, var(--purple), var(--purple-deep));
+    border-radius: 22px; padding: 52px 56px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  }
+  .eb-cta-band__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 36px;
+    line-height: 1.2; color: #fff; max-width: 560px;
+  }
+  .eb-reviews { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .eb-reviews__inner { max-width: 1200px; margin: 0 auto; padding: 88px 40px; }
+  .eb-reviews__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 40px;
+    letter-spacing: -0.015em; color: var(--ink); margin-bottom: 40px; text-align: center;
+  }
+  .eb-reviews__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .eb-review-card { background: #fff; border: 1px solid var(--border-card); border-radius: 18px; padding: 28px 26px; }
+  .eb-review-card__stars { color: #f59e0b; font-size: 17px; margin-bottom: 14px; letter-spacing: 2px; }
+  .eb-review-card__quote {
+    font-family: 'Newsreader', serif; font-style: italic;
+    font-size: 16px; line-height: 1.65; color: var(--ink); margin-bottom: 18px;
+  }
+  .eb-review-card__name { font-size: 13.5px; font-weight: 600; color: var(--purple); }
+  .eb-faq { max-width: 1200px; margin: 0 auto; padding: 88px 40px; }
+  .eb-faq__grid { display: grid; grid-template-columns: 360px 1fr; gap: 72px; align-items: start; }
+  .eb-faq__h2 {
+    font-family: 'Newsreader', serif; font-weight: 500; font-size: 40px;
+    letter-spacing: -0.015em; color: var(--ink); margin-bottom: 28px;
+  }
+  .eb-faq__img { width: 100%; border-radius: 18px; object-fit: cover; height: 320px; display: block; }
+  .eb-faq__item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .eb-faq__item:first-child { padding-top: 0; }
+  .eb-faq__q { font-family: 'Newsreader', serif; font-weight: 600; font-size: 18px; color: var(--ink); margin-bottom: 9px; }
+  .eb-faq__a { font-size: 15.5px; line-height: 1.72; color: var(--body); }
+  @media (max-width: 900px) {
+    .eb-hero, .eb-split, .eb-dark__inner { grid-template-columns: 1fr; }
+    .eb-hero__imgs { display: none; }
+    .eb-how__grid, .eb-reviews__grid { grid-template-columns: 1fr; }
+    .eb-cta-band__inner { flex-direction: column; text-align: center; }
+    .eb-faq__grid { grid-template-columns: 1fr; }
+    .eb-faq__img { display: none; }
+  }
+</style>
   <script src="/assets/js/form-handler.js" defer></script>
 </head>
 <body>
-
-  <!-- UTILITY BAR -->
+  <!-- ATLANTA UTILITY BAR -->
   <div class="util-bar">
     <div class="util-bar__inner">
       <span class="util-bar__portal"><span class="util-bar__dot"></span> Patient Portal</span>
-      <span class="util-bar__phone">718-866-3037</span>
+      <span class="util-bar__phone">(770) 588-3530</span>
     </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- ATLANTA HEADER -->
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/" class="logo" aria-label="Premier Hematology &amp; Oncology home">
+      <a href="/atlanta/" class="logo" aria-label="Premier Hematology &amp; Oncology Atlanta home">
         <div class="logo__mark"><div class="logo__ribbon"></div></div>
         <div class="logo__text">
           <div class="logo__name">PREMIER HEMATOLOGY</div>
-          <div class="logo__sub">ONCOLOGY</div>
+          <div class="logo__sub">ATLANTA</div>
         </div>
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -37,43 +156,300 @@
         <span class="nav-toggle__bar"></span>
       </button>
       <ul class="site-nav" id="site-nav">
-        <li class="site-nav__item"><a class="site-nav__link" href="/care-team/">Care Team</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/atlanta-care-team/">Care Team</a></li>
         <li class="site-nav__item">
           <span class="site-nav__link">Our Services <span class="site-nav__arrow">&#9660;</span></span>
           <div class="site-nav__dropdown">
             <a href="/hematology/">Hematology</a>
             <a href="/oncology/">Oncology</a>
-            <a href="/womens-health-services/">Women's Health</a>
+            <a href="/womens-health-services/">Women&rsquo;s Health</a>
             <a href="/wellness-infusions/">Wellness Infusions</a>
             <a href="/cancer-genetic-testing/">Cancer Genetic Testing</a>
-            <a href="/cancers-and-conditions-we-treat/">Cancers &amp; Conditions</a>
             <a href="/infusion-therapies-we-offer/">Infusion Therapies</a>
           </div>
         </li>
-        <li class="site-nav__item">
-          <span class="site-nav__link">Locations <span class="site-nav__arrow">&#9660;</span></span>
-          <div class="site-nav__dropdown">
-            <a href="/astoria-infusion-center/">Astoria</a>
-            <a href="/boro-park-infusion-center/">Boro Park</a>
-            <a href="/brooklyn-infusion-center/">Brooklyn</a>
-            <a href="/five-towns-infusion-center/">Five Towns</a>
-            <a href="/great-neck-infusion-center/">Great Neck</a>
-            <a href="/howard-beach-infusion-center/">Howard Beach</a>
-            <a href="/jamaica-infusion-center/">Jamaica</a>
-            <a href="/manhattan-infusion-center/">Manhattan</a>
-            <a href="/monroe-infusion-center/">Monroe</a>
-            <a href="/monsey-infusion-center/">Monsey</a>
-            <a href="/port-jefferson-infusion-center/">Port Jefferson</a>
-            <a href="/queens-infusion-center/">Queens</a>
-            <a href="/staten-island-infusion-center/">Staten Island</a>
-          </div>
-        </li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/atlanta-infusion-center/">Our Location</a></li>
         <li class="site-nav__item"><a class="site-nav__link" href="/blog/">Blog</a></li>
-        <li class="site-nav__item"><a class="btn btn--sm" href="/contact/">Contact Us</a></li>
+        <li class="site-nav__item"><a class="btn btn--sm" href="/contact-atlanta-center/">Contact Us</a></li>
       </ul>
     </div>
   </header>
-  <section class="form-section">
+
+<div class="eb-insurance-bar">We Accept Most Insurances &mdash; Get Approved Today</div>
+
+<!-- HERO -->
+<section style="background:#F3F5F8;">
+  <div class="eb-hero">
+    <div>
+      <div class="eyebrow-sans" style="margin-bottom:16px;">Hematology Consults and Iron Infusions</div>
+      <h1 class="eb-hero__h1">Have Low Iron? Get Seen in 24 Hours By Atlanta&rsquo;s Trusted Hematologists.</h1>
+      <p class="eb-hero__lead">Stop waiting weeks. Stop being told &ldquo;just take pills.&rdquo; Our board-certified hematologists treat iron deficiency fast &mdash; with personalized infusions covered by insurance.</p>
+      <div class="checklist" style="margin-bottom:28px;">
+        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">See a Women&rsquo;s Iron Specialist (Board-Certified Hematologist) within 24 hours</span></div>
+        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Conveniently-Located in Atlanta</span></div>
+        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Safe, fast, personalized iron infusions</span></div>
+        <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">For Women Who Are Tired of Feeling Tired&hellip; and Being Told It&rsquo;s &ldquo;Normal.&rdquo;</span></div>
+      </div>
+      <a href="#bottom_form" class="btn btn--lg">Schedule an Appointment &rarr;</a>
+      <div class="eb-hero__testimonial">
+        <p>&ldquo;The service was top-notch from start to finish. Can&rsquo;t recommend it enough. I&rsquo;ll definitely be back!&rdquo;</p>
+        <cite>&mdash; Anastasia M.</cite>
+      </div>
+    </div>
+    <div class="eb-hero__imgs">
+      <img class="eb-hero__img eb-hero__img--top" src="http://premierhematology.com/wp-content/uploads/2025/07/yonah0704_15145_a_30_year_old_woman_reclining_in_a_black_leat_cfbaa486-c462-4702-bcb6-3e7d8f14b5c1_1.png" alt="Patient at Premier Hematology Atlanta">
+      <img class="eb-hero__img eb-hero__img--bottom" src="http://premierhematology.com/wp-content/uploads/2024/04/0_0.webp" alt="Iron infusion at Premier Hematology Atlanta">
+    </div>
+  </div>
+</section>
+
+<!-- The Real Reason — text left, image right -->
+<section class="eb-split eb-split--img-right">
+  <div>
+    <div class="eyebrow-sans" style="margin-bottom:14px;">Why Supplements Fail</div>
+    <h2 class="eb-split__h2">The Real Reason You&rsquo;re Still Tired</h2>
+    <p class="eb-split__body">Most women with low iron are told to &ldquo;take supplements&rdquo; and wait months. But pills fail up to <strong>67% of the time</strong> &mdash; and don&rsquo;t work when your levels are critically low.</p>
+    <p class="eb-split__body">That&rsquo;s where our EnergyBoost Iron Care Program&#8482; is different.</p>
+    <div class="checklist" style="margin-bottom:20px;">
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">You&rsquo;ve tried the iron pills.</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">You&rsquo;ve blamed stress, hormones, even age.</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">You&rsquo;re tired all the time &mdash; and nothing&rsquo;s changing.</span></div>
+    </div>
+    <p class="eb-split__body">&ldquo;We hear it every day: &lsquo;I&rsquo;m tired of being tired. And I just want to feel normal again.&rsquo;&rdquo;</p>
+    <p class="eb-split__body">If that&rsquo;s you, you&rsquo;re not alone. And you&rsquo;re not crazy.</p>
+    <p class="eb-split__body">Your body might be screaming for help&hellip; and iron infusions may be the answer.</p>
+    <a href="#bottom_form" class="btn" style="margin-top:8px;">Find Out What&rsquo;s Really Going On &rarr;</a>
+  </div>
+  <div>
+    <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/questions.png" alt="Iron deficiency questions">
+  </div>
+</section>
+
+<!-- Hidden Crisis — dark band -->
+<section class="eb-dark">
+  <div class="eb-dark__inner">
+    <div>
+      <img class="eb-dark__img" src="http://premierhematology.com/wp-content/uploads/2025/07/aging-2-1.png" alt="Aging and iron deficiency">
+    </div>
+    <div>
+      <div class="eyebrow-sans" style="color:#c3aef0;margin-bottom:14px;">The Overlooked Epidemic</div>
+      <h2 class="eb-dark__h2">The Hidden Crisis That Impacts 1 in 5 Women</h2>
+      <p class="eb-dark__body">Anemia affects 20% of women &mdash; but most are misdiagnosed, dismissed, or ignored. Here&rsquo;s what your doctor might not tell you:</p>
+      <div class="checklist">
+        <div class="checklist__item"><span class="checklist__check" style="background:rgba(195,174,240,0.2);color:#c3aef0;">&#10003;</span><span class="checklist__text" style="color:#c9c3e0;">Iron pills don&rsquo;t work for everyone</span></div>
+        <div class="checklist__item"><span class="checklist__check" style="background:rgba(195,174,240,0.2);color:#c3aef0;">&#10003;</span><span class="checklist__text" style="color:#c9c3e0;">Basic labs can miss low ferritin (the protein that stores iron and fuels your body&rsquo;s energy)</span></div>
+        <div class="checklist__item"><span class="checklist__check" style="background:rgba(195,174,240,0.2);color:#c3aef0;">&#10003;</span><span class="checklist__text" style="color:#c9c3e0;">If you&rsquo;re severely deficient, supplements won&rsquo;t work fast enough</span></div>
+        <div class="checklist__item"><span class="checklist__check" style="background:rgba(195,174,240,0.2);color:#c3aef0;">&#10003;</span><span class="checklist__text" style="color:#c9c3e0;">And symptoms can mimic anxiety, depression, or burnout</span></div>
+      </div>
+      <p class="eb-dark__body" style="margin-top:20px;">Meanwhile, you&rsquo;re left exhausted, foggy, and barely functioning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EnergyBoost Program Intro -->
+<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:760px;margin:0 auto;padding:80px 40px;text-align:center;">
+    <div class="eyebrow-sans" style="margin-bottom:14px;">Fast, Personalized &amp; Proven</div>
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;letter-spacing:-0.015em;color:var(--ink);margin-bottom:20px;">The EnergyBoost Iron Care Program&#8482;</h2>
+    <p style="font-size:17px;line-height:1.75;color:var(--body);margin-bottom:12px;">We created the <strong>EnergyBoost Iron Care Program&#8482;</strong> to give women a better answer.</p>
+    <p style="font-size:17px;line-height:1.75;color:var(--body);margin-bottom:12px;">No more guessing. No more waiting. No more being dismissed.</p>
+    <p style="font-size:17px;line-height:1.75;color:var(--body);margin-bottom:32px;">It&rsquo;s a 3-part protocol designed to <strong>identify the real problem and treat it fast.</strong></p>
+    <a href="#bottom_form" class="btn btn--lg">Get Started Today &rarr;</a>
+  </div>
+</section>
+
+<!-- How the Program Works -->
+<section class="eb-how">
+  <div class="eb-how__inner">
+    <div class="eb-how__header">
+      <div class="eyebrow-sans" style="margin-bottom:12px;">How the Program Works</div>
+      <h2 class="eb-how__h2">A 3-Part Protocol</h2>
+      <p class="eb-how__lead">Designed to identify the real problem and treat it fast. No more guessing. No more waiting.</p>
+    </div>
+    <div class="eb-how__grid">
+      <div class="eb-step-card">
+        <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2025/07/womens-infusion.png" alt="Lab-guided diagnosis">
+        <div class="eb-step-card__body">
+          <div class="eb-step-card__num">01</div>
+          <h3 class="eb-step-card__title">Lab-Guided Diagnosis</h3>
+          <p class="eb-step-card__desc">We don&rsquo;t guess. We check your ferritin, hemoglobin, B12, folate &amp; more to get the full picture. (or help examine your existing labs)</p>
+        </div>
+      </div>
+      <div class="eb-step-card">
+        <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2024/04/0_0.webp" alt="Personalized infusion protocol">
+        <div class="eb-step-card__body">
+          <div class="eb-step-card__num">02</div>
+          <h3 class="eb-step-card__title">Personalized Infusion Protocol</h3>
+          <p class="eb-step-card__desc">Based on your labs and symptoms, our hematologists design a custom treatment plan for your body.</p>
+        </div>
+      </div>
+      <div class="eb-step-card">
+        <img class="eb-step-card__img" src="http://premierhematology.com/wp-content/uploads/2024/04/care.webp" alt="Track and support your recovery">
+        <div class="eb-step-card__body">
+          <div class="eb-step-card__num">03</div>
+          <h3 class="eb-step-card__title">Track + Support Your Recovery</h3>
+          <p class="eb-step-card__desc">Most patients feel a difference within 5&ndash;10 days. We follow up to make sure you&rsquo;re not just functioning &mdash; you&rsquo;re thriving and create your customized path towards better health.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#bottom_form" class="btn btn--lg">Take the First Step &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Symptoms — text left, image right -->
+<section class="eb-split eb-split--img-right">
+  <div>
+    <div class="eyebrow-sans" style="margin-bottom:14px;">Recognize the Signs</div>
+    <h2 class="eb-split__h2">Your body is trying to tell you something.</h2>
+    <p class="eb-split__body"><strong>Do any of these sound familiar?</strong></p>
+    <div class="checklist" style="margin-bottom:20px;">
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Chronic fatigue (even after 8 hours of sleep)</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Heavy or long periods</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Brain fog or trouble concentrating</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Hair loss or brittle nails</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Shortness of breath</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Dizziness or lightheadedness</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Restless legs or cold hands/feet</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Low mood, irritability, or feeling &ldquo;off&rdquo;</span></div>
+    </div>
+    <p class="eb-split__body" style="margin-top:0;">If you checked 2 or more&hellip; <strong>You may be iron deficient &mdash; and we can help.</strong></p>
+    <a href="#bottom_form" class="btn">Book Your Appointment Now &rarr;</a>
+  </div>
+  <div>
+    <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2024/04/fatigue.webp" alt="Woman experiencing fatigue from iron deficiency">
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="eb-reviews">
+  <div class="eb-reviews__inner">
+    <div class="eyebrow-sans" style="text-align:center;margin-bottom:12px;">Don&rsquo;t Take Our Word For It</div>
+    <h2 class="eb-reviews__h2">What Our Patients Are Saying</h2>
+    <div class="eb-reviews__grid">
+      <div class="eb-review-card">
+        <div class="eb-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="eb-review-card__quote">&ldquo;Had an amazing experience at Premier Hematology! Varda took incredible care of me, so kind, knowledgeable, and made the whole process feel effortless. The service was top-notch from start to finish. Can&rsquo;t recommend it enough. I&rsquo;ll definitely be back!&rdquo;</p>
+        <div class="eb-review-card__name">&mdash; Anastasia Hing Mackay</div>
+      </div>
+      <div class="eb-review-card">
+        <div class="eb-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="eb-review-card__quote">&ldquo;Getting my blood work infusions and shot shots at Premier Hematology has been nothing short of a pleasure everybody who works here is so kind extremely responsive communicative in a way that seems very unusual in the medical space and I cannot recommend this place highly enough!&rdquo;</p>
+        <div class="eb-review-card__name">&mdash; Chani Shalmoni</div>
+      </div>
+      <div class="eb-review-card">
+        <div class="eb-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="eb-review-card__quote">&ldquo;The team here is exceptionally professional and welcoming. Since starting my iron infusions and B12 shots, I&rsquo;ve felt noticeably healthier and more energized. They go above and beyond to ensure a comfortable experience, even offering great snacks during treatment. Highly recommend!&rdquo;</p>
+        <div class="eb-review-card__name">&mdash; Karla Ximena V&aacute;zquez Prada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Everything You Need — Atlanta -->
+<section class="eb-split eb-split--img-left" style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div>
+    <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/smiling.png" alt="Premier Hematology Atlanta infusion center">
+  </div>
+  <div>
+    <div class="eyebrow-sans" style="margin-bottom:14px;">Metro-Atlanta Location</div>
+    <h2 class="eb-split__h2">Everything you Need. All in One Location.</h2>
+    <p class="eb-split__body">Located conveniently in the metro-Atlanta area, we are able to make sure that your infusion care doesn&rsquo;t get in the way of your busy life. Visit our offices at <strong>325 Hammond Dr Suite 201, Atlanta, GA 30328</strong>.</p>
+    <div class="checklist" style="margin-bottom:32px;">
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Next-day consultations</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Covered by most major insurances</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Safe, fast, medically supervised iron infusions</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Labs + treatment under one roof</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Designed specifically for women&rsquo;s needs</span></div>
+    </div>
+    <a href="#bottom_form" class="btn">Get Started Today &rarr;</a>
+  </div>
+</section>
+
+<!-- Why Women Choose — image left, text right -->
+<section class="eb-split eb-split--img-right">
+  <div>
+    <div class="eyebrow-sans" style="margin-bottom:14px;">Thousands Helped</div>
+    <h2 class="eb-split__h2">Why Women Who&rsquo;ve Tried Everything Else Are Choosing Premier Hematology</h2>
+    <p class="eb-split__body">Tired of being told &ldquo;you&rsquo;re fine&rdquo; when you feel anything but? Here&rsquo;s what makes us different:</p>
+    <div class="checklist" style="margin-bottom:32px;">
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">No Long Waits</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">No &ldquo;just take pills&rdquo; advice</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">No cookie-cutter plans</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Women-first, doctor-led care</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Built for busy moms and professionals</span></div>
+      <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Trusted by Atlanta&rsquo;s best OBGYNs &amp; PCPs</span></div>
+    </div>
+    <a href="#bottom_form" class="btn">Click Here to Get Started &rarr;</a>
+  </div>
+  <div>
+    <img class="eb-split__img" src="http://premierhematology.com/wp-content/uploads/2025/07/smiling.png" alt="Happy patient after treatment">
+  </div>
+</section>
+
+<!-- Meet the Experts — dark band -->
+<section class="eb-dark">
+  <div class="eb-dark__inner">
+    <div>
+      <div class="eyebrow-sans" style="color:#c3aef0;margin-bottom:14px;">Premier Hematology &amp; Oncology</div>
+      <h2 class="eb-dark__h2">Meet Atlanta&rsquo;s Women&rsquo;s Iron Health Experts</h2>
+      <p class="eb-dark__body">Premier Hematology &amp; Oncology is Atlanta&rsquo;s fastest-growing center for personalized iron deficiency care. Led by board-certified hematologists and women&rsquo;s health experts, our mission is simple: Help you feel better, fast &mdash; with care you can actually trust.</p>
+      <p class="eb-dark__body">We&rsquo;ve helped thousands of women reclaim their energy, mental clarity, and quality of life through our science-backed infusion system.</p>
+      <a href="#bottom_form" class="btn btn--white">Book a Consultation &rarr;</a>
+    </div>
+    <div>
+      <img class="eb-dark__img" src="http://premierhematology.com/wp-content/uploads/2025/07/premier-team.png" alt="Premier Hematology Atlanta care team">
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<div class="eb-cta-band">
+  <div class="eb-cta-band__inner">
+    <h2 class="eb-cta-band__h2">Feeling Tired All The Time Isn&rsquo;t Normal. Let&rsquo;s Fix It.</h2>
+    <a href="#bottom_form" class="btn btn--white btn--lg">Book Your Appointment Now &rarr;</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="eb-faq">
+  <div class="eb-faq__grid">
+    <div>
+      <h2 class="eb-faq__h2">Frequently Asked Questions (FAQs)</h2>
+      <img class="eb-faq__img" src="http://premierhematology.com/wp-content/uploads/2024/04/care.webp" alt="Premier Hematology Atlanta infusion care">
+    </div>
+    <div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">What causes anemia in women?</h3>
+        <p class="eb-faq__a">Anemia in women can be caused by iron deficiency, vitamin deficiencies, chronic diseases, pregnancy, and heavy menstrual bleeding.</p>
+      </div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">How does anemia cause fatigue?</h3>
+        <p class="eb-faq__a">Anemia leads to fatigue because it reduces the number of red blood cells available to carry oxygen to the body&rsquo;s tissues, resulting in a constant feeling of tiredness and weakness.</p>
+      </div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">How is anemia diagnosed?</h3>
+        <p class="eb-faq__a">Anemia is diagnosed through blood tests such as a Complete Blood Count (CBC), serum ferritin levels, and assessments of vitamin B12 and folate.</p>
+      </div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">Are iron infusions safe?</h3>
+        <p class="eb-faq__a">Yes, iron infusions are generally safe and are an effective treatment for severe anemia or when oral supplements are not suitable.</p>
+      </div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">How long does it take to feel better after an iron infusion?</h3>
+        <p class="eb-faq__a">Many patients start to feel better within a few days to a week after the infusion, with significant improvements in energy and reduction in fatigue.</p>
+      </div>
+      <div class="eb-faq__item">
+        <h3 class="eb-faq__q">Can I prevent anemia?</h3>
+        <p class="eb-faq__a">Preventing anemia involves maintaining a balanced diet rich in iron, vitamins B12 and folate, and managing any underlying health conditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+  <section class="form-section" id="bottom_form">
     <div class="form-layout">
       <div class="form-layout__trust">
         <div class="eyebrow-serif" style="margin-bottom:14px;">Energy &amp; Wellness</div>
@@ -89,8 +465,8 @@
       <div class="form-card">
         <div class="form-card__title">Reclaim Your Energy — Atlanta</div>
         <div class="form-card__sub">Tell us your symptoms and we'll connect you with an Atlanta specialist.</div>
-        <form data-webhook="/api/submit" data-redirect="/contact-confirmation-energyboost/" novalidate>
-          <input type="hidden" name="form_type" value="energyboost">
+        <form data-webhook="https://hooks.zapier.com/hooks/catch/18791657/uj8me0c/" data-redirect="/atlanta-contact-confirmation-energyboost/" novalidate>
+          <input type="hidden" name="form_type" value="atlanta-energyboost">
           <div class="form-row">
             <div class="form-group">
               <label for="first_name">First Name <span class="req">*</span></label>
@@ -163,7 +539,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ATLANTA FOOTER -->
   <footer class="site-footer">
     <div class="site-footer__grid">
       <div>
@@ -171,45 +547,35 @@
           <div class="site-footer__logo-mark"><div class="site-footer__logo-ribbon"></div></div>
           <div class="site-footer__logo-text">
             <div class="site-footer__logo-name">PREMIER HEMATOLOGY</div>
-            <div class="site-footer__logo-sub">ONCOLOGY</div>
+            <div class="site-footer__logo-sub">ATLANTA</div>
           </div>
         </div>
-        <p class="site-footer__blurb">Delivering compassionate, expert hematology and oncology care with convenient access across the New York metro area and beyond.</p>
+        <p class="site-footer__blurb">Delivering compassionate, expert hematology and oncology care at our Atlanta location — 325 Hammond Drive, Suite 201, Atlanta, GA 30328.</p>
       </div>
       <div>
         <div class="site-footer__col-label">Contact Us</div>
         <div class="site-footer__links">
-          <a href="tel:7189972281">718-997-2281</a>
-          <a href="/contact/">Email Us</a>
-          <a href="/physician-referal/">Physician Referral Form</a>
+          <a href="tel:7705883530">(770) 588-3530</a>
+          <a href="/contact-atlanta-center/">Email Us</a>
+          <a href="/physician-referal-atlanta/">Physician Referral Form</a>
         </div>
       </div>
       <div>
         <div class="site-footer__col-label">Quick Links</div>
         <div class="site-footer__links">
-          <a href="/care-team/">Care Team</a>
+          <a href="/atlanta-care-team/">Care Team</a>
           <a href="/hematology/">Hematology</a>
           <a href="/oncology/">Oncology</a>
           <a href="/infusion-therapies-we-offer/">Our Services</a>
           <a href="/blog/">Blog</a>
-          <a href="/contact/">Contact Us</a>
+          <a href="/contact-atlanta-center/">Contact Us</a>
         </div>
       </div>
       <div>
-        <div class="site-footer__col-label">Our Locations</div>
-        <div class="site-footer__locations">
-          <a href="/astoria-infusion-center/">Astoria</a>
-          <a href="/boro-park-infusion-center/">Boro Park</a>
-          <a href="/brooklyn-infusion-center/">Brooklyn</a>
-          <a href="/five-towns-infusion-center/">Five Towns</a>
-          <a href="/great-neck-infusion-center/">Great Neck</a>
-          <a href="/howard-beach-infusion-center/">Howard Beach</a>
-          <a href="/jamaica-infusion-center/">Jamaica</a>
-          <a href="/manhattan-infusion-center/">Manhattan</a>
-          <a href="/monroe-infusion-center/">Monroe</a>
-          <a href="/monsey-infusion-center/">Monsey</a>
-          <a href="/queens-infusion-center/">Queens</a>
-          <a href="/staten-island-infusion-center/">Staten Island</a>
+        <div class="site-footer__col-label">Our Location</div>
+        <div class="site-footer__links">
+          <a href="/atlanta-infusion-center/">Atlanta — Hammond Drive</a>
+          <p style="color:#968fb0;font-size:13px;margin-top:8px;line-height:1.6;">325 Hammond Drive<br>Suite 201<br>Atlanta, GA 30328</p>
         </div>
       </div>
     </div>

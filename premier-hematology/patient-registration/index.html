@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Patient Registration | Premier Hematology Oncology</title>
+  <meta name="description" content="Complete your new patient registration online — patient information, insurance, consents, and telehealth authorization for Premier Hematology &amp; Oncology.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <style>
+    /* ---------- Registration wizard ---------- */
+    .reg-wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 90px; }
+
+    .reg-hero { text-align: center; padding: 44px 20px 8px; }
+    .reg-hero h1 {
+      font-family: 'Newsreader', serif; font-weight: 500;
+      font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--ink, #1C1633);
+      margin: 0 0 10px;
+    }
+    .reg-hero p { color: var(--body, #56526A); font-size: 1.02rem; line-height: 1.65; max-width: 620px; margin: 0 auto; }
+
+    /* Progress */
+    .reg-progress { margin: 26px 0 30px; }
+    .reg-progress__label {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: .82rem; font-weight: 600; color: var(--purple, #5B3FA0);
+      margin-bottom: 8px;
+    }
+    .reg-progress__label span:last-child { color: var(--muted-label, #8A84A0); font-weight: 500; }
+    .reg-progress__bar { height: 6px; background: var(--lavender-chip, #EBE3FA); border-radius: 99px; overflow: hidden; }
+    .reg-progress__fill { height: 100%; width: 0; background: var(--purple, #5B3FA0); border-radius: 99px; transition: width .3s ease; }
+
+    /* Cards */
+    .reg-card {
+      background: #fff; border: 1px solid var(--border-card, #EEE7F7);
+      border-radius: 14px; padding: 28px 30px; margin-bottom: 18px;
+      box-shadow: 0 1px 3px rgba(28,22,51,.05);
+    }
+    @media (max-width: 560px) { .reg-card { padding: 22px 18px; } }
+    .reg-card h2 {
+      font-family: 'Newsreader', serif; font-weight: 500; font-size: 1.45rem;
+      color: var(--ink, #1C1633); margin: 0 0 4px;
+    }
+    .reg-card h3 {
+      font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--purple, #5B3FA0); margin: 26px 0 12px; padding-top: 18px;
+      border-top: 1px solid var(--border-row, #F1EDF8);
+    }
+    .reg-card h3:first-of-type { margin-top: 18px; }
+    .reg-card__sub { color: var(--body, #56526A); font-size: .93rem; line-height: 1.6; margin: 0 0 6px; }
+
+    .reg-patient-chip {
+      display: inline-flex; gap: 14px; flex-wrap: wrap;
+      background: var(--lavender-bg, #F4F0FB); border: 1px solid var(--border, #EFEAF8);
+      border-radius: 8px; padding: 8px 14px; font-size: .84rem; color: var(--body-alt, #43405A);
+      margin: 10px 0 4px;
+    }
+    .reg-patient-chip strong { color: var(--ink, #1C1633); font-weight: 600; }
+
+    /* Fields */
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .f-row--3 { grid-template-columns: 2fr 1fr 1fr; }
+    @media (max-width: 640px) { .f-row, .f-row--3 { grid-template-columns: 1fr; } }
+    .f-group { margin-bottom: 14px; }
+    .f-group label {
+      display: block; font-size: .82rem; font-weight: 600; color: var(--body-alt, #43405A);
+      margin-bottom: 5px;
+    }
+    .f-group .req { color: #C0392B; }
+    .f-group .opt { color: var(--muted-label, #8A84A0); font-weight: 500; font-size: .76rem; }
+    .f-group input[type="text"], .f-group input[type="email"], .f-group input[type="tel"],
+    .f-group input[type="date"], .f-group input[type="number"], .f-group select, .f-group textarea {
+      width: 100%; box-sizing: border-box; padding: 10px 12px;
+      border: 1px solid #D9D2EA; border-radius: 8px;
+      font-family: 'Hanken Grotesk', sans-serif; font-size: .95rem; color: var(--ink, #1C1633);
+      background: #fff; outline: none; transition: border-color .15s, box-shadow .15s;
+      -webkit-appearance: none; appearance: none; min-height: 42px;
+    }
+    .f-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A84A0'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+    }
+    .f-group textarea { min-height: 74px; resize: vertical; }
+    .f-group input:focus, .f-group select:focus, .f-group textarea:focus {
+      border-color: var(--purple, #5B3FA0); box-shadow: 0 0 0 3px rgba(91,63,160,.13);
+    }
+    .f-group input.invalid, .f-group select.invalid, .f-group textarea.invalid { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,.10); }
+
+    /* Choice groups (radio / checkbox pills) */
+    .choice-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .choice-group.invalid-group { outline: 2px solid rgba(192,57,43,.35); outline-offset: 4px; border-radius: 8px; }
+    .choice {
+      position: relative; display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid #D9D2EA; border-radius: 8px; padding: 9px 13px;
+      font-size: .89rem; color: var(--body-alt, #43405A); cursor: pointer;
+      background: #fff; transition: border-color .15s, background .15s; user-select: none;
+    }
+    .choice:hover { border-color: var(--purple, #5B3FA0); }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice input:checked + span { color: var(--purple-deep, #3E2A6E); font-weight: 600; }
+    .choice:has(input:checked) { background: var(--lavender-bg, #F4F0FB); border-color: var(--purple, #5B3FA0); }
+    .choice-stack { display: flex; flex-direction: column; gap: 8px; }
+    .choice-stack .choice { width: 100%; box-sizing: border-box; }
+
+    /* Plain checkbox rows */
+    .check-row { display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; color: var(--body-alt, #43405A); line-height: 1.55; cursor: pointer; }
+    .check-row input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--purple, #5B3FA0); flex-shrink: 0; cursor: pointer; }
+    .check-row.invalid-group { outline: 2px solid rgba(192,57,43,.35); outline-offset: 4px; border-radius: 6px; }
+
+    /* Consent text boxes */
+    .consent-box {
+      border: 1px solid var(--border, #EFEAF8); background: var(--off-white, #FAF8FD);
+      border-radius: 10px; padding: 18px 20px; margin: 12px 0 16px;
+      max-height: 340px; overflow-y: auto;
+      font-size: .9rem; line-height: 1.7; color: var(--body-alt, #43405A);
+    }
+    .consent-box h4 { font-size: .95rem; color: var(--ink, #1C1633); margin: 16px 0 6px; }
+    .consent-box h4:first-child { margin-top: 0; }
+    .consent-box p { margin: 0 0 12px; }
+    .consent-box ul, .consent-box ol { margin: 0 0 12px; padding-left: 22px; }
+    .consent-box li { margin-bottom: 7px; }
+    .consent-box .fine { font-size: .8rem; color: var(--body-muted, #6A6480); font-style: italic; }
+    .consent-agree {
+      background: var(--lavender-bg, #F4F0FB); border: 1px solid var(--border, #EFEAF8);
+      border-radius: 10px; padding: 14px 16px;
+    }
+
+    /* Info note */
+    .reg-note {
+      display: flex; gap: 10px; background: #FFF9EC; border: 1px solid #F1E3BC;
+      border-radius: 10px; padding: 12px 15px; font-size: .86rem; color: #6E5A1E; line-height: 1.55; margin: 12px 0;
+    }
+
+    /* Uploads */
+    .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .upload-grid { grid-template-columns: 1fr; } }
+    .upload-slot {
+      border: 1.5px dashed #CBC0E5; border-radius: 12px; background: var(--off-white, #FAF8FD);
+      padding: 18px 14px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s;
+      position: relative; min-height: 132px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    }
+    .upload-slot:hover { border-color: var(--purple, #5B3FA0); background: var(--lavender-bg, #F4F0FB); }
+    .upload-slot.invalid-group { border-color: #C0392B; }
+    .upload-slot input { display: none; }
+    .upload-slot__icon { color: var(--purple, #5B3FA0); }
+    .upload-slot__label { font-size: .88rem; font-weight: 600; color: var(--ink, #1C1633); }
+    .upload-slot__hint { font-size: .76rem; color: var(--muted-label, #8A84A0); }
+    .upload-slot.has-file { border-style: solid; border-color: #3E9B4F; background: #F3FAF4; }
+    .upload-slot img.preview { max-width: 100%; max-height: 110px; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+    .upload-slot__remove {
+      position: absolute; top: 8px; right: 8px; background: #fff; border: 1px solid #D9D2EA;
+      border-radius: 6px; font-size: .72rem; padding: 3px 8px; cursor: pointer; color: #C0392B;
+      display: none; font-family: 'Hanken Grotesk', sans-serif;
+    }
+    .upload-slot.has-file .upload-slot__remove { display: block; }
+
+    /* Signature */
+    .sig-wrap {
+      border: 1.5px solid #CBC0E5; border-radius: 12px; overflow: hidden;
+      background: #fff; position: relative; touch-action: none;
+    }
+    .sig-wrap.invalid-group { border-color: #C0392B; }
+    .sig-wrap canvas { display: block; width: 100%; height: 190px; cursor: crosshair; }
+    .sig-hint {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      color: #B9B2CC; font-size: .95rem; pointer-events: none; transition: opacity .2s;
+    }
+    .sig-hint.hidden { opacity: 0; }
+    .sig-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+    .sig-date { font-size: .84rem; color: var(--body, #56526A); }
+    .btn-clear {
+      background: transparent; border: 1px solid #D9D2EA; color: var(--body, #56526A);
+      padding: 6px 16px; border-radius: 8px; font-size: .8rem; cursor: pointer;
+      font-family: 'Hanken Grotesk', sans-serif; transition: border-color .15s, color .15s;
+    }
+    .btn-clear:hover { border-color: var(--purple, #5B3FA0); color: var(--purple, #5B3FA0); }
+
+    .sig-covers { margin: 14px 0 4px; }
+    .sig-covers li { font-size: .88rem; color: var(--body-alt, #43405A); margin-bottom: 6px; list-style: none; display: flex; gap: 8px; align-items: baseline; }
+    .sig-covers li::before { content: "\2713"; color: #3E9B4F; font-weight: 700; }
+    .sig-covers li.skipped { color: var(--muted-label, #8A84A0); }
+    .sig-covers li.skipped::before { content: "\2013"; color: var(--muted-label, #8A84A0); }
+
+    /* Nav buttons */
+    .reg-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
+    .reg-btn {
+      font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: .96rem;
+      border-radius: 10px; padding: 13px 30px; cursor: pointer; border: none; transition: background .15s, opacity .15s;
+    }
+    .reg-btn--next { background: var(--purple, #5B3FA0); color: #fff; }
+    .reg-btn--next:hover { background: var(--purple-hover, #4C3388); }
+    .reg-btn--back { background: #fff; color: var(--body-alt, #43405A); border: 1px solid #D9D2EA; }
+    .reg-btn--back:hover { border-color: var(--purple, #5B3FA0); color: var(--purple, #5B3FA0); }
+    .reg-btn:disabled { opacity: .55; cursor: not-allowed; }
+
+    .step-error {
+      display: none; background: #FDF1F0; border: 1px solid #EFC7C2; color: #A93226;
+      border-radius: 10px; padding: 12px 16px; font-size: .88rem; margin-bottom: 16px;
+    }
+    .step-error.show { display: block; }
+
+    .reg-step { display: none; }
+    .reg-step.active { display: block; animation: fadeUp .25s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .hidden { display: none !important; }
+
+    .add-contact-btn {
+      background: transparent; border: 1.5px dashed #CBC0E5; color: var(--purple, #5B3FA0);
+      width: 100%; padding: 11px; border-radius: 10px; font-family: 'Hanken Grotesk', sans-serif;
+      font-weight: 600; font-size: .88rem; cursor: pointer; transition: background .15s;
+    }
+    .add-contact-btn:hover { background: var(--lavender-bg, #F4F0FB); }
+    .contact-block { border: 1px solid var(--border-row, #F1EDF8); border-radius: 10px; padding: 16px 16px 4px; margin-bottom: 12px; position: relative; }
+    .contact-block__title { font-size: .8rem; font-weight: 700; color: var(--purple, #5B3FA0); margin-bottom: 10px; }
+    .contact-block__remove { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #C0392B; font-size: .78rem; cursor: pointer; font-family: 'Hanken Grotesk', sans-serif; }
+
+    /* Success */
+    .reg-success { text-align: center; padding: 60px 24px; }
+    .reg-success__icon {
+      width: 68px; height: 68px; border-radius: 50%; background: #EAF6EC; color: #3E9B4F;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px;
+    }
+    .reg-success h2 { font-family: 'Newsreader', serif; font-weight: 500; font-size: 1.8rem; color: var(--ink, #1C1633); margin: 0 0 10px; }
+    .reg-success p { color: var(--body, #56526A); line-height: 1.7; max-width: 480px; margin: 0 auto 8px; }
+
+    .secure-note { text-align: center; font-size: .78rem; color: var(--muted-label, #8A84A0); margin-top: 18px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <!-- UTILITY BAR -->
+  <div class="util-bar">
+    <div class="util-bar__inner">
+      <span class="util-bar__portal"><span class="util-bar__dot"></span> Patient Portal</span>
+      <span class="util-bar__phone">718-866-3037</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo" aria-label="Premier Hematology &amp; Oncology home">
+        <div class="logo__mark"><div class="logo__ribbon"></div></div>
+        <div class="logo__text">
+          <div class="logo__name">PREMIER HEMATOLOGY</div>
+          <div class="logo__sub">ONCOLOGY</div>
+        </div>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+      <ul class="site-nav" id="site-nav">
+        <li class="site-nav__item"><a class="site-nav__link" href="/care-team/">Care Team</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/infusion-therapies-we-offer/">Our Services</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/blog/">Blog</a></li>
+        <li class="site-nav__item"><a class="btn btn--sm" href="/contact/">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="reg-hero">
+    <h1>New Patient Registration</h1>
+    <p>Welcome to Premier Hematology &amp; Oncology. Please complete each section below — it takes about 10&ndash;15 minutes. Have your insurance card and photo ID handy; you'll be asked to photograph or upload both.</p>
+  </div>
+
+  <div class="reg-wrap" id="reg-wrap">
+
+    <div class="reg-progress">
+      <div class="reg-progress__label">
+        <span id="progress-title">Patient Information</span>
+        <span id="progress-count">Step 1 of 9</span>
+      </div>
+      <div class="reg-progress__bar"><div class="reg-progress__fill" id="progress-fill"></div></div>
+    </div>
+
+    <form id="reg-form" novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+
+      <!-- ============================================================ -->
+      <!-- STEP 1 — PATIENT INFORMATION                                  -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Patient Information">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Patient Information</h2>
+          <p class="reg-card__sub">Tell us about the patient being registered.</p>
+
+          <h3>Name &amp; Basics</h3>
+          <div class="f-row f-row--3">
+            <div class="f-group"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" required autocomplete="given-name"></div>
+            <div class="f-group"><label>Middle Name <span class="opt">(optional)</span></label><input type="text" name="middle_name" autocomplete="additional-name"></div>
+            <div class="f-group"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" required autocomplete="family-name"></div>
+          </div>
+          <div class="f-row">
+            <div class="f-group"><label>Date of Birth <span class="req">*</span></label><input type="date" name="date_of_birth" required autocomplete="bday"></div>
+            <div class="f-group">
+              <label>Marital Status <span class="req">*</span></label>
+              <select name="marital_status" required>
+                <option value="" selected disabled>Select…</option>
+                <option>Single</option><option>Married</option><option>Divorced</option>
+                <option>Widowed</option><option>Separated</option><option>Domestic Partner</option>
+                <option>Prefer not to answer</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Birth Gender <span class="req">*</span></label>
+            <div class="choice-group" data-group="birth_gender">
+              <label class="choice"><input type="radio" name="birth_gender" value="Female" required><span>Female</span></label>
+              <label class="choice"><input type="radio" name="birth_gender" value="Male"><span>Male</span></label>
+            </div>
+          </div>
+
+          <h3>Address</h3>
+          <div class="f-row">
+            <div class="f-group" style="grid-column:1/-1"><label>Mailing Address <span class="req">*</span></label><input type="text" name="address" required autocomplete="street-address" placeholder="Street address"></div>
+          </div>
+          <div class="f-row f-row--3">
+            <div class="f-group"><label>City <span class="req">*</span></label><input type="text" name="city" required autocomplete="address-level2"></div>
+            <div class="f-group"><label>State <span class="req">*</span></label><input type="text" name="state" required autocomplete="address-level1"></div>
+            <div class="f-group"><label>ZIP <span class="req">*</span></label><input type="text" name="zip" required inputmode="numeric" autocomplete="postal-code"></div>
+          </div>
+          <div class="f-row">
+            <div class="f-group"><label>Apt / Unit # <span class="opt">(optional)</span></label><input type="text" name="apt"></div>
+          </div>
+
+          <h3>Contact</h3>
+          <div class="f-row">
+            <div class="f-group"><label>Email Address <span class="req">*</span></label><input type="email" name="email" required autocomplete="email"></div>
+            <div class="f-group"><label>Primary Phone <span class="req">*</span></label><input type="tel" name="phone" required autocomplete="tel"></div>
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label>This phone is a… <span class="req">*</span></label>
+              <div class="choice-group" data-group="phone_type">
+                <label class="choice"><input type="radio" name="phone_type" value="Cell" required><span>Cell Phone</span></label>
+                <label class="choice"><input type="radio" name="phone_type" value="Home"><span>Home Phone</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label>Okay to leave a message? <span class="req">*</span></label>
+              <div class="choice-group" data-group="ok_to_leave_message">
+                <label class="choice"><input type="radio" name="ok_to_leave_message" value="Yes" required><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="ok_to_leave_message" value="No"><span>No</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Preferred method of communication <span class="req">*</span></label>
+            <div class="choice-group" data-group="preferred_communication">
+              <label class="choice"><input type="radio" name="preferred_communication" value="Cell Phone" required><span>Cell Phone</span></label>
+              <label class="choice"><input type="radio" name="preferred_communication" value="Home Phone"><span>Home Phone</span></label>
+              <label class="choice"><input type="radio" name="preferred_communication" value="Email"><span>Email</span></label>
+            </div>
+          </div>
+
+          <h3>About You</h3>
+          <div class="f-group">
+            <label>Gender Identity <span class="req">*</span></label>
+            <div class="choice-group" data-group="gender_identity">
+              <label class="choice"><input type="radio" name="gender_identity" value="Female" required><span>Female</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Male"><span>Male</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Non-binary / GNC / Genderqueer"><span>Non-binary / GNC / Genderqueer</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Trans-female / Male to Female"><span>Trans-female / Male to Female</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Trans-male / Female to Male"><span>Trans-male / Female to Male</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Other"><span>Other</span></label>
+              <label class="choice"><input type="radio" name="gender_identity" value="Decline to Answer"><span>Decline to Answer</span></label>
+            </div>
+            <div class="f-group hidden" id="gender-other-wrap" style="margin-top:10px">
+              <label>Please specify <span class="req">*</span></label>
+              <input type="text" name="gender_identity_other" required disabled>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Sexual Orientation <span class="req">*</span></label>
+            <div class="choice-group" data-group="sexual_orientation">
+              <label class="choice"><input type="radio" name="sexual_orientation" value="Lesbian, gay or homosexual" required><span>Lesbian, gay or homosexual</span></label>
+              <label class="choice"><input type="radio" name="sexual_orientation" value="Straight or heterosexual"><span>Straight or heterosexual</span></label>
+              <label class="choice"><input type="radio" name="sexual_orientation" value="Bisexual"><span>Bisexual</span></label>
+              <label class="choice"><input type="radio" name="sexual_orientation" value="Other"><span>Other</span></label>
+              <label class="choice"><input type="radio" name="sexual_orientation" value="Withheld / Decline to Answer"><span>Withheld / Decline to Answer</span></label>
+            </div>
+            <div class="f-group hidden" id="orientation-other-wrap" style="margin-top:10px">
+              <label>Please specify <span class="req">*</span></label>
+              <input type="text" name="sexual_orientation_other" required disabled>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Race <span class="req">*</span> <span class="opt">(select all that apply)</span></label>
+            <div class="choice-group" data-group="race" data-require-one>
+              <label class="choice"><input type="checkbox" name="race" value="Black or African American"><span>Black or African American</span></label>
+              <label class="choice"><input type="checkbox" name="race" value="White"><span>White</span></label>
+              <label class="choice"><input type="checkbox" name="race" value="American Indian / Alaska Native"><span>American Indian / Alaska Native</span></label>
+              <label class="choice"><input type="checkbox" name="race" value="Native Hawaiian or Other Pacific Islander"><span>Native Hawaiian or Other Pacific Islander</span></label>
+              <label class="choice"><input type="checkbox" name="race" value="Other"><span>Other</span></label>
+              <label class="choice"><input type="checkbox" name="race" value="Prefer not to answer"><span>Prefer not to answer</span></label>
+            </div>
+          </div>
+          <div class="f-group">
+            <label>Ethnicity <span class="req">*</span></label>
+            <div class="choice-group" data-group="ethnicity">
+              <label class="choice"><input type="radio" name="ethnicity" value="Hispanic or Latino" required><span>Hispanic or Latino</span></label>
+              <label class="choice"><input type="radio" name="ethnicity" value="Not Hispanic or Latino"><span>Not Hispanic or Latino</span></label>
+              <label class="choice"><input type="radio" name="ethnicity" value="Declined"><span>Decline to answer</span></label>
+            </div>
+          </div>
+          <div class="f-row">
+            <div class="f-group"><label>Preferred Language <span class="req">*</span></label>
+              <input type="text" name="preferred_language" required list="languages" placeholder="e.g. English">
+              <datalist id="languages">
+                <option>English</option><option>Spanish</option><option>Russian</option><option>Yiddish</option>
+                <option>Hebrew</option><option>Chinese</option><option>Creole</option><option>Other</option>
+              </datalist>
+            </div>
+            <div class="f-group"><label>How did you hear about our practice? <span class="req">*</span></label>
+              <select name="how_did_you_hear" required>
+                <option value="" selected disabled>Select…</option>
+                <option>Physician referral</option><option>Friend or family</option><option>Insurance company</option>
+                <option>Internet search</option><option>Social media</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <h3>Primary Care Physician</h3>
+          <div class="f-row">
+            <div class="f-group"><label>Primary Care Physician <span class="opt">(if none, leave blank)</span></label><input type="text" name="pcp_name" placeholder="Physician name"></div>
+            <div class="f-group"><label>PCP Telephone <span class="opt">(optional)</span></label><input type="tel" name="pcp_phone"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 2 — EMERGENCY CONTACT / RESPONSIBLE PARTY / PHARMACY     -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Contacts &amp; Responsible Party">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Emergency Contact &amp; Responsible Party</h2>
+
+          <h3>Emergency Contact</h3>
+          <div class="f-row f-row--3">
+            <div class="f-group"><label>Contact Name <span class="req">*</span></label><input type="text" name="emergency_contact_name" required></div>
+            <div class="f-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="emergency_contact_phone" required></div>
+            <div class="f-group"><label>Relationship to Patient <span class="req">*</span></label><input type="text" name="emergency_contact_relationship" required placeholder="e.g. Spouse"></div>
+          </div>
+
+          <h3>Guarantor / Responsible Party</h3>
+          <p class="reg-card__sub">The person responsible for payment.</p>
+          <div class="f-group">
+            <label>Who is financially responsible for this account? <span class="req">*</span></label>
+            <div class="choice-group" data-group="responsible_party">
+              <label class="choice"><input type="radio" name="responsible_party" value="Self" required><span>The patient (myself)</span></label>
+              <label class="choice"><input type="radio" name="responsible_party" value="Someone else"><span>Someone else</span></label>
+            </div>
+          </div>
+          <div id="guarantor-fields" class="hidden">
+            <div class="f-row">
+              <div class="f-group"><label>Legal Name of Responsible Party (First, Middle, Last) <span class="req">*</span></label><input type="text" name="guarantor_name" required disabled></div>
+              <div class="f-group"><label>Responsible Party Date of Birth <span class="req">*</span></label><input type="date" name="guarantor_dob" required disabled></div>
+            </div>
+            <div class="f-group">
+              <label class="check-row"><input type="checkbox" id="guarantor-same-address" checked>
+                <span>The responsible party's address is the same as the patient's address</span></label>
+            </div>
+            <div class="f-group hidden" id="guarantor-address-wrap">
+              <label>Responsible Party Address <span class="req">*</span></label>
+              <input type="text" name="guarantor_address" required disabled placeholder="Street, City, State, ZIP">
+            </div>
+          </div>
+
+          <h3>Preferred Pharmacy</h3>
+          <div class="f-row">
+            <div class="f-group"><label>Pharmacy Name <span class="opt">(optional)</span></label><input type="text" name="pharmacy_name"></div>
+            <div class="f-group"><label>Pharmacy Location <span class="opt">(optional)</span></label><input type="text" name="pharmacy_location" placeholder="Address or cross streets"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 3 — INSURANCE                                            -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Medical Insurance">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Medical Insurance</h2>
+          <p class="reg-card__sub">You'll upload photos of your insurance card in the next step.</p>
+
+          <h3>Primary Insurance</h3>
+          <div class="f-row">
+            <div class="f-group"><label>Insurance Company Name <span class="req">*</span></label><input type="text" name="primary_insurance_company" required></div>
+            <div class="f-group"><label>Policy Number / Member ID <span class="req">*</span></label><input type="text" name="primary_policy_number" required></div>
+          </div>
+          <div class="f-row">
+            <div class="f-group"><label>Group Number <span class="opt">(if on card)</span></label><input type="text" name="primary_group_number"></div>
+            <div class="f-group"><label>Insurance Company Phone <span class="opt">(optional)</span></label><input type="tel" name="primary_insurance_phone"></div>
+          </div>
+          <div class="f-group"><label>Insurance Company Address <span class="opt">(optional)</span></label><input type="text" name="primary_insurance_address"></div>
+          <div class="f-group">
+            <label>Patient's relationship to the insured <span class="req">*</span></label>
+            <div class="choice-group" data-group="primary_relationship_to_insured">
+              <label class="choice"><input type="radio" name="primary_relationship_to_insured" value="Self" required><span>Self</span></label>
+              <label class="choice"><input type="radio" name="primary_relationship_to_insured" value="Spouse"><span>Spouse</span></label>
+              <label class="choice"><input type="radio" name="primary_relationship_to_insured" value="Dependent"><span>Dependent</span></label>
+            </div>
+          </div>
+          <div id="primary-insured-fields" class="f-row hidden">
+            <div class="f-group"><label>Insured Person's Name <span class="req">*</span></label><input type="text" name="primary_insured_name" required disabled></div>
+            <div class="f-group"><label>Insured Person's Date of Birth <span class="req">*</span></label><input type="date" name="primary_insured_dob" required disabled></div>
+          </div>
+
+          <h3>Secondary Insurance</h3>
+          <div class="f-group">
+            <label>Do you have secondary insurance? <span class="req">*</span></label>
+            <div class="choice-group" data-group="has_secondary_insurance">
+              <label class="choice"><input type="radio" name="has_secondary_insurance" value="No" required><span>No</span></label>
+              <label class="choice"><input type="radio" name="has_secondary_insurance" value="Yes"><span>Yes</span></label>
+            </div>
+          </div>
+          <div id="secondary-fields" class="hidden">
+            <div class="f-row">
+              <div class="f-group"><label>Insurance Company Name <span class="req">*</span></label><input type="text" name="secondary_insurance_company" required disabled></div>
+              <div class="f-group"><label>Policy Number / Member ID <span class="req">*</span></label><input type="text" name="secondary_policy_number" required disabled></div>
+            </div>
+            <div class="f-row">
+              <div class="f-group"><label>Group Number <span class="opt">(if on card)</span></label><input type="text" name="secondary_group_number" disabled></div>
+              <div class="f-group"><label>Insurance Company Phone <span class="opt">(optional)</span></label><input type="tel" name="secondary_insurance_phone" disabled></div>
+            </div>
+            <div class="f-group"><label>Insurance Company Address <span class="opt">(optional)</span></label><input type="text" name="secondary_insurance_address" disabled></div>
+            <div class="f-group">
+              <label>Patient's relationship to the insured <span class="req">*</span></label>
+              <div class="choice-group" data-group="secondary_relationship_to_insured">
+                <label class="choice"><input type="radio" name="secondary_relationship_to_insured" value="Self" required disabled><span>Self</span></label>
+                <label class="choice"><input type="radio" name="secondary_relationship_to_insured" value="Spouse" disabled><span>Spouse</span></label>
+                <label class="choice"><input type="radio" name="secondary_relationship_to_insured" value="Dependent" disabled><span>Dependent</span></label>
+              </div>
+            </div>
+            <div id="secondary-insured-fields" class="f-row hidden">
+              <div class="f-group"><label>Insured Person's Name <span class="req">*</span></label><input type="text" name="secondary_insured_name" required disabled></div>
+              <div class="f-group"><label>Insured Person's Date of Birth <span class="req">*</span></label><input type="date" name="secondary_insured_dob" required disabled></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 4 — DOCUMENT UPLOADS                                     -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Upload Documents">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Insurance Card &amp; Photo ID</h2>
+          <p class="reg-card__sub">Take a photo or upload a clear image of each. On a phone, tapping a box opens your camera. Please make sure all text is readable and glare-free.</p>
+
+          <h3>Primary Insurance Card</h3>
+          <div class="upload-grid">
+            <div class="upload-slot" data-key="insurance_primary_front" data-label="Insurance Card — Front" data-required="1">
+              <input type="file" accept="image/*" capture="environment">
+              <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              <div class="upload-slot__label">Front of insurance card <span class="req">*</span></div>
+              <div class="upload-slot__hint">Tap to photograph or upload</div>
+              <button type="button" class="upload-slot__remove">Remove</button>
+            </div>
+            <div class="upload-slot" data-key="insurance_primary_back" data-label="Insurance Card — Back" data-required="1">
+              <input type="file" accept="image/*" capture="environment">
+              <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15h6"/></svg>
+              <div class="upload-slot__label">Back of insurance card <span class="req">*</span></div>
+              <div class="upload-slot__hint">Tap to photograph or upload</div>
+              <button type="button" class="upload-slot__remove">Remove</button>
+            </div>
+          </div>
+
+          <div id="secondary-upload-wrap" class="hidden">
+            <h3>Secondary Insurance Card</h3>
+            <div class="upload-grid">
+              <div class="upload-slot" data-key="insurance_secondary_front" data-label="Secondary Insurance Card — Front" data-required="1">
+                <input type="file" accept="image/*" capture="environment">
+                <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                <div class="upload-slot__label">Front of secondary card <span class="req">*</span></div>
+                <div class="upload-slot__hint">Tap to photograph or upload</div>
+                <button type="button" class="upload-slot__remove">Remove</button>
+              </div>
+              <div class="upload-slot" data-key="insurance_secondary_back" data-label="Secondary Insurance Card — Back" data-required="1">
+                <input type="file" accept="image/*" capture="environment">
+                <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 15h6"/></svg>
+                <div class="upload-slot__label">Back of secondary card <span class="req">*</span></div>
+                <div class="upload-slot__hint">Tap to photograph or upload</div>
+                <button type="button" class="upload-slot__remove">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <h3>Driver's License / Photo ID</h3>
+          <div class="upload-grid">
+            <div class="upload-slot" data-key="photo_id_front" data-label="Photo ID — Front" data-required="1">
+              <input type="file" accept="image/*" capture="environment">
+              <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8.5" cy="11" r="2.5"/><path d="M14 9h5M14 13h5M5 18c.8-1.8 2-2.5 3.5-2.5S11.2 16.2 12 18"/></svg>
+              <div class="upload-slot__label">Front of photo ID <span class="req">*</span></div>
+              <div class="upload-slot__hint">Tap to photograph or upload</div>
+              <button type="button" class="upload-slot__remove">Remove</button>
+            </div>
+            <div class="upload-slot" data-key="photo_id_back" data-label="Photo ID — Back" data-required="1">
+              <input type="file" accept="image/*" capture="environment">
+              <svg class="upload-slot__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M5 9h14M5 13h9"/></svg>
+              <div class="upload-slot__label">Back of photo ID <span class="req">*</span></div>
+              <div class="upload-slot__hint">Tap to photograph or upload</div>
+              <button type="button" class="upload-slot__remove">Remove</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 5 — CARE CONTACTS                                        -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Care Contacts">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Care Contacts</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+
+          <div class="consent-box" style="max-height:none">
+            <p>It is our policy not to release confidential and/or unauthorized information by home telephone, answering machine, work telephone, voice mail, and cell phone and/or by mail, or someone other than any persons listed below. Information also will not be given or left with an unauthorized person who may answer the phone.</p>
+            <p>If you would like to authorize Premier Hematology &amp; Oncology to communicate with other individuals about your healthcare, please indicate your communication preferences below.</p>
+          </div>
+
+          <div class="f-group">
+            <label>Would you like to authorize anyone else to receive information about your healthcare? <span class="req">*</span></label>
+            <div class="choice-stack" data-group="care_contacts_choice">
+              <label class="choice"><input type="radio" name="care_contacts_choice" value="No one" required><span>No — I do NOT wish for Premier Hematology &amp; Oncology to speak with anyone but me</span></label>
+              <label class="choice"><input type="radio" name="care_contacts_choice" value="Authorize contacts"><span>Yes — I give consent to communicate with the individual(s) I list below about my healthcare (such as appointment details, prescription information, test results)</span></label>
+            </div>
+          </div>
+
+          <div id="care-contacts-list" class="hidden">
+            <div class="contact-block" data-contact="1">
+              <div class="contact-block__title">Care Contact 1</div>
+              <div class="f-row f-row--3">
+                <div class="f-group"><label>Name <span class="req">*</span></label><input type="text" name="care_contact_1_name" required disabled></div>
+                <div class="f-group"><label>Relationship <span class="req">*</span></label><input type="text" name="care_contact_1_relationship" required disabled></div>
+                <div class="f-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="care_contact_1_phone" required disabled></div>
+              </div>
+            </div>
+            <div class="contact-block hidden" data-contact="2">
+              <button type="button" class="contact-block__remove">Remove</button>
+              <div class="contact-block__title">Care Contact 2</div>
+              <div class="f-row f-row--3">
+                <div class="f-group"><label>Name <span class="req">*</span></label><input type="text" name="care_contact_2_name" required disabled></div>
+                <div class="f-group"><label>Relationship <span class="req">*</span></label><input type="text" name="care_contact_2_relationship" required disabled></div>
+                <div class="f-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="care_contact_2_phone" required disabled></div>
+              </div>
+            </div>
+            <div class="contact-block hidden" data-contact="3">
+              <button type="button" class="contact-block__remove">Remove</button>
+              <div class="contact-block__title">Care Contact 3</div>
+              <div class="f-row f-row--3">
+                <div class="f-group"><label>Name <span class="req">*</span></label><input type="text" name="care_contact_3_name" required disabled></div>
+                <div class="f-group"><label>Relationship <span class="req">*</span></label><input type="text" name="care_contact_3_relationship" required disabled></div>
+                <div class="f-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="care_contact_3_phone" required disabled></div>
+              </div>
+            </div>
+            <button type="button" class="add-contact-btn" id="add-contact-btn">+ Add another care contact</button>
+          </div>
+
+          <h3>Acknowledgement</h3>
+          <div class="consent-box" style="max-height:none">
+            <p>By signing at the end of this form, I understand that Premier Hematology &amp; Oncology has my permission to contact me or my Care Contact(s) identified on this form. I understand that I am responsible for notifying the office staff if there are changes to my designated communication preferences. If I am signing this document on behalf of another person, I acknowledge that I am consenting on behalf of the patient and I will indicate my relationship to the patient where indicated.</p>
+            <p class="fine">*The signature of the patient must be obtained unless the patient is an unemancipated minor under the age of 18 or lacks capacity to make medical decisions. In these cases the Agent, Surrogate or Guardian should sign.</p>
+          </div>
+          <div class="consent-agree">
+            <label class="check-row"><input type="checkbox" name="consent_care_contacts" value="Agreed" required>
+              <span><strong>I have read and agree</strong> to the Care Contacts acknowledgement above. <span class="req">*</span></span></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 6 — CONSENTS                                             -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Consents &amp; Acknowledgements">
+        <div class="step-error"></div>
+
+        <div class="reg-card">
+          <h2>Consent to Treatment, Assignment of Benefits and Guarantee of Payment</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+          <div class="consent-box">
+            <h4>General Care and Treatment Consent</h4>
+            <p>This consent form is simply an effort to obtain your permission to perform the evaluation necessary to identify the appropriate treatment and/or procedure for any identified condition(s). This consent provides us with your permission to perform reasonable and necessary medical examinations, testing and treatment. By signing below, you are indicating that (1) you intend that this consent is continuing in nature even after a specific diagnosis has been made and treatment recommended; and (2) you consent to treatment at this office or any other satellite office under common ownership. The consent will remain fully effective until it is revoked in writing.</p>
+            <h4>Assignment of Benefits</h4>
+            <p>I hereby irrevocably assign and transfer to Dr. Crescenzo at Premier Hematology &amp; Oncology any monies or benefits to which I may be entitled, including benefits/monies from governmental payers such as Medicare, my insurance company, HMO, or other third parties who are financially responsible for my medical care. I authorize and direct Dr. Crescenzo at Premier Hematology &amp; Oncology, having treated me, to release to such payers or other third parties who are financially responsible for my medical care, all information needed (including but not limited to medical records, copies of claims and itemized bills) to substantiate payment for my medical care and to permit representatives thereof to examine and make copies of all records relating to such care and treatment. I also appoint Dr. Crescenzo at Premier Hematology &amp; Oncology as my authorized representative to pursue all rights of payment, to ascertain the benefits available, to collect benefits directly from my insurance company and to appeal denials and proceed against my insurance company in any action, including legal suit, on my behalf if for any reason my insurance company refuses to pay my claim. The appointment shall include all rights to recover attorney's fees and costs for such action brought by Dr. Crescenzo at Premier Hematology &amp; Oncology as my assignee. I further agree to provide information as necessary and to cooperate with Dr. Crescenzo at Premier Hematology &amp; Oncology to process and obtain payments.</p>
+            <h4>Patients Entitled to Medicare Benefits</h4>
+            <p>I request that payment of authorized Medicare benefits be made to Dr. Delfino M Crescenzo at Premier Hematology &amp; Oncology. I authorize any holder of medical information about me to release to CMS and its agents any information needed to determine these benefits or the benefits payable for the related services. I certify that I may sign an ABN form for services that are not covered by Medicare, but I choose to receive.</p>
+            <h4>Guarantee of Payment</h4>
+            <p>I understand that I am financially responsible for charges not covered by insurance. I agree to pay all amounts for which I am responsible for medical services rendered in accordance with the rates and terms of this practice or as determined by my health plan. Should the account be referred to an attorney for collection, I will pay reasonable attorney's fees and collection expenses.</p>
+            <p class="fine">*The signature of the patient must be obtained unless the patient is an unemancipated minor under the age of 18 or lacks capacity to make medical decisions. In these cases, the Agent, Surrogate or Guardian should sign.</p>
+          </div>
+          <div class="consent-agree">
+            <label class="check-row"><input type="checkbox" name="consent_treatment_aob" value="Agreed" required>
+              <span><strong>I have read and agree</strong> to the Consent to Treatment, Assignment of Benefits and Guarantee of Payment. <span class="req">*</span></span></label>
+          </div>
+        </div>
+
+        <div class="reg-card">
+          <h2>Patient Bill of Rights</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+          <div class="consent-box">
+            <p>As a patient of Prime Infusions and their affiliated infusion centers, you have the right to:</p>
+            <ol>
+              <li>Be fully informed of all your rights and responsibilities both verbally and in writing at the time of admission and prior to the initiation of care.</li>
+              <li>Be treated with dignity and respect without discrimination on the basis of any factor for which discrimination is prohibited by law. Have cultural, personal values, beliefs &amp; preferences respected.</li>
+              <li>Receive information necessary to give informed consent prior to the start of any procedure or treatment in a language or form you can understand.</li>
+              <li>Make informed decisions about and actively participate in the planning of your care.</li>
+              <li>Be informed about your illness and treatment, when and how services will be provided, the name and function of any person providing care and service, and the name of the person responsible for the coordination of your care.</li>
+              <li>Refuse treatment and to be informed of the consequences of your action.</li>
+              <li>Confidentiality and privacy in treatment and care, including confidential treatment of patient health information.</li>
+              <li>Be admitted for service only if Prime Infusions has the ability to provide safe and professional care at the level of intensity prescribed. You have the right to reasonable continuity of care and service provided by qualified personnel, through education and experience, to perform the service for which they are responsible.</li>
+              <li>Be informed within a reasonable time of anticipated termination of services or plans for transfer to another agency, and participate in that discharge or transfer process.</li>
+              <li>Participate or refuse to participate in experimental treatment and research with voluntary, informed consent documented without jeopardizing access to care, treatment, and services unrelated to research.</li>
+              <li>Issue voice complaints and grievances, suggest changes in service staff, and be informed of Prime Infusions procedures for registering complaints without reprisal, coercion, discrimination, or unreasonable interruption in service and the right to have your complaint investigated.</li>
+              <li>Review your medical record, speak to a healthcare professional.</li>
+              <li>Participate in the consideration of ethical issues, formulate advance directives, and be aware that Prime Infusions will honor those directives when applicable.</li>
+              <li>Be advised of the availability of the toll-free state home health hotline.</li>
+              <li>Refuse disclosure of your Protected Health Information (PHI) to accrediting organizations for the purposes of quality management. To refuse disclosure of specialty pharmacy information and your PHI, please call the phone number of the pharmacy listed on your prescription label.</li>
+              <li>Be informed of the identity and job title of the staff members of the pharmacy providing services to you, and to speak to a supervisor of the staff member if requested.</li>
+              <li>Have a surrogate decision-maker whose decisions regarding care, treatment and services are respected, including the right to refuse care, treatment, and services on your behalf, in accordance with law and regulation.</li>
+              <li>Receive information about the patient management program when applicable. Decline participation, revoke consent or disenroll in the patient management program at any time.</li>
+            </ol>
+          </div>
+          <div class="consent-agree">
+            <label class="check-row"><input type="checkbox" name="consent_bill_of_rights" value="Acknowledged" required>
+              <span><strong>I hereby acknowledge receipt</strong> of this Bill of Rights. <span class="req">*</span></span></label>
+          </div>
+        </div>
+
+        <div class="reg-card">
+          <h2>Consent for Telehealth Services</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+          <div class="consent-box">
+            <p>Telehealth is the use of electronic information and communication technologies to remotely deliver healthcare services to patients. Please read this form for information about telehealth services and sign your name below. Your signature tells us that you have read the form and that you agree to receive treatment by telehealth.</p>
+            <h4>General Information</h4>
+            <p><strong>We may use the information you provide to:</strong></p>
+            <ul>
+              <li>Review your health records, images, and/or test results,</li>
+              <li>Have a live two-way interactive audio and video communication with you, and/or</li>
+              <li>Review output data from medical devices.</li>
+            </ul>
+            <p><strong>Expected benefits to you of telehealth services may include:</strong></p>
+            <ul>
+              <li>Improved access to care by allowing you to remain in your home or at a doctor's office while another provider consults on your care.</li>
+              <li>More efficient evaluation and care management.</li>
+              <li>Obtaining expertise of a specialist, as appropriate.</li>
+            </ul>
+            <p><strong>Possible risks associated with telehealth services may include:</strong></p>
+            <ul>
+              <li>Delays in evaluation and treatment could occur if the equipment or technology fails or if the telehealth provider decides that the transmitted information is of poor quality. If this is the case, we may need to reschedule the telehealth consult or schedule an in-person appointment with you and your provider.</li>
+              <li>Although the electronic communication systems that we use will incorporate security protocols to protect your privacy, security protocols could fail, causing a breach of privacy of personal medical information.</li>
+            </ul>
+            <p><strong>In an Emergency:</strong> If you experience an emergency during a telehealth session, your telehealth provider may contact 9-1-1 or your emergency contact.</p>
+            <h4>Acknowledgement and Consent</h4>
+            <p><strong>By checking the box and signing my name below, I acknowledge that I understand and agree with the following:</strong></p>
+            <ol>
+              <li>I consent to receive services via telehealth. I have the right to withhold or withdraw my consent to the use of telehealth at any time without affecting my right to future care or treatment.</li>
+              <li>My telehealth provider will determine whether my specific clinical needs are appropriate for care via telehealth. If my provider determines that telehealth is not appropriate for the care I need, I agree to schedule an in-person consult with my provider.</li>
+              <li>My medical information may be shared with others for scheduling and billing purposes and may also be communicated electronically to other providers in connection with my care. These other providers may be located in other areas, including out of state. If I am being treated for substance use disorder, an additional authorization for use of my health information will be provided to me when required by law.</li>
+              <li>I have been informed of all persons who will be present during the telehealth session and been given the opportunity to provide input. If I am a parent or guardian consenting to services for a minor, the patient and I have both had the opportunity to provide input regarding who can be present during a telehealth session.</li>
+              <li>I have the right to have staff available to me during the telehealth session for assistance if my visit is conducted in an office or hospital setting. I understand if my visit is conducted at home, the option for in person staff assistance is not available.</li>
+              <li>I will tell my provider where I am located at the time of my telehealth session. I have received location and license information of my telehealth provider as well as information about the staff responsible for my ongoing care.</li>
+              <li>The technology may fail during the telehealth session in which case either I or my provider may terminate the session. If my telehealth session is disrupted or disconnected, my provider will try to reestablish the connection or call me by phone. If we cannot reconnect, a new session will be scheduled. I agree to hold Premier Hematology &amp; Oncology harmless for delays in evaluation or for information lost due to such technical failures.</li>
+              <li>If I am at home during a telehealth session, I will have access to equipment that supports the telehealth platform and have a private and safe location in which to have the session.</li>
+              <li>I give consent to my provider to record a telehealth session. I will not record the session without my provider's consent and under no circumstance will I record a group therapy session.</li>
+              <li>Alternatives to telehealth services, such as in-person services, are available to me. In choosing to participate in the telehealth services, I understand that additional services, including lab or radiology tests, may require an in person visit. If I want a different provider, he or she may not be able to provide care via telehealth, which may necessitate an in-person visit that could delay care.</li>
+              <li>I am responsible for all copays and deductibles associated with the telehealth services that I receive. If I do not have insurance or if my insurance does not cover the telehealth services, I understand that I am responsible for the costs of the telehealth session.</li>
+            </ol>
+            <p>I have read this document carefully. I understand the risks and benefits of the telehealth services and my questions regarding the services, the technology, the costs and the terms of this consent have been answered. I give my consent to participate in the telehealth services under the terms of this Consent for Telehealth Services.</p>
+            <p class="fine">*The signature of the patient must be obtained unless the patient is an unemancipated minor under the age of 18 or lacks capacity to make medical decisions. In these cases, the Agent, Surrogate or Guardian should sign.</p>
+          </div>
+          <div class="consent-agree">
+            <label class="check-row"><input type="checkbox" name="consent_telehealth" value="Accepted" required>
+              <span><strong>ACCEPT.</strong> By checking the box for this <strong>&ldquo;CONSENT FOR TELEHEALTH SERVICES&rdquo;</strong> I hereby state that I have read, understood, and agree to the terms of this document. <span class="req">*</span></span></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 7 — RELEASE OF MEDICAL INFORMATION                       -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Medical Records Release">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Authorization to Release Medical Information</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+          <p class="reg-card__sub">If you would like us to obtain your medical records from a previous provider — or send your records to another provider or facility — complete this authorization. If not, you can skip it.</p>
+
+          <div class="f-group">
+            <label>Would you like to complete a medical records release authorization? <span class="req">*</span></label>
+            <div class="choice-group" data-group="wants_records_release">
+              <label class="choice"><input type="radio" name="wants_records_release" value="No" required><span>No, skip this section</span></label>
+              <label class="choice"><input type="radio" name="wants_records_release" value="Yes"><span>Yes</span></label>
+            </div>
+          </div>
+
+          <div id="release-fields" class="hidden">
+            <h3>Records Requested From</h3>
+            <div class="f-group">
+              <label>I am requesting my health information be released from (name of facility or health provider) <span class="req">*</span></label>
+              <input type="text" name="release_from" required disabled placeholder="Facility / provider name">
+            </div>
+            <div class="f-group">
+              <label>Released to <span class="req">*</span></label>
+              <div class="choice-stack" data-group="release_to_choice">
+                <label class="choice"><input type="radio" name="release_to_choice" value="Delfino M. Crescenzo, M.D. (Premier Hematology & Oncology)" required disabled><span>Delfino M. Crescenzo, M.D. — Premier Hematology &amp; Oncology</span></label>
+                <label class="choice"><input type="radio" name="release_to_choice" value="Other" disabled><span>Another entity or facility</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="release-to-other-wrap">
+              <label>Name, Address, Phone, Fax of entity or facility information will be sent to <span class="req">*</span></label>
+              <textarea name="release_to_other" required disabled></textarea>
+            </div>
+            <div class="f-group">
+              <label>Purpose <span class="req">*</span></label>
+              <div class="choice-group" data-group="release_purpose">
+                <label class="choice"><input type="radio" name="release_purpose" value="Medical Care / Treatment" required disabled><span>Medical Care / Treatment</span></label>
+                <label class="choice"><input type="radio" name="release_purpose" value="Other" disabled><span>Other</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="release-purpose-other-wrap">
+              <label>Please specify <span class="req">*</span></label>
+              <input type="text" name="release_purpose_other" required disabled>
+            </div>
+
+            <h3>Information to Release</h3>
+            <div class="f-group">
+              <label>I authorize the release of the following protected health information <span class="req">*</span> <span class="opt">(select all that apply)</span></label>
+              <div class="choice-group" data-group="release_phi_types" data-require-one>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Notes" disabled><span>Notes</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Pathology Reports" disabled><span>Pathology Reports</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Radiology Reports" disabled><span>Radiology Reports</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Laboratory Reports" disabled><span>Laboratory Reports</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Insurance" disabled><span>Insurance</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Entire Medical Records" id="phi-entire" disabled><span>Entire Medical Records</span></label>
+                <label class="choice"><input type="checkbox" name="release_phi_types" value="Other" id="phi-other" disabled><span>Other</span></label>
+              </div>
+            </div>
+            <div class="f-row hidden" id="phi-entire-dates">
+              <div class="f-group"><label>Entire records from <span class="req">*</span></label><input type="date" name="release_records_from_date" required disabled></div>
+              <div class="f-group"><label>To <span class="req">*</span></label><input type="date" name="release_records_to_date" required disabled></div>
+            </div>
+            <div class="f-group hidden" id="phi-other-wrap">
+              <label>Other — please specify <span class="req">*</span></label>
+              <input type="text" name="release_phi_other" required disabled>
+            </div>
+            <div class="f-group">
+              <label>Format <span class="req">*</span></label>
+              <div class="choice-group" data-group="release_format">
+                <label class="choice"><input type="radio" name="release_format" value="Paper Copy" required disabled><span>Paper Copy</span></label>
+                <label class="choice"><input type="radio" name="release_format" value="Electronic Copy" disabled><span>Electronic Copy</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label>This authorization expires on <span class="opt">(if left blank, one year after signed)</span></label>
+              <input type="date" name="release_expiration" disabled>
+            </div>
+
+            <h3>Restrictions &amp; Your Rights</h3>
+            <div class="consent-box">
+              <p><strong>Restrictions:</strong> Only medical records originated through this healthcare office will be copied, unless otherwise requested. I understand that:</p>
+              <ul>
+                <li>By signing this form, I am authorizing the use or disclosure of protected health information as indicated above.</li>
+                <li>I may refuse to sign this authorization, which will not affect my treatment or payment for health care.</li>
+                <li>I may revoke this authorization at any time before the information I have requested is released, I must do so in writing to the Office Med. Records department. Revocation will not apply to information already sent.</li>
+                <li>If the receiving party is not subject to medical records privacy laws, the information may be re-disclosed by the recipient and may no longer be protected by federal or state law. Premier Hematology &amp; Oncology shall not be held liable for any consequences resulting from re-disclosure.</li>
+                <li>If the information to be released contains any information about HIV/AIDS an additional HIPAA release of medical information form will be requested. Alcohol or substance abuse, mental health or psychiatry notes may have additional compliance requirements that must be met before the information can be released.</li>
+                <li>A copy of this signed form will be provided to me.</li>
+                <li>Dr. Crescenzo's office may charge an administrative fee to cover the cost of labor, copying, and postage. The physician's office will inform me of any charges and arrange for payment. <em>No more than $10.00/25&cent; per page.</em></li>
+                <li>This Authorization expires on the date indicated above (if date not completed, one year after signed).</li>
+              </ul>
+              <p class="fine">*The signature of the patient must be obtained unless the patient is an unemancipated minor under the age of 18 or lacks capacity to make medical decisions. In these cases the Agent, Surrogate or Guardian should sign.</p>
+            </div>
+            <div class="consent-agree">
+              <label class="check-row"><input type="checkbox" name="consent_records_release" value="Agreed" required disabled>
+                <span><strong>I have read and agree</strong> to this Authorization to Release Medical Information, including the restrictions above. <span class="req">*</span></span></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 8 — IRON SCREENING                                       -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Iron Screening">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Iron Screening</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+
+          <div class="f-group">
+            <label>Are you being seen for iron deficiency, anemia, or a possible iron infusion? <span class="req">*</span></label>
+            <div class="choice-group" data-group="iron_screening_applicable">
+              <label class="choice"><input type="radio" name="iron_screening_applicable" value="No" required><span>No / Not sure — skip this section</span></label>
+              <label class="choice"><input type="radio" name="iron_screening_applicable" value="Yes"><span>Yes</span></label>
+            </div>
+          </div>
+
+          <div id="iron-fields" class="hidden">
+            <h3>Oral Iron History</h3>
+            <div class="f-group">
+              <label>1. Have you ever tried oral iron? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_tried_oral">
+                <label class="choice"><input type="radio" name="iron_tried_oral" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_tried_oral" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label>2. Are you taking a prenatal with iron? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_prenatal">
+                <label class="choice"><input type="radio" name="iron_prenatal" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_prenatal" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div id="iron-oral-details" class="hidden">
+              <div class="f-group">
+                <label>3. What was the medication name, dosage, and duration of treatment? <span class="opt">(include over the counter and supplements)</span> <span class="req">*</span></label>
+                <textarea name="iron_medication_details" required disabled></textarea>
+              </div>
+              <div class="f-group">
+                <label>4. What was the reason for discontinuation of medication? <span class="req">*</span></label>
+                <textarea name="iron_discontinuation_reason" required disabled></textarea>
+              </div>
+            </div>
+
+            <h3>Gastric Issues</h3>
+            <div class="f-group">
+              <label>5. Do you have a gastroenterologist? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_has_gi_doctor">
+                <label class="choice"><input type="radio" name="iron_has_gi_doctor" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_has_gi_doctor" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="iron-gi-doctor-wrap">
+              <label>Gastroenterologist name and number <span class="req">*</span></label>
+              <input type="text" name="iron_gi_doctor_info" required disabled>
+            </div>
+            <div class="f-group">
+              <label>6. Are you unable to tolerate oral iron? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_intolerant">
+                <label class="choice"><input type="radio" name="iron_intolerant" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_intolerant" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="iron-intolerant-wrap">
+              <label>What happens when you take oral iron? <span class="req">*</span></label>
+              <textarea name="iron_intolerance_description" required disabled></textarea>
+            </div>
+            <div class="f-group">
+              <label>7. Do you have a gastrointestinal tract disorder, such as inflammatory bowel disease (ulcerative colitis or Crohn's disease) that may be aggravated by oral iron therapy? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_gi_disorder">
+                <label class="choice"><input type="radio" name="iron_gi_disorder" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_gi_disorder" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="iron-gi-disorder-wrap">
+              <label>Please describe <span class="req">*</span></label>
+              <textarea name="iron_gi_disorder_description" required disabled></textarea>
+            </div>
+            <div class="f-group">
+              <label>8. Have you had a gastric bypass surgery and/or a gastric resection? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_gastric_bypass">
+                <label class="choice"><input type="radio" name="iron_gastric_bypass" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_gastric_bypass" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group hidden" id="iron-bypass-wrap">
+              <label>When and where? <span class="req">*</span></label>
+              <input type="text" name="iron_gastric_bypass_details" required disabled>
+            </div>
+
+            <div id="iron-female-section" class="hidden">
+              <h3>Female Issues</h3>
+              <div class="f-group">
+                <label>9. Do you have a heavy uterine bleed? <span class="req">*</span></label>
+                <div class="choice-group" data-group="iron_heavy_bleed">
+                  <label class="choice"><input type="radio" name="iron_heavy_bleed" value="Yes" required disabled><span>Yes</span></label>
+                  <label class="choice"><input type="radio" name="iron_heavy_bleed" value="No" disabled><span>No</span></label>
+                </div>
+              </div>
+              <div class="f-group hidden" id="iron-bleed-wrap">
+                <label>How many pads/tampons in a 12-hour period? <span class="req">*</span></label>
+                <input type="number" name="iron_pads_per_12hr" min="0" required disabled>
+              </div>
+              <div class="f-group">
+                <label>10. Do you suffer from uterine fibroids? <span class="req">*</span></label>
+                <div class="choice-group" data-group="iron_fibroids">
+                  <label class="choice"><input type="radio" name="iron_fibroids" value="Yes" required disabled><span>Yes</span></label>
+                  <label class="choice"><input type="radio" name="iron_fibroids" value="No" disabled><span>No</span></label>
+                </div>
+              </div>
+              <div class="f-group">
+                <label>11. Are you pregnant? <span class="req">*</span></label>
+                <div class="choice-group" data-group="iron_pregnant">
+                  <label class="choice"><input type="radio" name="iron_pregnant" value="Yes" required disabled><span>Yes</span></label>
+                  <label class="choice"><input type="radio" name="iron_pregnant" value="No" disabled><span>No</span></label>
+                </div>
+              </div>
+              <div id="iron-pregnancy-wrap" class="hidden">
+                <div class="f-row">
+                  <div class="f-group"><label>How many weeks? <span class="req">*</span></label><input type="number" name="iron_pregnancy_weeks" min="0" max="45" required disabled></div>
+                  <div class="f-group"><label>12. How many weeks were you when you found out you were anemic? <span class="req">*</span></label><input type="number" name="iron_weeks_when_anemic" min="0" max="45" required disabled></div>
+                </div>
+                <div class="f-group">
+                  <label>13. Did you have anemia before pregnancy? <span class="req">*</span></label>
+                  <div class="choice-group" data-group="iron_anemia_before_pregnancy">
+                    <label class="choice"><input type="radio" name="iron_anemia_before_pregnancy" value="Yes" required disabled><span>Yes</span></label>
+                    <label class="choice"><input type="radio" name="iron_anemia_before_pregnancy" value="No" disabled><span>No</span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3>Kidney Disease &amp; Heart Failure</h3>
+            <div class="f-group">
+              <label>14. Do you have iron deficiency anemia associated with dialysis and chronic kidney disease? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_ckd">
+                <label class="choice"><input type="radio" name="iron_ckd" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_ckd" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label>15. Do you have heart failure and iron deficiency, with or without anemia? <span class="req">*</span></label>
+              <div class="choice-group" data-group="iron_heart_failure">
+                <label class="choice"><input type="radio" name="iron_heart_failure" value="Yes" required disabled><span>Yes</span></label>
+                <label class="choice"><input type="radio" name="iron_heart_failure" value="No" disabled><span>No</span></label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label>16. Anything else we should know? <span class="opt">(optional)</span></label>
+              <textarea name="iron_other_notes" disabled></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- STEP 9 — REVIEW & SIGN                                        -->
+      <!-- ============================================================ -->
+      <section class="reg-step" data-title="Review &amp; Sign">
+        <div class="step-error"></div>
+        <div class="reg-card">
+          <h2>Review &amp; Sign</h2>
+          <div class="reg-patient-chip" data-patient-chip></div>
+
+          <h3>Who is signing this form?</h3>
+          <div class="f-group">
+            <div class="choice-stack" data-group="signer_type">
+              <label class="choice"><input type="radio" name="signer_type" value="Patient" required><span>I am the patient</span></label>
+              <label class="choice"><input type="radio" name="signer_type" value="Agent/Surrogate/Guardian"><span>I am the patient's Agent, Surrogate, Parent or Guardian</span></label>
+            </div>
+          </div>
+          <div class="reg-note">
+            *The signature of the patient must be obtained unless the patient is an unemancipated minor under the age of 18 or lacks capacity to make medical decisions. In these cases the Agent, Surrogate or Guardian should sign.
+          </div>
+          <div class="f-row">
+            <div class="f-group"><label>Printed name of person signing this form <span class="req">*</span></label><input type="text" name="signer_printed_name" required></div>
+            <div class="f-group hidden" id="signer-authority-wrap">
+              <label>Authority to sign on behalf of patient / relationship to patient <span class="req">*</span></label>
+              <input type="text" name="signer_authority" required disabled placeholder="e.g. Parent, Legal Guardian, Healthcare Proxy">
+            </div>
+          </div>
+
+          <h3>Your signature will be applied to</h3>
+          <ul class="sig-covers" id="sig-covers"></ul>
+
+          <h3>Signature</h3>
+          <p class="reg-card__sub">Sign in the box below using your mouse, finger, or stylus.</p>
+          <div class="sig-wrap" id="sig-wrap">
+            <canvas id="sig-canvas"></canvas>
+            <div class="sig-hint" id="sig-hint">Sign here</div>
+          </div>
+          <div class="sig-actions">
+            <span class="sig-date" id="sig-date"></span>
+            <button type="button" class="btn-clear" id="sig-clear">Clear</button>
+          </div>
+
+          <p class="secure-note">
+            Your signature is transmitted securely and constitutes a legally binding electronic signature applied to each
+            consent and acknowledgement you agreed to in this form. The date and time of signing are recorded.
+          </p>
+        </div>
+      </section>
+
+      <!-- NAV -->
+      <div class="reg-nav">
+        <button type="button" class="reg-btn reg-btn--back" id="btn-back">Back</button>
+        <button type="button" class="reg-btn reg-btn--next" id="btn-next">Continue</button>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="reg-success hidden" id="reg-success">
+      <div class="reg-success__icon">&#10003;</div>
+      <h2>Registration received!</h2>
+      <p>Thank you — your registration, consents, and documents have been submitted to Premier Hematology &amp; Oncology.</p>
+      <p>Our team will review everything before your visit. If we need anything else, we'll reach out. Questions? Call us at <a href="tel:7188663037" style="color:var(--purple,#5B3FA0)">718-866-3037</a>.</p>
+      <p style="margin-top:22px"><a class="btn" href="/">Return to homepage</a></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer__bottom">
+      <div class="site-footer__bottom-inner">
+        <span>&copy; 2026 Premier Hematology &amp; Oncology. All rights reserved.</span>
+        <div class="site-footer__bottom-links">
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="/sms-privacy-policy/">SMS Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var form     = document.getElementById('reg-form');
+    var steps    = Array.prototype.slice.call(document.querySelectorAll('.reg-step'));
+    var btnBack  = document.getElementById('btn-back');
+    var btnNext  = document.getElementById('btn-next');
+    var current  = 0;
+    var uploads  = {};   // key -> { dataUrl, filename }
+
+    // ---------- Conditional show/hide ----------
+    function setEnabled(container, show) {
+      container.classList.toggle('hidden', !show);
+      container.querySelectorAll('input, select, textarea').forEach(function (el) {
+        el.disabled = !show;
+      });
+    }
+
+    function onRadio(name, handler) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function (r) {
+        r.addEventListener('change', function () { handler(r.value); });
+      });
+    }
+
+    // Step 1
+    onRadio('gender_identity', function (v) { setEnabled(document.getElementById('gender-other-wrap'), v === 'Other'); });
+    onRadio('sexual_orientation', function (v) { setEnabled(document.getElementById('orientation-other-wrap'), v === 'Other'); });
+
+    // Step 2 — guarantor
+    onRadio('responsible_party', function (v) { setEnabled(document.getElementById('guarantor-fields'), v === 'Someone else'); syncGuarantorAddress(); });
+    var guarantorSame = document.getElementById('guarantor-same-address');
+    function syncGuarantorAddress() {
+      var guarantorOn = (getRadio('responsible_party') === 'Someone else');
+      setEnabled(document.getElementById('guarantor-address-wrap'), guarantorOn && !guarantorSame.checked);
+    }
+    guarantorSame.addEventListener('change', syncGuarantorAddress);
+
+    // Step 3 — insurance
+    onRadio('primary_relationship_to_insured', function (v) { setEnabled(document.getElementById('primary-insured-fields'), v !== 'Self'); });
+    onRadio('has_secondary_insurance', function (v) {
+      setEnabled(document.getElementById('secondary-fields'), v === 'Yes');
+      document.getElementById('secondary-upload-wrap').classList.toggle('hidden', v !== 'Yes');
+      if (v !== 'Yes') { removeUpload('insurance_secondary_front'); removeUpload('insurance_secondary_back'); }
+      // re-apply nested conditional
+      var rel = getRadio('secondary_relationship_to_insured');
+      setEnabled(document.getElementById('secondary-insured-fields'), v === 'Yes' && rel && rel !== 'Self');
+    });
+    onRadio('secondary_relationship_to_insured', function (v) { setEnabled(document.getElementById('secondary-insured-fields'), v !== 'Self'); });
+
+    // Step 5 — care contacts
+    onRadio('care_contacts_choice', function (v) {
+      var on = (v === 'Authorize contacts');
+      var list = document.getElementById('care-contacts-list');
+      list.classList.toggle('hidden', !on);
+      list.querySelectorAll('.contact-block').forEach(function (block, i) {
+        var visible = on && (i === 0 || !block.classList.contains('hidden'));
+        block.querySelectorAll('input').forEach(function (el) { el.disabled = !visible; });
+      });
+    });
+    document.getElementById('add-contact-btn').addEventListener('click', function () {
+      var hiddenBlocks = document.querySelectorAll('#care-contacts-list .contact-block.hidden');
+      if (hiddenBlocks.length) {
+        var block = hiddenBlocks[0];
+        block.classList.remove('hidden');
+        block.querySelectorAll('input').forEach(function (el) { el.disabled = false; });
+      }
+      if (hiddenBlocks.length <= 1) this.classList.add('hidden');
+    });
+    document.querySelectorAll('.contact-block__remove').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var block = btn.closest('.contact-block');
+        block.classList.add('hidden');
+        block.querySelectorAll('input').forEach(function (el) { el.disabled = true; el.value = ''; });
+        document.getElementById('add-contact-btn').classList.remove('hidden');
+      });
+    });
+
+    // Step 7 — records release
+    onRadio('wants_records_release', function (v) {
+      setEnabled(document.getElementById('release-fields'), v === 'Yes');
+      if (v === 'Yes') {
+        // nested conditionals stay hidden until their triggers fire
+        setEnabled(document.getElementById('release-to-other-wrap'), getRadio('release_to_choice') === 'Other');
+        setEnabled(document.getElementById('release-purpose-other-wrap'), getRadio('release_purpose') === 'Other');
+        setEnabled(document.getElementById('phi-entire-dates'), document.getElementById('phi-entire').checked);
+        setEnabled(document.getElementById('phi-other-wrap'), document.getElementById('phi-other').checked);
+      }
+    });
+    onRadio('release_to_choice', function (v) { setEnabled(document.getElementById('release-to-other-wrap'), v === 'Other'); });
+    onRadio('release_purpose', function (v) { setEnabled(document.getElementById('release-purpose-other-wrap'), v === 'Other'); });
+    document.getElementById('phi-entire').addEventListener('change', function () { setEnabled(document.getElementById('phi-entire-dates'), this.checked); });
+    document.getElementById('phi-other').addEventListener('change', function () { setEnabled(document.getElementById('phi-other-wrap'), this.checked); });
+
+    // Step 8 — iron screening
+    onRadio('iron_screening_applicable', function (v) {
+      setEnabled(document.getElementById('iron-fields'), v === 'Yes');
+      if (v === 'Yes') syncIronConditionals();
+    });
+    function syncIronConditionals() {
+      setEnabled(document.getElementById('iron-oral-details'), getRadio('iron_tried_oral') === 'Yes');
+      setEnabled(document.getElementById('iron-gi-doctor-wrap'), getRadio('iron_has_gi_doctor') === 'Yes');
+      setEnabled(document.getElementById('iron-intolerant-wrap'), getRadio('iron_intolerant') === 'Yes');
+      setEnabled(document.getElementById('iron-gi-disorder-wrap'), getRadio('iron_gi_disorder') === 'Yes');
+      setEnabled(document.getElementById('iron-bypass-wrap'), getRadio('iron_gastric_bypass') === 'Yes');
+      syncFemaleSection();
+      setEnabled(document.getElementById('iron-bleed-wrap'), getRadio('iron_heavy_bleed') === 'Yes');
+      setEnabled(document.getElementById('iron-pregnancy-wrap'), getRadio('iron_pregnant') === 'Yes');
+    }
+    onRadio('iron_tried_oral', function (v) { setEnabled(document.getElementById('iron-oral-details'), v === 'Yes'); });
+    onRadio('iron_has_gi_doctor', function (v) { setEnabled(document.getElementById('iron-gi-doctor-wrap'), v === 'Yes'); });
+    onRadio('iron_intolerant', function (v) { setEnabled(document.getElementById('iron-intolerant-wrap'), v === 'Yes'); });
+    onRadio('iron_gi_disorder', function (v) { setEnabled(document.getElementById('iron-gi-disorder-wrap'), v === 'Yes'); });
+    onRadio('iron_gastric_bypass', function (v) { setEnabled(document.getElementById('iron-bypass-wrap'), v === 'Yes'); });
+    onRadio('iron_heavy_bleed', function (v) { setEnabled(document.getElementById('iron-bleed-wrap'), v === 'Yes'); });
+    onRadio('iron_pregnant', function (v) { setEnabled(document.getElementById('iron-pregnancy-wrap'), v === 'Yes'); });
+    onRadio('birth_gender', syncFemaleSection);
+    function syncFemaleSection() {
+      var ironOn = (getRadio('iron_screening_applicable') === 'Yes');
+      var female = (getRadio('birth_gender') === 'Female');
+      setEnabled(document.getElementById('iron-female-section'), ironOn && female);
+      if (ironOn && female) {
+        setEnabled(document.getElementById('iron-bleed-wrap'), getRadio('iron_heavy_bleed') === 'Yes');
+        setEnabled(document.getElementById('iron-pregnancy-wrap'), getRadio('iron_pregnant') === 'Yes');
+      }
+    }
+
+    // Step 9 — signer
+    onRadio('signer_type', function (v) {
+      setEnabled(document.getElementById('signer-authority-wrap'), v !== 'Patient');
+      var printed = form.elements['signer_printed_name'];
+      if (v === 'Patient' && !printed.value.trim()) {
+        printed.value = (val('first_name') + ' ' + val('last_name')).trim();
+      }
+    });
+
+    function getRadio(name) {
+      var el = form.querySelector('input[name="' + name + '"]:checked');
+      return el ? el.value : '';
+    }
+    function val(name) {
+      var el = form.elements[name];
+      return el && el.value ? el.value : '';
+    }
+
+    // ---------- Uploads ----------
+    function compressImage(file, cb) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          var MAX = 1400;
+          var w = img.width, h = img.height;
+          if (w > MAX || h > MAX) {
+            var scale = MAX / Math.max(w, h);
+            w = Math.round(w * scale); h = Math.round(h * scale);
+          }
+          var c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(img, 0, 0, w, h);
+          cb(c.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = function () { cb(null); };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeUpload(key) {
+      delete uploads[key];
+      var slot = document.querySelector('.upload-slot[data-key="' + key + '"]');
+      if (!slot) return;
+      slot.classList.remove('has-file');
+      var img = slot.querySelector('img.preview');
+      if (img) img.remove();
+      slot.querySelectorAll('.upload-slot__icon, .upload-slot__label, .upload-slot__hint').forEach(function (el) { el.classList.remove('hidden'); });
+      slot.querySelector('input[type="file"]').value = '';
+    }
+
+    document.querySelectorAll('.upload-slot').forEach(function (slot) {
+      var input = slot.querySelector('input[type="file"]');
+      var key   = slot.dataset.key;
+      slot.addEventListener('click', function (e) {
+        if (e.target.closest('.upload-slot__remove')) return;
+        input.click();
+      });
+      slot.querySelector('.upload-slot__remove').addEventListener('click', function (e) {
+        e.stopPropagation();
+        removeUpload(key);
+      });
+      input.addEventListener('change', function () {
+        var file = input.files && input.files[0];
+        if (!file) return;
+        if (!/^image\//.test(file.type)) { alert('Please upload a photo (JPG, PNG, or HEIC).'); input.value = ''; return; }
+        compressImage(file, function (dataUrl) {
+          if (!dataUrl) { alert('We could not read that image — please try another photo.'); input.value = ''; return; }
+          uploads[key] = { dataUrl: dataUrl, label: slot.dataset.label };
+          slot.classList.add('has-file');
+          slot.classList.remove('invalid-group');
+          slot.querySelectorAll('.upload-slot__icon, .upload-slot__label, .upload-slot__hint').forEach(function (el) { el.classList.add('hidden'); });
+          var old = slot.querySelector('img.preview');
+          if (old) old.remove();
+          var img = document.createElement('img');
+          img.className = 'preview';
+          img.src = dataUrl;
+          img.alt = slot.dataset.label;
+          slot.insertBefore(img, slot.querySelector('.upload-slot__remove'));
+        });
+      });
+    });
+
+    // ---------- Signature ----------
+    var sigCanvas = document.getElementById('sig-canvas');
+    var sigHint   = document.getElementById('sig-hint');
+    var sigWrap   = document.getElementById('sig-wrap');
+    var pad = new SignaturePad(sigCanvas, { penColor: '#1C1633', minWidth: 1.2, maxWidth: 2.8 });
+    pad.addEventListener('beginStroke', function () {
+      sigHint.classList.add('hidden');
+      sigWrap.classList.remove('invalid-group');
+    });
+    document.getElementById('sig-clear').addEventListener('click', function () {
+      pad.clear();
+      sigHint.classList.remove('hidden');
+    });
+    function resizeSigCanvas() {
+      if (!sigWrap.offsetWidth) return;
+      var ratio = Math.max(window.devicePixelRatio || 1, 1);
+      var data  = pad.toData();
+      sigCanvas.width  = sigWrap.offsetWidth * ratio;
+      sigCanvas.height = 190 * ratio;
+      sigCanvas.getContext('2d').scale(ratio, ratio);
+      pad.clear();
+      if (data && data.length) pad.fromData(data);
+    }
+    window.addEventListener('resize', resizeSigCanvas);
+
+    // ---------- Wizard ----------
+    function updateChrome() {
+      var title = steps[current].getAttribute('data-title');
+      document.getElementById('progress-title').innerHTML = title;
+      document.getElementById('progress-count').textContent = 'Step ' + (current + 1) + ' of ' + steps.length;
+      document.getElementById('progress-fill').style.width = (((current + 1) / steps.length) * 100) + '%';
+      btnBack.style.visibility = current === 0 ? 'hidden' : 'visible';
+      btnNext.textContent = current === steps.length - 1 ? 'Submit Registration' : 'Continue';
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '';
+      var p = iso.split('-');
+      return p.length === 3 ? (p[1] + '/' + p[2] + '/' + p[0]) : iso;
+    }
+
+    function enterStep(i) {
+      steps[current].classList.remove('active');
+      current = i;
+      steps[current].classList.add('active');
+      updateChrome();
+      window.scrollTo({ top: document.querySelector('.reg-progress').offsetTop - 80, behavior: 'smooth' });
+
+      // Patient identity chips (dedup: entered once in step 1, echoed everywhere)
+      var chipHtml = '<span>Patient: <strong>' +
+        escapeHtml((val('first_name') + ' ' + val('middle_name') + ' ' + val('last_name')).replace(/\s+/g, ' ').trim() || '—') +
+        '</strong></span><span>DOB: <strong>' + (fmtDate(val('date_of_birth')) || '—') + '</strong></span>';
+      document.querySelectorAll('[data-patient-chip]').forEach(function (c) { c.innerHTML = chipHtml; });
+
+      if (steps[current].getAttribute('data-title') === 'Review &amp; Sign' || current === steps.length - 1) {
+        buildSigCovers();
+        document.getElementById('sig-date').textContent = 'Date: ' + new Date().toLocaleDateString('en-US');
+        setTimeout(resizeSigCanvas, 60);
+      }
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function buildSigCovers() {
+      var items = [
+        { label: 'Care Contacts acknowledgement', on: true },
+        { label: 'Consent to Treatment, Assignment of Benefits &amp; Guarantee of Payment', on: true },
+        { label: 'Patient Bill of Rights — acknowledgement of receipt', on: true },
+        { label: 'Consent for Telehealth Services', on: true },
+        { label: 'Authorization to Release Medical Information', on: getRadio('wants_records_release') === 'Yes', skipNote: 'skipped — not requested' },
+        { label: 'Iron Screening responses', on: getRadio('iron_screening_applicable') === 'Yes', skipNote: 'skipped — not applicable' }
+      ];
+      document.getElementById('sig-covers').innerHTML = items.map(function (it) {
+        return it.on
+          ? '<li>' + it.label + '</li>'
+          : '<li class="skipped">' + it.label + ' (' + it.skipNote + ')</li>';
+      }).join('');
+    }
+
+    function isVisible(el) { return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length); }
+
+    function validateStep() {
+      var step = steps[current];
+      var errBox = step.querySelector('.step-error');
+      var bad = [];
+
+      step.querySelectorAll('.invalid, .invalid-group').forEach(function (el) { el.classList.remove('invalid', 'invalid-group'); });
+
+      // Standard fields
+      step.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
+        if (el.disabled || !isVisible(el.closest('.f-group, .consent-agree, .check-row') || el)) return;
+        if (el.type === 'radio') {
+          var group = step.querySelectorAll('input[name="' + el.name + '"]');
+          var checked = Array.prototype.some.call(group, function (r) { return r.checked; });
+          if (!checked) {
+            var wrap = el.closest('.choice-group, .choice-stack');
+            if (wrap && !wrap.classList.contains('invalid-group')) { wrap.classList.add('invalid-group'); bad.push(wrap); }
+          }
+        } else if (el.type === 'checkbox') {
+          if (!el.checked) { var row = el.closest('.check-row'); row.classList.add('invalid-group'); bad.push(row); }
+        } else if (!el.value.trim() || !el.checkValidity()) {
+          el.classList.add('invalid'); bad.push(el);
+        }
+      });
+
+      // "at least one" checkbox groups
+      step.querySelectorAll('.choice-group[data-require-one]').forEach(function (g) {
+        if (!isVisible(g)) return;
+        var boxes = g.querySelectorAll('input[type="checkbox"]');
+        if (boxes.length && boxes[0].disabled) return;
+        var any = Array.prototype.some.call(boxes, function (b) { return b.checked; });
+        if (!any) { g.classList.add('invalid-group'); bad.push(g); }
+      });
+
+      // Required uploads
+      step.querySelectorAll('.upload-slot[data-required="1"]').forEach(function (slot) {
+        if (!isVisible(slot)) return;
+        if (!uploads[slot.dataset.key]) { slot.classList.add('invalid-group'); bad.push(slot); }
+      });
+
+      // Signature on final step
+      if (current === steps.length - 1 && pad.isEmpty()) {
+        sigWrap.classList.add('invalid-group'); bad.push(sigWrap);
+      }
+
+      if (bad.length) {
+        errBox.textContent = 'Please complete the highlighted fields before continuing.';
+        errBox.classList.add('show');
+        bad[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+      errBox.classList.remove('show');
+      return true;
+    }
+
+    btnBack.addEventListener('click', function () { if (current > 0) enterStep(current - 1); });
+    btnNext.addEventListener('click', function () {
+      if (!validateStep()) return;
+      if (current < steps.length - 1) { enterStep(current + 1); return; }
+      submit();
+    });
+
+    // ---------- Submit ----------
+    function collectData() {
+      var data = {};
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name || el.disabled) return;
+        if (el.type === 'radio') { if (el.checked) data[el.name] = el.value; return; }
+        if (el.type === 'checkbox') {
+          if (!el.checked) return;
+          if (data[el.name]) {
+            if (!Array.isArray(data[el.name])) data[el.name] = [data[el.name]];
+            data[el.name].push(el.value);
+          } else {
+            // groups that can have multiple selections stay arrays
+            var multi = form.querySelectorAll('input[type="checkbox"][name="' + el.name + '"]').length > 1;
+            data[el.name] = multi ? [el.value] : el.value;
+          }
+          return;
+        }
+        if (el.type === 'file' || el.type === 'button') return;
+        if (el.value !== '') data[el.name] = el.value;
+      });
+      return data;
+    }
+
+    function submit() {
+      btnNext.disabled = true;
+      btnBack.disabled = true;
+      btnNext.textContent = 'Submitting…';
+
+      var data = collectData();
+      data.form_type = 'patient-registration';
+      data.signature_date  = new Date().toLocaleDateString('en-US');
+      data._submitted_at   = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }) + ' ET';
+      data._source_url     = window.location.href;
+
+      var payload = {
+        fields: data,
+        signature: pad.toDataURL('image/png'),
+        uploads: {}
+      };
+      Object.keys(uploads).forEach(function (k) {
+        payload.uploads[k] = uploads[k];
+      });
+
+      fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      }).then(function () {
+        form.classList.add('hidden');
+        document.querySelector('.reg-progress').classList.add('hidden');
+        document.getElementById('reg-success').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }).catch(function () {
+        alert('Something went wrong submitting your registration. Please check your connection and try again, or call us at 718-866-3037.');
+        btnNext.disabled = false;
+        btnBack.disabled = false;
+        btnNext.textContent = 'Submit Registration';
+      });
+    }
+
+    // init
+    steps[0].classList.add('active');
+    updateChrome();
+  })();
+  </script>
+  <script src="/assets/js/nav.js"></script>
+</body>
+</html>

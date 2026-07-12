@@ -3,16 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anemia & Chronic Heart Failure | Premier Hematology</title>
-  <meta name="description" content="At Premier Hematology, we provide specialized care for anemia related to chronic heart failure. Expert diagnosis and treatment.">
+  <title>Page Not Found | Premier Hematology & Oncology</title>
+  <meta name="description" content="The page you were looking for may have moved or no longer exists. Find what you need at Premier Hematology.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
-  <script src="/assets/js/form-handler.js" defer></script>
+<style>
+  .err-wrap {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+  .err-inner {
+    max-width: 560px;
+    text-align: center;
+  }
+  .err-code {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 1;
+    color: #E8E4F4;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+  .err-h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    color: #1C1633;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .err-body {
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: #56526A;
+    margin-bottom: 36px;
+  }
+  .err-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .err-links a {
+    display: inline-block;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid #DDD8F0;
+    color: #1C1633;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .err-links a:hover { background: #EDE9F8; border-color: #5B4FCF; color: #5B4FCF; }
+  .err-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    color: #a89ecf;
+    font-size: 13px;
+  }
+  .err-divider::before, .err-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DDD8F0;
+  }
+</style>
 </head>
 <body>
-
   <!-- UTILITY BAR -->
   <div class="util-bar">
     <div class="util-bar__inner">
@@ -73,88 +140,33 @@
       </ul>
     </div>
   </header>
-  <section class="form-section">
-    <div class="form-layout">
-      <div class="form-layout__trust">
-        <div class="eyebrow-serif" style="margin-bottom:14px;">Iron Infusion Therapy</div>
-        <h2>Get the iron infusion treatment you need.</h2>
-        <p>Premier Hematology administers IV iron infusions at 13 locations across the New York metro area and Atlanta. Most major insurance plans accepted — our team will verify your benefits before your first visit.</p>
-        <div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">FDA-approved IV iron formulations</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Board-certified hematology supervision</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Most major insurance accepted</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Next-day appointments available</span></div>
-        </div>
-      </div>
-      <div class="form-card">
-        <div class="form-card__title">Request a Consultation</div>
-        <div class="form-card__sub">Our team will confirm your appointment within 24 hours.</div>
-        <form data-webhook="/api/submit" data-redirect="/contact-confirmation/" novalidate>
-          <input type="hidden" name="form_type" value="iron-infusions">
-          <div class="form-row">
-            <div class="form-group form-group--full">
-              <label for="full_name">Full Name <span class="req">*</span></label>
-              <input type="text" id="full_name" name="full_name" required autocomplete="name">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email <span class="req">*</span></label>
-              <input type="email" id="email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone <span class="req">*</span></label>
-              <input type="tel" id="phone" name="phone" required autocomplete="tel">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-group--full">
-              <label for="current_healthcare">Current Healthcare Provider <span class="req">*</span></label>
-              <input type="text" id="current_healthcare" name="current_healthcare" required placeholder="Your primary care doctor or specialist">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="insurance_provider">Insurance Provider <span class="req">*</span></label>
-              <input type="text" id="insurance_provider" name="insurance_provider" required>
-            </div>
-            <div class="form-group">
-              <label for="insurance_id">Insurance ID # <span class="req">*</span></label>
-              <input type="text" id="insurance_id" name="insurance_id" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-group--full">
-              <label for="reason">Reason for Appointment <span class="req">*</span></label>
-              <select id="reason" name="reason" required>
-                <option value="">— Select a reason —</option>
-                <option value="I have an Iron IV Referral">I have an Iron IV Referral</option>
-                <option value="I would like to speak with a physician">I would like to speak with a physician</option>
-                <option value="Other / Reason for Appointment">Other / Reason for Appointment</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-group--full">
-              <label for="message">How can we help? (optional)</label>
-              <input type="text" id="message" name="message" placeholder="Any additional details…">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-group--full">
-              <label for="files">Upload Files (optional)</label>
-              <input type="file" id="files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png">
-            </div>
-          </div>
-          <div class="form-submit">
-            <button type="submit" class="btn btn--lg">Request Appointment &rarr;</button>
-          </div>
-          <div class="form-msg" role="alert"></div>
-        </form>
-      </div>
-    </div>
-  </section>
 
+<div class="err-wrap">
+  <div class="err-inner">
+    <div class="err-code">404</div>
+    <h1 class="err-h1">This page may have moved.</h1>
+    <p class="err-body">Sorry about that — we recently updated our site and some pages have new addresses. Try one of the links below, or search for what you need.</p>
+
+    <div class="err-links">
+      <a href="/">Home</a>
+      <a href="/anemia-iron-deficiency-consultation/">Book a Consultation</a>
+      <a href="/locations/">Find a Location</a>
+      <a href="/care-team/">Care Team</a>
+      <a href="/cancers-and-conditions-we-treat/">Conditions We Treat</a>
+      <a href="/contact/">Contact Us</a>
+    </div>
+
+    <div class="err-divider">or call us directly</div>
+
+    <p style="font-size:15px;color:#56526A;">
+      <strong>New York:</strong> <a href="tel:7188663037" style="color:var(--purple);text-decoration:none;">718-866-3037</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <strong>Atlanta:</strong> <a href="tel:7705883530" style="color:var(--purple);text-decoration:none;">(770) 588-3530</a>
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer__grid">

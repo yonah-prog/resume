@@ -51,7 +51,7 @@
           </div>
         </li>
         <li class="site-nav__item">
-          <span class="site-nav__link">Locations <span class="site-nav__arrow">&#9660;</span></span>
+          <a class="site-nav__link" href="/locations/">Locations <span class="site-nav__arrow">&#9660;</span></a>
           <div class="site-nav__dropdown">
             <a href="/astoria-infusion-center/">Astoria</a>
             <a href="/boro-park-infusion-center/">Boro Park</a>
@@ -77,34 +77,42 @@
   <section class="service-hero">
     <div class="service-hero__inner">
       <h1 class="service-hero__h1">Billing Inquiries</h1>
-      <p class="service-hero__lead">Have questions about your bill or insurance coverage? Our billing team is here to help.</p>
+      <p class="service-hero__lead">Have a question about your bill or insurance coverage? Our billing team is here to help.</p>
     </div>
   </section>
 
   <section style="max-width:1100px;margin:0 auto;padding:64px 40px;">
-    <div style="max-width:640px;">
-      <p style="font-size:16.5px;line-height:1.75;margin-bottom:20px;">We accept most major insurance plans and work with our patients to ensure billing is as clear and straightforward as possible. If you have a question about a charge, your insurance coverage, or payment options, please contact our billing department directly.</p>
-      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:36px;">
-        <div><strong style="color:#1C1633;">Billing Phone</strong><br><a href="tel:7189972281" style="color:#5B3FA0;">718-997-2281</a></div>
-        <div><strong style="color:#1C1633;">Hours</strong><br>Monday–Friday, 9am–5pm EST</div>
-      </div>
-      <a href="/contact/" class="btn">Contact us</a>
-    </div>
-  </section>
-
-  
-  <section class="form-section">
-    <div class="form-layout">
-      <div class="form-layout__trust">
-        <div class="eyebrow-serif" style="margin-bottom:14px;">Billing &amp; Insurance</div>
-        <h2>Billing questions? We're here to help.</h2>
-        <p>Our billing team is available Monday–Friday, 9 am–5 pm. For urgent billing matters, call us at <a href="tel:7189972281" style="color:var(--purple);">718-997-2281</a>.</p>
-        <div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Response within 1–2 business days</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Assistance with insurance claims</span></div>
-          <div class="checklist__item"><span class="checklist__check">&#10003;</span><span class="checklist__text">Payment plan options available</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;">
+      <div>
+        <h2 style="font-family:'Newsreader',serif;font-size:28px;color:#1C1633;margin-bottom:18px;">Contact our billing team</h2>
+        <p style="font-size:16px;line-height:1.75;color:#56526A;margin-bottom:24px;">Our dedicated billing team can help with insurance questions, payment plans, statements, and general billing concerns. Please fill out the form and a team member will follow up within 1&ndash;2 business days.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
+          <div class="card" style="padding:20px 24px;display:flex;gap:14px;align-items:center;">
+            <div style="width:38px;height:38px;min-width:38px;border-radius:50%;background:var(--lavender-chip);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:15px;">&#9993;</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A84A0;margin-bottom:3px;">Billing Email</div>
+              <a href="mailto:BillingInquiries@premierhematology.com" style="font-size:14.5px;color:#5B3FA0;font-weight:600;">BillingInquiries@premierhematology.com</a>
+            </div>
+          </div>
+          <div class="card" style="padding:20px 24px;display:flex;gap:14px;align-items:center;">
+            <div style="width:38px;height:38px;min-width:38px;border-radius:50%;background:var(--lavender-chip);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:15px;">&#128222;</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A84A0;margin-bottom:3px;">Phone</div>
+              <a href="tel:7189972281" style="font-size:14.5px;color:#5B3FA0;font-weight:600;">718-997-2281</a>
+            </div>
+          </div>
+          <div class="card" style="padding:20px 24px;display:flex;gap:14px;align-items:center;">
+            <div style="width:38px;height:38px;min-width:38px;border-radius:50%;background:var(--lavender-chip);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:15px;">&#128337;</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A84A0;margin-bottom:3px;">Hours</div>
+              <div style="font-size:14.5px;color:#1C1633;">Monday&ndash;Friday, 9 am&ndash;5 pm EST</div>
+            </div>
+          </div>
         </div>
       </div>
+      <div>
+  <section class="form-section">
+    <div style="max-width:600px;margin:0 auto;">
       <div class="form-card">
         <div class="form-card__title">Billing Inquiry</div>
         <div class="form-card__sub">Fill out the form and our billing team will follow up within 1–2 business days.</div>
@@ -149,6 +157,8 @@
         </form>
       </div>
     </div>
+  </section></div>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -170,6 +180,7 @@
           <a href="tel:7189972281">718-997-2281</a>
           <a href="/contact/">Email Us</a>
           <a href="/physician-referal/">Physician Referral Form</a>
+          <a href="/billing-inquiries/">Billing Inquiries</a>
         </div>
       </div>
       <div>
