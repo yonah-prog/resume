@@ -1,236 +1,187 @@
 #!/usr/bin/env python3
 """
-Downloads all WordPress media into premier-hematology/assets/img/wp/
-preserving the uploads year/month folder structure.
-Then maps key images to the HTML placeholder divs.
+Full media migration for premier-hematology static site.
+
+Steps:
+  1. Scrape all image URLs currently referenced in HTML files
+  2. (Optional) Also paginate WP REST API for any media not yet in HTML
+  3. Download every file into assets/img/wp/ preserving year/month structure
+  4. Rewrite every http(s)://premierhematology.com/wp-content/uploads/... URL
+     across all .html files to /assets/img/wp/...
 
 Run: python3 download_media.py
+Re-running is safe — already-downloaded files are skipped, remapping is idempotent.
 """
 
-import json, os, re, urllib.request, urllib.error, time
+import os, re, time, urllib.request, urllib.error
 from pathlib import Path
-from collections import defaultdict
 
-ROOT       = Path(__file__).parent
-IMG_DIR    = ROOT / "assets" / "img" / "wp"
-MEDIA_FILE = (
-    "/Users/yonahfriedman/.claude/projects/"
-    "-Users-yonahfriedman-Desktop-Birds-Eye-Yonah-Resume/"
-    "77b2c083-f11f-436e-ba84-534fc4cabde8/tool-results/"
-    "mcp-novamira-premierhematology-com-mcp-adapter-execute-ability-1782220325948.txt"
-)
-
+ROOT    = Path(__file__).parent
+IMG_DIR = ROOT / "assets" / "img" / "wp"
 IMG_DIR.mkdir(parents=True, exist_ok=True)
 
-# ---------------------------------------------------------------------------
-# Load media list
-# ---------------------------------------------------------------------------
-with open(MEDIA_FILE) as f:
-    outer = json.load(f)
-items = json.loads(outer["data"]["return_value"])
-images = [i for i in items if i["mime"].startswith("image/")]
-print(f"Found {len(images)} images to download.\n")
+WP_UPLOAD_BASE   = "http://premierhematology.com/wp-content/uploads/"
+WP_UPLOAD_HTTPS  = "https://premierhematology.com/wp-content/uploads/"
+LOCAL_IMG_PREFIX = "/assets/img/wp/"
+
+# ATL images use a different origin but same pattern
+ATL_UPLOAD_BASE  = "http://premierhematologyatlanta.com/wp-content/uploads/"
+ATL_UPLOAD_HTTPS = "https://premierhematologyatlanta.com/wp-content/uploads/"
 
 # ---------------------------------------------------------------------------
-# Download
-# ---------------------------------------------------------------------------
-downloaded = []
-failed     = []
-
-for img in images:
-    url = img["url"]
-    # Strip domain, keep path: /wp-content/uploads/2026/04/bina.jpeg
-    path_part = re.sub(r"https?://[^/]+", "", url)
-    # Map to local: assets/img/wp/2026/04/bina.jpeg
-    rel = path_part.replace("/wp-content/uploads/", "")
-    local_path = IMG_DIR / rel
-
-    if local_path.exists():
-        downloaded.append((url, local_path, img))
-        continue  # already have it
-
-    local_path.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            local_path.write_bytes(resp.read())
-        downloaded.append((url, local_path, img))
-        print(f"  ✓ {rel}")
-    except Exception as e:
-        failed.append((url, str(e)))
-        print(f"  ✗ {rel} — {e}")
-    time.sleep(0.05)  # polite
-
-print(f"\nDownloaded: {len(downloaded)}  Failed: {len(failed)}")
-
-# ---------------------------------------------------------------------------
-# Build a local URL map:  wp_url -> /assets/img/wp/rel_path
-# ---------------------------------------------------------------------------
-url_to_local = {}
-for orig_url, local_path, meta in downloaded:
-    rel = str(local_path.relative_to(ROOT)).replace("\\", "/")
-    url_to_local[orig_url] = "/" + rel
-
-# ---------------------------------------------------------------------------
-# Replace img-placeholder divs in HTML with real <img> tags
-# Strategy: scan every HTML file for img-placeholder divs,
-# try to match by page context to a downloaded image.
+# Step 1: Collect every WP media URL referenced in HTML files
 # ---------------------------------------------------------------------------
 
-# Curated mapping: page slug → best image local path
-# (covers the most visible pages; rest stay as placeholders until photos are added)
-
-def find_img(keyword_list):
-    """Find best local image matching any keyword in the list."""
-    kws = [k.lower() for k in keyword_list]
-    candidates = []
-    for orig_url, local, meta in downloaded:
-        score = 0
-        name = orig_url.lower()
-        alt  = (meta.get("alt") or "").lower()
-        title = (meta.get("title") or "").lower()
-        for kw in kws:
-            if kw in name: score += 2
-            if kw in alt:  score += 3
-            if kw in title: score += 1
-        # Prefer larger images
-        w = meta.get("width", 0) or 0
-        if w >= 800: score += 1
-        if w >= 1200: score += 1
-        if score > 0:
-            candidates.append((score, str(local.relative_to(ROOT)).replace("\\","/")))
-    if not candidates:
-        return None
-    candidates.sort(reverse=True)
-    return "/" + candidates[0][1]
-
-# Build page → image map
-PAGE_IMAGES = {
-    # Homepage hero cluster
-    "index":                    find_img(["patient", "infusion", "nurse", "doctor", "smiling", "reclining"]),
-    # Services
-    "hematology":               find_img(["hematology", "blood", "lab", "doctor"]),
-    "oncology":                 find_img(["oncology", "cancer", "infusion", "chemo"]),
-    "womens-health-services":   find_img(["women", "woman", "female", "hormonal"]),
-    "wellness-infusions":       find_img(["wellness", "infusion", "iv", "hydration"]),
-    "cancer-genetic-testing":   find_img(["genetic", "dna", "testing", "brca"]),
-    "cancers-and-conditions-we-treat": find_img(["cancer", "oncology", "conditions"]),
-    "infusion-therapies-we-offer":     find_img(["infusion", "center", "suite", "chair"]),
-    "infusions-suites":         find_img(["suite", "infusion", "chair", "bay"]),
-    # Care team
-    "care-team":                find_img(["team", "doctor", "staff", "physician"]),
-    # Blog hero
-    "blog":                     find_img(["blog", "article", "medical", "health"]),
-    # Atlanta
-    "atlanta":                  find_img(["atlanta", "west end"]),
-    "atlanta-infusion-center":  find_img(["atlanta", "infusion"]),
-}
-
-print("\n📸 Image mapping:")
-for slug, path in PAGE_IMAGES.items():
-    print(f"  {slug}: {path or '(not found)'}")
-
-# ---------------------------------------------------------------------------
-# Replace img-placeholder in HTML files
-# ---------------------------------------------------------------------------
-# Pattern: <div class="..img-placeholder..">Label text</div>
-# Replace with: <img src="PATH" alt="Label text" loading="lazy" ...>
-
-PLACEHOLDER_RE = re.compile(
-    r'<div([^>]*class="[^"]*img-placeholder[^"]*"[^>]*)>(.*?)</div>',
-    re.DOTALL
+URL_RE = re.compile(
+    r'https?://(?:www\.)?premierhematology(?:atlanta)?\.com'
+    r'/wp-content/uploads/([^\s"\'<>)\]]+)'
 )
 
-def replace_placeholders(html, img_path):
-    """Replace ALL img-placeholder divs in a page with real img tags."""
-    if not img_path:
-        return html
+print("🔍 Scanning HTML files for media URLs...")
+all_urls: dict[str, str] = {}   # url -> relative path under wp-content/uploads/
 
-    def replacer(m):
-        attrs   = m.group(1)
-        alt_txt = re.sub(r"<[^>]+>", "", m.group(2)).strip()
-        # Preserve style attrs on the div (for height hints)
-        style_m = re.search(r'style="([^"]*)"', attrs)
-        style   = f' style="{style_m.group(1)}"' if style_m else ""
-        return (
-            f'<img src="{img_path}" alt="{alt_txt}" loading="lazy"'
-            f' class="page-img"{style}>'
+for html_path in ROOT.rglob("*.html"):
+    try:
+        text = html_path.read_text(errors="ignore")
+    except Exception:
+        continue
+    for m in URL_RE.finditer(text):
+        url     = m.group(0)
+        relpath = m.group(1)          # e.g. 2024/04/nurse.webp
+        all_urls[url] = relpath
+
+# Also scan generate.py and build_seo.py for hardcoded URLs
+for src in ROOT.glob("*.py"):
+    try:
+        text = src.read_text(errors="ignore")
+    except Exception:
+        continue
+    for m in URL_RE.finditer(text):
+        all_urls[m.group(0)] = m.group(1)
+
+print(f"   Found {len(all_urls)} unique media URLs across the site.\n")
+
+# ---------------------------------------------------------------------------
+# Step 2: (Optional) Augment with WP REST API
+# ---------------------------------------------------------------------------
+
+def fetch_wp_media_api():
+    """Paginate WP REST API to get ALL media items."""
+    api_urls: dict[str, str] = {}
+    page = 1
+    while True:
+        api_url = (
+            f"https://premierhematology.com/wp-json/wp/v2/media"
+            f"?per_page=100&page={page}&_fields=source_url"
         )
-    return PLACEHOLDER_RE.sub(replacer, html)
+        try:
+            req = urllib.request.Request(
+                api_url,
+                headers={"User-Agent": "Mozilla/5.0 (compatible; site-migration)"}
+            )
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                import json
+                items = json.loads(resp.read())
+                if not items:
+                    break
+                for item in items:
+                    url = item.get("source_url", "")
+                    m = URL_RE.match(url)
+                    if m:
+                        api_urls[url] = m.group(1)
+                print(f"   API page {page}: +{len(items)} items")
+                if len(items) < 100:
+                    break
+                page += 1
+                time.sleep(0.2)
+        except Exception as e:
+            print(f"   ⚠️  API page {page} failed: {e}")
+            break
+    return api_urls
 
-def process_file(path, img_path):
-    with open(path) as f:
-        html = f.read()
-    new_html = replace_placeholders(html, img_path)
-    if new_html != html:
-        with open(path, "w") as f:
-            f.write(new_html)
-        return True
-    return False
+print("📡 Fetching WP REST API media list...")
+api_urls = fetch_wp_media_api()
+before = len(all_urls)
+all_urls.update(api_urls)
+print(f"   API added {len(all_urls) - before} additional files. Total: {len(all_urls)}\n")
 
-replaced = 0
+# ---------------------------------------------------------------------------
+# Step 3: Download
+# ---------------------------------------------------------------------------
 
-# Service/core pages
-for slug, img_path in PAGE_IMAGES.items():
-    if slug == "index":
-        p = ROOT / "index.html"
-    else:
-        p = ROOT / slug / "index.html"
-    if p.exists() and img_path:
-        if process_file(p, img_path):
-            replaced += 1
-            print(f"  ✓ replaced placeholders in {slug}/index.html")
+print("⬇️  Downloading media files...")
+downloaded: dict[str, str] = {}   # original url -> local /assets/img/wp/... path
+failed: list[tuple[str, str]] = []
 
-# Location pages — use a generic infusion center image
-location_img = find_img(["infusion", "center", "suite", "chair", "interior"])
-if location_img:
-    for location_dir in ROOT.iterdir():
-        if "infusion-center" in location_dir.name and location_dir.is_dir():
-            p = location_dir / "index.html"
-            if p.exists():
-                if process_file(p, location_img):
-                    replaced += 1
+for url, relpath in sorted(all_urls.items()):
+    local = IMG_DIR / relpath
+    local_web = LOCAL_IMG_PREFIX + relpath   # /assets/img/wp/2024/04/nurse.webp
 
-# Blog posts — replace article hero placeholder with relevant image where possible
-# Map blog categories to images
-cat_imgs = {
-    "hematology": find_img(["hematology", "blood", "anemia", "iron"]),
-    "oncology":   find_img(["oncology", "cancer", "genetic"]),
-    "wellness":   find_img(["wellness", "infusion", "iv", "hydration"]),
-    "women":      find_img(["women", "woman", "female"]),
-    "migraine":   find_img(["migraine", "headache"]),
-}
-fallback_blog_img = find_img(["medical", "health", "doctor", "patient"])
+    # Always record the mapping even if already on disk
+    downloaded[url] = local_web
 
-blog_dir = ROOT / "blog"
-if blog_dir.exists():
-    for post_dir in blog_dir.iterdir():
-        if not post_dir.is_dir():
-            continue
-        p = post_dir / "index.html"
-        if not p.exists():
-            continue
-        slug_name = post_dir.name.lower()
-        # Pick image by slug keywords
-        img = None
-        for kw, candidate in cat_imgs.items():
-            if kw in slug_name:
-                img = candidate
-                break
-        if not img:
-            img = fallback_blog_img
-        if img and process_file(p, img):
-            replaced += 1
+    if local.exists():
+        continue
 
-# Atlanta pages
-atlanta_img = find_img(["atlanta"])
-for slug in ["atlanta", "atlanta-infusion-center", "atlanta-care-team"]:
-    p = ROOT / slug / "index.html"
-    if p.exists() and atlanta_img:
-        process_file(p, atlanta_img)
+    local.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "Mozilla/5.0 (compatible; site-migration)"}
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            local.write_bytes(resp.read())
+        print(f"  ✓ {relpath}")
+    except urllib.error.HTTPError as e:
+        failed.append((url, f"HTTP {e.code}"))
+        print(f"  ✗ {relpath}  ({e.code})")
+    except Exception as e:
+        failed.append((url, str(e)))
+        print(f"  ✗ {relpath}  ({e})")
+    time.sleep(0.05)   # polite rate limit
 
-print(f"\n✅ Done. {replaced} HTML files updated with real images.")
+print(f"\n   Downloaded: {len(downloaded) - len(failed)}  Failed: {len(failed)}\n")
+
+# ---------------------------------------------------------------------------
+# Step 4: Remap — replace WP upload URLs with local paths in all HTML files
+# ---------------------------------------------------------------------------
+
+print("🔁 Remapping URLs in HTML files...")
+
+# Build a replacement map: each WP URL variant → local path
+# We handle http:// and https:// as well as www. prefix variants
+remap: dict[str, str] = {}
+for orig_url, local_web in downloaded.items():
+    relpath = all_urls[orig_url]
+    # Cover all 4 origin variants
+    for base in [WP_UPLOAD_BASE, WP_UPLOAD_HTTPS,
+                 WP_UPLOAD_BASE.replace("http://", "http://www."),
+                 WP_UPLOAD_HTTPS.replace("https://", "https://www."),
+                 ATL_UPLOAD_BASE, ATL_UPLOAD_HTTPS]:
+        remap[base + relpath] = local_web
+
+remapped_files = 0
+
+for html_path in sorted(ROOT.rglob("*.html")):
+    try:
+        original = html_path.read_text(errors="ignore")
+    except Exception:
+        continue
+
+    updated = original
+    for wp_url, local_web in remap.items():
+        updated = updated.replace(wp_url, local_web)
+
+    if updated != original:
+        html_path.write_text(updated)
+        remapped_files += 1
+        print(f"  ✓ {html_path.relative_to(ROOT)}")
+
+print(f"\n✅ Done.")
+print(f"   Files remapped: {remapped_files}")
+print(f"   Media on disk:  {sum(1 for _ in IMG_DIR.rglob('*') if _.is_file())}")
 if failed:
-    print(f"\n⚠️  {len(failed)} images failed to download:")
-    for url, err in failed[:10]:
-        print(f"   {url}: {err}")
+    print(f"\n⚠️  {len(failed)} files failed to download:")
+    for url, err in failed[:20]:
+        print(f"   {err:>10}  {url}")
+    if len(failed) > 20:
+        print(f"   ... and {len(failed) - 20} more")
