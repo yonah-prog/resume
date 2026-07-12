@@ -4423,6 +4423,767 @@ write("404.html", f"""<!DOCTYPE html>
 </body>
 </html>""")
 
+# ---------------------------------------------------------------------------
+# IRON SCORE QUIZ
+# ---------------------------------------------------------------------------
+write("iron-score/index.html", f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+{HEAD("Iron Score Quiz | Am I Iron Deficient? | Premier Hematology", "Take the 2-minute Iron Score quiz to find out if your fatigue, brain fog, or heavy periods could be caused by iron deficiency. Get your personalized result instantly.")}
+<style>
+  /* ── Quiz shell ─────────────────────────────────────── */
+  body {{ background: #f7f5ff; }}
+
+  .iq-wrap {{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 120px;
+  }}
+
+  /* Progress bar */
+  .iq-progress-track {{
+    width: 100%;
+    height: 4px;
+    background: #e0d8f5;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }}
+  .iq-progress-fill {{
+    height: 100%;
+    background: var(--purple, #5B3FA0);
+    transition: width .45s ease;
+  }}
+
+  /* Card */
+  .iq-card {{
+    width: 100%;
+    max-width: 640px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px rgba(91,63,160,.10);
+    padding: 48px 48px 40px;
+    margin: 48px 24px 0;
+    position: relative;
+    overflow: hidden;
+  }}
+
+  /* Step counter */
+  .iq-step-label {{
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #a08ec0;
+    margin-bottom: 14px;
+  }}
+
+  /* Question text */
+  .iq-question {{
+    font-family: 'Newsreader', serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #1C1633;
+    margin-bottom: 32px;
+  }}
+
+  /* Answer options */
+  .iq-options {{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }}
+  .iq-option {{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 1.5px solid #e0d8f5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .15s;
+    font-size: 15.5px;
+    color: #2d2550;
+    background: #fff;
+    text-align: left;
+    width: 100%;
+  }}
+  .iq-option:hover {{ background: #f3eeff; border-color: #b49edc; transform: translateY(-1px); }}
+  .iq-option.selected {{ background: #ede5ff; border-color: #7c5fa9; font-weight: 600; }}
+  .iq-option__dot {{
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px solid #c8b8ea;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+  }}
+  .iq-option.selected .iq-option__dot {{
+    background: #7c5fa9; border-color: #7c5fa9;
+  }}
+  .iq-option.selected .iq-option__dot::after {{
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    display: block;
+  }}
+
+  /* Nav buttons */
+  .iq-nav {{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    gap: 12px;
+  }}
+  .iq-btn-back {{
+    background: none;
+    border: none;
+    color: #a08ec0;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 0;
+  }}
+  .iq-btn-back:hover {{ color: #5B3FA0; }}
+  .iq-btn-next {{
+    background: var(--purple, #5B3FA0);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 32px;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, opacity .2s;
+    margin-left: auto;
+  }}
+  .iq-btn-next:disabled {{ opacity: .4; cursor: not-allowed; }}
+  .iq-btn-next:not(:disabled):hover {{ background: #4a3085; }}
+
+  /* Intro screen */
+  .iq-intro {{ text-align: center; }}
+  .iq-intro-eyebrow {{
+    display: inline-block;
+    background: #ede5ff;
+    color: #7c5fa9;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }}
+  .iq-intro h1 {{
+    font-family: 'Newsreader', serif;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 1.12;
+    color: #1C1633;
+    margin-bottom: 16px;
+  }}
+  .iq-intro p {{
+    font-size: 16.5px;
+    line-height: 1.72;
+    color: #56526A;
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }}
+  .iq-pills {{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }}
+  .iq-pill {{
+    background: #f3eeff;
+    color: #56526A;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid #e0d8f5;
+  }}
+  .iq-btn-start {{
+    background: var(--purple, #5B3FA0);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 18px 40px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s;
+    width: 100%;
+    max-width: 340px;
+  }}
+  .iq-btn-start:hover {{ background: #4a3085; }}
+
+  /* Lead gate */
+  .iq-gate-label {{
+    font-family: 'Newsreader', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #1C1633;
+    margin-bottom: 8px;
+  }}
+  .iq-gate-sub {{
+    font-size: 15px;
+    color: #56526A;
+    margin-bottom: 28px;
+    line-height: 1.65;
+  }}
+  .iq-field {{ margin-bottom: 16px; }}
+  .iq-field label {{
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d2550;
+    margin-bottom: 6px;
+  }}
+  .iq-field input {{
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #d8d0ee;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #1C1633;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color .2s;
+  }}
+  .iq-field input:focus {{ border-color: #7c5fa9; }}
+  .iq-btn-reveal {{
+    background: var(--purple, #5B3FA0);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    transition: background .2s;
+  }}
+  .iq-btn-reveal:hover {{ background: #4a3085; }}
+  .iq-privacy {{
+    font-size: 12px;
+    color: #a099bb;
+    text-align: center;
+    margin-top: 10px;
+  }}
+
+  /* Results */
+  .iq-result-badge {{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }}
+  .iq-result-badge.low    {{ background: #e8f5e9; color: #2e7d32; }}
+  .iq-result-badge.mod    {{ background: #fff8e1; color: #f59f00; }}
+  .iq-result-badge.high   {{ background: #fce4ec; color: #c62828; }}
+  .iq-score-ring {{
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    border: 6px solid;
+  }}
+  .iq-score-ring.low  {{ border-color: #81c784; background: #f1f8f1; }}
+  .iq-score-ring.mod  {{ border-color: #ffd54f; background: #fffbf0; }}
+  .iq-score-ring.high {{ border-color: #ef9a9a; background: #fff5f5; }}
+  .iq-score-num {{
+    font-family: 'Newsreader', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1;
+    color: #1C1633;
+  }}
+  .iq-score-denom {{ font-size: 13px; color: #908aaa; }}
+  .iq-result-h {{
+    font-family: 'Newsreader', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: #1C1633;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }}
+  .iq-result-body {{
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: #56526A;
+    margin-bottom: 24px;
+  }}
+  .iq-result-items {{
+    background: #f7f5ff;
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 28px;
+  }}
+  .iq-result-items p {{
+    font-size: 14px;
+    font-weight: 600;
+    color: #7c5fa9;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }}
+  .iq-result-items li {{
+    font-size: 14.5px;
+    color: #2d2550;
+    margin-bottom: 6px;
+    padding-left: 4px;
+  }}
+  .iq-btn-book {{
+    display: block;
+    background: var(--purple, #5B3FA0);
+    color: #fff;
+    border: none;
+    border-radius: 13px;
+    padding: 17px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    transition: background .2s;
+    cursor: pointer;
+  }}
+  .iq-btn-book:hover {{ background: #4a3085; color: #fff; }}
+
+  /* Sticky CTA bar */
+  .iq-sticky-cta {{
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #fff;
+    border-top: 1px solid #e0d8f5;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(91,63,160,.08);
+  }}
+  .iq-sticky-cta__text {{
+    font-size: 14px;
+    line-height: 1.4;
+    color: #56526A;
+  }}
+  .iq-sticky-cta__text strong {{ color: #1C1633; display: block; }}
+  .iq-sticky-cta a {{
+    flex-shrink: 0;
+    background: var(--purple, #5B3FA0);
+    color: #fff;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background .2s;
+  }}
+  .iq-sticky-cta a:hover {{ background: #4a3085; }}
+
+  @media (max-width: 600px) {{
+    .iq-card {{ padding: 32px 24px 28px; margin: 24px 16px 0; }}
+    .iq-intro h1 {{ font-size: 28px; }}
+    .iq-question {{ font-size: 20px; }}
+    .iq-sticky-cta__text {{ display: none; }}
+  }}
+</style>
+</head>
+<body>
+{HEADER}
+
+<div class="iq-wrap">
+  <!-- Progress bar -->
+  <div class="iq-progress-track">
+    <div class="iq-progress-fill" id="iq-progress" style="width:0%"></div>
+  </div>
+
+  <!-- Quiz card -->
+  <div class="iq-card" id="iq-card">
+    <!-- content injected by JS -->
+  </div>
+</div>
+
+<!-- Sticky CTA — visible on every step -->
+<div class="iq-sticky-cta">
+  <div class="iq-sticky-cta__text">
+    <strong>No referral needed. Most patients seen within 24 hours.</strong>
+    Schedule your iron consultation today.
+  </div>
+  <a href="/anemia-iron-deficiency-consultation/">Book a Consultation &rarr;</a>
+</div>
+
+<script>
+const QUESTIONS = [
+  {{
+    q: "How often do you feel tired or sluggish, even after a full night of sleep?",
+    opts: [
+      {{ label: "Rarely or never", score: 0 }},
+      {{ label: "A few times a month", score: 1 }},
+      {{ label: "Most days", score: 2 }},
+      {{ label: "Every single day", score: 3 }},
+    ]
+  }},
+  {{
+    q: "How would you describe your energy levels throughout the day?",
+    opts: [
+      {{ label: "Consistently strong — I feel like myself", score: 0 }},
+      {{ label: "I crash in the afternoon", score: 1 }},
+      {{ label: "Low by midday, even with coffee", score: 2 }},
+      {{ label: "Exhausted from the moment I wake up", score: 3 }},
+    ]
+  }},
+  {{
+    q: "Do you experience heavy or prolonged menstrual periods?",
+    opts: [
+      {{ label: "No periods, or they're light and short", score: 0 }},
+      {{ label: "Moderate — average duration and flow", score: 1 }},
+      {{ label: "Heavy — I go through supplies quickly", score: 2 }},
+      {{ label: "Very heavy or lasting more than 7 days", score: 3 }},
+    ]
+  }},
+  {{
+    q: "How often do you experience brain fog, poor concentration, or difficulty thinking clearly?",
+    opts: [
+      {{ label: "Rarely — my thinking is sharp", score: 0 }},
+      {{ label: "Occasionally, usually when tired", score: 1 }},
+      {{ label: "Frequently — it affects my work or daily life", score: 2 }},
+      {{ label: "Almost constantly", score: 3 }},
+    ]
+  }},
+  {{
+    q: "Do you crave ice, starchy foods, or non-food items like dirt or chalk? (This is called pica and is a classic iron deficiency sign.)",
+    opts: [
+      {{ label: "Never", score: 0 }},
+      {{ label: "Occasionally crave ice or starchy things", score: 1 }},
+      {{ label: "I chew ice regularly", score: 2 }},
+      {{ label: "Strong, frequent cravings for ice or other items", score: 3 }},
+    ]
+  }},
+  {{
+    q: "How often do your legs feel restless, twitchy, or uncomfortable — especially when lying down at night?",
+    opts: [
+      {{ label: "Never", score: 0 }},
+      {{ label: "Occasionally", score: 1 }},
+      {{ label: "A few nights per week", score: 2 }},
+      {{ label: "Most nights — it disrupts my sleep", score: 3 }},
+    ]
+  }},
+  {{
+    q: "How do you handle cold temperatures compared to the people around you?",
+    opts: [
+      {{ label: "I'm comfortable when others are comfortable", score: 0 }},
+      {{ label: "I run slightly cold", score: 1 }},
+      {{ label: "I'm often cold when others aren't", score: 2 }},
+      {{ label: "I'm almost always cold, even indoors in summer", score: 3 }},
+    ]
+  }},
+  {{
+    q: "Do you experience shortness of breath or feel winded during normal daily activities — like climbing stairs or a short walk?",
+    opts: [
+      {{ label: "Never", score: 0 }},
+      {{ label: "Occasionally after exertion", score: 1 }},
+      {{ label: "Often, even with light activity", score: 2 }},
+      {{ label: "Most of the time", score: 3 }},
+    ]
+  }},
+  {{
+    q: "Have you noticed increased hair loss, or are your nails brittle or spoon-shaped?",
+    opts: [
+      {{ label: "No changes", score: 0 }},
+      {{ label: "Slight changes — could be normal", score: 1 }},
+      {{ label: "Noticeable hair loss or nail changes", score: 2 }},
+      {{ label: "Significant changes I'm concerned about", score: 3 }},
+    ]
+  }},
+  {{
+    q: "Do you feel dizzy or lightheaded — especially when standing up quickly?",
+    opts: [
+      {{ label: "Never", score: 0 }},
+      {{ label: "Occasionally", score: 1 }},
+      {{ label: "Fairly often", score: 2 }},
+      {{ label: "Very frequently — I have to be careful standing", score: 3 }},
+    ]
+  }},
+];
+
+const TOTAL_STEPS = QUESTIONS.length + 3; // intro + questions + gate + result
+let step = 0;       // 0 = intro, 1..N = questions, N+1 = gate, N+2 = result
+let answers = [];
+let totalScore = 0;
+let leadData = {{}};
+
+const card = document.getElementById('iq-card');
+const progressFill = document.getElementById('iq-progress');
+
+function setProgress(pct) {{
+  progressFill.style.width = pct + '%';
+}}
+
+function render() {{
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(12px)';
+  setTimeout(() => {{
+    _render();
+    card.style.transition = 'opacity .3s, transform .3s';
+    card.style.opacity = '1';
+    card.style.transform = 'translateY(0)';
+  }}, 150);
+}}
+
+function _render() {{
+  if (step === 0) {{ renderIntro(); return; }}
+  const qIdx = step - 1;
+  if (qIdx < QUESTIONS.length) {{ renderQuestion(qIdx); return; }}
+  if (qIdx === QUESTIONS.length) {{ renderGate(); return; }}
+  renderResult();
+}}
+
+function renderIntro() {{
+  setProgress(0);
+  card.innerHTML = `
+    <div class="iq-intro">
+      <span class="iq-intro-eyebrow">Free · 2 minutes · Instant result</span>
+      <h1>The Iron Score</h1>
+      <p>10 questions about how you're really feeling. Get a personalized risk assessment and find out whether iron deficiency could be behind your fatigue, brain fog, or other symptoms.</p>
+      <div class="iq-pills">
+        <span class="iq-pill">&#128165; Fatigue &amp; energy</span>
+        <span class="iq-pill">&#129504; Brain fog</span>
+        <span class="iq-pill">&#10052;&#65039; Cold intolerance</span>
+        <span class="iq-pill">&#128149; Menstrual health</span>
+        <span class="iq-pill">&#128564; Restless legs</span>
+        <span class="iq-pill">&#128138; Cravings</span>
+      </div>
+      <button class="iq-btn-start" onclick="nextStep()">Start the Quiz &rarr;</button>
+      <p style="font-size:13px;color:#a099bb;margin-top:16px;">No account needed. Results in under 2 minutes.</p>
+    </div>
+  `;
+}}
+
+function renderQuestion(idx) {{
+  const q = QUESTIONS[idx];
+  const saved = answers[idx];
+  setProgress(Math.round(((idx + 1) / QUESTIONS.length) * 80));
+
+  const optHtml = q.opts.map((o, i) => `
+    <button class="iq-option${{saved !== undefined && saved.optIdx === i ? ' selected' : ''}}"
+      onclick="selectAnswer(${{idx}}, ${{i}}, ${{o.score}})">
+      <span class="iq-option__dot"></span>
+      ${{o.label}}
+    </button>
+  `).join('');
+
+  const hasAnswer = saved !== undefined;
+
+  card.innerHTML = `
+    <div class="iq-step-label">Question ${{idx + 1}} of ${{QUESTIONS.length}}</div>
+    <div class="iq-question">${{q.q}}</div>
+    <div class="iq-options" id="iq-opts">${{optHtml}}</div>
+    <div class="iq-nav">
+      <button class="iq-btn-back" onclick="prevStep()">&larr; Back</button>
+      <button class="iq-btn-next" id="iq-next" ${{hasAnswer ? '' : 'disabled'}} onclick="nextStep()">
+        ${{idx === QUESTIONS.length - 1 ? 'See My Score &rarr;' : 'Next &rarr;'}}
+      </button>
+    </div>
+  `;
+}}
+
+function selectAnswer(qIdx, optIdx, score) {{
+  answers[qIdx] = {{ optIdx, score }};
+  // Update UI
+  document.querySelectorAll('.iq-option').forEach((el, i) => {{
+    el.classList.toggle('selected', i === optIdx);
+  }});
+  document.getElementById('iq-next').disabled = false;
+  // Auto-advance after short delay
+  setTimeout(() => nextStep(), 380);
+}}
+
+function renderGate() {{
+  setProgress(85);
+  card.innerHTML = `
+    <div class="iq-gate-label">You're almost there.</div>
+    <p class="iq-gate-sub">Enter your name and phone number to see your personalized Iron Score result. We&rsquo;ll never spam you — your information is only used to follow up if you&rsquo;d like a consultation.</p>
+    <div class="iq-field">
+      <label for="iq-name">First Name <span style="color:#c62828">*</span></label>
+      <input type="text" id="iq-name" placeholder="Sarah" autocomplete="given-name">
+    </div>
+    <div class="iq-field">
+      <label for="iq-phone">Phone Number <span style="color:#c62828">*</span></label>
+      <input type="tel" id="iq-phone" placeholder="(718) 555-0100" autocomplete="tel">
+    </div>
+    <div class="iq-field">
+      <label for="iq-email">Email (optional)</label>
+      <input type="email" id="iq-email" placeholder="sarah@email.com" autocomplete="email">
+    </div>
+    <button class="iq-btn-reveal" onclick="submitLead()">Reveal My Iron Score &rarr;</button>
+    <p class="iq-privacy">&#128274; Your information is private and never sold. See our <a href="/privacy-policy/" style="color:#a08ec0">privacy policy</a>.</p>
+    <div class="iq-nav" style="margin-top:16px;">
+      <button class="iq-btn-back" onclick="prevStep()">&larr; Back</button>
+    </div>
+  `;
+}}
+
+function submitLead() {{
+  const name  = document.getElementById('iq-name').value.trim();
+  const phone = document.getElementById('iq-phone').value.trim();
+  const email = document.getElementById('iq-email').value.trim();
+
+  if (!name || !phone) {{
+    document.getElementById('iq-name').style.borderColor  = name  ? '#d8d0ee' : '#c62828';
+    document.getElementById('iq-phone').style.borderColor = phone ? '#d8d0ee' : '#c62828';
+    return;
+  }}
+
+  leadData = {{ name, phone, email }};
+  totalScore = answers.reduce((s, a) => s + (a ? a.score : 0), 0);
+
+  // Fire webhook (non-blocking) — replace URL with your Zapier iron-score webhook
+  fetch('https://hooks.zapier.com/hooks/catch/18791657/IRON_SCORE_WEBHOOK/', {{
+    method: 'POST',
+    headers: {{ 'Content-Type': 'application/json' }},
+    body: JSON.stringify({{
+      form_type: 'iron-score-quiz',
+      first_name: name,
+      phone,
+      email,
+      iron_score: totalScore,
+      iron_score_pct: Math.round((totalScore / 30) * 100),
+      answers: answers.map((a, i) => ({{
+        question: QUESTIONS[i].q.slice(0, 60),
+        answer: QUESTIONS[i].opts[a.optIdx].label,
+        score: a.score
+      }}))
+    }})
+  }}).catch(() => {{}});
+
+  step = QUESTIONS.length + 2;
+  render();
+}}
+
+function renderResult() {{
+  setProgress(100);
+  const pct = Math.round((totalScore / 30) * 100);
+  let tier, badgeLabel, ringColor, headline, body, items;
+
+  if (pct <= 27) {{
+    tier = 'low';
+    badgeLabel = 'Low Risk';
+    headline = 'Your symptoms are minimal right now.';
+    body = 'Your score suggests a low likelihood of active iron deficiency. That said, iron levels fluctuate — especially with menstrual cycles, diet changes, or periods of stress. A simple ferritin blood test is the only way to know for certain. If symptoms develop or worsen, don&rsquo;t wait.';
+    items = [
+      'Monitor energy levels and note any changes',
+      'Eat iron-rich foods: red meat, leafy greens, legumes',
+      'Avoid taking calcium with iron-rich meals (it blocks absorption)',
+      'Consider a baseline ferritin test — especially if you menstruate',
+    ];
+  }} else if (pct <= 57) {{
+    tier = 'mod';
+    badgeLabel = 'Moderate Risk';
+    headline = 'Several of your symptoms are consistent with iron deficiency.';
+    body = 'Your score suggests you may have suboptimal iron or ferritin levels. Many people in this range have been told their labs are "normal" — but ferritin below 50 ng/mL can cause every symptom you described, even when hemoglobin looks fine. A targeted blood panel takes 10 minutes and gives you answers.';
+    items = [
+      'Ask your doctor for a <strong>ferritin test</strong>, not just hemoglobin',
+      'Oral supplements often cause GI issues and absorb poorly',
+      'Iron infusions restore levels in 1–2 sessions — most patients feel better within a week',
+      'Premier Hematology offers next-day appointments, no referral needed',
+    ];
+  }} else {{
+    tier = 'high';
+    badgeLabel = 'High Risk';
+    headline = 'Your symptoms strongly suggest iron deficiency.';
+    body = 'Your score is in the range we see most often in patients who come to us after months — sometimes years — of being told they&rsquo;re "fine." You&rsquo;re not fine. These symptoms are real, they have a treatable cause, and you don&rsquo;t have to live with them. An iron infusion at our center typically takes under 2 hours. Most patients feel the difference within days.';
+    items = [
+      'Don&rsquo;t rely on oral iron alone — absorption is poor when deficiency is this significant',
+      'Request a <strong>ferritin, serum iron, and TIBC panel</strong> from your doctor',
+      'IV iron infusion therapy restores levels faster and more effectively than supplements',
+      'Most insurance plans cover iron infusions when medically indicated',
+    ];
+  }}
+
+  card.innerHTML = `
+    <div style="text-align:center;margin-bottom:24px;">
+      <div class="iq-result-badge ${{tier}}">${{badgeLabel}} &mdash; ${{pct}}&#8239;/ 100</div>
+      <div class="iq-score-ring ${{tier}}">
+        <span class="iq-score-num">${{pct}}</span>
+        <span class="iq-score-denom">out of 100</span>
+      </div>
+    </div>
+    <h2 class="iq-result-h">${{headline}}</h2>
+    <p class="iq-result-body">${{body}}</p>
+    <div class="iq-result-items">
+      <p>What this means for you</p>
+      <ul style="margin:0;padding-left:18px;">
+        ${{items.map(i => `<li class="iq-result-items li">${{i}}</li>`).join('')}}
+      </ul>
+    </div>
+    <a href="/anemia-iron-deficiency-consultation/" class="iq-btn-book">
+      Book Your Consultation &mdash; No Referral Needed &rarr;
+    </a>
+    <p style="font-size:13px;color:#a099bb;text-align:center;margin-top:12px;">
+      Next-day appointments available &middot; Most major insurance accepted
+    </p>
+    <button onclick="restart()" style="display:block;margin:20px auto 0;background:none;border:none;color:#a08ec0;font-size:13px;cursor:pointer;text-decoration:underline;">
+      Retake the quiz
+    </button>
+  `;
+}}
+
+function nextStep() {{
+  if (step === 0) {{
+    step = 1;
+    render();
+    return;
+  }}
+  const qIdx = step - 1;
+  if (qIdx < QUESTIONS.length) {{
+    if (answers[qIdx] === undefined) return;
+    step++;
+    render();
+    return;
+  }}
+  // gate — handled by submitLead()
+}}
+
+function prevStep() {{
+  if (step > 0) {{ step--; render(); }}
+}}
+
+function restart() {{
+  step = 0;
+  answers = [];
+  totalScore = 0;
+  leadData = {{}};
+  render();
+}}
+
+// Init
+render();
+</script>
+
+{FOOTER}
+</body>
+</html>""")
+
 print(f"\n✅ Done! Site generated in {ROOT}")
 
 # Always inject forms immediately after generation so they're never accidentally omitted
