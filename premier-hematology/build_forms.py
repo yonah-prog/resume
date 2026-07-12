@@ -457,8 +457,7 @@ PAGES = {
     "anemia-iron-deficiency-consultation":
         general_form("general", "/contact-confirmation-iron-request/",
                      title="Book My Consultation",
-                     sub="Our specialist team will reach out within 24 hours.",
-                     webhook=ZAPIER_ANEMIA),
+                     sub="Our specialist team will reach out within 24 hours."),
 
     "hematology-and-iron-infusion-appointments":
         general_form("general", "/contact-confirmation-iron-request/",
@@ -488,14 +487,12 @@ PAGES = {
                             title="Request a Bariatric Iron Infusion Appointment"),
 
     "consultation-request":
-        energyboost_form("energyboost", "/contact-confirmation-energyboost/",
-                         webhook=ZAPIER_ENERGYBOOST),
+        energyboost_form("energyboost", "/contact-confirmation-energyboost/"),
 
     "energy-boost":
         energyboost_form("energyboost", "/contact-confirmation-energyboost/",
                          title="Reclaim Your Energy",
-                         sub="Tell us your symptoms and we'll connect you with a specialist.",
-                         webhook=ZAPIER_ENERGYBOOST),
+                         sub="Tell us your symptoms and we'll connect you with a specialist."),
 
     "chronic-heart-failure":
         iron_infusions_form("iron-infusions", "/contact-confirmation/",
@@ -510,14 +507,12 @@ PAGES = {
     "contact-atlanta-center":
         general_form("atlanta-contact", "/contact-confirmation-iron-request/",
                      title="Contact Our Atlanta Center",
-                     sub="Our Atlanta team will reach out within 24 hours.",
-                     webhook=ZAPIER_ATLANTA_CONTACT),
+                     sub="Our Atlanta team will reach out within 24 hours."),
 
     "atlanta-anemia-iron-deficiency-consultation":
         general_form("atlanta-anemia", "/contact-confirmation-atlanta-iron-consult/",
                      title="Atlanta: Request an Anemia Consultation",
-                     sub="Our Atlanta specialist team will reach out within 24 hours.",
-                     webhook=ZAPIER_ATLANTA_ANEMIA),
+                     sub="Our Atlanta specialist team will reach out within 24 hours."),
 
     "billing-inquiries":
         billing_form(),
@@ -526,20 +521,17 @@ PAGES = {
     "energy-boost-atlanta-hematology-and-iron-infusion-appointments":
         energyboost_form("atlanta-energyboost", "/atlanta-contact-confirmation-energyboost/",
                          title="Reclaim Your Energy — Atlanta",
-                         sub="Tell us your symptoms and we'll connect you with an Atlanta specialist.",
-                         webhook=ZAPIER_ATLANTA_ENERGYBOOST),
+                         sub="Tell us your symptoms and we'll connect you with an Atlanta specialist."),
 
     "energy-boost-hematology-and-iron-infusion-appointments-openai":
         energyboost_form("energyboost", "/contact-confirmation-energyboost/",
                          title="Reclaim Your Energy",
-                         sub="Tell us your symptoms and we'll connect you with a specialist.",
-                         webhook=ZAPIER_ENERGYBOOST),
+                         sub="Tell us your symptoms and we'll connect you with a specialist."),
 
     "energy-boost-heavy-periods":
         energyboost_form("energyboost", "/contact-confirmation-energyboost/",
                          title="Reclaim Your Energy",
-                         sub="Tell us your symptoms and we'll connect you with a specialist.",
-                         webhook=ZAPIER_ENERGYBOOST),
+                         sub="Tell us your symptoms and we'll connect you with a specialist."),
 }
 
 # ---------------------------------------------------------------------------
