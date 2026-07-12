@@ -564,7 +564,7 @@ img.page-img {
   color: var(--ink); margin-bottom: 34px;
 }
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.blog-card__img { height: 170px; border-radius: 14px; margin-bottom: 16px; }
+.blog-card__img { height: 170px; border-radius: 14px; margin-bottom: 16px; width: 100%; object-fit: cover; display: block; }
 .blog-card__cat {
   font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--purple); margin-bottom: 9px;

@@ -508,7 +508,7 @@ def article_page(slug, title, yoast_title, meta_desc, category, author, date, re
     for p in related_posts:
         related_html += f"""
         <a href="/blog/{p['slug']}/" style="text-decoration:none;color:inherit;">
-          <div class="blog-card__img img-placeholder">{p['title'][:30]}</div>
+          <img class="blog-card__img" src="{p.get('img') or _og_image(p['slug'])}" alt="{p['title']}" loading="lazy">
           <div class="blog-card__cat">{p['cat']}</div>
           <h3 class="blog-card__title">{p['title']}</h3>
         </a>"""
@@ -3256,7 +3256,7 @@ blog_cards = ""
 for slug, title, cat, _ in ALL_POSTS:
     blog_cards += f"""
         <a href="/blog/{slug}/" style="text-decoration:none;color:inherit;">
-          <div class="blog-card__img img-placeholder">{title[:35]}</div>
+          <img class="blog-card__img" src="{_og_image(slug)}" alt="{title}" loading="lazy">
           <div class="blog-card__cat">{cat}</div>
           <h3 class="blog-card__title">{title}</h3>
         </a>"""
