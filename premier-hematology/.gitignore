@@ -5,3 +5,5 @@ __pycache__/
 *.pyc
 node_modules/
 .vercel
+# Raw WP media download — everything is already copied to assets/img/wp/
+media/
