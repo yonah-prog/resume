@@ -844,22 +844,25 @@ write("cancers-and-conditions-we-treat/index.html", f"""<!DOCTYPE html>
 <body>
 {HEADER}
 
-<!-- BREADCRUMB -->
-<div class="breadcrumb"><div class="breadcrumb__inner"><a href="/">Home</a><span class="breadcrumb__sep">/</span><span class="breadcrumb__current">Cancers and Conditions We Treat</span></div></div>
+  <!-- PAGE HERO -->
+  <section class="service-hero">
+    <div class="service-hero__inner">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+        <span class="breadcrumb__current">Cancers &amp; Conditions We Treat</span>
+      </div>
+      <div class="eyebrow-sans service-hero__eyebrow">We Are Here for You</div>
+      <h1 class="service-hero__h1">Comprehensive Cancer &amp; Blood Disorder Care</h1>
+      <p class="service-hero__lead">At Premier Hematology, every treatment plan is personal. We tailor care to your specific diagnosis, stage, overall health, and genetic profile — so you receive exactly what you need, nothing more.</p>
+    </div>
+  </section>
 
-<!-- HERO — 2 col -->
-<section style="max-width:1200px;margin:0 auto;padding:72px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
-  <div>
-    <div class="eyebrow-sans" style="margin-bottom:14px;">We Are Here for You</div>
-    <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.06;letter-spacing:-0.02em;color:#1C1633;margin-bottom:10px;">Comprehensive Care at Premier Hematology</h1>
-    <p style="font-size:17px;line-height:1.75;color:#56526A;margin-bottom:16px;">At Premier Hematology, we understand that every patient is unique, and so are their cancer and blood disorder treatments. Our approach is tailored to your specific needs, considering factors like cancer type, stage, overall health, and genetic factors.</p>
-    <p style="font-size:17px;line-height:1.75;color:#56526A;margin-bottom:32px;">Together with your doctor, we&rsquo;ll craft a personalized treatment plan aimed at achieving the best possible outcome.</p>
-    <a href="/anemia-iron-deficiency-consultation/" class="btn btn--lg">Schedule an Appointment &rarr;</a>
-  </div>
-  <div style="border-radius:20px;overflow:hidden;height:480px;">
-    <img src="http://premierhematology.com/wp-content/uploads/2024/04/office-interior.webp" alt="Premier Hematology office interior" style="width:100%;height:100%;object-fit:cover;display:block;">
-  </div>
-</section>
+  <!-- HERO IMAGE -->
+  <section class="service-media">
+    <div class="service-media__img" style="height:420px;overflow:hidden;">
+      <img src="http://premierhematology.com/wp-content/uploads/2024/04/office-interior.webp" alt="Premier Hematology office interior" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </section>
 
 <!-- CONDITIONS LIST -->
 <section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
@@ -878,7 +881,7 @@ write("cancers-and-conditions-we-treat/index.html", f"""<!DOCTYPE html>
 <div style="background:var(--purple);">
   <div style="max-width:1200px;margin:0 auto;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
     <p style="font-size:17px;font-weight:500;color:#fff;margin:0;">Ready to begin? Next-day appointments are available.</p>
-    <a href="/anemia-iron-deficiency-consultation/" class="btn btn--white">Schedule an Appointment &rarr;</a>
+    <a href="/contact/" class="btn btn--white">Schedule an Appointment &rarr;</a>
   </div>
 </div>
 
@@ -896,9 +899,9 @@ write("infusion-therapies-we-offer/index.html", service_page(
     h1="Therapies We Offer",
     lead="Comprehensive Infusion Therapies for Optimal Health — From therapies targeting autoimmune disorders to those supporting bone health and beyond, our expert team is dedicated to providing personalized care and support throughout your infusion therapy journey.",
     body_paras=[
-        "<strong>Remicade (infliximab), Entyvio (vedolizumab), Stelara (ustekinumab), Inflectra (infliximab-dyyb), Renflexis (infliximab-abda), Tysabri (natalizumab), Ocrevus (ocrelizumab), Lemtrada (alemtuzumab)</strong>",
-        "<strong>Radicava (edaravone), Soliris (eculizumab), Tepezza (teprotumumab-trbw), Onpattro (patisiran), Cerezyme (imiglucerase), Lumizyme (alglucosidase alfa), Fabrazyme (agalsidase beta), Simponi Aria (golimumab)</strong>",
-        "<strong>Rituxan (rituximab), Benlysta IV (belimumab), Cimzia (certolizumab pegol), Krystexxa (pegloticase), Actemra (tocilizumab), Intravenous Immunoglobulin therapy, Injectafer (ferric carboxymaltose), Reclast (zoledronic acid)</strong>",
+        "Premier Hematology &amp; Oncology administers a broad range of specialty infusion therapies in our comfortable, on-site infusion suites. Whether you need treatment for an autoimmune condition, a rare enzyme disorder, iron deficiency, or a neurological disease, our board-certified specialists manage your care from diagnosis through recovery — all under one roof.",
+        "Our infusion services cover biologic therapies for inflammatory bowel disease and rheumatologic conditions, including Remicade (infliximab), Entyvio (vedolizumab), Stelara (ustekinumab), Actemra (tocilizumab), and Simponi Aria (golimumab). We also provide intravenous immunoglobulin (IVIG) therapy for immune-mediated diseases, Soliris (eculizumab) for complement-mediated disorders, and Benlysta IV (belimumab) for lupus.",
+        "For patients with iron deficiency anemia, we offer Injectafer (ferric carboxymaltose) infusions — a fast, well-tolerated alternative to oral iron supplements. We also administer Reclast (zoledronic acid) for bone health, Rituxan (rituximab) for certain lymphomas and autoimmune diseases, and enzyme replacement therapies including Cerezyme, Lumizyme, and Fabrazyme for rare metabolic conditions. Neurological infusion treatments such as Radicava (edaravone), Ocrevus (ocrelizumab), and Tysabri (natalizumab) are also available.",
     ],
     bullets=[
         "Remicade (infliximab)", "Entyvio (vedolizumab)", "Stelara (ustekinumab)",
