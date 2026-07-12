@@ -1,0 +1,8 @@
+# Build scripts — not serverless functions, exclude from deployment bundle
+generate.py
+build_forms.py
+build_seo.py
+download_media.py
+*.py
+__pycache__/
+media/
