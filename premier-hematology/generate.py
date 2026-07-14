@@ -41,9 +41,21 @@ HEAD = lambda title, desc, css_path="assets/css/style.css": f"""  <meta charset=
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/{css_path}">"""
+  <link rel="stylesheet" href="/{css_path}">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','GTM-MR3695CP');</script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR6ZR1D8M"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-KHR6ZR1D8M');gtag('config','GT-TBW8R3DK');</script>
+  <!-- Meta Pixel -->
+  <script>!function(f,b,e,v,n,t,s){{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1068226264910023');fbq('track','PageView');</script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1068226264910023&ev=PageView&noscript=1"/></noscript>
+  <!-- Microsoft Clarity -->
+  <script>(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}})(window,document,"clarity","script","ssj13w0qcx");</script>"""
 
 HEADER = """\
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR3695CP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- UTILITY BAR -->
   <div class="util-bar">
     <div class="util-bar__inner">
@@ -932,31 +944,80 @@ write("care-team/index.html", simple_page(
     meta_desc="Meet the expert cancer care team at Premier Hematology Oncology. Compassionate specialists providing trusted hematology and oncology support.",
     h1="Meet Our Care Team",
     lead="Our board-certified specialists bring decades of combined experience in hematology and oncology — and a genuine commitment to every patient.",
-    body_html="""    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:30px;">
-      <div class="card" style="padding:28px;text-align:center;">
-        <img src="/assets/img/wp/2024/04/Dr.-Delfino-Crescenzo.jpeg" alt="Dr. Delfino Crescenzo" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
-        <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Dr. Delfino Crescenzo</h3>
-        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Hematologist &amp; Oncologist</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College and earned his medical degree from the University of Bologna, Italy. He completed his residency in Internal Medicine and Fellowship in Hematology/Oncology at Brookdale Hospital Medical Center.</p>
+    body_html="""
+    <!-- PHYSICIANS -->
+    <div class="eyebrow-sans" style="margin-bottom:24px;">Physicians</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-bottom:64px;">
+
+      <div class="card" style="overflow:hidden;padding:0;">
+        <img src="/assets/img/wp/2024/04/Dr.-Delfino-Crescenzo.jpeg" alt="Dr. Delfino Crescenzo" style="width:100%;height:280px;object-fit:cover;object-position:top center;display:block;">
+        <div style="padding:28px 28px 24px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:4px;">Dr. Delfino Crescenzo</h3>
+          <p style="font-size:12px;color:#5B3FA0;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist</p>
+          <p style="font-size:14px;line-height:1.65;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College in New York City, New York and earned his medical degree from the University of Bologna in Bologna, Italy. Following this, he completed his internship and residency training at The Jamaica Hospital in Jamaica, New York. To advance his training further, Dr. Crescenzo pursued a series of clinical fellowships: Hematology at The Jamaica Hospital and Oncology at Montefiore Hospital and Medical Center in Bronx, New York. Additionally, he received fellowship training in thrombosis and hemostasis.</p>
+        </div>
       </div>
-      <div class="card" style="padding:28px;text-align:center;">
-        <img src="/assets/img/wp/2024/04/shani-spector.png" alt="Shani Spector, NP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
-        <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Shani Spector</h3>
-        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Shani Spector is a dedicated Nurse Practitioner with a Master's in Nursing from Stony Brook University. She brings expertise in in-patient oncology, hematology, and infusion services, and serves as a devoted patient advocate.</p>
+
+      <div class="card" style="overflow:hidden;padding:0;">
+        <img src="/assets/img/wp/2025/12/Dr-Marco-Ayulo.jpg" alt="Dr. Marco Ayulo" style="width:100%;height:280px;object-fit:cover;object-position:top center;display:block;">
+        <div style="padding:28px 28px 24px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:4px;">Dr. Marco Ayulo</h3>
+          <p style="font-size:12px;color:#5B3FA0;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist &mdash; Atlanta</p>
+          <p style="font-size:14px;line-height:1.65;color:#6a6480;">Dr. Marco Ayulo is a distinguished hematologist at Cancer Care of Dublin in Dublin, GA. With certifications from the American Board of Internal Medicine in both Internal Medicine and Medical Oncology, Dr. Ayulo brings extensive expertise and dedication to his practice. He emphasizes a comprehensive approach to treatment, integrating the latest advancements in hematology and oncology to offer his patients the best possible outcomes. Through compassionate care and expert guidance, Dr. Ayulo aims to support his patients throughout their treatment journey and ensure they receive the highest quality of care.</p>
+        </div>
       </div>
-      <div class="card" style="padding:28px;text-align:center;">
-        <img src="/assets/img/wp/2024/04/yocheved-brazil.jpeg" alt="Yocheved Brazil, NP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
-        <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Yocheved Brazil</h3>
-        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Yocheved Brazil is an adult primary care nurse practitioner specializing in hematology and women's health. She completed her nursing degree at the Phillip's Beth Israel School of Nursing with a background in cardiology, oncology, and hematology.</p>
+
+    </div>
+
+    <!-- ADVANCED PRACTICE PROVIDERS -->
+    <div class="eyebrow-sans" style="margin-bottom:24px;">Advanced Practice Providers</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+
+      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
+        <img src="/assets/img/wp/2024/04/shani-spector.png" alt="Shani Spector, NP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:20px 18px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Shani Spector</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Shani Spector is a dedicated Nurse Practitioner with a Master&#8217;s in Nursing from Stony Brook University. She brings a wealth of expertise in in-patient oncology, hematology, and infusion services. Beyond her commitment to patient well-being, she finds balance by staying active and spending time with her husband and children. Trust her compassionate care for a holistic approach to your health journey.</p>
+        </div>
       </div>
-      <div class="card" style="padding:28px;text-align:center;">
-        <img src="/assets/img/wp/2022/08/staff-06.jpg" alt="Ariella Goldhammer, FNP" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 18px;display:block;border:3px solid #ebe3fa;">
-        <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:6px;">Ariella Goldhammer</h3>
-        <p style="font-size:14px;color:#5B3FA0;font-weight:600;margin-bottom:10px;">Family Nurse Practitioner</p>
-        <p style="font-size:14.5px;line-height:1.6;color:#6a6480;">Ariella Goldhammer is a compassionate Family Nurse Practitioner holding a Master's in Nursing from the College of Mount Saint Vincent, with a focus on primary care, hematology, and infusion services.</p>
+
+      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
+        <img src="/assets/img/wp/2024/04/yocheved-brazil.jpeg" alt="Yocheved Brazil, NP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:20px 18px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Yocheved Brazil</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Yocheved Brazil is an adult primacy care nurse practitioner who specializes in hematology and women&#8217;s health. She completed her Associates in Nursing at the Phillip&#8217;s Beth Israel School of Nursing, bachelors of science in nursing at Thomas Edison University and then earned her Master of Science degree at Stony Brook University. She is board certified with the American Academy of Nurse Practitioners (AANP).</p>
+        </div>
       </div>
+
+      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
+        <img src="/assets/img/wp/2024/04/Ariella-Headshot.png" alt="Ariella Goldhammer, FNP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:20px 18px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Ariella Goldhammer</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Ariella Goldhammer is a compassionate Family Nurse Practitioner, holding a Master&#8217;s in Nursing from the College of Mount Saint Vincent. With a focus on primary care, hematology, and infusion services, Ariella brings a diverse range of expertise to our team. Outside of work, she dedicates her time to volunteering in her community, finding joy in giving back to her community.</p>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
+        <img src="/assets/img/wp/2025/12/snatoira.jpeg" alt="Santoria Felton, FNP-C" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:20px 18px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Santoria Felton</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">FNP-C &mdash; Atlanta</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Santoria Felton, FNP-C is a dedicated nurse practitioner specializing in hematology and oncology, committed to providing compassionate, patient-centered care to individuals navigating complex blood disorders and cancer diagnoses. With a strong clinical foundation and a deep sense of empathy, Santoria focuses on delivering comprehensive, evidence-based care while supporting patients and their families through every stage of treatment. She is especially passionate about patient education and advocacy, empowering individuals to understand their diagnosis, treatment options, and overall health.</p>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
+        <img src="/assets/img/wp/2025/12/Yaakov-Perlstein.webp" alt="Yaakov Perlstein, FNP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
+        <div style="padding:20px 18px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Yaakov Perlstein</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Yaakov Perlstein is a Family Nurse Practitioner with more than six years of experience in hematology and oncology care. He earned both his Bachelor of Science in Nursing and Master of Science, Family Nurse Practitioner, from Pace University and is board certified by the American Academy of Nurse Practitioners (AANP). His clinical expertise includes the evaluation and management of a wide range of benign hematologic conditions, as well as treatment plan coordination and symptom management for medical oncology patients across the spectrum of cancer diagnoses. Outside of his professional practice, he is most proud of his family, including his wife and four children. In his free time, he enjoys volunteering, running, and cycling.</p>
+        </div>
+      </div>
+
     </div>
     <div style="margin-top:48px;text-align:center;">
       <a href="/contact/" class="btn">Get in touch with our team</a>
@@ -1521,10 +1582,24 @@ write("atlanta-care-team/index.html", f"""<!DOCTYPE html>
   </div>
 </section>
 
-<!-- SANTORIA FELTON -->
+<!-- DR. MARCO AYULO -->
 <section style="max-width:1200px;margin:0 auto;padding:88px 40px;display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:start;">
   <div>
-    <img src="{ATL_IMG}2025/12/torri.jpeg" alt="Santoria Felton, NP" style="width:100%;border-radius:20px;object-fit:cover;aspect-ratio:3/4;display:block;">
+    <img src="{ATL_IMG}2025/12/Dr-Marco-Ayulo.jpg" alt="Dr. Marco Ayulo" style="width:100%;border-radius:20px;object-fit:cover;aspect-ratio:1/1;display:block;">
+  </div>
+  <div style="padding-top:8px;">
+    <div class="eyebrow-sans" style="margin-bottom:12px;">Physician</div>
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:38px;letter-spacing:-0.015em;color:#1C1633;margin-bottom:8px;">Dr. Marco Ayulo</h2>
+    <p style="font-size:14px;font-weight:600;color:#5B3FA0;margin-bottom:24px;">Hematologist &amp; Oncologist</p>
+    <p style="font-size:16.5px;line-height:1.75;color:#56526A;">Dr. Marco Ayulo is a distinguished hematologist at Cancer Care of Dublin in Dublin, GA. With certifications from the American Board of Internal Medicine in both Internal Medicine and Medical Oncology, Dr. Ayulo brings extensive expertise and dedication to his practice. He emphasizes a comprehensive approach to treatment, integrating the latest advancements in hematology and oncology to offer his patients the best possible outcomes. Through compassionate care and expert guidance, Dr. Ayulo aims to support his patients throughout their treatment journey and ensure they receive the highest quality of care.</p>
+  </div>
+</section>
+
+<!-- SANTORIA FELTON -->
+<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:1200px;margin:0 auto;padding:88px 40px;display:grid;grid-template-columns:360px 1fr;gap:64px;align-items:start;">
+  <div>
+    <img src="{ATL_IMG}2025/12/snatoira.jpeg" alt="Santoria Felton, NP" style="width:100%;border-radius:20px;object-fit:cover;aspect-ratio:3/4;display:block;">
   </div>
   <div style="padding-top:8px;">
     <div class="eyebrow-sans" style="margin-bottom:12px;">Nurse Practitioner</div>
@@ -3378,13 +3453,22 @@ for _wp_slug, wp in _wp_map.items():
 # ---------------------------------------------------------------------------
 print("\n⚙️  Utility pages...")
 
-CONFIRMATION_HTML = lambda name="": f"""<!DOCTYPE html>
+_LEAD_PIXEL_SLUGS = {
+    "contact-confirmation-energyboost",
+    "contact-confirmation-hematology-and-iron",
+    "atlanta-contact-confirmation-energyboost",
+}
+
+def CONFIRMATION_HTML(name=""):
+    lead_pixel = '<script>if(typeof fbq!=="undefined")fbq("track","Lead");</script>' if name in _LEAD_PIXEL_SLUGS else ""
+    return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 {HEAD("Thank You | Premier Hematology Oncology", "Thank you for reaching out to Premier Hematology. Your message has been received.")}
 </head>
 <body>
 {HEADER}
+{lead_pixel}
   <section style="max-width:600px;margin:100px auto;padding:0 40px;text-align:center;">
     <div style="width:72px;height:72px;border-radius:50%;background:#ebe3fa;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
       <span style="font-size:28px;color:#5B3FA0;">&#10003;</span>
