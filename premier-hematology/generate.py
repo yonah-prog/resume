@@ -947,23 +947,23 @@ write("care-team/index.html", simple_page(
     body_html="""
     <!-- PHYSICIANS -->
     <div class="eyebrow-sans" style="margin-bottom:24px;">Physicians</div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-bottom:64px;">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:56px;">
 
-      <div class="card" style="overflow:hidden;padding:0;">
-        <img src="/assets/img/wp/2024/04/Dr.-Delfino-Crescenzo.jpeg" alt="Dr. Delfino Crescenzo" style="width:100%;height:280px;object-fit:cover;object-position:top center;display:block;">
-        <div style="padding:28px 28px 24px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:4px;">Dr. Delfino Crescenzo</h3>
-          <p style="font-size:12px;color:#5B3FA0;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist</p>
-          <p style="font-size:14px;line-height:1.65;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College in New York City, New York and earned his medical degree from the University of Bologna in Bologna, Italy. Following this, he completed his internship and residency training at The Jamaica Hospital in Jamaica, New York. To advance his training further, Dr. Crescenzo pursued a series of clinical fellowships: Hematology at The Jamaica Hospital and Oncology at Montefiore Hospital and Medical Center in Bronx, New York. Additionally, he received fellowship training in thrombosis and hemostasis.</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2024/04/Dr.-Delfino-Crescenzo.jpeg" alt="Dr. Delfino Crescenzo" style="width:160px;height:160px;object-fit:cover;object-position:top center;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Dr. Delfino Crescenzo</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Dr. Delfino Crescenzo received his undergraduate degree from Manhattan College in New York City, New York and earned his medical degree from the University of Bologna in Bologna, Italy. Following this, he completed his internship and residency training at The Jamaica Hospital in Jamaica, New York. To advance his training further, Dr. Crescenzo pursued a series of clinical fellowships: Hematology at The Jamaica Hospital and Oncology at Montefiore Hospital and Medical Center in Bronx, New York. Additionally, he received fellowship training in thrombosis and hemostasis.</p>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;">
-        <img src="/assets/img/wp/2025/12/Dr-Marco-Ayulo.jpg" alt="Dr. Marco Ayulo" style="width:100%;height:280px;object-fit:cover;object-position:top center;display:block;">
-        <div style="padding:28px 28px 24px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:22px;color:#1C1633;margin-bottom:4px;">Dr. Marco Ayulo</h3>
-          <p style="font-size:12px;color:#5B3FA0;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist &mdash; Atlanta</p>
-          <p style="font-size:14px;line-height:1.65;color:#6a6480;">Dr. Marco Ayulo is a distinguished hematologist at Cancer Care of Dublin in Dublin, GA. With certifications from the American Board of Internal Medicine in both Internal Medicine and Medical Oncology, Dr. Ayulo brings extensive expertise and dedication to his practice. He emphasizes a comprehensive approach to treatment, integrating the latest advancements in hematology and oncology to offer his patients the best possible outcomes. Through compassionate care and expert guidance, Dr. Ayulo aims to support his patients throughout their treatment journey and ensure they receive the highest quality of care.</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2025/12/Dr-Marco-Ayulo.jpg" alt="Dr. Marco Ayulo" style="width:160px;height:160px;object-fit:cover;object-position:top center;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Dr. Marco Ayulo</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em;">Hematologist &amp; Oncologist &mdash; Atlanta</p>
+          <p style="font-size:13px;line-height:1.65;color:#6a6480;">Dr. Marco Ayulo is a distinguished hematologist at Cancer Care of Dublin in Dublin, GA. With certifications from the American Board of Internal Medicine in both Internal Medicine and Medical Oncology, Dr. Ayulo brings extensive expertise and dedication to his practice. He emphasizes a comprehensive approach to treatment, integrating the latest advancements in hematology and oncology to offer his patients the best possible outcomes. Through compassionate care and expert guidance, Dr. Ayulo aims to support his patients throughout their treatment journey and ensure they receive the highest quality of care.</p>
         </div>
       </div>
 
@@ -971,49 +971,49 @@ write("care-team/index.html", simple_page(
 
     <!-- ADVANCED PRACTICE PROVIDERS -->
     <div class="eyebrow-sans" style="margin-bottom:24px;">Advanced Practice Providers</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;">
 
-      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
-        <img src="/assets/img/wp/2024/04/shani-spector.png" alt="Shani Spector, NP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:20px 18px 22px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Shani Spector</h3>
-          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2024/04/shani-spector.png" alt="Shani Spector, NP" style="width:160px;height:160px;object-fit:cover;object-position:top;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Shani Spector</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
           <p style="font-size:13px;line-height:1.65;color:#6a6480;">Shani Spector is a dedicated Nurse Practitioner with a Master&#8217;s in Nursing from Stony Brook University. She brings a wealth of expertise in in-patient oncology, hematology, and infusion services. Beyond her commitment to patient well-being, she finds balance by staying active and spending time with her husband and children. Trust her compassionate care for a holistic approach to your health journey.</p>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
-        <img src="/assets/img/wp/2024/04/yocheved-brazil.jpeg" alt="Yocheved Brazil, NP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:20px 18px 22px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Yocheved Brazil</h3>
-          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2024/04/yocheved-brazil.jpeg" alt="Yocheved Brazil, NP" style="width:160px;height:160px;object-fit:cover;object-position:top;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Yocheved Brazil</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">Nurse Practitioner</p>
           <p style="font-size:13px;line-height:1.65;color:#6a6480;">Yocheved Brazil is an adult primacy care nurse practitioner who specializes in hematology and women&#8217;s health. She completed her Associates in Nursing at the Phillip&#8217;s Beth Israel School of Nursing, bachelors of science in nursing at Thomas Edison University and then earned her Master of Science degree at Stony Brook University. She is board certified with the American Academy of Nurse Practitioners (AANP).</p>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
-        <img src="/assets/img/wp/2024/04/Ariella-Headshot.png" alt="Ariella Goldhammer, FNP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:20px 18px 22px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Ariella Goldhammer</h3>
-          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2024/04/Ariella-Headshot.png" alt="Ariella Goldhammer, FNP" style="width:160px;height:160px;object-fit:cover;object-position:top;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Ariella Goldhammer</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
           <p style="font-size:13px;line-height:1.65;color:#6a6480;">Ariella Goldhammer is a compassionate Family Nurse Practitioner, holding a Master&#8217;s in Nursing from the College of Mount Saint Vincent. With a focus on primary care, hematology, and infusion services, Ariella brings a diverse range of expertise to our team. Outside of work, she dedicates her time to volunteering in her community, finding joy in giving back to her community.</p>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
-        <img src="/assets/img/wp/2025/12/snatoira.jpeg" alt="Santoria Felton, FNP-C" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:20px 18px 22px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Santoria Felton</h3>
-          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">FNP-C &mdash; Atlanta</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2025/12/snatoira.jpeg" alt="Santoria Felton, FNP-C" style="width:160px;height:160px;object-fit:cover;object-position:top;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Santoria Felton</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">FNP-C &mdash; Atlanta</p>
           <p style="font-size:13px;line-height:1.65;color:#6a6480;">Santoria Felton, FNP-C is a dedicated nurse practitioner specializing in hematology and oncology, committed to providing compassionate, patient-centered care to individuals navigating complex blood disorders and cancer diagnoses. With a strong clinical foundation and a deep sense of empathy, Santoria focuses on delivering comprehensive, evidence-based care while supporting patients and their families through every stage of treatment. She is especially passionate about patient education and advocacy, empowering individuals to understand their diagnosis, treatment options, and overall health.</p>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;text-align:center;">
-        <img src="/assets/img/wp/2025/12/Yaakov-Perlstein.webp" alt="Yaakov Perlstein, FNP" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;">
-        <div style="padding:20px 18px 22px;">
-          <h3 style="font-family:'Newsreader',serif;font-size:18px;color:#1C1633;margin-bottom:3px;">Yaakov Perlstein</h3>
-          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
+      <div class="card" style="overflow:hidden;padding:0;display:flex;align-items:flex-start;">
+        <img src="/assets/img/wp/2025/12/Yaakov-Perlstein.webp" alt="Yaakov Perlstein, FNP" style="width:160px;height:160px;object-fit:cover;object-position:top;flex-shrink:0;">
+        <div style="padding:22px 24px 22px;">
+          <h3 style="font-family:'Newsreader',serif;font-size:20px;color:#1C1633;margin-bottom:3px;">Yaakov Perlstein</h3>
+          <p style="font-size:11px;color:#5B3FA0;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">Family Nurse Practitioner</p>
           <p style="font-size:13px;line-height:1.65;color:#6a6480;">Yaakov Perlstein is a Family Nurse Practitioner with more than six years of experience in hematology and oncology care. He earned both his Bachelor of Science in Nursing and Master of Science, Family Nurse Practitioner, from Pace University and is board certified by the American Academy of Nurse Practitioners (AANP). His clinical expertise includes the evaluation and management of a wide range of benign hematologic conditions, as well as treatment plan coordination and symptom management for medical oncology patients across the spectrum of cancer diagnoses. Outside of his professional practice, he is most proud of his family, including his wife and four children. In his free time, he enjoys volunteering, running, and cycling.</p>
         </div>
       </div>
