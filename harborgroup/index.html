@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,200;0,300;0,400;0,700;1,300&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -170,14 +170,31 @@
   }
   .eyebrow-rule { width: 28px; height: 1px; background: rgba(27,75,156,.45); }
   .hero-copy h1 {
-    font-family: Newsreader, serif;
-    font-weight: 200;
-    font-size: clamp(40px, 4.6vw, 74px);
-    line-height: 1.08;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: clamp(40px, 4.4vw, 68px);
+    line-height: 1.12;
     letter-spacing: -.02em;
-    margin: 0 0 30px;
+    margin: 0 0 26px;
     text-wrap: pretty;
     color: #16181C;
+  }
+  .hero-reg {
+    font-size: .32em;
+    font-weight: 400;
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+  .hero-copy p.hero-sub {
+    font-family: 'Noto Serif', serif;
+    font-weight: 300;
+    font-size: clamp(21px, 1.9vw, 29px);
+    line-height: 1.4;
+    letter-spacing: -.01em;
+    color: rgba(22,24,28,.78);
+    max-width: 26ch;
+    margin: 0 0 22px;
+    text-wrap: pretty;
   }
   .hero-copy p {
     font-size: 18px;
@@ -218,7 +235,7 @@
     gap: 24px;
   }
   .stat-figure {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 200;
     font-size: clamp(30px, 2.7vw, 46px);
     line-height: 1;
@@ -252,7 +269,7 @@
   }
   .portfolio-head .eyebrow { margin-bottom: 18px; }
   .portfolio-head h2 {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 200;
     font-size: clamp(34px, 3.4vw, 54px);
     line-height: 1.12;
@@ -300,7 +317,7 @@
   .quotes-grid figure { margin: 0; display: flex; flex-direction: column; gap: 28px; }
   .quotes-grid blockquote {
     margin: 0;
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 300;
     font-size: clamp(21px, 1.7vw, 25px);
     line-height: 1.5;
@@ -335,7 +352,7 @@
   }
   .about-rule { margin-top: 20px; height: 1px; background: rgba(22,24,28,.12); }
   .about-lede {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 300;
     font-size: clamp(23px, 2vw, 31px);
     line-height: 1.5;
@@ -368,7 +385,7 @@
     padding-bottom: 16px;
   }
   .news-col-head h3 {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 300;
     font-size: 26px;
     margin: 0;
@@ -398,7 +415,7 @@
   }
   .news-meta.muted { color: rgba(22,24,28,.4); }
   .news-title {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-size: 21px;
     line-height: 1.4;
     font-weight: 400;
@@ -414,7 +431,7 @@
     text-align: center;
   }
   .cta-inner h2 {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 200;
     font-size: clamp(30px, 3.2vw, 50px);
     line-height: 1.2;
@@ -446,7 +463,7 @@
     margin-bottom: clamp(40px, 5vw, 60px);
   }
   .offices-head h2 {
-    font-family: Newsreader, serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 200;
     font-size: clamp(32px, 3.2vw, 44px);
     margin: 0;
@@ -597,11 +614,8 @@
   <section>
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="hero-eyebrow-row">
-          <span class="eyebrow-rule"></span>
-          <span class="eyebrow">Vision. Integrity. Discipline. <sup style="letter-spacing:0">&reg;</sup></span>
-        </div>
-        <h1>A leading global real estate investment and management firm</h1>
+        <h1>Vision. Integrity. Discipline.<sup class="hero-reg">&reg;</sup></h1>
+        <p class="hero-sub">A leading global real estate investment and management firm</p>
         <p>Forty years of investing with patience and discipline across market cycles &mdash; $21 billion in real estate investments, and people in six offices worldwide.</p>
         <div class="hero-buttons">
           <a href="#" class="btn btn-solid"><span class="play-glyph"></span>Watch Our Video</a>
