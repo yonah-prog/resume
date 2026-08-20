@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbor Group International — Homepage Concept</title>
+<meta name="description" content="A redesigned homepage concept for Harbor Group International — a leading global real estate investment and management firm.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: #FCFBF9;
+    font-family: Archivo, sans-serif;
+    color: #16181C;
+  }
+  a { color: #1B4B9C; text-decoration: none; }
+  a:hover { color: #0F2E63; }
+  ::selection { background: #DDE6F5; color: #16181C; }
+  img { max-width: 100%; }
+
+  .wrap {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding-left: clamp(20px, 3vw, 44px);
+    padding-right: clamp(20px, 3vw, 44px);
+  }
+
+  .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: #1B4B9C;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn-solid {
+    background: #1B4B9C;
+    color: #fff;
+    font-weight: 600;
+    padding: 17px 30px;
+  }
+  .btn-solid:hover { background: #0F2E63; color: #fff; }
+  .btn-outline {
+    color: #16181C;
+    border: 1px solid rgba(22,24,28,.18);
+    padding: 17px 28px;
+  }
+  .btn-outline:hover { border-color: #1B4B9C; color: #1B4B9C; }
+
+  .link-caps {
+    font-size: 12.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #1B4B9C;
+    border-bottom: 1px solid rgba(27,75,156,.35);
+    padding-bottom: 8px;
+    transition: border-color .18s ease;
+  }
+  .link-caps:hover { border-color: #1B4B9C; color: #1B4B9C; }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(252,251,249,.92);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(22,24,28,.08);
+  }
+  .header-row {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 44px);
+    flex-wrap: wrap;
+  }
+  .header-logo { flex-shrink: 0; display: block; }
+  .header-logo img { height: 30px; width: auto; display: block; mix-blend-mode: multiply; }
+  .site-nav {
+    display: flex;
+    gap: clamp(12px, 1.9vw, 30px);
+    row-gap: 12px;
+    margin-left: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .site-nav a {
+    font-size: 13px;
+    letter-spacing: .06em;
+    color: rgba(22,24,28,.62);
+    transition: color .18s ease;
+  }
+  .site-nav a:hover { color: #1B4B9C; }
+  .site-nav a.active { color: #16181C; font-weight: 500; }
+  .nav-pill {
+    font-size: 12px !important;
+    letter-spacing: .1em !important;
+    text-transform: uppercase;
+    color: #1B4B9C !important;
+    border: 1px solid rgba(27,75,156,.4);
+    padding: 12px 20px;
+    font-weight: 600 !important;
+    border-radius: 999px;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease !important;
+  }
+  .nav-pill:hover { background: #1B4B9C; color: #fff !important; border-color: #1B4B9C; }
+  .nav-toggle {
+    display: none;
+    margin-left: auto;
+    background: none;
+    border: 1px solid rgba(22,24,28,.18);
+    border-radius: 999px;
+    padding: 11px 18px;
+    font-family: Archivo, sans-serif;
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #16181C;
+    cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    .nav-toggle { display: block; }
+    .site-nav {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 10px 0 22px;
+    }
+    .site-nav.open { display: flex; }
+    .site-nav a { font-size: 15px; }
+  }
+
+  /* ---------- Hero (split) ---------- */
+  .hero-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(48px, 6vw, 88px) clamp(20px, 3vw, 44px) clamp(56px, 7vw, 104px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: clamp(40px, 5vw, 72px);
+    align-items: center;
+  }
+  .hero-copy { max-width: 620px; }
+  .hero-eyebrow-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: clamp(28px, 3.5vw, 40px);
+  }
+  .eyebrow-rule { width: 28px; height: 1px; background: rgba(27,75,156,.45); }
+  .hero-copy h1 {
+    font-family: Newsreader, serif;
+    font-weight: 200;
+    font-size: clamp(40px, 4.6vw, 74px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin: 0 0 30px;
+    text-wrap: pretty;
+    color: #16181C;
+  }
+  .hero-copy p {
+    font-size: 18px;
+    line-height: 1.75;
+    color: rgba(22,24,28,.6);
+    max-width: 50ch;
+    margin: 0 0 clamp(34px, 4vw, 48px);
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .play-glyph {
+    display: inline-block;
+    width: 0; height: 0;
+    border-left: 7px solid #fff;
+    border-top: 4.5px solid transparent;
+    border-bottom: 4.5px solid transparent;
+  }
+  .hero-collage {
+    display: grid;
+    grid-template-columns: 1.06fr .94fr;
+    grid-template-rows: repeat(5, clamp(84px, 9vw, 122px));
+    gap: clamp(10px, 1.2vw, 18px);
+  }
+  .hero-collage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3px;
+    display: block;
+  }
+
+  /* ---------- Sections ---------- */
+  .section-pad { padding-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(72px, 9vw, 128px); }
+
+  /* ---------- Stat band ---------- */
+  .stat-band {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .stat-figure {
+    font-family: Newsreader, serif;
+    font-weight: 200;
+    font-size: clamp(30px, 2.7vw, 46px);
+    line-height: 1;
+    color: #1B4B9C;
+    letter-spacing: -.025em;
+    white-space: nowrap;
+  }
+  .stat-label {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(22,24,28,.5);
+    line-height: 1.5;
+  }
+  @media (max-width: 1024px) {
+    .stat-band { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; }
+  }
+  @media (max-width: 560px) {
+    .stat-band { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 20px; }
+  }
+
+  /* ---------- Portfolio ---------- */
+  .portfolio-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+  .portfolio-head .eyebrow { margin-bottom: 18px; }
+  .portfolio-head h2 {
+    font-family: Newsreader, serif;
+    font-weight: 200;
+    font-size: clamp(34px, 3.4vw, 54px);
+    line-height: 1.12;
+    margin: 0;
+    max-width: 22ch;
+    letter-spacing: -.015em;
+  }
+  .portfolio-head .link-caps { white-space: nowrap; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 24px;
+  }
+  .portfolio-card { display: block; color: #16181C; transition: color .18s ease; }
+  .portfolio-card:hover { color: #1B4B9C; }
+  .portfolio-card img {
+    width: 100%;
+    height: clamp(240px, 26vw, 340px);
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+  .portfolio-card .card-name {
+    margin-top: 20px;
+    font-size: 12.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .portfolio-card .card-note {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(22,24,28,.55);
+  }
+
+  /* ---------- Quotes ---------- */
+  .quotes-pad { padding-top: clamp(80px, 10vw, 144px); padding-bottom: clamp(80px, 10vw, 144px); }
+  .quotes-eyebrow { margin-bottom: clamp(40px, 5vw, 60px); }
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(40px, 4vw, 56px);
+  }
+  .quotes-grid figure { margin: 0; display: flex; flex-direction: column; gap: 28px; }
+  .quotes-grid blockquote {
+    margin: 0;
+    font-family: Newsreader, serif;
+    font-weight: 300;
+    font-size: clamp(21px, 1.7vw, 25px);
+    line-height: 1.5;
+    letter-spacing: -.01em;
+    text-wrap: pretty;
+    color: #16181C;
+    flex: 1;
+  }
+  .quotes-grid figcaption {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(22,24,28,.12);
+  }
+  .quotes-grid figcaption img {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .quote-name { font-size: 14.5px; font-weight: 600; }
+  .quote-title { font-size: 13px; color: rgba(22,24,28,.55); margin-top: 3px; }
+  .quote-org { font-size: 13px; color: rgba(22,24,28,.42); margin-top: 1px; }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(36px, 6vw, 96px);
+  }
+  .about-rule { margin-top: 20px; height: 1px; background: rgba(22,24,28,.12); }
+  .about-lede {
+    font-family: Newsreader, serif;
+    font-weight: 300;
+    font-size: clamp(23px, 2vw, 31px);
+    line-height: 1.5;
+    margin: 0 0 30px;
+    letter-spacing: -.01em;
+    text-wrap: pretty;
+  }
+  .about-lede sup { font-size: .5em; }
+  .about-body {
+    font-size: 17px;
+    line-height: 1.75;
+    color: rgba(22,24,28,.62);
+    max-width: 62ch;
+    margin: 0 0 36px;
+  }
+  .link-caps-strong { font-weight: 600; display: inline-block; }
+
+  /* ---------- News ---------- */
+  .news-pad { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(72px, 9vw, 120px); }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(40px, 6vw, 88px);
+  }
+  .news-col-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(22,24,28,.12);
+    padding-bottom: 16px;
+  }
+  .news-col-head h3 {
+    font-family: Newsreader, serif;
+    font-weight: 300;
+    font-size: 26px;
+    margin: 0;
+  }
+  .news-all {
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(22,24,28,.45);
+    transition: color .18s ease;
+  }
+  .news-all:hover { color: #1B4B9C; }
+  .news-item {
+    display: block;
+    padding: 26px 0;
+    border-bottom: 1px solid rgba(22,24,28,.07);
+    color: #16181C;
+    transition: color .18s ease;
+  }
+  .news-item:hover { color: #1B4B9C; }
+  .news-meta {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #1B4B9C;
+    margin-bottom: 11px;
+  }
+  .news-meta.muted { color: rgba(22,24,28,.4); }
+  .news-title {
+    font-family: Newsreader, serif;
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Investor CTA ---------- */
+  .cta-section { background: #1B4B9C; color: #fff; }
+  .cta-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(80px, 10vw, 132px) clamp(20px, 3vw, 44px);
+    text-align: center;
+  }
+  .cta-inner h2 {
+    font-family: Newsreader, serif;
+    font-weight: 200;
+    font-size: clamp(30px, 3.2vw, 50px);
+    line-height: 1.2;
+    margin: 0 auto 40px;
+    max-width: 30ch;
+    text-wrap: pretty;
+  }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    background: #fff;
+    color: #1B4B9C;
+    padding: 17px 32px;
+    font-weight: 600;
+  }
+  .btn-white:hover { background: #DDE6F5; color: #1B4B9C; }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,.45);
+    color: #fff;
+    padding: 17px 32px;
+  }
+  .btn-ghost:hover { border-color: #fff; color: #fff; }
+
+  /* ---------- Offices ---------- */
+  .offices-head {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(40px, 5vw, 60px);
+  }
+  .offices-head h2 {
+    font-family: Newsreader, serif;
+    font-weight: 200;
+    font-size: clamp(32px, 3.2vw, 44px);
+    margin: 0;
+  }
+  .offices-head .head-rule { flex: 1; height: 1px; background: rgba(22,24,28,.12); min-width: 40px; }
+  .offices-head .head-count {
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(22,24,28,.45);
+  }
+  .offices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px 40px;
+  }
+  @media (max-width: 900px) {
+    .offices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .offices-grid { grid-template-columns: 1fr; }
+  }
+  .office-city {
+    font-size: 12.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #1B4B9C;
+    margin-bottom: 16px;
+  }
+  .office-address {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(22,24,28,.68);
+    white-space: pre-line;
+  }
+  .office-tel { margin-top: 16px; font-size: 14.5px; color: rgba(22,24,28,.5); }
+  .office-email {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #1B4B9C;
+    border-bottom: 1px solid rgba(27,75,156,.3);
+    padding-bottom: 5px;
+    transition: border-color .18s ease;
+  }
+  .office-email:hover { border-color: #1B4B9C; color: #1B4B9C; }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    background: #F4F1EC;
+    color: rgba(22,24,28,.6);
+    font-size: 13px;
+    line-height: 1.8;
+    border-top: 1px solid rgba(22,24,28,.08);
+  }
+  .footer-grid {
+    padding-top: clamp(56px, 7vw, 84px);
+    padding-bottom: 56px;
+    display: grid;
+    grid-template-columns: minmax(240px, 1.3fr) repeat(auto-fit, minmax(150px, 1fr));
+    gap: clamp(36px, 4vw, 64px);
+  }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  .footer-brand img { height: 28px; width: auto; display: block; margin-bottom: 22px; mix-blend-mode: multiply; }
+  .footer-brand p { margin: 0 0 22px; max-width: 34ch; }
+  .footer-pill {
+    display: inline-block;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #1B4B9C;
+    border: 1px solid rgba(27,75,156,.35);
+    border-radius: 999px;
+    padding: 12px 20px;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .footer-pill:hover { background: #1B4B9C; color: #fff; border-color: #1B4B9C; }
+  .footer-col-head {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #16181C;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .footer-links a { color: rgba(22,24,28,.6); transition: color .18s ease; }
+  .footer-links a:hover { color: #1B4B9C; }
+  .legal-bar { border-top: 1px solid rgba(22,24,28,.1); }
+  .legal-row {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .legal-links { display: flex; gap: 24px; margin-left: auto; flex-wrap: wrap; }
+  .legal-links a { color: rgba(22,24,28,.6); }
+  .legal-links a:hover { color: #1B4B9C; }
+  .disclaimer-band { background: #EAE5DD; }
+  .disclaimer-inner {
+    padding-top: 36px;
+    padding-bottom: 44px;
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: rgba(22,24,28,.5);
+  }
+  .disclaimer-label {
+    font-size: 10.5px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    color: rgba(22,24,28,.42);
+  }
+  .disclaimer-inner p { margin: 0 0 12px; max-width: 110ch; }
+  .disclaimer-inner p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="#" class="header-logo" aria-label="Harbor Group International — Home">
+        <img src="assets/hgi-logo-crop.png" alt="Harbor Group International">
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" onclick="var n=document.getElementById('site-nav');var open=n.classList.toggle('open');this.setAttribute('aria-expanded',open);this.textContent=open?'Close':'Menu';">Menu</button>
+      <nav class="site-nav" id="site-nav">
+        <a href="#" class="active">Home</a>
+        <a href="#">Firm</a>
+        <a href="#">Strategy</a>
+        <a href="#">Investments</a>
+        <a href="#">Impact</a>
+        <a href="#">News</a>
+        <a href="#">Contact</a>
+        <a href="#" class="nav-pill">Investor Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-eyebrow-row">
+          <span class="eyebrow-rule"></span>
+          <span class="eyebrow">Vision. Integrity. Discipline. <sup style="letter-spacing:0">&reg;</sup></span>
+        </div>
+        <h1>A leading global real estate investment and management firm</h1>
+        <p>Forty years of investing with patience and discipline across market cycles &mdash; $21 billion in real estate investments, and people in six offices worldwide.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-solid"><span class="play-glyph"></span>Watch Our Video</a>
+          <a href="#" class="btn btn-outline">Our Portfolio</a>
+        </div>
+      </div>
+      <div class="hero-collage">
+        <img src="assets/office-curved.png" alt="Office property" style="grid-column: 1; grid-row: 1 / span 3;">
+        <img src="assets/people-family.png" alt="Residents" style="grid-column: 2; grid-row: 2 / span 2; object-position: center 28%;">
+        <img src="assets/people-team.png" alt="HGI team" style="grid-column: 1; grid-row: 4 / span 2; object-position: center 30%;">
+        <img src="assets/multifamily-townhomes.png" alt="Multifamily community" style="grid-column: 2; grid-row: 4 / span 2;">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-pad">
+      <div class="stat-band" id="stat-band">
+        <div>
+          <div class="stat-figure" data-end="40">40</div>
+          <div class="stat-label">Years of Operation</div>
+        </div>
+        <div>
+          <div class="stat-figure" data-end="21" data-prefix="$" data-suffix="B">$21B</div>
+          <div class="stat-label">Assets Under Management &sup1;</div>
+        </div>
+        <div>
+          <div class="stat-figure" data-end="1600" data-comma="true">1,600</div>
+          <div class="stat-label">Employees</div>
+        </div>
+        <div>
+          <div class="stat-figure" data-end="70000" data-comma="true">70,000</div>
+          <div class="stat-label">Multifamily Units &sup2;</div>
+        </div>
+        <div>
+          <div class="stat-figure" data-end="5" data-suffix="M">5M</div>
+          <div class="stat-label">Commercial SQFT</div>
+        </div>
+        <div>
+          <div class="stat-figure" data-end="18" data-prefix="$" data-suffix="B">$18B</div>
+          <div class="stat-label">Value of Properties Sold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #F4F1EC;">
+    <div class="wrap section-pad">
+      <div class="portfolio-head">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 18px;">Investments</div>
+          <h2>A diversified portfolio across property types</h2>
+        </div>
+        <a href="#" class="link-caps">View Full Portfolio</a>
+      </div>
+      <div class="portfolio-grid">
+        <a href="#" class="portfolio-card">
+          <img src="assets/office-glass.png" alt="Office">
+          <div class="card-name">Office</div>
+          <div class="card-note">Trophy and Class A assets in major markets.</div>
+        </a>
+        <a href="#" class="portfolio-card">
+          <img src="assets/multifamily-townhomes.png" alt="Multifamily">
+          <div class="card-name">Multifamily</div>
+          <div class="card-note">Communities managed with long-term care.</div>
+        </a>
+        <a href="#" class="portfolio-card">
+          <img src="assets/retail-center.png" alt="Retail">
+          <div class="card-name">Retail</div>
+          <div class="card-note">Well-located centers serving their neighborhoods.</div>
+        </a>
+        <a href="#" class="portfolio-card">
+          <img src="assets/alternative-facade.png" alt="Alternative Investments">
+          <div class="card-name">Alternative Investments</div>
+          <div class="card-note">Credit and real estate related strategies.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap quotes-pad">
+      <div class="eyebrow quotes-eyebrow">In Their Words</div>
+      <div class="quotes-grid">
+        <figure>
+          <blockquote>Our success through many market cycles is made possible by the continued loyalty and trust of our investors - many of whom have invested with HGI for more than 20 consecutive years - and the hard work, dedication and creativity of our employees.</blockquote>
+          <figcaption>
+            <img src="assets/jordan-slone.png" alt="Jordan E. Slone">
+            <div>
+              <div class="quote-name">Jordan E. Slone</div>
+              <div class="quote-title">Chairman and Chief Executive Officer</div>
+              <div class="quote-org">Harbor Group International</div>
+            </div>
+          </figcaption>
+        </figure>
+        <figure>
+          <blockquote>Harbor Group Management understands an owner's requirements for maximizing current distributions and creating value over the ownership period.</blockquote>
+          <figcaption>
+            <img src="assets/robert-friedman.png" alt="Robert S. Friedman">
+            <div>
+              <div class="quote-name">Robert S. Friedman</div>
+              <div class="quote-title">President</div>
+              <div class="quote-org">Harbor Group Management Company</div>
+            </div>
+          </figcaption>
+        </figure>
+        <figure>
+          <blockquote>The true success of any organization is tied to its people. Our talented, dedicated people define our corporate culture.</blockquote>
+          <figcaption>
+            <img src="assets/carla-stoner.png" alt="Carla Stoner">
+            <div>
+              <div class="quote-name">Carla Stoner</div>
+              <div class="quote-title">Chief Financial Officer</div>
+              <div class="quote-org">Harbor Group International</div>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #F4F1EC;">
+    <div class="wrap section-pad about-grid">
+      <div>
+        <div class="eyebrow">About HGI</div>
+        <div class="about-rule"></div>
+      </div>
+      <div>
+        <p class="about-lede">Harbor Group International (HGI) is a leading global real estate investment and management firm. With $21 billion<sup>1</sup> in real estate investment properties, the firm invests in and manages diversified property portfolios including office, retail, and multifamily properties.</p>
+        <p class="about-body">With over 40 years of experience in the industry and approximately 1,600 employees worldwide, HGI continues to look for real estate investment opportunities.</p>
+        <a href="#" class="link-caps link-caps-strong">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap news-pad news-grid">
+      <div>
+        <div class="news-col-head">
+          <h3>Media Coverage</h3>
+          <a href="#" class="news-all">All</a>
+        </div>
+        <a href="#" class="news-item">
+          <div class="news-meta">Commercial Observer</div>
+          <div class="news-title">Law Firm Alston &amp; Bird Takes 170K SF at 51 West 52nd Street</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta">Commercial Observer</div>
+          <div class="news-title">Acre Supplies $351M Refi for Four-State Multifamily Portfolio</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta">Bisnow</div>
+          <div class="news-title">What The Biggest Buyers And Sellers In Commercial Real Estate Did In 2025</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta">Bloomberg</div>
+          <div class="news-title">HGI President Richard Litton Appears on Bloomberg's FICC Focus Podcast</div>
+        </a>
+      </div>
+      <div>
+        <div class="news-col-head">
+          <h3>Recent Press Releases</h3>
+          <a href="#" class="news-all">All</a>
+        </div>
+        <a href="#" class="news-item">
+          <div class="news-meta muted">Press Release</div>
+          <div class="news-title">Harbor Group International Acquires Class A Single Tenant Office Building in King of Prussia</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta muted">Press Release</div>
+          <div class="news-title">Harbor Group International Achieves Full Occupancy at Trophy Office Tower 51 West 52nd Street in Manhattan</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta muted">Press Release</div>
+          <div class="news-title">Harbor Group International Sells New Jersey Multifamily Community</div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-meta muted">Press Release</div>
+          <div class="news-title">Harbor Group International, The Garrett Companies and Telis Group Refinance Eight-Property Multifamily Portfolio</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Constantly exploring real estate investment opportunities in the worldwide market.</h2>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-white">Investor Login</a>
+        <a href="#" class="btn btn-ghost">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section-pad">
+      <div class="offices-head">
+        <h2>Global Offices</h2>
+        <span class="head-rule"></span>
+        <span class="head-count">Six locations</span>
+      </div>
+      <div class="offices-grid">
+        <div>
+          <div class="office-city">Norfolk</div>
+          <div class="office-address">999 Waterside Drive
+Suite 2300
+Norfolk, Virginia 23510</div>
+          <div class="office-tel">+1-757-640-0800</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+        <div>
+          <div class="office-city">New York</div>
+          <div class="office-address">51 West 52nd Street
+19th Floor
+New York, NY 10019</div>
+          <div class="office-tel">+1-212-644-0515</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+        <div>
+          <div class="office-city">Los Angeles</div>
+          <div class="office-address">2029 Century Park East
+Suite 400N
+Los Angeles, CA 90067</div>
+          <div class="office-tel">+1-310-491-3684</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+        <div>
+          <div class="office-city">Baltimore</div>
+          <div class="office-address">1829 Reisterstown Road
+Suite 350
+Baltimore, MD 21208</div>
+          <div class="office-tel">+1-667-219-2344</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+        <div>
+          <div class="office-city">Hong Kong</div>
+          <div class="office-address">YFLive Tower Building
+33 Lockhart Road, 10th Floor
+Wanchai, Hong Kong</div>
+          <div class="office-tel">+852-3525-8100</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+        <div>
+          <div class="office-city">Tel Aviv</div>
+          <div class="office-address">11 Menachem Begin Street
+31st Floor
+Ramat Gan 52681 Israel</div>
+          <div class="office-tel">+972-3-753-8400</div>
+          <a href="#" class="office-email">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <img src="assets/hgi-logo-crop.png" alt="Harbor Group International">
+        <p>Vision. Integrity. Discipline.<sup>&reg;</sup> A leading global real estate investment and management firm since 1985.</p>
+        <a href="#" class="footer-pill">Investor Login</a>
+      </div>
+      <div>
+        <div class="footer-col-head">Firm</div>
+        <div class="footer-links">
+          <a href="#">Firm Overview</a>
+          <a href="#">Leadership</a>
+          <a href="#">Investment Strategy</a>
+          <a href="#">Impact</a>
+          <a href="#">Harbor Group Management</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">Investments</div>
+        <div class="footer-links">
+          <a href="#">Portfolio</a>
+          <a href="#">Office</a>
+          <a href="#">Multifamily</a>
+          <a href="#">Retail</a>
+          <a href="#">Alternative Investments</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">News</div>
+        <div class="footer-links">
+          <a href="#">Media Coverage</a>
+          <a href="#">Press Releases</a>
+          <a href="#">Video</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">Connect</div>
+        <div class="footer-links">
+          <a href="#">Contact Us</a>
+          <a href="#">Offices</a>
+          <a href="#">Careers / Jobs</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="legal-bar">
+      <div class="wrap legal-row">
+        <div>&copy; 2026 Harbor Group International</div>
+        <div class="legal-links">
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="disclaimer-band">
+      <div class="wrap disclaimer-inner">
+        <div class="disclaimer-label">Disclaimer</div>
+        <p>Harbor Group International, LLC provides real estate management and real estate investment services and is not affiliated with Harbour Group Industries, Inc. (whose web site may be found at www.HarbourGroup.com), which offers investment services in connection with the acquisition, development and operation of industrial and manufacturing companies.</p>
+        <p><sup>1</sup>Total capitalized value of underlying assets of $21 billion includes direct real estate and private funds as of 3/31/2026. AUM represents the total capitalized value of underlying assets, which includes direct and indirect real estate and real estate related investments, and the AUM of HGI&rsquo;s affiliate, HGI Capital Management, LLC.</p>
+        <p><sup>2</sup>Multifamily units includes multifamily preferred equity investments.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    // Count-up is an enhancement: the final strings are already in the markup,
+    // so the band reads correctly if JS or animation frames never run.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var figures = document.querySelectorAll('#stat-band .stat-figure');
+    if (!figures.length) return;
+    var dur = 1500, t0 = null;
+    function render(t) {
+      figures.forEach(function (el) {
+        var end = parseFloat(el.getAttribute('data-end'));
+        var n = Math.round(end * t);
+        var text = el.getAttribute('data-comma') ? n.toLocaleString('en-US') : String(n);
+        el.textContent = (el.getAttribute('data-prefix') || '') + text + (el.getAttribute('data-suffix') || '');
+      });
+    }
+    function tick(now) {
+      if (t0 === null) { t0 = now; render(0); }
+      var p = Math.min(1, (now - t0) / dur);
+      render(1 - Math.pow(1 - p, 3));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+  </script>
+
+</body>
+</html>
